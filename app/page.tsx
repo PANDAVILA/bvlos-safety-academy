@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, BookOpen, ShieldCheck, Globe2, Users, TrendingUp, FileText, Newspaper, Radar } from "lucide-react";
