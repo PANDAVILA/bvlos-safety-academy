@@ -55,7 +55,7 @@ export default function AeroSafetyCasePage() {
         <div className="mx-auto max-w-7xl px-6 py-24">
           <div className="grid gap-px overflow-hidden border border-navy-900/10 bg-navy-900/10 sm:grid-cols-3">
             {[
-              { icon: Gauge, title: "Risk assessment", desc: "Calculate GRC and ARC following the SORA methodology, with full traceability of every assumption." },
+              { icon: Gauge, title: "Risk assessment", desc: "Calculate GRC and ARC following the SMS methodology, with full traceability of every assumption." },
               { icon: ListChecks, title: "Mitigation tracking", desc: "Catalog and monitor the status of every operational and technical mitigation for your operation." },
               { icon: ShieldAlert, title: "Safety case documentation", desc: "Generate the documentation package ready to submit to the competent authority." },
             ].map((f) => (

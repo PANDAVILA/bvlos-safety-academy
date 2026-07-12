@@ -3,9 +3,9 @@ import { ShieldCheck, FileText, Users, Globe2 } from "lucide-react";
 import LeadForm from "@/components/LeadForm";
 
 const services = [
-  { icon: ShieldCheck, title: "SORA Assessment", desc: "Full ground and air risk calculation (GRC, ARC) and mitigation strategy for your operational dossier." },
+  { icon: ShieldCheck, title: "SMS Risk Assessment", desc: "Full ground and air risk calculation (GRC, ARC) and mitigation strategy for your operational dossier." },
   { icon: FileText, title: "Safety Case", desc: "Development of the complete safety case required for specific-category BVLOS authorizations." },
-  { icon: Users, title: "Custom SMS", desc: "Design and implementation of your Safety Management System, including a maturity audit." },
+  { icon: Users, title: "SMS Design & Audit", desc: "Design and implementation of your Safety Management System, including a maturity audit." },
   { icon: Globe2, title: "ConOps & Operational Volume", desc: "Definition of the concept of operations and the operational/contingency volume for your mission." },
 ];
 

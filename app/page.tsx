@@ -52,7 +52,7 @@ export default function Home() {
                 <p className="eyebrow mt-1 text-white/40">Countries</p>
               </div>
               <div>
-                <p className="font-display text-2xl text-gold-400">SORA</p>
+                <p className="font-display text-2xl text-gold-400">SMS</p>
                 <p className="eyebrow mt-1 text-white/40">Aligned</p>
               </div>
             </div>
@@ -91,7 +91,7 @@ export default function Home() {
             </p>
             <ul className="mt-8 space-y-4">
               {[
-                "Methodology grounded in SORA, ConOps, and real risk management",
+                "Methodology grounded in SMS, ConOps, and real risk management",
                 "Case studies from anonymized real-world incidents",
                 "Certification valid for authority-facing operational files",
               ].map((item) => (
@@ -202,7 +202,7 @@ export default function Home() {
                 Need expert support for your operational file?
               </h2>
               <p className="mt-5 text-white/70">
-                We design ConOps, SORA assessments, safety cases, and tailored SMS programs for operators,
+                We design ConOps, risk assessments, safety cases, and tailored SMS programs for operators,
                 manufacturers, and public administrations.
               </p>
               <Link
@@ -214,7 +214,7 @@ export default function Home() {
             </div>
             <div className="grid grid-cols-2 gap-4">
               {[
-                { icon: Globe2, label: "SORA assessment" },
+                { icon: Globe2, label: "SMS assessment" },
                 { icon: Users, label: "SMS audit" },
                 { icon: FileText, label: "Safety case" },
                 { icon: TrendingUp, label: "Tailored ConOps" },
