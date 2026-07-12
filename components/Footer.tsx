@@ -7,7 +7,7 @@ export default function Footer() {
       <div className="relative mx-auto max-w-7xl px-6 py-16">
         <div className="grid gap-12 lg:grid-cols-[1.3fr_1fr_1fr_1fr]">
           <div>
-            <Image src="/brand/logo.png" alt="BVLOS Safety Academy" width={220} height={60} className="h-14 w-auto" />
+            <Image src="/brand/logo-white.png" alt="BVLOS Safety Academy" width={220} height={60} className="h-14 w-auto" />
             <p className="mt-4 max-w-xs text-sm text-white/60">
               Training, standards, and consulting for safe BVLOS operations worldwide.
             </p>
