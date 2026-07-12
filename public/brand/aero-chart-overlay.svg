@@ -1,0 +1,74 @@
+<svg width="1920" height="1080" viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      .route { fill: none; stroke: #C79A44; stroke-width: 1.4; opacity: 0.32; }
+      .route-dashed { fill: none; stroke: #C79A44; stroke-width: 1.2; stroke-dasharray: 10 8; opacity: 0.28; }
+      .tick { stroke: #C79A44; stroke-width: 1; opacity: 0.3; }
+      .wp { fill: none; stroke: #C79A44; stroke-width: 1.4; opacity: 0.55; }
+      .wp-dot { fill: #C79A44; opacity: 0.6; }
+      .label { font-family: 'IBM Plex Mono', monospace; fill: #C79A44; opacity: 0.45; font-size: 15px; letter-spacing: 1px; }
+      .label-dim { font-family: 'IBM Plex Mono', monospace; fill: #C79A44; opacity: 0.22; font-size: 13px; letter-spacing: 1px; }
+      .ring { fill: none; stroke: #C79A44; stroke-width: 1; opacity: 0.18; }
+      .ring-strong { fill: none; stroke: #C79A44; stroke-width: 1.2; opacity: 0.3; }
+      .spoke { stroke: #C79A44; stroke-width: 0.8; opacity: 0.16; }
+    </style>
+  </defs>
+
+  <!-- Airway 1: ascending route across the canvas -->
+  <path class="route" d="M -20 780 L 260 700 L 560 560 L 900 400 L 1260 260 L 1620 150" />
+  <circle class="wp" cx="260" cy="700" r="7" />
+  <circle class="wp-dot" cx="260" cy="700" r="2" />
+  <text class="label" x="278" y="694">GND</text>
+
+  <circle class="wp" cx="560" cy="560" r="7" />
+  <circle class="wp-dot" cx="560" cy="560" r="2" />
+  <text class="label" x="578" y="554">IF ALPHA · 4500</text>
+
+  <circle class="wp" cx="900" cy="400" r="7" />
+  <circle class="wp-dot" cx="900" cy="400" r="2" />
+  <text class="label" x="918" y="394">D-43</text>
+
+  <circle class="wp" cx="1260" cy="260" r="8" />
+  <circle class="wp-dot" cx="1260" cy="260" r="2.5" />
+  <text class="label" x="1278" y="254">BRAVO · FL180</text>
+
+  <!-- Airway 2: crossing horizontal route with DME tick marks -->
+  <path class="route-dashed" d="M -20 460 L 420 480 L 860 440 L 1300 410 L 1940 380" />
+  <line class="tick" x1="420" y1="465" x2="420" y2="495" />
+  <line class="tick" x1="860" y1="425" x2="860" y2="455" />
+  <line class="tick" x1="1300" y1="395" x2="1300" y2="425" />
+  <text class="label-dim" x="120" y="450">R-090</text>
+  <text class="label-dim" x="640" y="470">30 NM</text>
+  <text class="label-dim" x="1080" y="430">115.30 BSA</text>
+
+  <!-- Airway 3: descending secondary route, lower opacity -->
+  <path class="route-dashed" d="M 100 40 L 340 220 L 620 340 L 980 520 L 1400 640" />
+  <circle class="wp" cx="620" cy="340" r="6" />
+  <text class="label-dim" x="636" y="335">J-80</text>
+  <circle class="wp" cx="980" cy="520" r="6" />
+  <text class="label-dim" x="996" y="515">20 NM</text>
+
+  <!-- VOR compass rose, top right -->
+  <g transform="translate(1660,190)">
+    <circle class="ring-strong" r="140" />
+    <circle class="ring" r="100" />
+    <circle class="ring" r="60" />
+    <circle class="wp-dot" r="3" />
+    <g class="spoke">
+      <line x1="0" y1="-140" x2="0" y2="140" />
+      <line x1="-140" y1="0" x2="140" y2="0" />
+      <line x1="-99" y1="-99" x2="99" y2="99" />
+      <line x1="-99" y1="99" x2="99" y2="-99" />
+    </g>
+    <text class="label-dim" x="-14" y="-150">N</text>
+    <text class="label-dim" x="146" y="6">E</text>
+    <text class="label-dim" x="-8" y="164">S</text>
+    <text class="label-dim" x="-160" y="6">W</text>
+  </g>
+
+  <!-- Scattered altitude / coordinate callouts -->
+  <text class="label-dim" x="60" y="120">FL180</text>
+  <text class="label-dim" x="1500" y="720">8500 MSL</text>
+  <text class="label-dim" x="200" y="960">39.4699N · 0.3763W</text>
+  <text class="label-dim" x="1350" y="980">GRC 4 · ARC-c</text>
+</svg>

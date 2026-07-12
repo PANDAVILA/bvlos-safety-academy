@@ -25,7 +25,7 @@ const config: Config = {
         ink: "#0A1B33",
       },
       fontFamily: {
-        display: ["Anton", "sans-serif"],
+        display: ["Oswald", "sans-serif"],
         body: ["Inter", "sans-serif"],
         mono: ["IBM Plex Mono", "monospace"],
       },
