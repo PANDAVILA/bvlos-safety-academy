@@ -15,7 +15,7 @@ import Providers from "@/components/Providers";
 export const metadata: Metadata = {
   title: "BVLOS Safety Academy | Knowledge. Standards. Safety.",
   description:
-    "Formación especializada, consultoría y herramientas para operaciones BVLOS seguras. Cursos, certificaciones, informes técnicos y AeroSafety Case.",
+    "Specialized training, consulting, and tools for safe BVLOS operations. Courses, certifications, technical reports, and AeroSafety Case.",
 };
 
 export default function RootLayout({
@@ -24,7 +24,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es">
+    <html lang="en">
       <body className="font-body bg-paper text-ink antialiased">
         <Providers>
           <Header />

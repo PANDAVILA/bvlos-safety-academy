@@ -28,18 +28,43 @@ h1, h2, h3, h4 {
 .chart-bg {
   background-color: #0A1B33;
   background-image:
-    linear-gradient(rgba(199,154,68,0.10) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(199,154,68,0.10) 1px, transparent 1px);
+    linear-gradient(rgba(199,154,68,0.18) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(199,154,68,0.18) 1px, transparent 1px);
   background-size: 44px 44px;
   position: relative;
+  overflow: hidden;
 }
 
 .chart-bg::before {
   content: "";
   position: absolute;
   inset: 0;
-  background-image: radial-gradient(circle at 1px 1px, rgba(199,154,68,0.35) 1px, transparent 0);
+  background-image: radial-gradient(circle at 1px 1px, rgba(199,154,68,0.55) 1.5px, transparent 0);
   background-size: 44px 44px;
+  pointer-events: none;
+}
+
+/* VOR-style concentric rings + radiating compass lines, echoing aeronautical charts */
+.chart-bg::after {
+  content: "";
+  position: absolute;
+  top: -260px;
+  right: -260px;
+  width: 620px;
+  height: 620px;
+  border-radius: 50%;
+  border: 1px solid rgba(199,154,68,0.16);
+  box-shadow:
+    0 0 0 70px rgba(199,154,68,0.045),
+    0 0 0 140px rgba(199,154,68,0.035),
+    0 0 0 210px rgba(199,154,68,0.025);
+  background:
+    repeating-conic-gradient(
+      rgba(199,154,68,0.10) 0deg 1deg,
+      transparent 1deg 30deg
+    );
+  mask-image: radial-gradient(circle, black 0%, black 55%, transparent 72%);
+  -webkit-mask-image: radial-gradient(circle, black 0%, black 55%, transparent 72%);
   pointer-events: none;
 }
 

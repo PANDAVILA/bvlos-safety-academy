@@ -18,13 +18,13 @@ export async function POST(req: Request) {
     const body = await req.json();
     const parsed = schema.safeParse(body);
     if (!parsed.success) {
-      return NextResponse.json({ error: "Datos inválidos" }, { status: 400 });
+      return NextResponse.json({ error: "Invalid data" }, { status: 400 });
     }
     const { name, email, password, company, country } = parsed.data;
 
     const existing = db.select().from(users).where(eq(users.email, email.toLowerCase())).get();
     if (existing) {
-      return NextResponse.json({ error: "Ese correo ya está registrado" }, { status: 409 });
+      return NextResponse.json({ error: "That email is already registered" }, { status: 409 });
     }
 
     const passwordHash = await bcrypt.hash(password, 10);

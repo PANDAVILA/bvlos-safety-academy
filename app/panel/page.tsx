@@ -1,4 +1,5 @@
 export const dynamic = "force-dynamic";
+
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { redirect } from "next/navigation";
@@ -25,13 +26,13 @@ export default async function PanelPage() {
   return (
     <div className="chart-bg-light min-h-[calc(100vh-64px)]">
       <div className="mx-auto max-w-7xl px-6 py-16">
-        <p className="eyebrow text-gold-600">Mi panel</p>
-        <h1 className="mt-3 font-display text-3xl text-navy-900">Hola, {session.user?.name}</h1>
+        <p className="eyebrow text-gold-600">My dashboard</p>
+        <h1 className="mt-3 font-display text-3xl text-navy-900">Hi, {session.user?.name}</h1>
 
-        <h2 className="mt-14 font-display text-xl text-navy-900">Mis cursos</h2>
+        <h2 className="mt-14 font-display text-xl text-navy-900">My courses</h2>
         {myCourses.length === 0 ? (
           <p className="mt-4 text-navy-900/60">
-            Aún no estás inscrito en ningún curso. <Link href="/cursos" className="text-gold-600 hover:underline">Explora el catálogo</Link>.
+            You're not enrolled in any courses yet. <Link href="/cursos" className="text-gold-600 hover:underline">Browse the catalog</Link>.
           </p>
         ) : (
           <div className="mt-6 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -51,7 +52,7 @@ export default async function PanelPage() {
                       <div className="h-1.5 bg-gold-500" style={{ width: `${enrollment.progressPercent}%` }} />
                     </div>
                     <p className="mt-2 flex items-center gap-2 text-xs text-navy-900/50">
-                      <PlayCircle size={13} /> {Math.round(enrollment.progressPercent)}% completado
+                      <PlayCircle size={13} /> {Math.round(enrollment.progressPercent)}% complete
                     </p>
                   </div>
                 </Link>
@@ -60,9 +61,9 @@ export default async function PanelPage() {
           </div>
         )}
 
-        <h2 className="mt-16 font-display text-xl text-navy-900">Historial de compras</h2>
+        <h2 className="mt-16 font-display text-xl text-navy-900">Purchase history</h2>
         {myOrders.length === 0 ? (
-          <p className="mt-4 text-navy-900/60">Todavía no tienes compras registradas.</p>
+          <p className="mt-4 text-navy-900/60">You don't have any purchases yet.</p>
         ) : (
           <div className="mt-6 divide-y divide-navy-900/10 border border-navy-900/10 bg-white">
             {myOrders.map((o) => (

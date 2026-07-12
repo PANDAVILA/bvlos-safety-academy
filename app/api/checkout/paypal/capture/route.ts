@@ -41,6 +41,6 @@ export async function POST(req: Request) {
     return NextResponse.json(data);
   } catch (err: any) {
     console.error(err);
-    return NextResponse.json({ error: err.message || "Error al capturar el pago" }, { status: 500 });
+    return NextResponse.json({ error: err.message || "Error capturing the payment" }, { status: 500 });
   }
 }

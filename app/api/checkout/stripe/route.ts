@@ -10,7 +10,7 @@ export async function POST(req: Request) {
   try {
     if (!stripeConfigured) {
       return NextResponse.json(
-        { error: "Stripe no está configurado. Añade STRIPE_SECRET_KEY en .env.local" },
+        { error: "Stripe is not configured. Add STRIPE_SECRET_KEY to your .env.local" },
         { status: 501 }
       );
     }
@@ -24,7 +24,7 @@ export async function POST(req: Request) {
     } else if (itemType === "product") {
       item = db.select().from(products).where(eq(products.id, itemId)).get();
     }
-    if (!item) return NextResponse.json({ error: "Producto no encontrado" }, { status: 404 });
+    if (!item) return NextResponse.json({ error: "Item not found" }, { status: 404 });
 
     const origin = req.headers.get("origin") || "http://localhost:3000";
 
@@ -64,6 +64,6 @@ export async function POST(req: Request) {
     return NextResponse.json({ url: checkoutSession.url });
   } catch (err: any) {
     console.error(err);
-    return NextResponse.json({ error: err.message || "Error al crear el pago" }, { status: 500 });
+    return NextResponse.json({ error: err.message || "Error creating the payment" }, { status: 500 });
   }
 }

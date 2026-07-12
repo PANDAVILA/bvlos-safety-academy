@@ -47,12 +47,12 @@ export default function LessonViewer({
     <div className="grid min-h-[calc(100vh-64px)] grid-cols-1 lg:grid-cols-[320px_1fr]">
       <aside className="border-r border-navy-900/10 bg-white">
         <div className="border-b border-navy-900/10 p-6">
-          <p className="eyebrow text-gold-600">Curso</p>
+          <p className="eyebrow text-gold-600">Course</p>
           <p className="mt-1 font-display text-navy-900">{courseTitle}</p>
           <div className="mt-4 h-1.5 w-full bg-navy-900/10">
             <div className="h-1.5 bg-gold-500 transition-all" style={{ width: `${percent}%` }} />
           </div>
-          <p className="coord mt-2 text-xs text-navy-900/40">{percent}% completado</p>
+          <p className="coord mt-2 text-xs text-navy-900/40">{percent}% complete</p>
         </div>
         <nav className="max-h-[calc(100vh-220px)] overflow-y-auto">
           {moduleGroups.map((m) => (
@@ -86,7 +86,7 @@ export default function LessonViewer({
         {active && (
           <div className="mx-auto max-w-2xl">
             <p className="eyebrow flex items-center gap-2 text-gold-600">
-              <PlayCircle size={14} /> Lección
+              <PlayCircle size={14} /> Lesson
             </p>
             <h1 className="mt-3 font-display text-2xl text-navy-900 sm:text-3xl">{active.title}</h1>
             <div className="mt-8 aspect-video border border-navy-900/10 bg-navy-900" />
@@ -98,7 +98,7 @@ export default function LessonViewer({
               className="mt-10 flex items-center gap-2 bg-gold-500 px-6 py-3 font-medium text-navy-950 hover:bg-gold-400 disabled:cursor-default disabled:bg-navy-900/10 disabled:text-navy-900/40"
             >
               <CheckCircle2 size={16} />
-              {progress[active.id] ? "Lección completada" : "Marcar como completada"}
+              {progress[active.id] ? "Lesson completed" : "Mark as complete"}
             </button>
           </div>
         )}

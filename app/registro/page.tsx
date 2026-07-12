@@ -21,7 +21,7 @@ export default function RegisterPage() {
     });
     const data = await res.json();
     if (!res.ok) {
-      setError(data.error || "No se pudo crear la cuenta.");
+      setError(data.error || "Could not create the account.");
       setLoading(false);
       return;
     }
@@ -34,11 +34,11 @@ export default function RegisterPage() {
   return (
     <div className="chart-bg-light flex min-h-[calc(100vh-64px)] items-center justify-center px-6 py-20">
       <div className="w-full max-w-md border border-navy-900/10 bg-white p-8">
-        <p className="eyebrow text-gold-600">Crear cuenta</p>
-        <h1 className="mt-3 font-display text-2xl text-navy-900">Únete a la Academia</h1>
+        <p className="eyebrow text-gold-600">Create account</p>
+        <h1 className="mt-3 font-display text-2xl text-navy-900">Join the Academy</h1>
         <form onSubmit={handleSubmit} className="mt-8 space-y-4">
           <div>
-            <label className="eyebrow text-navy-900/60">Nombre completo</label>
+            <label className="eyebrow text-navy-900/60">Full name</label>
             <input
               required
               value={form.name}
@@ -47,7 +47,7 @@ export default function RegisterPage() {
             />
           </div>
           <div>
-            <label className="eyebrow text-navy-900/60">Empresa (opcional)</label>
+            <label className="eyebrow text-navy-900/60">Company (optional)</label>
             <input
               value={form.company}
               onChange={(e) => setForm({ ...form, company: e.target.value })}
@@ -55,7 +55,7 @@ export default function RegisterPage() {
             />
           </div>
           <div>
-            <label className="eyebrow text-navy-900/60">Correo electrónico</label>
+            <label className="eyebrow text-navy-900/60">Email address</label>
             <input
               type="email"
               required
@@ -65,7 +65,7 @@ export default function RegisterPage() {
             />
           </div>
           <div>
-            <label className="eyebrow text-navy-900/60">Contraseña (mín. 8 caracteres)</label>
+            <label className="eyebrow text-navy-900/60">Password (min. 8 characters)</label>
             <input
               type="password"
               required
@@ -81,11 +81,11 @@ export default function RegisterPage() {
             disabled={loading}
             className="w-full bg-gold-500 px-6 py-3 font-medium text-navy-950 hover:bg-gold-400 disabled:opacity-60"
           >
-            {loading ? "Creando cuenta…" : "Crear cuenta"}
+            {loading ? "Creating account…" : "Create account"}
           </button>
         </form>
         <p className="mt-6 text-sm text-navy-900/60">
-          ¿Ya tienes cuenta? <Link href="/login" className="text-gold-600 hover:underline">Inicia sesión</Link>
+          Already have an account? <Link href="/login" className="text-gold-600 hover:underline">Sign in</Link>
         </p>
       </div>
     </div>

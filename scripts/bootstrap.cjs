@@ -131,7 +131,7 @@ CREATE TABLE IF NOT EXISTS consulting_leads (
 const courseCount = db.prepare("SELECT COUNT(*) AS n FROM courses").get().n;
 
 if (courseCount === 0) {
-  console.log("[bootstrap] Base de datos vacía: cargando contenido de ejemplo…");
+  console.log("[bootstrap] Empty database: loading sample content…");
 
   const uuid = () => crypto.randomUUID();
 
@@ -154,19 +154,19 @@ if (courseCount === 0) {
   `);
 
   const courses = [
-    { slug: "fundamentos-bvlos", title: "Fundamentos de Operaciones BVLOS", subtitle: "La base normativa y operativa para volar más allá de la línea de visión.", description: "Curso introductorio que cubre el marco regulatorio, la terminología esencial (BVLOS, VLOS, GRC, ARC) y los principios de una operación segura. Diseñado para pilotos remotos y gestores de operaciones que inician su camino hacia BVLOS.", level: "foundation", category: "bvlos", priceCents: 24900, durationHours: 8, coverImage: "/brand/hero-1.png" },
-    { slug: "metodologia-sora-avanzada", title: "Metodología SORA Avanzada", subtitle: "Evaluación cuantitativa del riesgo de tierra y aire para expedientes reales.", description: "Profundiza en el proceso SORA paso a paso: definición del ConOps, cálculo del GRC intrínseco, mitigaciones, determinación del ARC y estrategias de contención. Incluye plantillas descargables usadas en expedientes reales ante autoridad.", level: "advanced", category: "risk-assessment", priceCents: 44900, durationHours: 14, coverImage: "/brand/drift-1.png" },
-    { slug: "sms-para-operadores-uas", title: "Sistemas de Gestión de Seguridad (SMS) para Operadores UAS", subtitle: "Diseña, implementa y audita un SMS conforme a estándares internacionales.", description: "Aprende a construir un Sistema de Gestión de Seguridad completo: política de seguridad, identificación de peligros, gestión de riesgo, aseguramiento y promoción de la seguridad, adaptado a operadores de aeronaves no tripuladas.", level: "specialist", category: "sms", priceCents: 59900, durationHours: 20, coverImage: "/brand/hero-2.png" },
-    { slug: "conops-y-volumen-operacional", title: "Diseño de ConOps y Volumen Operacional", subtitle: "De la idea de misión a un concepto de operaciones defendible.", description: "Curso práctico para redactar un Concepto de Operaciones (ConOps) robusto: definición de la misión, volumen operacional, volumen de contingencia, y su integración en el espacio aéreo.", level: "foundation", category: "conops", priceCents: 19900, durationHours: 6, coverImage: "/brand/drift-2.png" },
-    { slug: "gestion-de-mitigaciones-bvlos", title: "Gestión de Mitigaciones en Operaciones BVLOS", subtitle: "Del catálogo de mitigaciones al seguimiento de su eficacia operativa.", description: "Cómo seleccionar, justificar y hacer seguimiento de mitigaciones operacionales y técnicas (M1, M2, M3) a lo largo del ciclo de vida de la operación, con foco en trazabilidad ante auditoría.", level: "advanced", category: "risk-assessment", priceCents: 34900, durationHours: 10, coverImage: "/brand/drift-3.png" },
-    { slug: "introduccion-espacio-aereo-no-segregado", title: "Introducción al Espacio Aéreo No Segregado para UAS", subtitle: "Clasificación del espacio aéreo, NOTAM y coordinación con ATC.", description: "Curso gratuito de nivelación: clasificación del espacio aéreo, lectura de cartas aeronáuticas, publicación de NOTAM y fundamentos de coordinación con control de tránsito aéreo para operaciones no tripuladas.", level: "foundation", category: "bvlos", priceCents: 0, durationHours: 3, coverImage: "/brand/hero-1.png" },
+    { slug: "fundamentos-bvlos", title: "BVLOS Operations Fundamentals", subtitle: "The regulatory and operational foundation for flying beyond visual line of sight.", description: "An introductory course covering the regulatory framework, essential terminology (BVLOS, VLOS, GRC, ARC), and the principles of a safe operation. Designed for remote pilots and operations managers starting their journey into BVLOS.", level: "foundation", category: "bvlos", priceCents: 24900, durationHours: 8, coverImage: "/brand/hero-1.png" },
+    { slug: "metodologia-sora-avanzada", title: "Advanced SORA Methodology", subtitle: "Quantitative ground and air risk assessment for real operational dossiers.", description: "A deep dive into the SORA process step by step: ConOps definition, intrinsic GRC calculation, mitigations, ARC determination, and containment strategies. Includes downloadable templates used in real dossiers submitted to authorities.", level: "advanced", category: "risk-assessment", priceCents: 44900, durationHours: 14, coverImage: "/brand/drift-1.png" },
+    { slug: "sms-para-operadores-uas", title: "Safety Management Systems (SMS) for UAS Operators", subtitle: "Design, implement, and audit an SMS aligned with international standards.", description: "Learn to build a complete Safety Management System: safety policy, hazard identification, risk management, safety assurance, and safety promotion, adapted for uncrewed aircraft operators.", level: "specialist", category: "sms", priceCents: 59900, durationHours: 20, coverImage: "/brand/hero-2.png" },
+    { slug: "conops-y-volumen-operacional", title: "ConOps and Operational Volume Design", subtitle: "From mission concept to a defensible concept of operations.", description: "A hands-on course for drafting a robust Concept of Operations (ConOps): mission definition, operational volume, contingency volume, and its integration into the airspace.", level: "foundation", category: "conops", priceCents: 19900, durationHours: 6, coverImage: "/brand/drift-2.png" },
+    { slug: "gestion-de-mitigaciones-bvlos", title: "Mitigation Management in BVLOS Operations", subtitle: "From the mitigation catalog to tracking its operational effectiveness.", description: "How to select, justify, and track operational and technical mitigations (M1, M2, M3) throughout the operation's lifecycle, with a focus on audit traceability.", level: "advanced", category: "risk-assessment", priceCents: 34900, durationHours: 10, coverImage: "/brand/drift-3.png" },
+    { slug: "introduccion-espacio-aereo-no-segregado", title: "Introduction to Non-Segregated Airspace for UAS", subtitle: "Airspace classification, NOTAMs, and coordination with ATC.", description: "A free foundation course: airspace classification, reading aeronautical charts, publishing NOTAMs, and the fundamentals of air traffic control coordination for uncrewed operations.", level: "foundation", category: "bvlos", priceCents: 0, durationHours: 3, coverImage: "/brand/hero-1.png" },
   ];
 
   for (const c of courses) {
     const courseId = uuid();
     insertCourse.run({ id: courseId, ...c });
 
-    const moduleTitles = ["Introducción y marco normativo", "Metodología y herramientas", "Aplicación práctica y evaluación"];
+    const moduleTitles = ["Introduction and regulatory framework", "Methodology and tools", "Practical application and assessment"];
     moduleTitles.forEach((mt, mi) => {
       const moduleId = uuid();
       insertModule.run({ id: moduleId, courseId, title: mt, order: mi });
@@ -174,8 +174,8 @@ if (courseCount === 0) {
         insertLesson.run({
           id: uuid(),
           moduleId,
-          title: `${mt} — Lección ${li + 1}`,
-          content: "Contenido de la lección en formato texto enriquecido. Aquí iría el desarrollo teórico, ejemplos y referencias normativas correspondientes a este bloque del curso.",
+          title: `${mt} — Lesson ${li + 1}`,
+          content: "Lesson content in rich text format. This is where the theoretical development, examples, and regulatory references for this block of the course would go.",
           durationMinutes: 15 + li * 5,
           order: li,
           isPreview: mi === 0 && li === 0 ? 1 : 0,
@@ -185,24 +185,24 @@ if (courseCount === 0) {
   }
 
   const articles = [
-    { slug: "easa-actualiza-marco-bvlos-2026", title: "EASA actualiza el marco normativo para operaciones BVLOS en 2026", excerpt: "Nuevos requisitos de la categoría específica afectan a operadores que ya cuentan con autorización SORA.", body: "Contenido completo del artículo con el análisis detallado de los cambios normativos, su impacto en los operadores existentes y los plazos de adaptación previstos.", type: "news", coverImage: "/brand/hero-2.png", author: "Equipo Editorial BSA" },
-    { slug: "corredores-bvlos-infraestructura-critica", title: "Corredores BVLOS para inspección de infraestructura crítica: primeros resultados", excerpt: "Un análisis de los primeros doce meses de operación de corredores aéreos dedicados a inspección energética.", body: "Contenido completo del artículo con estadísticas operativas, incidentes reportados y lecciones aprendidas del primer año de corredores BVLOS dedicados.", type: "news", coverImage: "/brand/drift-2.png", author: "Equipo Editorial BSA" },
-    { slug: "estudio-deriva-operacional-2025", title: "Estudio técnico: deriva operacional como precursor de eventos reportables", excerpt: "Análisis de 340 vuelos BVLOS que identifica patrones de deriva antes de incidentes de pérdida de enlace.", body: "Informe técnico completo con metodología, muestra analizada, hallazgos estadísticos y recomendaciones de mitigación para operadores y diseñadores de sistemas de detección temprana.", type: "report", coverImage: "/brand/drift-1.png", author: "Departamento de Investigación BSA" },
-    { slug: "benchmark-sms-operadores-uas", title: "Benchmark 2026: madurez de los Sistemas de Gestión de Seguridad en operadores UAS", excerpt: "Comparativa de madurez SMS entre 45 operadores certificados en tres regiones.", body: "Informe completo con la metodología de evaluación de madurez, resultados por región y categoría de operador, y recomendaciones para cerrar brechas identificadas.", type: "report", coverImage: "/brand/hero-1.png", author: "Departamento de Investigación BSA" },
+    { slug: "easa-actualiza-marco-bvlos-2026", title: "EASA updates the regulatory framework for BVLOS operations in 2026", excerpt: "New specific-category requirements affect operators who already hold a SORA authorization.", body: "Full article content with a detailed analysis of the regulatory changes, their impact on existing operators, and the expected adaptation timelines.", type: "news", coverImage: "/brand/hero-2.png", author: "BSA Editorial Team" },
+    { slug: "corredores-bvlos-infraestructura-critica", title: "BVLOS corridors for critical infrastructure inspection: first results", excerpt: "An analysis of the first twelve months of dedicated aerial corridors for energy-sector inspection.", body: "Full article content with operational statistics, reported incidents, and lessons learned from the first year of dedicated BVLOS corridors.", type: "news", coverImage: "/brand/drift-2.png", author: "BSA Editorial Team" },
+    { slug: "estudio-deriva-operacional-2025", title: "Technical study: operational drift as a precursor to reportable events", excerpt: "An analysis of 340 BVLOS flights identifying drift patterns before link-loss incidents.", body: "Full technical report with methodology, sample analyzed, statistical findings, and mitigation recommendations for operators and early-detection system designers.", type: "report", coverImage: "/brand/drift-1.png", author: "BSA Research Department" },
+    { slug: "benchmark-sms-operadores-uas", title: "2026 Benchmark: Safety Management System maturity among UAS operators", excerpt: "An SMS maturity comparison across 45 certified operators in three regions.", body: "Full report with the maturity assessment methodology, results by region and operator category, and recommendations for closing identified gaps.", type: "report", coverImage: "/brand/hero-1.png", author: "BSA Research Department" },
   ];
   for (const a of articles) insertArticle.run({ id: uuid(), ...a });
 
   const products = [
-    { slug: "ebook-guia-sora-paso-a-paso", title: "Guía SORA Paso a Paso (eBook)", description: "Manual práctico de 120 páginas con ejemplos reales de cálculo de GRC y ARC, y plantillas editables.", type: "ebook", priceCents: 3900, coverImage: "/brand/hero-2.png" },
-    { slug: "plantilla-conops-editable", title: "Plantilla de ConOps Editable", description: "Documento editable en formato profesional, listo para adaptar a tu operación y presentar ante autoridad.", type: "template", priceCents: 1900, coverImage: "/brand/drift-2.png" },
-    { slug: "checklist-preflight-bvlos", title: "Checklist Pre-Vuelo BVLOS", description: "Lista de verificación imprimible y digital para operaciones BVLOS, alineada con buenas prácticas SMS.", type: "checklist", priceCents: 900, coverImage: "/brand/drift-3.png" },
-    { slug: "ebook-gestion-mitigaciones", title: "Gestión de Mitigaciones: Catálogo de Referencia (eBook)", description: "Catálogo comentado de mitigaciones M1, M2 y M3 con criterios de justificación y evidencia requerida.", type: "ebook", priceCents: 2900, coverImage: "/brand/hero-1.png" },
+    { slug: "ebook-guia-sora-paso-a-paso", title: "The Step-by-Step SORA Guide (eBook)", description: "A 120-page practical manual with real-world GRC and ARC calculation examples and editable templates.", type: "ebook", priceCents: 3900, coverImage: "/brand/hero-2.png" },
+    { slug: "plantilla-conops-editable", title: "Editable ConOps Template", description: "A professionally formatted, editable document ready to adapt to your operation and submit to authorities.", type: "template", priceCents: 1900, coverImage: "/brand/drift-2.png" },
+    { slug: "checklist-preflight-bvlos", title: "BVLOS Pre-Flight Checklist", description: "A printable and digital checklist for BVLOS operations, aligned with SMS best practices.", type: "checklist", priceCents: 900, coverImage: "/brand/drift-3.png" },
+    { slug: "ebook-gestion-mitigaciones", title: "Mitigation Management: Reference Catalog (eBook)", description: "An annotated catalog of M1, M2, and M3 mitigations with justification criteria and required evidence.", type: "ebook", priceCents: 2900, coverImage: "/brand/hero-1.png" },
   ];
   for (const p of products) insertProduct.run({ id: uuid(), ...p });
 
-  console.log("[bootstrap] Contenido de ejemplo cargado.");
+  console.log("[bootstrap] Sample content loaded.");
 } else {
-  console.log(`[bootstrap] Base de datos ya inicializada (${courseCount} cursos). Nada que hacer.`);
+  console.log(`[bootstrap] Database already initialized (${courseCount} courses). Nothing to do.`);
 }
 
 db.close();

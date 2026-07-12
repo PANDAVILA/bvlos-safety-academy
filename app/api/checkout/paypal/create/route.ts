@@ -10,7 +10,7 @@ export async function POST(req: Request) {
   try {
     if (!paypalConfigured) {
       return NextResponse.json(
-        { error: "PayPal no está configurado. Añade PAYPAL_CLIENT_ID y PAYPAL_CLIENT_SECRET en .env.local" },
+        { error: "PayPal is not configured. Add PAYPAL_CLIENT_ID and PAYPAL_CLIENT_SECRET to your .env.local" },
         { status: 501 }
       );
     }
@@ -23,7 +23,7 @@ export async function POST(req: Request) {
     } else if (itemType === "product") {
       item = db.select().from(products).where(eq(products.id, itemId)).get();
     }
-    if (!item) return NextResponse.json({ error: "Producto no encontrado" }, { status: 404 });
+    if (!item) return NextResponse.json({ error: "Item not found" }, { status: 404 });
 
     const accessToken = await getPayPalAccessToken();
     const amount = (item.priceCents / 100).toFixed(2);
@@ -63,6 +63,6 @@ export async function POST(req: Request) {
     return NextResponse.json({ id: order.id });
   } catch (err: any) {
     console.error(err);
-    return NextResponse.json({ error: err.message || "Error al crear el pedido" }, { status: 500 });
+    return NextResponse.json({ error: err.message || "Error creating the order" }, { status: 500 });
   }
 }

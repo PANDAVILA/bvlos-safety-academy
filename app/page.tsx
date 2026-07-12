@@ -1,4 +1,5 @@
 export const dynamic = "force-dynamic";
+
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, BookOpen, ShieldCheck, Globe2, Users, TrendingUp, FileText, Newspaper, Radar } from "lucide-react";
@@ -20,39 +21,39 @@ export default function Home() {
           <div>
             <p className="eyebrow text-gold-400">Knowledge · Standards · Safety</p>
             <h1 className="mt-5 font-display text-4xl font-semibold leading-[1.08] text-white sm:text-5xl lg:text-6xl">
-              El riesgo BVLOS más peligroso es el que nadie reporta.
+              The most dangerous BVLOS risk is the one nobody reports.
             </h1>
             <p className="mt-6 max-w-lg text-lg text-white/70">
-              Formación especializada, certificaciones y consultoría para equipos que operan más allá de la línea de
-              visión. Convertimos el cumplimiento normativo en seguridad operacional real.
+              Specialized training, certifications, and consulting for teams operating beyond visual line of
+              sight. We turn regulatory compliance into real operational safety.
             </p>
             <div className="mt-9 flex flex-wrap items-center gap-4">
               <Link
                 href="/cursos"
                 className="group flex items-center gap-2 bg-gold-500 px-6 py-3 font-medium text-navy-950 transition hover:bg-gold-400"
               >
-                Ver catálogo de cursos
+                Browse course catalog
                 <ArrowRight size={16} className="transition group-hover:translate-x-1" />
               </Link>
               <Link
                 href="/aerosafety-case"
                 className="flex items-center gap-2 border border-white/25 px-6 py-3 font-medium text-white transition hover:border-gold-400 hover:text-gold-400"
               >
-                Probar AeroSafety Case
+                Try AeroSafety Case
               </Link>
             </div>
             <div className="mt-14 grid grid-cols-3 gap-6 border-t border-white/10 pt-8 text-white/80 sm:max-w-md">
               <div>
                 <p className="font-display text-2xl text-gold-400">40+</p>
-                <p className="eyebrow mt-1 text-white/40">Módulos técnicos</p>
+                <p className="eyebrow mt-1 text-white/40">Technical modules</p>
               </div>
               <div>
                 <p className="font-display text-2xl text-gold-400">18</p>
-                <p className="eyebrow mt-1 text-white/40">Países</p>
+                <p className="eyebrow mt-1 text-white/40">Countries</p>
               </div>
               <div>
                 <p className="font-display text-2xl text-gold-400">SORA</p>
-                <p className="eyebrow mt-1 text-white/40">Alineado</p>
+                <p className="eyebrow mt-1 text-white/40">Aligned</p>
               </div>
             </div>
           </div>
@@ -61,7 +62,7 @@ export default function Home() {
             <div className="absolute -inset-4 border border-gold-500/20" />
             <Image
               src="/brand/hero-1.png"
-              alt="Operador BVLOS analizando espacio aéreo"
+              alt="BVLOS operator analyzing airspace"
               width={900}
               height={700}
               className="relative w-full object-cover"
@@ -79,20 +80,20 @@ export default function Home() {
       <section className="bg-white">
         <div className="mx-auto grid max-w-7xl gap-12 px-6 py-24 lg:grid-cols-2 lg:items-center">
           <div className="order-2 lg:order-1">
-            <p className="eyebrow text-gold-600">La brecha operativa</p>
+            <p className="eyebrow text-gold-600">The operational gap</p>
             <h2 className="mt-4 font-display text-3xl font-semibold text-navy-900 sm:text-4xl">
-              El cumplimiento no es seguridad.
+              Compliance is not safety.
             </h2>
             <p className="mt-5 text-navy-900/70">
-              Cumplir con el reglamento certifica un expediente; no certifica que la tripulación reconozca la deriva
-              operacional en tiempo real. BVLOS Safety Academy forma a pilotos remotos, gestores de operaciones y
-              equipos de SMS para cerrar esa brecha con criterio, no solo con papeleo.
+              Meeting the regulation certifies a paper trail; it doesn&apos;t certify that the crew will recognize
+              operational drift in real time. BVLOS Safety Academy trains remote pilots, operations managers, and
+              SMS teams to close that gap with judgment, not just paperwork.
             </p>
             <ul className="mt-8 space-y-4">
               {[
-                "Metodología basada en SORA, ConOps y gestión de riesgo real",
-                "Casos de estudio de incidentes reales anonimizados",
-                "Certificación con validez para expedientes ante autoridad",
+                "Methodology grounded in SORA, ConOps, and real risk management",
+                "Case studies from anonymized real-world incidents",
+                "Certification valid for authority-facing operational files",
               ].map((item) => (
                 <li key={item} className="flex items-start gap-3 text-navy-900/80">
                   <ShieldCheck size={18} className="mt-0.5 shrink-0 text-gold-600" />
@@ -119,23 +120,23 @@ export default function Home() {
           <div className="grid gap-10 lg:grid-cols-2 lg:items-center">
             <Image
               src="/brand/drift-1.png"
-              alt="Deriva operacional en operaciones BVLOS"
+              alt="Operational drift in BVLOS operations"
               width={900}
               height={650}
               className="w-full border border-navy-900/10 object-cover"
             />
             <div>
-              <p className="eyebrow text-gold-600">Deriva operacional</p>
+              <p className="eyebrow text-gold-600">Operational drift</p>
               <h3 className="mt-4 font-display text-3xl font-semibold text-navy-900">
-                El riesgo silencioso de las operaciones BVLOS.
+                The silent risk in BVLOS operations.
               </h3>
               <p className="mt-5 text-navy-900/70">
-                La distancia entre la ruta planificada y la trayectoria real crece de forma progresiva y casi
-                imperceptible. Nuestros módulos de mitigación de riesgo entrenan a los equipos para detectar esa
-                deriva antes de que se convierta en un evento reportable.
+                The gap between the planned route and the actual track grows gradually and almost
+                imperceptibly. Our risk mitigation modules train teams to spot that drift before it becomes a
+                reportable event.
               </p>
               <Link href="/cursos?categoria=risk-assessment" className="mt-6 inline-flex items-center gap-2 font-medium text-navy-900 hover:text-gold-600">
-                Ver cursos de gestión de riesgo <ArrowRight size={16} />
+                View risk management courses <ArrowRight size={16} />
               </Link>
             </div>
           </div>
@@ -146,24 +147,24 @@ export default function Home() {
       <section className="bg-white">
         <div className="mx-auto max-w-7xl px-6 py-24">
           <div className="max-w-2xl">
-            <p className="eyebrow text-gold-600">La plataforma</p>
+            <p className="eyebrow text-gold-600">The platform</p>
             <h2 className="mt-4 font-display text-3xl font-semibold text-navy-900 sm:text-4xl">
-              Todo lo que un equipo BVLOS necesita, en un solo lugar.
+              Everything a BVLOS team needs, in one place.
             </h2>
           </div>
           <div className="mt-14 grid gap-px overflow-hidden border border-navy-900/10 bg-navy-900/10 sm:grid-cols-2 lg:grid-cols-4">
             {[
-              { icon: BookOpen, title: "Academia LMS", desc: "Cursos por niveles con evaluación, certificados y seguimiento de progreso.", href: "/cursos" },
-              { icon: Newspaper, title: "Noticias", desc: "Actualidad regulatoria y del sector BVLOS, curada por expertos.", href: "/noticias" },
-              { icon: FileText, title: "Informes", desc: "Análisis técnicos, estudios de caso y reportes de incidentes.", href: "/informes" },
-              { icon: Radar, title: "AeroSafety Case", desc: "Prueba la herramienta de evaluación de riesgo y safety case.", href: "/aerosafety-case" },
+              { icon: BookOpen, title: "LMS Academy", desc: "Tiered courses with assessments, certificates, and progress tracking.", href: "/cursos" },
+              { icon: Newspaper, title: "News", desc: "Regulatory and industry updates for the BVLOS sector, curated by experts.", href: "/noticias" },
+              { icon: FileText, title: "Reports", desc: "Technical analysis, case studies, and incident reports.", href: "/informes" },
+              { icon: Radar, title: "AeroSafety Case", desc: "Try our risk assessment and safety case tool.", href: "/aerosafety-case" },
             ].map((f) => (
               <Link key={f.title} href={f.href} className="group flex flex-col gap-4 bg-white p-8 transition hover:bg-navy-900">
                 <f.icon size={22} className="text-gold-600 group-hover:text-gold-400" />
                 <p className="font-display text-lg text-navy-900 group-hover:text-white">{f.title}</p>
                 <p className="text-sm text-navy-900/60 group-hover:text-white/60">{f.desc}</p>
                 <span className="mt-auto flex items-center gap-1 text-sm font-medium text-navy-900 group-hover:text-gold-400">
-                  Explorar <ArrowRight size={14} />
+                  Explore <ArrowRight size={14} />
                 </span>
               </Link>
             ))}
@@ -176,11 +177,11 @@ export default function Home() {
         <div className="mx-auto max-w-7xl px-6 py-24">
           <div className="flex flex-wrap items-end justify-between gap-6">
             <div>
-              <p className="eyebrow text-gold-600">Formación</p>
-              <h2 className="mt-4 font-display text-3xl font-semibold text-navy-900 sm:text-4xl">Cursos destacados</h2>
+              <p className="eyebrow text-gold-600">Training</p>
+              <h2 className="mt-4 font-display text-3xl font-semibold text-navy-900 sm:text-4xl">Featured courses</h2>
             </div>
             <Link href="/cursos" className="flex items-center gap-2 font-medium text-navy-900 hover:text-gold-600">
-              Ver todo el catálogo <ArrowRight size={16} />
+              View full catalog <ArrowRight size={16} />
             </Link>
           </div>
           <div className="mt-12 grid gap-8 md:grid-cols-3">
@@ -196,27 +197,27 @@ export default function Home() {
         <div className="relative mx-auto max-w-7xl px-6 py-24">
           <div className="grid gap-12 lg:grid-cols-[1fr_1fr] lg:items-center">
             <div>
-              <p className="eyebrow text-gold-400">Consultoría</p>
+              <p className="eyebrow text-gold-400">Consulting</p>
               <h2 className="mt-4 font-display text-3xl font-semibold text-white sm:text-4xl">
-                ¿Necesitas apoyo experto para tu expediente de operación?
+                Need expert support for your operational file?
               </h2>
               <p className="mt-5 text-white/70">
-                Diseñamos ConOps, evaluaciones SORA, safety cases y programas de SMS a medida para operadores,
-                fabricantes y administraciones públicas.
+                We design ConOps, SORA assessments, safety cases, and tailored SMS programs for operators,
+                manufacturers, and public administrations.
               </p>
               <Link
                 href="/consultoria"
                 className="mt-8 inline-flex items-center gap-2 bg-gold-500 px-6 py-3 font-medium text-navy-950 hover:bg-gold-400"
               >
-                Solicitar una propuesta <ArrowRight size={16} />
+                Request a proposal <ArrowRight size={16} />
               </Link>
             </div>
             <div className="grid grid-cols-2 gap-4">
               {[
-                { icon: Globe2, label: "Evaluación SORA" },
-                { icon: Users, label: "Auditoría de SMS" },
-                { icon: FileText, label: "Safety Case" },
-                { icon: TrendingUp, label: "ConOps a medida" },
+                { icon: Globe2, label: "SORA assessment" },
+                { icon: Users, label: "SMS audit" },
+                { icon: FileText, label: "Safety case" },
+                { icon: TrendingUp, label: "Tailored ConOps" },
               ].map((s) => (
                 <div key={s.label} className="border border-white/15 p-6">
                   <s.icon size={20} className="text-gold-400" />
@@ -233,13 +234,13 @@ export default function Home() {
         <div className="mx-auto max-w-7xl px-6 py-24">
           <div className="flex flex-wrap items-end justify-between gap-6">
             <div>
-              <p className="eyebrow text-gold-600">Últimas publicaciones</p>
+              <p className="eyebrow text-gold-600">Latest publications</p>
               <h2 className="mt-4 font-display text-3xl font-semibold text-navy-900 sm:text-4xl">
-                Noticias e informes del sector
+                Industry news and reports
               </h2>
             </div>
             <Link href="/noticias" className="flex items-center gap-2 font-medium text-navy-900 hover:text-gold-600">
-              Ver todo <ArrowRight size={16} />
+              View all <ArrowRight size={16} />
             </Link>
           </div>
           <div className="mt-12 grid gap-8 md:grid-cols-3">

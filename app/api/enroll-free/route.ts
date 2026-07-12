@@ -7,12 +7,12 @@ import { eq } from "drizzle-orm";
 
 export async function POST(req: Request) {
   const session = await getServerSession(authOptions);
-  if (!session) return NextResponse.json({ error: "No autenticado" }, { status: 401 });
+  if (!session) return NextResponse.json({ error: "Not authenticated" }, { status: 401 });
 
   const { itemId } = await req.json();
   const course = db.select().from(courses).where(eq(courses.id, itemId)).get();
   if (!course || course.priceCents !== 0) {
-    return NextResponse.json({ error: "Este curso no es gratuito" }, { status: 400 });
+    return NextResponse.json({ error: "This course is not free" }, { status: 400 });
   }
 
   const userId = (session.user as any).id;
