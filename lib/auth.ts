@@ -27,11 +27,18 @@ export const authOptions: NextAuthOptions = {
         if (!user) return null;
         const valid = await bcrypt.compare(credentials.password, user.passwordHash);
         if (!valid) return null;
+
+        const adminEmails = (process.env.ADMIN_EMAILS || "")
+          .split(",")
+          .map((e) => e.trim().toLowerCase())
+          .filter(Boolean);
+        const role = adminEmails.includes(user.email.toLowerCase()) ? "admin" : user.role;
+
         return {
           id: user.id,
           name: user.name,
           email: user.email,
-          role: user.role,
+          role,
         } as any;
       },
     }),

@@ -40,6 +40,11 @@ export default function Header() {
         <div className="hidden items-center gap-3 lg:flex">
           {session ? (
             <>
+              {(session.user as any)?.role === "admin" && (
+                <Link href="/admin" className="eyebrow text-gold-600 hover:text-gold-700">
+                  Admin
+                </Link>
+              )}
               <Link href="/panel" className="eyebrow text-navy-900/70 hover:text-gold-600">
                 My dashboard
               </Link>

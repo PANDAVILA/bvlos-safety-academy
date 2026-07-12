@@ -15,8 +15,9 @@ body {
 }
 
 h1, h2, h3, h4 {
-  font-family: "Space Grotesk", sans-serif;
-  letter-spacing: -0.01em;
+  font-family: "Anton", sans-serif;
+  letter-spacing: 0.01em;
+  font-weight: 400;
 }
 
 .font-mono, .eyebrow, .coord {
