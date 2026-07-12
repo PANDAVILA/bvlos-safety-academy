@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { ShieldCheck, FileText, Users, Globe2 } from "lucide-react";
 import LeadForm from "@/components/LeadForm";
+import DisclaimerNote from "@/components/DisclaimerNote";
 
 const services = [
   { icon: ShieldCheck, title: "SMS Risk Assessment", desc: "Full ground and air risk calculation (GRC, ARC) and mitigation strategy for your operational dossier." },
@@ -43,16 +44,21 @@ export default function ConsultingPage() {
       </section>
 
       <section id="contacto" className="chart-bg-light border-t border-navy-900/10">
-        <div className="mx-auto grid max-w-5xl gap-10 px-6 py-24 lg:grid-cols-[1fr_1.2fr] lg:items-start">
-          <div>
-            <p className="eyebrow text-gold-600">Request a proposal</p>
-            <h2 className="mt-4 font-display text-3xl text-navy-900">Let's talk about your operation</h2>
-            <p className="mt-4 text-navy-900/70">
-              Tell us what you need and a specialized consultant will review your case to propose the scope and
-              timeline of a tailored project.
-            </p>
+        <div className="mx-auto max-w-5xl px-6 py-24">
+          <div className="grid gap-10 lg:grid-cols-[1fr_1.2fr] lg:items-start">
+            <div>
+              <p className="eyebrow text-gold-600">Request a proposal</p>
+              <h2 className="mt-4 font-display text-3xl text-navy-900">Let's talk about your operation</h2>
+              <p className="mt-4 text-navy-900/70">
+                Tell us what you need and a specialized consultant will review your case to propose the scope and
+                timeline of a tailored project.
+              </p>
+            </div>
+            <LeadForm />
           </div>
-          <LeadForm />
+          <div className="mt-8">
+            <DisclaimerNote />
+          </div>
         </div>
       </section>
     </div>

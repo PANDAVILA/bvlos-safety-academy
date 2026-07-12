@@ -1,4 +1,5 @@
 import { ArrowUpRight, Gauge, ListChecks, ShieldAlert } from "lucide-react";
+import DisclaimerNote from "@/components/DisclaimerNote";
 
 export default function AeroSafetyCasePage() {
   const appUrl = process.env.NEXT_PUBLIC_AEROSAFETY_CASE_URL || "#";
@@ -33,6 +34,9 @@ export default function AeroSafetyCasePage() {
                 Set NEXT_PUBLIC_AEROSAFETY_CASE_URL in your .env.local to link your deployed instance.
               </p>
             )}
+            <div className="mt-8">
+              <DisclaimerNote variant="dark" />
+            </div>
           </div>
           <div className="border border-white/15 bg-navy-950/40 p-6">
             <div className="flex items-center justify-between border-b border-white/10 pb-3 text-xs text-white/50">

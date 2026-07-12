@@ -42,9 +42,27 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-16 flex flex-col items-start justify-between gap-4 border-t border-white/10 pt-6 text-xs text-white/40 lg:flex-row lg:items-center">
-          <p>© {new Date().getFullYear()} BVLOS Safety Academy. All rights reserved.</p>
-          <p className="coord">39.4699° N · 0.3763° W — HQ OPS</p>
+        <div className="mt-16 border-t border-white/10 pt-6">
+          <p className="max-w-3xl text-xs leading-relaxed text-white/40">
+            BVLOS Safety Academy is an independent training and consulting provider. We are not affiliated with,
+            endorsed by, or certified by the FAA, EASA, ICAO, or any aviation authority. Course certificates and
+            consulting deliverables do not constitute regulatory certification.{" "}
+            <Link href="/legal/disclaimer" className="text-gold-400 hover:underline">
+              Read the full disclaimer.
+            </Link>
+          </p>
+
+          <div className="mt-6 flex flex-col items-start justify-between gap-4 text-xs text-white/40 lg:flex-row lg:items-center">
+            <p>© {new Date().getFullYear()} BVLOS Safety Academy. All rights reserved.</p>
+            <nav className="flex flex-wrap gap-x-5 gap-y-2">
+              <Link href="/legal/disclaimer" className="hover:text-gold-400">Disclaimer</Link>
+              <Link href="/legal/terms" className="hover:text-gold-400">Terms of Service</Link>
+              <Link href="/legal/privacy" className="hover:text-gold-400">Privacy Policy</Link>
+              <Link href="/legal/refunds" className="hover:text-gold-400">Refund Policy</Link>
+              <Link href="/legal/consulting-scope" className="hover:text-gold-400">Consulting Scope</Link>
+            </nav>
+            <p className="coord">39.4699° N · 0.3763° W — HQ OPS</p>
+          </div>
         </div>
       </div>
     </footer>
