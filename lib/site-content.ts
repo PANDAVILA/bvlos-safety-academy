@@ -8,6 +8,7 @@ export const homepageDefaults = {
     "Specialized training, certifications, and consulting for teams operating beyond visual line of sight. We turn regulatory compliance into real operational safety.",
   hero_image: "/brand/hero-1.png",
   hero_image_size: "md", // sm | md | lg
+  hero_background_image: "",
   primary_cta_text: "Explore courses",
   primary_cta_href: "/cursos",
   secondary_cta_text: "Try AeroSafety Case",

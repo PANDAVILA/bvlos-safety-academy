@@ -18,7 +18,22 @@ export default async function Home() {
   return (
     <div>
       {/* HERO */}
-      <section className="chart-bg relative overflow-hidden">
+      <section className="chart-bg chart-bg-subtle relative overflow-hidden">
+        {hero.hero_background_image && (
+          <div className="pointer-events-none absolute inset-0">
+            <Image
+              src={hero.hero_background_image}
+              alt=""
+              fill
+              className="object-cover opacity-40 blur-sm"
+              style={{
+                maskImage: "linear-gradient(to right, transparent 0%, black 55%)",
+                WebkitMaskImage: "linear-gradient(to right, transparent 0%, black 55%)",
+              }}
+              priority
+            />
+          </div>
+        )}
         <div className="relative mx-auto grid max-w-7xl gap-10 px-6 py-24 lg:grid-cols-2 lg:items-center lg:py-32">
           <div>
             <p className="eyebrow text-gold-400">{hero.hero_eyebrow}</p>
@@ -57,21 +72,19 @@ export default async function Home() {
             </div>
           </div>
 
-          <div className={`relative mx-auto w-full ${heroImageSizeClass[hero.hero_image_size] ?? ""}`}>
-            <div className="absolute -inset-4 border border-gold-500/20" />
-            <Image
-              src={hero.hero_image}
-              alt="BVLOS operator analyzing airspace"
-              width={900}
-              height={700}
-              className="relative w-full object-cover"
-              priority
-            />
-            <div className="absolute -bottom-6 -left-6 hidden border border-navy-900/10 bg-white px-5 py-4 shadow-xl lg:block">
-              <p className="coord text-xs text-navy-900/50">RISK CLASS</p>
-              <p className="font-display text-lg text-navy-900">GRC 4 · ARC-c</p>
+          {hero.hero_image && (
+            <div className={`relative mx-auto w-full ${heroImageSizeClass[hero.hero_image_size] ?? ""}`}>
+              <div className="absolute -inset-4 border border-gold-500/20" />
+              <Image
+                src={hero.hero_image}
+                alt="BVLOS operator analyzing airspace"
+                width={900}
+                height={700}
+                className="relative w-full object-cover"
+                priority
+              />
             </div>
-          </div>
+          )}
         </div>
       </section>
 

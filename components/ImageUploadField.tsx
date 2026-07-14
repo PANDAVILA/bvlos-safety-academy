@@ -2,7 +2,7 @@
 
 import { useState, useRef } from "react";
 import Image from "next/image";
-import { Upload, Loader2 } from "lucide-react";
+import { Upload, Loader2, X } from "lucide-react";
 
 export default function ImageUploadField({
   name,
@@ -60,15 +60,27 @@ export default function ImageUploadField({
               if (file) handleFile(file);
             }}
           />
-          <button
-            type="button"
-            onClick={() => inputRef.current?.click()}
-            disabled={uploading}
-            className="flex items-center gap-2 border border-navy-900/20 px-4 py-2 text-sm text-navy-900 hover:border-gold-500 disabled:opacity-60"
-          >
-            {uploading ? <Loader2 size={14} className="animate-spin" /> : <Upload size={14} />}
-            {uploading ? "Uploading…" : "Upload image"}
-          </button>
+          <div className="flex flex-wrap gap-2">
+            <button
+              type="button"
+              onClick={() => inputRef.current?.click()}
+              disabled={uploading}
+              className="flex items-center gap-2 border border-navy-900/20 px-4 py-2 text-sm text-navy-900 hover:border-gold-500 disabled:opacity-60"
+            >
+              {uploading ? <Loader2 size={14} className="animate-spin" /> : <Upload size={14} />}
+              {uploading ? "Uploading…" : "Upload image"}
+            </button>
+            {value && (
+              <button
+                type="button"
+                onClick={() => setValue("")}
+                className="flex items-center gap-2 border border-red-200 px-4 py-2 text-sm text-red-600 hover:border-red-400"
+              >
+                <X size={14} />
+                Remove
+              </button>
+            )}
+          </div>
           <input
             type="text"
             value={value}
@@ -77,7 +89,7 @@ export default function ImageUploadField({
             className="mt-2 w-full border border-navy-900/20 px-3 py-2 text-xs text-navy-900/70 focus:border-gold-500 focus:outline-none"
           />
           {error && <p className="mt-1 text-xs text-red-600">{error}</p>}
-          <p className="mt-1 text-xs text-navy-900/40">PNG, JPG, WEBP, GIF, or SVG — max 8MB.</p>
+          <p className="mt-1 text-xs text-navy-900/40">PNG, JPG, WEBP, GIF, or SVG — max 8MB. Leave empty to remove the image entirely.</p>
         </div>
       </div>
     </div>

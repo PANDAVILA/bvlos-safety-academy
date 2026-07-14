@@ -52,7 +52,7 @@ export default async function AdminHomepagePage() {
 
         <div className="space-y-5 border border-navy-900/10 bg-white p-6">
           <p className="eyebrow text-gold-600">Hero image</p>
-          <ImageUploadField name="hero_image" label="Image" defaultValue={content.hero_image} />
+          <ImageUploadField name="hero_image" label="Foreground image (boxed, right side)" defaultValue={content.hero_image} />
           <div>
             <label className="eyebrow text-navy-900/60">Image size</label>
             <select
@@ -65,6 +65,15 @@ export default async function AdminHomepagePage() {
               <option value="lg">Large</option>
             </select>
           </div>
+        </div>
+
+        <div className="space-y-5 border border-navy-900/10 bg-white p-6">
+          <p className="eyebrow text-gold-600">Hero background (optional)</p>
+          <p className="text-xs text-navy-900/50">
+            An extra image blended softly into the dark background, fading in from the right — like a subtle
+            atmospheric backdrop. Leave empty for a plain navy background.
+          </p>
+          <ImageUploadField name="hero_background_image" label="Background image" defaultValue={content.hero_background_image} />
         </div>
 
         <div className="space-y-5 border border-navy-900/10 bg-white p-6">
