@@ -1,4 +1,5 @@
 export const dynamic = "force-dynamic";
+import ImageUploadField from "@/components/ImageUploadField";
 
 import { createArticle } from "@/lib/actions/articles";
 import Link from "next/link";
@@ -40,10 +41,7 @@ export default function NewArticlePage() {
           <label className="eyebrow text-navy-900/60">Author</label>
           <input name="author" defaultValue="BVLOS Safety Academy" className="mt-2 w-full border border-navy-900/20 px-4 py-2.5 focus:border-gold-500 focus:outline-none" />
         </div>
-        <div>
-          <label className="eyebrow text-navy-900/60">Cover image path</label>
-          <input name="coverImage" defaultValue="/brand/hero-1.png" className="mt-2 w-full border border-navy-900/20 px-4 py-2.5 focus:border-gold-500 focus:outline-none" />
-        </div>
+        <ImageUploadField name="coverImage" label="Cover image" defaultValue="/brand/hero-1.png" />
         <label className="flex items-center gap-2 text-sm text-navy-900/70">
           <input type="checkbox" name="published" defaultChecked /> Published
         </label>

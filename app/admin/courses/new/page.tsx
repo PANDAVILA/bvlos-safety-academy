@@ -1,4 +1,5 @@
 export const dynamic = "force-dynamic";
+import ImageUploadField from "@/components/ImageUploadField";
 
 import { createCourse } from "@/lib/actions/courses";
 import Link from "next/link";
@@ -58,11 +59,7 @@ export default function NewCoursePage() {
             <input name="durationHours" type="number" min="0" defaultValue="0" className="mt-2 w-full border border-navy-900/20 px-4 py-2.5 focus:border-gold-500 focus:outline-none" />
           </div>
         </div>
-        <div>
-          <label className="eyebrow text-navy-900/60">Cover image path</label>
-          <input name="coverImage" defaultValue="/brand/hero-1.png" className="mt-2 w-full border border-navy-900/20 px-4 py-2.5 focus:border-gold-500 focus:outline-none" />
-          <p className="mt-1 text-xs text-navy-900/40">Any image already in /public/brand/, e.g. /brand/hero-1.png</p>
-        </div>
+        <ImageUploadField name="coverImage" label="Cover image" defaultValue="/brand/hero-1.png" />
         <label className="flex items-center gap-2 text-sm text-navy-900/70">
           <input type="checkbox" name="published" defaultChecked /> Published (visible on the site)
         </label>

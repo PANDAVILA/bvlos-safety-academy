@@ -8,10 +8,12 @@ import { courses, articles } from "@/lib/db/schema";
 import { eq, desc } from "drizzle-orm";
 import CourseCard from "@/components/CourseCard";
 import ArticleCard from "@/components/ArticleCard";
+import { getHomepageContent, heroImageSizeClass } from "@/lib/site-content";
 
-export default function Home() {
+export default async function Home() {
   const featuredCourses = db.select().from(courses).where(eq(courses.published, true)).all().slice(0, 3);
   const latestArticles = db.select().from(articles).where(eq(articles.published, true)).orderBy(desc(articles.publishedAt)).all().slice(0, 3);
+  const hero = await getHomepageContent();
 
   return (
     <div>
@@ -19,27 +21,24 @@ export default function Home() {
       <section className="chart-bg relative overflow-hidden">
         <div className="relative mx-auto grid max-w-7xl gap-10 px-6 py-24 lg:grid-cols-2 lg:items-center lg:py-32">
           <div>
-            <p className="eyebrow text-gold-400">Knowledge · Standards · Safety</p>
+            <p className="eyebrow text-gold-400">{hero.hero_eyebrow}</p>
             <h1 className="mt-5 font-display text-4xl font-semibold leading-[1.08] text-white sm:text-5xl lg:text-6xl">
-              The most dangerous BVLOS risk is the one nobody reports.
+              {hero.hero_title}
             </h1>
-            <p className="mt-6 max-w-lg text-lg text-white/70">
-              Specialized training, certifications, and consulting for teams operating beyond visual line of
-              sight. We turn regulatory compliance into real operational safety.
-            </p>
+            <p className="mt-6 max-w-lg text-lg text-white/70">{hero.hero_subtitle}</p>
             <div className="mt-9 flex flex-wrap items-center gap-4">
               <Link
-                href="/cursos"
+                href={hero.primary_cta_href}
                 className="group flex items-center gap-2 bg-gold-500 px-6 py-3 font-medium text-navy-950 transition hover:bg-gold-400"
               >
-                Browse course catalog
+                {hero.primary_cta_text}
                 <ArrowRight size={16} className="transition group-hover:translate-x-1" />
               </Link>
               <Link
-                href="/aerosafety-case"
+                href={hero.secondary_cta_href}
                 className="flex items-center gap-2 border border-white/25 px-6 py-3 font-medium text-white transition hover:border-gold-400 hover:text-gold-400"
               >
-                Try AeroSafety Case
+                {hero.secondary_cta_text}
               </Link>
             </div>
             <div className="mt-14 grid grid-cols-3 gap-6 border-t border-white/10 pt-8 text-white/80 sm:max-w-md">
@@ -58,10 +57,10 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="relative">
+          <div className={`relative mx-auto w-full ${heroImageSizeClass[hero.hero_image_size] ?? ""}`}>
             <div className="absolute -inset-4 border border-gold-500/20" />
             <Image
-              src="/brand/hero-1.png"
+              src={hero.hero_image}
               alt="BVLOS operator analyzing airspace"
               width={900}
               height={700}
@@ -77,18 +76,15 @@ export default function Home() {
       </section>
 
       {/* COMPLIANCE IS NOT SAFETY */}
+      {hero.section2_visible !== "false" && (
       <section className="bg-white">
         <div className="mx-auto grid max-w-7xl gap-12 px-6 py-24 lg:grid-cols-2 lg:items-center">
           <div className="order-2 lg:order-1">
-            <p className="eyebrow text-gold-600">The operational gap</p>
+            <p className="eyebrow text-gold-600">{hero.section2_eyebrow}</p>
             <h2 className="mt-4 font-display text-3xl font-semibold text-navy-900 sm:text-4xl">
-              Compliance is not safety.
+              {hero.section2_title}
             </h2>
-            <p className="mt-5 text-navy-900/70">
-              Meeting the regulation certifies a paper trail; it doesn&apos;t certify that the crew will recognize
-              operational drift in real time. BVLOS Safety Academy trains remote pilots, operations managers, and
-              SMS teams to close that gap with judgment, not just paperwork.
-            </p>
+            <p className="mt-5 text-navy-900/70">{hero.section2_body}</p>
             <ul className="mt-8 space-y-4">
               {[
                 "Methodology grounded in SMS, ConOps, and real risk management",
@@ -104,8 +100,8 @@ export default function Home() {
           </div>
           <div className="order-1 lg:order-2">
             <Image
-              src="/brand/hero-2.png"
-              alt="Compliance is not safety"
+              src={hero.section2_image}
+              alt={hero.section2_title}
               width={900}
               height={650}
               className="w-full border border-navy-900/10 object-cover"
@@ -113,28 +109,26 @@ export default function Home() {
           </div>
         </div>
       </section>
+      )}
 
       {/* OPERATIONAL DRIFT feature strip */}
+      {hero.section3_visible !== "false" && (
       <section className="chart-bg-light border-y border-navy-900/10">
         <div className="mx-auto max-w-7xl px-6 py-20">
           <div className="grid gap-10 lg:grid-cols-2 lg:items-center">
             <Image
-              src="/brand/drift-1.png"
-              alt="Operational drift in BVLOS operations"
+              src={hero.section3_image}
+              alt={hero.section3_title}
               width={900}
               height={650}
               className="w-full border border-navy-900/10 object-cover"
             />
             <div>
-              <p className="eyebrow text-gold-600">Operational drift</p>
+              <p className="eyebrow text-gold-600">{hero.section3_eyebrow}</p>
               <h3 className="mt-4 font-display text-3xl font-semibold text-navy-900">
-                The silent risk in BVLOS operations.
+                {hero.section3_title}
               </h3>
-              <p className="mt-5 text-navy-900/70">
-                The gap between the planned route and the actual track grows gradually and almost
-                imperceptibly. Our risk mitigation modules train teams to spot that drift before it becomes a
-                reportable event.
-              </p>
+              <p className="mt-5 text-navy-900/70">{hero.section3_body}</p>
               <Link href="/cursos?categoria=risk-assessment" className="mt-6 inline-flex items-center gap-2 font-medium text-navy-900 hover:text-gold-600">
                 View risk management courses <ArrowRight size={16} />
               </Link>
@@ -142,6 +136,7 @@ export default function Home() {
           </div>
         </div>
       </section>
+      )}
 
       {/* PLATFORM PILLARS */}
       <section className="bg-white">

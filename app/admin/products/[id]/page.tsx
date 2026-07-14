@@ -1,4 +1,5 @@
 export const dynamic = "force-dynamic";
+import ImageUploadField from "@/components/ImageUploadField";
 
 import { db } from "@/lib/db";
 import { products } from "@/lib/db/schema";
@@ -46,10 +47,7 @@ export default function EditProductPage({ params }: { params: { id: string } }) 
           <label className="eyebrow text-navy-900/60">Price (USD)</label>
           <input name="price" type="number" step="0.01" min="0" defaultValue={(product.priceCents / 100).toFixed(2)} className="mt-2 w-full border border-navy-900/20 px-4 py-2.5 focus:border-gold-500 focus:outline-none" />
         </div>
-        <div>
-          <label className="eyebrow text-navy-900/60">Cover image path</label>
-          <input name="coverImage" defaultValue={product.coverImage ?? ""} className="mt-2 w-full border border-navy-900/20 px-4 py-2.5 focus:border-gold-500 focus:outline-none" />
-        </div>
+        <ImageUploadField name="coverImage" label="Cover image" defaultValue={product.coverImage ?? ""} />
         <div>
           <label className="eyebrow text-navy-900/60">Downloadable file URL</label>
           <input name="fileUrl" defaultValue={product.fileUrl ?? ""} placeholder="https://..." className="mt-2 w-full border border-navy-900/20 px-4 py-2.5 focus:border-gold-500 focus:outline-none" />

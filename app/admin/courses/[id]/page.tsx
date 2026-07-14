@@ -1,4 +1,5 @@
 export const dynamic = "force-dynamic";
+import ImageUploadField from "@/components/ImageUploadField";
 
 import { db } from "@/lib/db";
 import { courses, modules, lessons } from "@/lib/db/schema";
@@ -83,10 +84,7 @@ export default function EditCoursePage({ params }: { params: { id: string } }) {
             <input name="durationHours" type="number" min="0" defaultValue={course.durationHours} className="mt-2 w-full border border-navy-900/20 px-4 py-2.5 focus:border-gold-500 focus:outline-none" />
           </div>
         </div>
-        <div>
-          <label className="eyebrow text-navy-900/60">Cover image path</label>
-          <input name="coverImage" defaultValue={course.coverImage ?? ""} className="mt-2 w-full border border-navy-900/20 px-4 py-2.5 focus:border-gold-500 focus:outline-none" />
-        </div>
+        <ImageUploadField name="coverImage" label="Cover image" defaultValue={course.coverImage ?? ""} />
         <label className="flex items-center gap-2 text-sm text-navy-900/70">
           <input type="checkbox" name="published" defaultChecked={course.published} /> Published
         </label>

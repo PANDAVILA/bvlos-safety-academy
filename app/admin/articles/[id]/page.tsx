@@ -1,4 +1,5 @@
 export const dynamic = "force-dynamic";
+import ImageUploadField from "@/components/ImageUploadField";
 
 import { db } from "@/lib/db";
 import { articles } from "@/lib/db/schema";
@@ -49,10 +50,7 @@ export default function EditArticlePage({ params }: { params: { id: string } }) 
           <label className="eyebrow text-navy-900/60">Author</label>
           <input name="author" defaultValue={article.author} className="mt-2 w-full border border-navy-900/20 px-4 py-2.5 focus:border-gold-500 focus:outline-none" />
         </div>
-        <div>
-          <label className="eyebrow text-navy-900/60">Cover image path</label>
-          <input name="coverImage" defaultValue={article.coverImage ?? ""} className="mt-2 w-full border border-navy-900/20 px-4 py-2.5 focus:border-gold-500 focus:outline-none" />
-        </div>
+        <ImageUploadField name="coverImage" label="Cover image" defaultValue={article.coverImage ?? ""} />
         <label className="flex items-center gap-2 text-sm text-navy-900/70">
           <input type="checkbox" name="published" defaultChecked={article.published} /> Published
         </label>

@@ -9,3 +9,11 @@ export async function requireAdmin() {
   }
   return session;
 }
+
+// For use inside API route handlers, where redirect() isn't appropriate.
+// Returns the session if the caller is an admin, or null otherwise.
+export async function getAdminSession() {
+  const session = await getServerSession(authOptions);
+  if (!session || (session.user as any)?.role !== "admin") return null;
+  return session;
+}

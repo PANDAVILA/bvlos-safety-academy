@@ -2,10 +2,13 @@ export const dynamic = "force-dynamic";
 
 import { requireAdmin } from "@/lib/admin";
 import Link from "next/link";
-import { LayoutDashboard, Users, BookOpen, Newspaper, ShoppingBag, Mail, ArrowLeft } from "lucide-react";
+import { LayoutDashboard, Users, BookOpen, Newspaper, ShoppingBag, Mail, ArrowLeft, Home, Image as ImageIcon, Palette } from "lucide-react";
 
 const navItems = [
   { href: "/admin", label: "Dashboard", icon: LayoutDashboard },
+  { href: "/admin/homepage", label: "Homepage", icon: Home },
+  { href: "/admin/appearance", label: "Appearance", icon: Palette },
+  { href: "/admin/media", label: "Media Library", icon: ImageIcon },
   { href: "/admin/users", label: "Users", icon: Users },
   { href: "/admin/courses", label: "Courses", icon: BookOpen },
   { href: "/admin/articles", label: "News & Reports", icon: Newspaper },

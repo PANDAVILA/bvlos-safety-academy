@@ -10,19 +10,19 @@ const config: Config = {
     extend: {
       colors: {
         navy: {
-          950: "#060F1E",
-          900: "#0A1B33",
-          800: "#0E2648",
-          700: "#15335C",
-          600: "#1D4472",
+          950: "rgb(var(--c-navy-950) / <alpha-value>)",
+          900: "rgb(var(--c-navy-900) / <alpha-value>)",
+          800: "rgb(var(--c-navy-800) / <alpha-value>)",
+          700: "rgb(var(--c-navy-700) / <alpha-value>)",
+          600: "rgb(var(--c-navy-600) / <alpha-value>)",
         },
         gold: {
-          400: "#E3BA6C",
-          500: "#C79A44",
-          600: "#A87B2E",
+          400: "rgb(var(--c-gold-400) / <alpha-value>)",
+          500: "rgb(var(--c-gold-500) / <alpha-value>)",
+          600: "rgb(var(--c-gold-600) / <alpha-value>)",
         },
         paper: "#F6F7F9",
-        ink: "#0A1B33",
+        ink: "rgb(var(--c-navy-900) / <alpha-value>)",
       },
       fontFamily: {
         display: ["Oswald", "sans-serif"],
