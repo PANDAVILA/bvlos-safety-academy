@@ -119,3 +119,10 @@ export const consultingLeads = sqliteTable("consulting_leads", {
   status: text("status").notNull().default("new"),
   createdAt: text("created_at").default(sql`CURRENT_TIMESTAMP`),
 });
+
+// ---------- SITE CONTENT (editable homepage fields) ----------
+export const siteContent = sqliteTable("site_content", {
+  key: text("key").primaryKey(),
+  value: text("value").notNull().default(""),
+  updatedAt: text("updated_at").default(sql`CURRENT_TIMESTAMP`),
+});
