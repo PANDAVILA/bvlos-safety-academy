@@ -19,21 +19,22 @@ export default async function Home() {
     <div>
       {/* HERO */}
       <section className="chart-bg chart-bg-subtle relative overflow-hidden">
-        {hero.hero_background_image && (
-          <div className="pointer-events-none absolute inset-0">
-            <Image
-              src={hero.hero_background_image}
-              alt=""
-              fill
-              className="object-cover opacity-40 blur-sm"
-              style={{
-                maskImage: "linear-gradient(to right, transparent 0%, black 55%)",
-                WebkitMaskImage: "linear-gradient(to right, transparent 0%, black 55%)",
-              }}
-              priority
-            />
-          </div>
-        )}
+        <div className="relative">
+          {hero.hero_background_image && (
+            <div className="pointer-events-none absolute inset-0 z-0">
+              <Image
+                src={hero.hero_background_image}
+                alt=""
+                fill
+                className="object-cover opacity-40 blur-sm"
+                style={{
+                  maskImage: "linear-gradient(to right, transparent 0%, black 55%)",
+                  WebkitMaskImage: "linear-gradient(to right, transparent 0%, black 55%)",
+                }}
+                priority
+              />
+            </div>
+          )}
         <div className="relative mx-auto grid max-w-7xl gap-10 px-6 py-24 lg:grid-cols-2 lg:items-center lg:py-32">
           <div>
             <p className="eyebrow text-gold-400">{hero.hero_eyebrow}</p>
@@ -85,6 +86,7 @@ export default async function Home() {
               />
             </div>
           )}
+        </div>
         </div>
       </section>
 
