@@ -126,6 +126,12 @@ CREATE TABLE IF NOT EXISTS consulting_leads (
   status TEXT NOT NULL DEFAULT 'new',
   created_at TEXT DEFAULT CURRENT_TIMESTAMP
 );
+
+CREATE TABLE IF NOT EXISTS site_content (
+  key TEXT PRIMARY KEY,
+  value TEXT NOT NULL DEFAULT '',
+  updated_at TEXT DEFAULT CURRENT_TIMESTAMP
+);
 `);
 
 const courseCount = db.prepare("SELECT COUNT(*) AS n FROM courses").get().n;
