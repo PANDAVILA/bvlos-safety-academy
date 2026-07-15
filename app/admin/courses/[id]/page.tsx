@@ -5,7 +5,7 @@ import { courses, modules, lessons } from "@/lib/db/schema";
 import { eq } from "drizzle-orm";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { ArrowLeft, ArrowUp, ArrowDown, Plus, Trash2 } from "lucide-react";
+import { ArrowLeft, ArrowUp, ArrowDown, Plus, Trash2, PlayCircle } from "lucide-react";
 import {
   updateCourse,
   createModule,
@@ -16,6 +16,7 @@ import {
   updateLesson,
   deleteLesson,
   moveLesson,
+  enrollSelfForPreview,
 } from "@/lib/actions/courses";
 import ConfirmSubmitButton from "@/components/ConfirmSubmitButton";
 import ImageUploadField from "@/components/ImageUploadField";
@@ -40,7 +41,14 @@ export default function EditCoursePage({ params }: { params: { id: string } }) {
       <Link href="/admin/courses" className="flex items-center gap-2 text-sm text-navy-900/60 hover:text-navy-900">
         <ArrowLeft size={14} /> Back to courses
       </Link>
-      <h1 className="mt-4 font-display text-3xl text-navy-900">{course.title}</h1>
+      <div className="mt-4 flex flex-wrap items-center justify-between gap-4">
+        <h1 className="font-display text-3xl text-navy-900">{course.title}</h1>
+        <form action={enrollSelfForPreview.bind(null, course.id)}>
+          <button type="submit" className="eyebrow flex items-center gap-2 border border-gold-500 px-4 py-2 text-gold-600 hover:bg-gold-500 hover:text-navy-950">
+            <PlayCircle size={15} /> Preview as enrolled student
+          </button>
+        </form>
+      </div>
 
       {/* Course fields */}
       <form action={updateCourseWithId} className="mt-8 max-w-2xl space-y-5 border border-navy-900/10 bg-white p-6">

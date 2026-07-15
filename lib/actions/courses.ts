@@ -197,3 +197,14 @@ export async function moveLesson(courseId: string, moduleId: string, lessonId: s
   db.update(lessons).set({ order: a.order }).where(eq(lessons.id, b.id)).run();
   revalidatePath(`/admin/courses/${courseId}`);
 }
+
+// Lets an admin preview a paid course as an enrolled student, without paying.
+export async function enrollSelfForPreview(courseId: string) {
+  const session = await requireAdmin();
+  const userId = (session.user as any).id;
+  const existing = db.select().from(enrollments).where(eq(enrollments.courseId, courseId)).all().find((e) => e.userId === userId);
+  if (!existing) {
+    db.insert(enrollments).values({ userId, courseId }).run();
+  }
+  redirect(`/aprender/${courseId}`);
+}
