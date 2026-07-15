@@ -1,4 +1,5 @@
 export const dynamic = "force-dynamic";
+
 import { db } from "@/lib/db";
 import { courses, modules, lessons } from "@/lib/db/schema";
 import { eq } from "drizzle-orm";
@@ -11,14 +12,14 @@ export default function CourseDetail({ params }: { params: { slug: string } }) {
   const course = db.select().from(courses).where(eq(courses.slug, params.slug)).get();
   if (!course) return notFound();
 
-  const courseModules = db.select().from(modules).where(eq(modules.courseId, course.id)).all();
+  const courseModules = db.select().from(modules).where(eq(modules.courseId, course.id)).all().sort((a, b) => a.order - b.order);
   const allLessons = courseModules.map((m) => ({
     module: m,
-    lessons: db.select().from(lessons).where(eq(lessons.moduleId, m.id)).all(),
+    lessons: db.select().from(lessons).where(eq(lessons.moduleId, m.id)).all().sort((a, b) => a.order - b.order),
   }));
 
   const totalLessons = allLessons.reduce((acc, m) => acc + m.lessons.length, 0);
-  const price = course.priceCents === 0 ? "Gratis" : `$${(course.priceCents / 100).toFixed(0)} ${course.currency}`;
+  const price = course.priceCents === 0 ? "Free" : `$${(course.priceCents / 100).toFixed(0)} ${course.currency}`;
 
   return (
     <div>
@@ -29,8 +30,8 @@ export default function CourseDetail({ params }: { params: { slug: string } }) {
             <h1 className="mt-4 font-display text-3xl font-semibold text-white sm:text-4xl">{course.title}</h1>
             <p className="mt-4 max-w-2xl text-white/70">{course.subtitle}</p>
             <div className="mt-6 flex flex-wrap gap-6 text-sm text-white/60">
-              <span className="flex items-center gap-2"><Clock size={15} /> {course.durationHours} horas</span>
-              <span className="flex items-center gap-2"><PlayCircle size={15} /> {totalLessons} lecciones</span>
+              <span className="flex items-center gap-2"><Clock size={15} /> {course.durationHours} hours</span>
+              <span className="flex items-center gap-2"><PlayCircle size={15} /> {totalLessons} lessons</span>
             </div>
           </div>
           <div className="border border-white/15 bg-navy-950/40 p-6">
@@ -48,10 +49,28 @@ export default function CourseDetail({ params }: { params: { slug: string } }) {
       <section className="bg-white">
         <div className="mx-auto grid max-w-7xl gap-12 px-6 py-20 lg:grid-cols-[1.4fr_1fr]">
           <div>
-            <h2 className="font-display text-2xl text-navy-900">Sobre este curso</h2>
+            <h2 className="font-display text-2xl text-navy-900">About this course</h2>
             <p className="mt-4 text-navy-900/70">{course.description}</p>
 
-            <h2 className="mt-14 font-display text-2xl text-navy-900">Contenido del curso</h2>
+            {course.learningOutcomes && course.learningOutcomes.trim() && (
+              <>
+                <h2 className="mt-10 font-display text-2xl text-navy-900">What you&apos;ll learn</h2>
+                <ul className="mt-4 space-y-3">
+                  {course.learningOutcomes
+                    .split("\n")
+                    .map((line) => line.trim())
+                    .filter(Boolean)
+                    .map((line) => (
+                      <li key={line} className="flex items-start gap-3 text-navy-900/80">
+                        <CheckCircle2 size={17} className="mt-0.5 shrink-0 text-gold-600" />
+                        <span>{line}</span>
+                      </li>
+                    ))}
+                </ul>
+              </>
+            )}
+
+            <h2 className="mt-14 font-display text-2xl text-navy-900">Course content</h2>
             <div className="mt-6 divide-y divide-navy-900/10 border border-navy-900/10">
               {allLessons.map(({ module, lessons: ls }) => (
                 <div key={module.id} className="p-6">
@@ -73,13 +92,13 @@ export default function CourseDetail({ params }: { params: { slug: string } }) {
           </div>
 
           <aside className="h-fit border border-navy-900/10 bg-navy-900 p-6 text-white">
-            <p className="eyebrow text-gold-400">Incluye</p>
+            <p className="eyebrow text-gold-400">Included</p>
             <ul className="mt-4 space-y-3 text-sm text-white/80">
               {[
-                "Acceso de por vida al contenido",
-                "Certificado de finalización",
-                "Plantillas y recursos descargables",
-                "Actualizaciones normativas incluidas",
+                "Lifetime access to the content",
+                "Certificate of completion",
+                "Downloadable templates and resources",
+                "Regulatory updates included",
               ].map((i) => (
                 <li key={i} className="flex items-start gap-2">
                   <CheckCircle2 size={15} className="mt-0.5 shrink-0 text-gold-400" />

@@ -8,7 +8,7 @@ export function getUploadsDir() {
   return dir;
 }
 
-const MIME_TYPES: Record<string, string> = {
+const IMAGE_MIME_TYPES: Record<string, string> = {
   ".png": "image/png",
   ".jpg": "image/jpeg",
   ".jpeg": "image/jpeg",
@@ -17,12 +17,26 @@ const MIME_TYPES: Record<string, string> = {
   ".svg": "image/svg+xml",
 };
 
+const ATTACHMENT_MIME_TYPES: Record<string, string> = {
+  ...IMAGE_MIME_TYPES,
+  ".pdf": "application/pdf",
+  ".doc": "application/msword",
+  ".docx": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+  ".ppt": "application/vnd.ms-powerpoint",
+  ".pptx": "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+};
+
 export function mimeTypeFor(filename: string) {
   const ext = path.extname(filename).toLowerCase();
-  return MIME_TYPES[ext] || "application/octet-stream";
+  return ATTACHMENT_MIME_TYPES[ext] || "application/octet-stream";
 }
 
 export function isAllowedImageExt(filename: string) {
   const ext = path.extname(filename).toLowerCase();
-  return Object.prototype.hasOwnProperty.call(MIME_TYPES, ext);
+  return Object.prototype.hasOwnProperty.call(IMAGE_MIME_TYPES, ext);
+}
+
+export function isAllowedAttachmentExt(filename: string) {
+  const ext = path.extname(filename).toLowerCase();
+  return Object.prototype.hasOwnProperty.call(ATTACHMENT_MIME_TYPES, ext);
 }

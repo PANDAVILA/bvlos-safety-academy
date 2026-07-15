@@ -1,30 +1,36 @@
 export const dynamic = "force-dynamic";
-import ImageUploadField from "@/components/ImageUploadField";
 
 import { db } from "@/lib/db";
 import { courses, modules, lessons } from "@/lib/db/schema";
 import { eq } from "drizzle-orm";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { ArrowLeft, Plus, Trash2 } from "lucide-react";
+import { ArrowLeft, ArrowUp, ArrowDown, Plus, Trash2 } from "lucide-react";
 import {
   updateCourse,
   createModule,
   deleteModule,
+  moveModule,
+  updateModuleQuiz,
   createLesson,
   updateLesson,
   deleteLesson,
+  moveLesson,
 } from "@/lib/actions/courses";
 import ConfirmSubmitButton from "@/components/ConfirmSubmitButton";
+import ImageUploadField from "@/components/ImageUploadField";
+import AttachmentUploadField from "@/components/AttachmentUploadField";
+import MarkdownEditor from "@/components/MarkdownEditor";
+import QuizEditor from "@/components/QuizEditor";
 
 export default function EditCoursePage({ params }: { params: { id: string } }) {
   const course = db.select().from(courses).where(eq(courses.id, params.id)).get();
   if (!course) return notFound();
 
-  const courseModules = db.select().from(modules).where(eq(modules.courseId, course.id)).all();
+  const courseModules = db.select().from(modules).where(eq(modules.courseId, course.id)).all().sort((a, b) => a.order - b.order);
   const modulesWithLessons = courseModules.map((m) => ({
     module: m,
-    lessons: db.select().from(lessons).where(eq(lessons.moduleId, m.id)).all(),
+    lessons: db.select().from(lessons).where(eq(lessons.moduleId, m.id)).all().sort((a, b) => a.order - b.order),
   }));
 
   const updateCourseWithId = updateCourse.bind(null, course.id);
@@ -54,6 +60,17 @@ export default function EditCoursePage({ params }: { params: { id: string } }) {
         <div>
           <label className="eyebrow text-navy-900/60">Description</label>
           <textarea name="description" defaultValue={course.description} rows={4} className="mt-2 w-full border border-navy-900/20 px-4 py-2.5 focus:border-gold-500 focus:outline-none" />
+        </div>
+        <div>
+          <label className="eyebrow text-navy-900/60">What you&apos;ll learn (one per line)</label>
+          <textarea
+            name="learningOutcomes"
+            defaultValue={course.learningOutcomes ?? ""}
+            rows={4}
+            placeholder={"Calculate GRC and ARC step by step\nBuild a defensible ConOps\nDesign mitigations that hold up under audit"}
+            className="mt-2 w-full border border-navy-900/20 px-4 py-2.5 focus:border-gold-500 focus:outline-none"
+          />
+          <p className="mt-1 text-xs text-navy-900/40">Shown as a bullet checklist on the course page before purchase.</p>
         </div>
         <div className="grid grid-cols-2 gap-4">
           <div>
@@ -99,38 +116,90 @@ export default function EditCoursePage({ params }: { params: { id: string } }) {
         <h2 className="mt-2 font-display text-xl text-navy-900">Modules & lessons</h2>
 
         <div className="mt-6 space-y-6">
-          {modulesWithLessons.map(({ module: m, lessons: moduleLessons }) => (
+          {modulesWithLessons.map(({ module: m, lessons: moduleLessons }, mi) => (
             <div key={m.id} className="border border-navy-900/10 bg-white">
               <div className="flex items-center justify-between border-b border-navy-900/10 bg-navy-900/5 p-4">
                 <p className="font-display text-navy-900">{m.title}</p>
-                <form action={deleteModule.bind(null, course.id, m.id)}>
-                  <ConfirmSubmitButton
-                    confirmMessage={`Delete module "${m.title}" and all its lessons?`}
-                    className="text-red-600 hover:text-red-800"
-                  >
-                    <Trash2 size={15} />
-                  </ConfirmSubmitButton>
-                </form>
+                <div className="flex items-center gap-1">
+                  <form action={moveModule.bind(null, course.id, m.id, "up")}>
+                    <button type="submit" disabled={mi === 0} className="p-1.5 text-navy-900/50 hover:text-navy-900 disabled:opacity-20">
+                      <ArrowUp size={15} />
+                    </button>
+                  </form>
+                  <form action={moveModule.bind(null, course.id, m.id, "down")}>
+                    <button type="submit" disabled={mi === modulesWithLessons.length - 1} className="p-1.5 text-navy-900/50 hover:text-navy-900 disabled:opacity-20">
+                      <ArrowDown size={15} />
+                    </button>
+                  </form>
+                  <form action={deleteModule.bind(null, course.id, m.id)}>
+                    <ConfirmSubmitButton
+                      confirmMessage={`Delete module "${m.title}" and all its lessons?`}
+                      className="p-1.5 text-red-600 hover:text-red-800"
+                    >
+                      <Trash2 size={15} />
+                    </ConfirmSubmitButton>
+                  </form>
+                </div>
               </div>
 
               <div className="divide-y divide-navy-900/5">
-                {moduleLessons.map((l) => (
+                {moduleLessons.map((l, li) => (
                   <details key={l.id} className="p-4">
                     <summary className="cursor-pointer text-sm font-medium text-navy-900">{l.title}</summary>
+
+                    <div className="mt-3 flex items-center gap-1">
+                      <form action={moveLesson.bind(null, course.id, m.id, l.id, "up")}>
+                        <button type="submit" disabled={li === 0} className="flex items-center gap-1 text-xs text-navy-900/50 hover:text-navy-900 disabled:opacity-20">
+                          <ArrowUp size={13} /> Move up
+                        </button>
+                      </form>
+                      <span className="mx-1 text-navy-900/20">·</span>
+                      <form action={moveLesson.bind(null, course.id, m.id, l.id, "down")}>
+                        <button type="submit" disabled={li === moduleLessons.length - 1} className="flex items-center gap-1 text-xs text-navy-900/50 hover:text-navy-900 disabled:opacity-20">
+                          <ArrowDown size={13} /> Move down
+                        </button>
+                      </form>
+                    </div>
+
                     <form action={updateLesson.bind(null, course.id, l.id)} className="mt-4 space-y-3">
                       <input name="title" defaultValue={l.title} className="w-full border border-navy-900/20 px-3 py-2 text-sm focus:border-gold-500 focus:outline-none" placeholder="Lesson title" />
-                      <textarea name="content" defaultValue={l.content} rows={3} className="w-full border border-navy-900/20 px-3 py-2 text-sm focus:border-gold-500 focus:outline-none" placeholder="Lesson content" />
+
+                      <div>
+                        <label className="eyebrow text-navy-900/50">Content</label>
+                        <div className="mt-1">
+                          <MarkdownEditor name="content" defaultValue={l.content} rows={5} />
+                        </div>
+                      </div>
+
+                      <ImageUploadField name="image" label="Lesson image (optional)" defaultValue={l.image ?? ""} />
+
+                      <div>
+                        <label className="eyebrow text-navy-900/50">Video URL (optional)</label>
+                        <input
+                          name="videoUrl"
+                          defaultValue={l.videoUrl ?? ""}
+                          placeholder="https://www.youtube.com/watch?v=... or Vimeo link"
+                          className="mt-2 w-full border border-navy-900/20 px-3 py-2 text-sm focus:border-gold-500 focus:outline-none"
+                        />
+                      </div>
+
+                      <AttachmentUploadField
+                        urlFieldName="attachmentUrl"
+                        nameFieldName="attachmentName"
+                        label="Downloadable attachment (optional)"
+                        defaultUrl={l.attachmentUrl ?? ""}
+                        defaultName={l.attachmentName ?? ""}
+                      />
+
                       <div className="flex items-center gap-4">
                         <input name="durationMinutes" type="number" min="1" defaultValue={l.durationMinutes} className="w-24 border border-navy-900/20 px-3 py-2 text-sm focus:border-gold-500 focus:outline-none" />
                         <label className="flex items-center gap-2 text-xs text-navy-900/60">
                           <input type="checkbox" name="isPreview" defaultChecked={l.isPreview} /> Free preview
                         </label>
                       </div>
-                      <div className="flex items-center gap-3">
-                        <button type="submit" className="eyebrow bg-navy-900 px-3 py-1.5 text-white hover:bg-navy-800">
-                          Save
-                        </button>
-                      </div>
+                      <button type="submit" className="eyebrow bg-navy-900 px-3 py-1.5 text-white hover:bg-navy-800">
+                        Save
+                      </button>
                     </form>
                     <form action={deleteLesson.bind(null, course.id, l.id)} className="mt-2">
                       <ConfirmSubmitButton confirmMessage={`Delete lesson "${l.title}"?`} className="eyebrow text-red-600 hover:text-red-800">
@@ -152,6 +221,21 @@ export default function EditCoursePage({ params }: { params: { id: string } }) {
                   </button>
                 </div>
               </form>
+
+              <details className="border-t border-navy-900/10 p-4">
+                <summary className="eyebrow cursor-pointer text-gold-600">Module quiz ({(() => {
+                  try { return JSON.parse(m.quizJson || "[]").length; } catch { return 0; }
+                })()} questions)</summary>
+                <form action={async (formData: FormData) => {
+                  "use server";
+                  await updateModuleQuiz(course.id, m.id, String(formData.get("quiz") || "[]"));
+                }} className="mt-4">
+                  <QuizEditor name="quiz" defaultValue={m.quizJson ?? "[]"} />
+                  <button type="submit" className="eyebrow mt-4 bg-navy-900 px-4 py-2 text-white hover:bg-navy-800">
+                    Save quiz
+                  </button>
+                </form>
+              </details>
             </div>
           ))}
         </div>

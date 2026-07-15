@@ -31,6 +31,7 @@ CREATE TABLE IF NOT EXISTS courses (
   title TEXT NOT NULL,
   subtitle TEXT,
   description TEXT NOT NULL,
+  learning_outcomes TEXT,
   level TEXT NOT NULL DEFAULT 'foundation',
   category TEXT NOT NULL DEFAULT 'bvlos',
   price_cents INTEGER NOT NULL DEFAULT 0,
@@ -45,7 +46,8 @@ CREATE TABLE IF NOT EXISTS modules (
   id TEXT PRIMARY KEY,
   course_id TEXT NOT NULL REFERENCES courses(id),
   title TEXT NOT NULL,
-  "order" INTEGER NOT NULL DEFAULT 0
+  "order" INTEGER NOT NULL DEFAULT 0,
+  quiz_json TEXT
 );
 
 CREATE TABLE IF NOT EXISTS lessons (
@@ -53,7 +55,10 @@ CREATE TABLE IF NOT EXISTS lessons (
   module_id TEXT NOT NULL REFERENCES modules(id),
   title TEXT NOT NULL,
   content TEXT NOT NULL DEFAULT '',
+  image TEXT,
   video_url TEXT,
+  attachment_url TEXT,
+  attachment_name TEXT,
   duration_minutes INTEGER NOT NULL DEFAULT 10,
   "order" INTEGER NOT NULL DEFAULT 0,
   is_preview INTEGER NOT NULL DEFAULT 0
@@ -135,6 +140,22 @@ CREATE TABLE IF NOT EXISTS site_content (
 `);
 
 const courseCount = db.prepare("SELECT COUNT(*) AS n FROM courses").get().n;
+
+// --- Idempotent migrations: add any columns missing from an existing database ---
+function ensureColumn(table, column, definition) {
+  const existing = db.prepare(`PRAGMA table_info(${table})`).all();
+  const hasColumn = existing.some((c) => c.name === column);
+  if (!hasColumn) {
+    db.exec(`ALTER TABLE ${table} ADD COLUMN ${column} ${definition}`);
+    console.log(`[bootstrap] Migrated: added column ${table}.${column}`);
+  }
+}
+
+ensureColumn("courses", "learning_outcomes", "TEXT");
+ensureColumn("modules", "quiz_json", "TEXT");
+ensureColumn("lessons", "image", "TEXT");
+ensureColumn("lessons", "attachment_url", "TEXT");
+ensureColumn("lessons", "attachment_name", "TEXT");
 
 if (courseCount === 0) {
   console.log("[bootstrap] Empty database: loading sample content…");

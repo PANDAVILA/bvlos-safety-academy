@@ -20,6 +20,7 @@ export const courses = sqliteTable("courses", {
   title: text("title").notNull(),
   subtitle: text("subtitle"),
   description: text("description").notNull(),
+  learningOutcomes: text("learning_outcomes"), // newline-separated bullet points
   level: text("level").notNull().default("foundation"), // foundation | advanced | specialist
   category: text("category").notNull().default("bvlos"), // bvlos | sms | conops | risk-assessment
   priceCents: integer("price_cents").notNull().default(0),
@@ -35,6 +36,7 @@ export const modules = sqliteTable("modules", {
   courseId: text("course_id").notNull().references(() => courses.id),
   title: text("title").notNull(),
   order: integer("order").notNull().default(0),
+  quizJson: text("quiz_json"), // JSON-encoded array of {question, options:[{text, correct}]}
 });
 
 export const lessons = sqliteTable("lessons", {
@@ -42,7 +44,10 @@ export const lessons = sqliteTable("lessons", {
   moduleId: text("module_id").notNull().references(() => modules.id),
   title: text("title").notNull(),
   content: text("content").notNull().default(""),
+  image: text("image"),
   videoUrl: text("video_url"),
+  attachmentUrl: text("attachment_url"),
+  attachmentName: text("attachment_name"),
   durationMinutes: integer("duration_minutes").notNull().default(10),
   order: integer("order").notNull().default(0),
   isPreview: integer("is_preview", { mode: "boolean" }).notNull().default(false),

@@ -30,6 +30,15 @@ export default function NewCoursePage() {
           <label className="eyebrow text-navy-900/60">Description</label>
           <textarea name="description" rows={4} className="mt-2 w-full border border-navy-900/20 px-4 py-2.5 focus:border-gold-500 focus:outline-none" />
         </div>
+        <div>
+          <label className="eyebrow text-navy-900/60">What you&apos;ll learn (one per line)</label>
+          <textarea
+            name="learningOutcomes"
+            rows={4}
+            placeholder={"Calculate GRC and ARC step by step\nBuild a defensible ConOps\nDesign mitigations that hold up under audit"}
+            className="mt-2 w-full border border-navy-900/20 px-4 py-2.5 focus:border-gold-500 focus:outline-none"
+          />
+        </div>
         <div className="grid grid-cols-2 gap-4">
           <div>
             <label className="eyebrow text-navy-900/60">Level</label>
