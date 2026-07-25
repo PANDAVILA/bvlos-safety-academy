@@ -1,10 +1,22 @@
 "use client";
 
 import { useState } from "react";
-import { Plus, Trash2 } from "lucide-react";
+import { Plus, Trash2, ListPlus } from "lucide-react";
 
 type Option = { text: string; correct: boolean };
 type Question = { question: string; options: Option[] };
+
+function blankQuestion(): Question {
+  return {
+    question: "",
+    options: [
+      { text: "", correct: true },
+      { text: "", correct: false },
+      { text: "", correct: false },
+      { text: "", correct: false },
+    ],
+  };
+}
 
 export default function QuizEditor({ name, defaultValue }: { name: string; defaultValue: string }) {
   const initial: Question[] = (() => {
@@ -19,7 +31,10 @@ export default function QuizEditor({ name, defaultValue }: { name: string; defau
   const [questions, setQuestions] = useState<Question[]>(initial);
 
   function addQuestion() {
-    setQuestions([...questions, { question: "", options: [{ text: "", correct: true }, { text: "", correct: false }] }]);
+    setQuestions([...questions, blankQuestion()]);
+  }
+  function addTenQuestions() {
+    setQuestions([...questions, ...Array.from({ length: 10 }, blankQuestion)]);
   }
   function removeQuestion(qi: number) {
     setQuestions(questions.filter((_, i) => i !== qi));
@@ -58,6 +73,12 @@ export default function QuizEditor({ name, defaultValue }: { name: string; defau
       <input type="hidden" name={name} value={JSON.stringify(questions)} />
 
       {questions.length === 0 && <p className="text-xs text-navy-900/40">No quiz yet for this module.</p>}
+      {questions.length > 0 && (
+        <p className="mb-3 text-xs text-navy-900/40">
+          {questions.length} question{questions.length !== 1 ? "s" : ""}
+          {questions.length !== 10 && " — aim for 10 for a full module assessment"}
+        </p>
+      )}
 
       <div className="space-y-4">
         {questions.map((q, qi) => (
@@ -107,13 +128,24 @@ export default function QuizEditor({ name, defaultValue }: { name: string; defau
         ))}
       </div>
 
-      <button
-        type="button"
-        onClick={addQuestion}
-        className="eyebrow mt-3 flex items-center gap-1 border border-navy-900/20 px-3 py-2 text-navy-900 hover:border-gold-500"
-      >
-        <Plus size={13} /> Add question
-      </button>
+      <div className="mt-3 flex items-center gap-3">
+        <button
+          type="button"
+          onClick={addQuestion}
+          className="eyebrow flex items-center gap-1 border border-navy-900/20 px-3 py-2 text-navy-900 hover:border-gold-500"
+        >
+          <Plus size={13} /> Add question
+        </button>
+        {questions.length === 0 && (
+          <button
+            type="button"
+            onClick={addTenQuestions}
+            className="eyebrow flex items-center gap-1 bg-gold-500 px-3 py-2 text-navy-950 hover:bg-gold-400"
+          >
+            <ListPlus size={13} /> Add 10 questions at once
+          </button>
+        )}
+      </div>
     </div>
   );
 }
