@@ -12,8 +12,9 @@ function withParams(src: string, params: Record<string, string>) {
 /**
  * Intro video shown in a modal on the homepage.
  * mode "button": a "Watch intro" button opens it.
- * mode "auto":   opens by itself once per visitor (muted, because browsers block autoplay with sound),
- *                and the button stays available to reopen it.
+ * mode "auto":   opens by itself (see frequency), showing a "Play with sound" panel. Browsers block
+ *                autoplay with sound until the visitor clicks, so that click starts the video with audio.
+ *                The button stays available to reopen it.
  */
 export default function IntroVideo({
   url,
@@ -28,7 +29,7 @@ export default function IntroVideo({
 }) {
   const video = parseVideoUrl(url);
   const [open, setOpen] = useState(false);
-  const [muted, setMuted] = useState(false);
+  const [gated, setGated] = useState(false); // waiting for the visitor's click so audio is allowed
   const closeRef = useRef<HTMLButtonElement>(null);
 
   const close = useCallback(() => setOpen(false), []);
@@ -52,7 +53,7 @@ export default function IntroVideo({
     } catch {}
     if (seen) return;
     const t = setTimeout(() => {
-      setMuted(true);
+      setGated(true);
       setOpen(true);
       try {
         store()?.setItem("bsa-intro-seen", url);
@@ -79,8 +80,7 @@ export default function IntroVideo({
 
   let src = video.src;
   if (video.kind === "iframe") {
-    const isVimeo = src.includes("vimeo.com");
-    src = withParams(src, isVimeo ? { autoplay: "1", ...(muted ? { muted: "1" } : {}) } : { autoplay: "1", ...(muted ? { mute: "1" } : {}) });
+    src = withParams(src, { autoplay: "1" });
   }
 
   return (
@@ -88,7 +88,7 @@ export default function IntroVideo({
       <button
         type="button"
         onClick={() => {
-          setMuted(false);
+          setGated(false);
           setOpen(true);
         }}
         className="flex items-center gap-2 px-2 py-3 font-medium text-white/80 transition hover:text-gold-400"
@@ -118,7 +118,19 @@ export default function IntroVideo({
               Close <X size={18} />
             </button>
             <div className="aspect-video w-full overflow-hidden border border-white/15 bg-black">
-              {video.kind === "iframe" && (
+              {gated && video.kind !== "link" && (
+                <button
+                  type="button"
+                  onClick={() => setGated(false)}
+                  className="group flex h-full w-full flex-col items-center justify-center gap-4 bg-navy-900 text-white"
+                >
+                  <span className="flex h-20 w-20 items-center justify-center rounded-full bg-gold-500 text-navy-950 transition group-hover:scale-105 group-hover:bg-gold-400">
+                    <Play size={32} fill="currentColor" />
+                  </span>
+                  <span className="font-display text-xl">Play with sound</span>
+                </button>
+              )}
+              {!gated && video.kind === "iframe" && (
                 <iframe
                   src={src}
                   title="Intro video"
@@ -128,8 +140,8 @@ export default function IntroVideo({
                   referrerPolicy="strict-origin-when-cross-origin"
                 />
               )}
-              {video.kind === "file" && (
-                <video src={video.src} controls autoPlay muted={muted} playsInline className="h-full w-full" />
+              {!gated && video.kind === "file" && (
+                <video src={video.src} controls autoPlay playsInline className="h-full w-full" />
               )}
               {video.kind === "link" && (
                 <div className="flex h-full flex-col items-center justify-center gap-4 text-center">
@@ -140,9 +152,6 @@ export default function IntroVideo({
                 </div>
               )}
             </div>
-            {muted && video.kind !== "link" && (
-              <p className="mt-3 text-center text-xs text-white/50">Playing without sound. Use the player controls to unmute.</p>
-            )}
           </div>
         </div>
       )}
