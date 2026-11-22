@@ -19,10 +19,12 @@ export default function IntroVideo({
   url,
   mode,
   buttonText,
+  frequency = "once",
 }: {
   url: string;
   mode: "off" | "button" | "auto";
   buttonText: string;
+  frequency?: "once" | "session" | "always";
 }) {
   const video = parseVideoUrl(url);
   const [open, setOpen] = useState(false);
@@ -34,20 +36,30 @@ export default function IntroVideo({
   // Auto-open once per visitor
   useEffect(() => {
     if (mode !== "auto" || !video) return;
+    // once    -> remembered for good in this browser (localStorage)
+    // session -> shown again after the browser/tab is closed (sessionStorage)
+    // always  -> shown on every visit to the homepage
+    const store = (): Storage | null => {
+      try {
+        return frequency === "once" ? localStorage : frequency === "session" ? sessionStorage : null;
+      } catch {
+        return null;
+      }
+    };
     let seen = false;
     try {
-      seen = localStorage.getItem("bsa-intro-seen") === url;
+      seen = store()?.getItem("bsa-intro-seen") === url;
     } catch {}
     if (seen) return;
     const t = setTimeout(() => {
       setMuted(true);
       setOpen(true);
       try {
-        localStorage.setItem("bsa-intro-seen", url);
+        store()?.setItem("bsa-intro-seen", url);
       } catch {}
     }, 1200);
     return () => clearTimeout(t);
-  }, [mode, url, video]);
+  }, [mode, url, video, frequency]);
 
   // Close on Escape, lock page scroll while open
   useEffect(() => {

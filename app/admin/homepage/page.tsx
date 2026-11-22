@@ -136,6 +136,18 @@ export default async function AdminHomepagePage() {
               />
             </div>
           </div>
+          <div>
+            <label className="eyebrow text-navy-900/60">How often it opens by itself (automatic mode)</label>
+            <select
+              name="intro_video_frequency"
+              defaultValue={content.intro_video_frequency}
+              className="mt-2 w-full border border-navy-900/20 px-4 py-2.5 focus:border-gold-500 focus:outline-none"
+            >
+              <option value="once">Only the first time (remembered in the browser)</option>
+              <option value="session">Once per visit (again after closing the browser)</option>
+              <option value="always">Every time the homepage loads</option>
+            </select>
+          </div>
           <p className="text-xs text-navy-900/40">
             Automatic mode plays without sound (browsers block autoplay with sound) and only appears the first time someone visits.
           </p>

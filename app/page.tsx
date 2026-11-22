@@ -61,6 +61,7 @@ export default async function Home() {
                 url={hero.intro_video_url}
                 mode={(["button", "auto"].includes(hero.intro_video_mode) ? hero.intro_video_mode : "off") as "off" | "button" | "auto"}
                 buttonText={hero.intro_video_button_text || "Watch intro"}
+                frequency={(["session", "always"].includes(hero.intro_video_frequency) ? hero.intro_video_frequency : "once") as "once" | "session" | "always"}
               />
             </div>
             <div className="mt-14 grid grid-cols-3 gap-6 border-t border-white/10 pt-8 text-white/80 sm:max-w-md">

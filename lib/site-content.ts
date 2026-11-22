@@ -17,6 +17,7 @@ export const homepageDefaults = {
   intro_video_url: "",
   intro_video_mode: "off", // off | button | auto
   intro_video_button_text: "Watch intro",
+  intro_video_frequency: "once", // once | session | always (only used in auto mode)
 
   section2_visible: "true",
   section2_eyebrow: "The operational gap",
