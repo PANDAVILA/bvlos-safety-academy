@@ -56,6 +56,15 @@ export function parseVideoUrl(raw: string | null | undefined): VideoSource | nul
     return { kind: "iframe", src: `https://www.loom.com/embed/${parts[1]}` };
   }
 
+  // Synthesia: share page (share.synthesia.io/<id>) or embed (share.synthesia.io/embeds/videos/<id>)
+  if (host === "share.synthesia.io") {
+    const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+    const id = parts[0] === "embeds" && parts[1] === "videos" ? parts[2] : parts[0];
+    if (id && UUID.test(id)) {
+      return { kind: "iframe", src: `https://share.synthesia.io/embeds/videos/${id}?language=${url.searchParams.get("language") || "en"}` };
+    }
+  }
+
   // Google Drive file (must be shared as "Anyone with the link")
   if (host === "drive.google.com") {
     const m = url.pathname.match(/\/file\/d\/([\w-]+)/);

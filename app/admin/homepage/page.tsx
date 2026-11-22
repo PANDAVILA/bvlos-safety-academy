@@ -103,7 +103,7 @@ export default async function AdminHomepagePage() {
         <div className="space-y-5 border border-navy-900/10 bg-white p-6">
           <p className="eyebrow text-gold-600">Intro video (pop-up)</p>
           <p className="text-xs text-navy-900/50">
-            Opens in a pop-up on the homepage. Works with YouTube, Vimeo, Loom, Google Drive, or a direct .mp4 link.
+            Opens in a pop-up on the homepage. Works with YouTube, Vimeo, Loom, Synthesia, Google Drive, or a direct .mp4 link.
           </p>
           <div>
             <label className="eyebrow text-navy-900/60">Video link</label>
