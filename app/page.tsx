@@ -9,6 +9,7 @@ import { eq, desc } from "drizzle-orm";
 import CourseCard from "@/components/CourseCard";
 import ArticleCard from "@/components/ArticleCard";
 import { getHomepageContent, heroImageSizeClass } from "@/lib/site-content";
+import IntroVideo from "@/components/IntroVideo";
 
 export default async function Home() {
   const featuredCourses = db.select().from(courses).where(eq(courses.published, true)).all().slice(0, 3);
@@ -56,6 +57,11 @@ export default async function Home() {
               >
                 {hero.secondary_cta_text}
               </Link>
+              <IntroVideo
+                url={hero.intro_video_url}
+                mode={(["button", "auto"].includes(hero.intro_video_mode) ? hero.intro_video_mode : "off") as "off" | "button" | "auto"}
+                buttonText={hero.intro_video_button_text || "Watch intro"}
+              />
             </div>
             <div className="mt-14 grid grid-cols-3 gap-6 border-t border-white/10 pt-8 text-white/80 sm:max-w-md">
               <div>

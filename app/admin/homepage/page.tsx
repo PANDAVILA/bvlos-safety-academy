@@ -101,6 +101,47 @@ export default async function AdminHomepagePage() {
         </div>
 
         <div className="space-y-5 border border-navy-900/10 bg-white p-6">
+          <p className="eyebrow text-gold-600">Intro video (pop-up)</p>
+          <p className="text-xs text-navy-900/50">
+            Opens in a pop-up on the homepage. Works with YouTube, Vimeo, Loom, Google Drive, or a direct .mp4 link.
+          </p>
+          <div>
+            <label className="eyebrow text-navy-900/60">Video link</label>
+            <input
+              name="intro_video_url"
+              defaultValue={content.intro_video_url}
+              placeholder="https://www.youtube.com/watch?v=..."
+              className="mt-2 w-full border border-navy-900/20 px-4 py-2.5 focus:border-gold-500 focus:outline-none"
+            />
+          </div>
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <label className="eyebrow text-navy-900/60">When to show it</label>
+              <select
+                name="intro_video_mode"
+                defaultValue={content.intro_video_mode}
+                className="mt-2 w-full border border-navy-900/20 px-4 py-2.5 focus:border-gold-500 focus:outline-none"
+              >
+                <option value="off">Off</option>
+                <option value="button">Button in the hero (visitor clicks)</option>
+                <option value="auto">Opens automatically, once per visitor</option>
+              </select>
+            </div>
+            <div>
+              <label className="eyebrow text-navy-900/60">Button text</label>
+              <input
+                name="intro_video_button_text"
+                defaultValue={content.intro_video_button_text}
+                className="mt-2 w-full border border-navy-900/20 px-4 py-2.5 focus:border-gold-500 focus:outline-none"
+              />
+            </div>
+          </div>
+          <p className="text-xs text-navy-900/40">
+            Automatic mode plays without sound (browsers block autoplay with sound) and only appears the first time someone visits.
+          </p>
+        </div>
+
+        <div className="space-y-5 border border-navy-900/10 bg-white p-6">
           <div className="flex items-center justify-between">
             <p className="eyebrow text-gold-600">Section: "Compliance is not safety"</p>
             <label className="flex items-center gap-2 text-xs text-navy-900/60">

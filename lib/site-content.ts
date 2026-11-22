@@ -14,6 +14,10 @@ export const homepageDefaults = {
   secondary_cta_text: "Try AeroSafety Case",
   secondary_cta_href: "/aerosafety-case",
 
+  intro_video_url: "",
+  intro_video_mode: "off", // off | button | auto
+  intro_video_button_text: "Watch intro",
+
   section2_visible: "true",
   section2_eyebrow: "The operational gap",
   section2_title: "Compliance is not safety.",
