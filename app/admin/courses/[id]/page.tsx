@@ -200,6 +200,9 @@ export default function EditCoursePage({ params }: { params: { id: string } }) {
                           placeholder="https://www.youtube.com/watch?v=... or Vimeo link"
                           className="mt-2 w-full border border-navy-900/20 px-3 py-2 text-sm focus:border-gold-500 focus:outline-none"
                         />
+                        <p className="mt-1 text-xs text-navy-900/40">
+                          Works with YouTube, Vimeo (including unlisted), Loom, Google Drive (shared as &quot;Anyone with the link&quot;), or a direct .mp4 link. The video appears in the student view of the lesson.
+                        </p>
                       </div>
 
                       <AttachmentUploadField

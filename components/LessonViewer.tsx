@@ -1,4 +1,5 @@
 "use client";
+import { parseVideoUrl } from "@/lib/video";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
@@ -18,18 +19,6 @@ type Lesson = {
 };
 type QuizQuestion = { question: string; options: { text: string; correct: boolean }[] };
 type ModuleGroup = { id: string; title: string; quiz: QuizQuestion[]; lessons: Lesson[] };
-
-function videoEmbedUrl(url: string): string | null {
-  try {
-    const yt = url.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/))([\w-]+)/);
-    if (yt) return `https://www.youtube.com/embed/${yt[1]}`;
-    const vimeo = url.match(/vimeo\.com\/(\d+)/);
-    if (vimeo) return `https://player.vimeo.com/video/${vimeo[1]}`;
-    return null;
-  } catch {
-    return null;
-  }
-}
 
 function Quiz({ quiz }: { quiz: QuizQuestion[] }) {
   const [answers, setAnswers] = useState<Record<number, number>>({});
@@ -128,7 +117,7 @@ export default function LessonViewer({
 
   const completedCount = Object.values(progress).filter(Boolean).length;
   const percent = flat.length ? Math.round((completedCount / flat.length) * 100) : 0;
-  const embedUrl = active?.videoUrl ? videoEmbedUrl(active.videoUrl) : null;
+  const video = parseVideoUrl(active?.videoUrl);
 
   return (
     <div className="grid min-h-[calc(100vh-64px)] grid-cols-1 lg:grid-cols-[320px_1fr]">
@@ -177,9 +166,27 @@ export default function LessonViewer({
             </p>
             <h1 className="mt-3 font-display text-2xl text-navy-900 sm:text-3xl">{active.title}</h1>
 
-            {embedUrl ? (
+            {video?.kind === "iframe" ? (
               <div className="mt-8 aspect-video overflow-hidden border border-navy-900/10 bg-navy-900">
-                <iframe src={embedUrl} className="h-full w-full" allow="autoplay; fullscreen; picture-in-picture" allowFullScreen />
+                <iframe
+                  src={video.src}
+                  title={active.title}
+                  className="h-full w-full"
+                  allow="autoplay; fullscreen; picture-in-picture; encrypted-media"
+                  allowFullScreen
+                  referrerPolicy="strict-origin-when-cross-origin"
+                />
+              </div>
+            ) : video?.kind === "file" ? (
+              <div className="mt-8 aspect-video overflow-hidden border border-navy-900/10 bg-black">
+                <video src={video.src} controls playsInline className="h-full w-full" />
+              </div>
+            ) : video?.kind === "link" ? (
+              <div className="mt-8 flex aspect-video flex-col items-center justify-center gap-4 border border-navy-900/10 bg-navy-900 p-6 text-center">
+                <p className="text-white/70">This video opens in a new tab.</p>
+                <a href={video.src} target="_blank" rel="noopener noreferrer" className="bg-gold-500 px-6 py-3 font-medium text-navy-950 hover:bg-gold-400">
+                  Watch video
+                </a>
               </div>
             ) : active.image ? (
               <div className="relative mt-8 aspect-video overflow-hidden border border-navy-900/10 bg-navy-900">
