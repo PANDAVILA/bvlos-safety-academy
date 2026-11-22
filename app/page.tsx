@@ -144,7 +144,7 @@ export default async function Home() {
                 {hero.section3_title}
               </h3>
               <p className="mt-5 text-navy-900/70">{hero.section3_body}</p>
-              <Link href="/cursos?categoria=risk-assessment" className="mt-6 inline-flex items-center gap-2 font-medium text-navy-900 hover:text-gold-600">
+              <Link href="/courses?category=risk-assessment" className="mt-6 inline-flex items-center gap-2 font-medium text-navy-900 hover:text-gold-600">
                 View risk management courses <ArrowRight size={16} />
               </Link>
             </div>
@@ -164,9 +164,9 @@ export default async function Home() {
           </div>
           <div className="mt-14 grid gap-px overflow-hidden border border-navy-900/10 bg-navy-900/10 sm:grid-cols-2 lg:grid-cols-4">
             {[
-              { icon: BookOpen, title: "LMS Academy", desc: "Tiered courses with assessments, certificates, and progress tracking.", href: "/cursos" },
-              { icon: Newspaper, title: "News", desc: "Regulatory and industry updates for the BVLOS sector, curated by experts.", href: "/noticias" },
-              { icon: FileText, title: "Reports", desc: "Technical analysis, case studies, and incident reports.", href: "/informes" },
+              { icon: BookOpen, title: "LMS Academy", desc: "Tiered courses with assessments, certificates of completion, and progress tracking.", href: "/courses" },
+              { icon: Newspaper, title: "News", desc: "Regulatory and industry updates for the BVLOS sector, curated by experts.", href: "/news" },
+              { icon: FileText, title: "Reports", desc: "Technical analysis, case studies, and incident reports.", href: "/reports" },
               { icon: Radar, title: "AeroSafety Case", desc: "Try our risk assessment and safety case tool.", href: "/aerosafety-case" },
             ].map((f) => (
               <Link key={f.title} href={f.href} className="group flex flex-col gap-4 bg-white p-8 transition hover:bg-navy-900">
@@ -190,7 +190,7 @@ export default async function Home() {
               <p className="eyebrow text-gold-600">Training</p>
               <h2 className="mt-4 font-display text-3xl font-semibold text-navy-900 sm:text-4xl">Featured courses</h2>
             </div>
-            <Link href="/cursos" className="flex items-center gap-2 font-medium text-navy-900 hover:text-gold-600">
+            <Link href="/courses" className="flex items-center gap-2 font-medium text-navy-900 hover:text-gold-600">
               View full catalog <ArrowRight size={16} />
             </Link>
           </div>
@@ -216,7 +216,7 @@ export default async function Home() {
                 manufacturers, and public administrations.
               </p>
               <Link
-                href="/consultoria"
+                href="/consulting"
                 className="mt-8 inline-flex items-center gap-2 bg-gold-500 px-6 py-3 font-medium text-navy-950 hover:bg-gold-400"
               >
                 Request a proposal <ArrowRight size={16} />
@@ -249,7 +249,7 @@ export default async function Home() {
                 Industry news and reports
               </h2>
             </div>
-            <Link href="/noticias" className="flex items-center gap-2 font-medium text-navy-900 hover:text-gold-600">
+            <Link href="/news" className="flex items-center gap-2 font-medium text-navy-900 hover:text-gold-600">
               View all <ArrowRight size={16} />
             </Link>
           </div>

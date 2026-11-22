@@ -32,6 +32,7 @@ CREATE TABLE IF NOT EXISTS courses (
   subtitle TEXT,
   description TEXT NOT NULL,
   learning_outcomes TEXT,
+  frameworks TEXT,
   level TEXT NOT NULL DEFAULT 'foundation',
   category TEXT NOT NULL DEFAULT 'bvlos',
   price_cents INTEGER NOT NULL DEFAULT 0,
@@ -152,6 +153,7 @@ function ensureColumn(table, column, definition) {
 }
 
 ensureColumn("courses", "learning_outcomes", "TEXT");
+ensureColumn("courses", "frameworks", "TEXT");
 ensureColumn("modules", "quiz_json", "TEXT");
 ensureColumn("lessons", "image", "TEXT");
 ensureColumn("lessons", "attachment_url", "TEXT");
@@ -181,12 +183,12 @@ if (courseCount === 0) {
   `);
 
   const courses = [
-    { slug: "fundamentos-bvlos", title: "BVLOS Operations Fundamentals", subtitle: "The regulatory and operational foundation for flying beyond visual line of sight.", description: "An introductory course covering the regulatory framework, essential terminology (BVLOS, VLOS, GRC, ARC), and the principles of a safe operation. Designed for remote pilots and operations managers starting their journey into BVLOS.", level: "foundation", category: "bvlos", priceCents: 24900, durationHours: 8, coverImage: "/brand/hero-1.png" },
-    { slug: "metodologia-sms-avanzada", title: "Advanced SMS Risk Methodology", subtitle: "Quantitative ground and air risk assessment for real operational dossiers.", description: "A deep dive into the risk assessment process step by step: ConOps definition, intrinsic GRC calculation, mitigations, ARC determination, and containment strategies. Includes downloadable templates used in real dossiers submitted to authorities.", level: "advanced", category: "risk-assessment", priceCents: 44900, durationHours: 14, coverImage: "/brand/drift-1.png" },
-    { slug: "sms-para-operadores-uas", title: "Safety Management Systems (SMS) for UAS Operators", subtitle: "Design, implement, and audit an SMS aligned with international standards.", description: "Learn to build a complete Safety Management System: safety policy, hazard identification, risk management, safety assurance, and safety promotion, adapted for uncrewed aircraft operators.", level: "specialist", category: "sms", priceCents: 59900, durationHours: 20, coverImage: "/brand/hero-2.png" },
-    { slug: "conops-y-volumen-operacional", title: "ConOps and Operational Volume Design", subtitle: "From mission concept to a defensible concept of operations.", description: "A hands-on course for drafting a robust Concept of Operations (ConOps): mission definition, operational volume, contingency volume, and its integration into the airspace.", level: "foundation", category: "conops", priceCents: 19900, durationHours: 6, coverImage: "/brand/drift-2.png" },
-    { slug: "gestion-de-mitigaciones-bvlos", title: "Mitigation Management in BVLOS Operations", subtitle: "From the mitigation catalog to tracking its operational effectiveness.", description: "How to select, justify, and track operational and technical mitigations (M1, M2, M3) throughout the operation's lifecycle, with a focus on audit traceability.", level: "advanced", category: "risk-assessment", priceCents: 34900, durationHours: 10, coverImage: "/brand/drift-3.png" },
-    { slug: "introduccion-espacio-aereo-no-segregado", title: "Introduction to Non-Segregated Airspace for UAS", subtitle: "Airspace classification, NOTAMs, and coordination with ATC.", description: "A free foundation course: airspace classification, reading aeronautical charts, publishing NOTAMs, and the fundamentals of air traffic control coordination for uncrewed operations.", level: "foundation", category: "bvlos", priceCents: 0, durationHours: 3, coverImage: "/brand/hero-1.png" },
+    { slug: "bvlos-operations-fundamentals", title: "BVLOS Operations Fundamentals", subtitle: "The regulatory and operational foundation for flying beyond visual line of sight.", description: "An introductory course covering the regulatory framework, essential terminology (BVLOS, VLOS, GRC, ARC), and the principles of a safe operation. Designed for remote pilots and operations managers starting their journey into BVLOS.", level: "foundation", category: "bvlos", priceCents: 24900, durationHours: 8, coverImage: "/brand/hero-1.png" },
+    { slug: "advanced-sms-risk-methodology", title: "Advanced SMS Risk Methodology", subtitle: "Quantitative ground and air risk assessment for real operational dossiers.", description: "A deep dive into the risk assessment process step by step: ConOps definition, intrinsic GRC calculation, mitigations, ARC determination, and containment strategies. Includes downloadable templates used in real dossiers submitted to authorities.", level: "advanced", category: "risk-assessment", priceCents: 44900, durationHours: 14, coverImage: "/brand/drift-1.png" },
+    { slug: "sms-for-uas-operators", title: "Safety Management Systems (SMS) for UAS Operators", subtitle: "Design, implement, and audit an SMS aligned with international standards.", description: "Learn to build a complete Safety Management System: safety policy, hazard identification, risk management, safety assurance, and safety promotion, adapted for uncrewed aircraft operators.", level: "specialist", category: "sms", priceCents: 59900, durationHours: 20, coverImage: "/brand/hero-2.png" },
+    { slug: "conops-and-operational-volume-design", title: "ConOps and Operational Volume Design", subtitle: "From mission concept to a defensible concept of operations.", description: "A hands-on course for drafting a robust Concept of Operations (ConOps): mission definition, operational volume, contingency volume, and its integration into the airspace.", level: "foundation", category: "conops", priceCents: 19900, durationHours: 6, coverImage: "/brand/drift-2.png" },
+    { slug: "mitigation-management-bvlos", title: "Mitigation Management in BVLOS Operations", subtitle: "From the mitigation catalog to tracking its operational effectiveness.", description: "How to select, justify, and track operational and technical mitigations (M1, M2, M3) throughout the operation's lifecycle, with a focus on audit traceability.", level: "advanced", category: "risk-assessment", priceCents: 34900, durationHours: 10, coverImage: "/brand/drift-3.png" },
+    { slug: "intro-to-non-segregated-airspace", title: "Introduction to Non-Segregated Airspace for UAS", subtitle: "Airspace classification, NOTAMs, and coordination with ATC.", description: "A free foundation course: airspace classification, reading aeronautical charts, publishing NOTAMs, and the fundamentals of air traffic control coordination for uncrewed operations.", level: "foundation", category: "bvlos", priceCents: 0, durationHours: 3, coverImage: "/brand/hero-1.png" },
   ];
 
   for (const c of courses) {
@@ -212,24 +214,89 @@ if (courseCount === 0) {
   }
 
   const articles = [
-    { slug: "easa-actualiza-marco-bvlos-2026", title: "EASA updates the regulatory framework for BVLOS operations in 2026", excerpt: "New specific-category requirements affect operators who already hold a SMS authorization.", body: "Full article content with a detailed analysis of the regulatory changes, their impact on existing operators, and the expected adaptation timelines.", type: "news", coverImage: "/brand/hero-2.png", author: "BSA Editorial Team" },
-    { slug: "corredores-bvlos-infraestructura-critica", title: "BVLOS corridors for critical infrastructure inspection: first results", excerpt: "An analysis of the first twelve months of dedicated aerial corridors for energy-sector inspection.", body: "Full article content with operational statistics, reported incidents, and lessons learned from the first year of dedicated BVLOS corridors.", type: "news", coverImage: "/brand/drift-2.png", author: "BSA Editorial Team" },
-    { slug: "estudio-deriva-operacional-2025", title: "Technical study: operational drift as a precursor to reportable events", excerpt: "An analysis of 340 BVLOS flights identifying drift patterns before link-loss incidents.", body: "Full technical report with methodology, sample analyzed, statistical findings, and mitigation recommendations for operators and early-detection system designers.", type: "report", coverImage: "/brand/drift-1.png", author: "BSA Research Department" },
-    { slug: "benchmark-sms-operadores-uas", title: "2026 Benchmark: Safety Management System maturity among UAS operators", excerpt: "An SMS maturity comparison across 45 certified operators in three regions.", body: "Full report with the maturity assessment methodology, results by region and operator category, and recommendations for closing identified gaps.", type: "report", coverImage: "/brand/hero-1.png", author: "BSA Research Department" },
+    { slug: "easa-updates-bvlos-framework-2026", title: "EASA updates the regulatory framework for BVLOS operations in 2026", excerpt: "New specific-category requirements affect operators who already hold a SMS authorization.", body: "Full article content with a detailed analysis of the regulatory changes, their impact on existing operators, and the expected adaptation timelines.", type: "news", coverImage: "/brand/hero-2.png", author: "BSA Editorial Team" },
+    { slug: "bvlos-corridors-critical-infrastructure", title: "BVLOS corridors for critical infrastructure inspection: first results", excerpt: "An analysis of the first twelve months of dedicated aerial corridors for energy-sector inspection.", body: "Full article content with operational statistics, reported incidents, and lessons learned from the first year of dedicated BVLOS corridors.", type: "news", coverImage: "/brand/drift-2.png", author: "BSA Editorial Team" },
+    { slug: "operational-drift-study-2025", title: "Technical study: operational drift as a precursor to reportable events", excerpt: "An analysis of 340 BVLOS flights identifying drift patterns before link-loss incidents.", body: "Full technical report with methodology, sample analyzed, statistical findings, and mitigation recommendations for operators and early-detection system designers.", type: "report", coverImage: "/brand/drift-1.png", author: "BSA Research Department" },
+    { slug: "sms-maturity-benchmark-uas-operators", title: "2026 Benchmark: Safety Management System maturity among UAS operators", excerpt: "An SMS maturity comparison across 45 certified operators in three regions.", body: "Full report with the maturity assessment methodology, results by region and operator category, and recommendations for closing identified gaps.", type: "report", coverImage: "/brand/hero-1.png", author: "BSA Research Department" },
   ];
   for (const a of articles) insertArticle.run({ id: uuid(), ...a });
 
   const products = [
-    { slug: "ebook-guia-sms-paso-a-paso", title: "The Step-by-Step SMS Guide (eBook)", description: "A 120-page practical manual with real-world GRC and ARC calculation examples and editable templates.", type: "ebook", priceCents: 3900, coverImage: "/brand/hero-2.png" },
-    { slug: "plantilla-conops-editable", title: "Editable ConOps Template", description: "A professionally formatted, editable document ready to adapt to your operation and submit to authorities.", type: "template", priceCents: 1900, coverImage: "/brand/drift-2.png" },
-    { slug: "checklist-preflight-bvlos", title: "BVLOS Pre-Flight Checklist", description: "A printable and digital checklist for BVLOS operations, aligned with SMS best practices.", type: "checklist", priceCents: 900, coverImage: "/brand/drift-3.png" },
-    { slug: "ebook-gestion-mitigaciones", title: "Mitigation Management: Reference Catalog (eBook)", description: "An annotated catalog of M1, M2, and M3 mitigations with justification criteria and required evidence.", type: "ebook", priceCents: 2900, coverImage: "/brand/hero-1.png" },
+    { slug: "step-by-step-sms-guide-ebook", title: "The Step-by-Step SMS Guide (eBook)", description: "A 120-page practical manual with real-world GRC and ARC calculation examples and editable templates.", type: "ebook", priceCents: 3900, coverImage: "/brand/hero-2.png" },
+    { slug: "editable-conops-template", title: "Editable ConOps Template", description: "A professionally formatted, editable document ready to adapt to your operation and submit to authorities.", type: "template", priceCents: 1900, coverImage: "/brand/drift-2.png" },
+    { slug: "bvlos-preflight-checklist", title: "BVLOS Pre-Flight Checklist", description: "A printable and digital checklist for BVLOS operations, aligned with SMS best practices.", type: "checklist", priceCents: 900, coverImage: "/brand/drift-3.png" },
+    { slug: "mitigation-management-catalog-ebook", title: "Mitigation Management: Reference Catalog (eBook)", description: "An annotated catalog of M1, M2, and M3 mitigations with justification criteria and required evidence.", type: "ebook", priceCents: 2900, coverImage: "/brand/hero-1.png" },
   ];
   for (const p of products) insertProduct.run({ id: uuid(), ...p });
 
   console.log("[bootstrap] Sample content loaded.");
 } else {
   console.log(`[bootstrap] Database already initialized (${courseCount} courses). Nothing to do.`);
+}
+
+// ---------------------------------------------------------------------------
+// Migrations that run on every start (all idempotent)
+// ---------------------------------------------------------------------------
+const legacySlugs = require("../lib/legacy-slugs.json");
+
+// 1) Spanish slugs -> English slugs (never overwrites an existing English slug)
+function migrateSlugs(table, map) {
+  for (const [oldSlug, newSlug] of Object.entries(map)) {
+    const row = db.prepare(`SELECT id FROM ${table} WHERE slug = ?`).get(oldSlug);
+    if (!row) continue;
+    const clash = db.prepare(`SELECT id FROM ${table} WHERE slug = ?`).get(newSlug);
+    if (clash) {
+      console.warn(`[bootstrap] Slug migration skipped: ${table}.${newSlug} already exists.`);
+      continue;
+    }
+    db.prepare(`UPDATE ${table} SET slug = ? WHERE id = ?`).run(newSlug, row.id);
+    console.log(`[bootstrap] Migrated ${table} slug: ${oldSlug} -> ${newSlug}`);
+  }
+}
+migrateSlugs("courses", legacySlugs.courses);
+migrateSlugs("products", legacySlugs.products);
+migrateSlugs("articles", legacySlugs.articles);
+
+// 2) Links saved by the homepage editor that still point at the old Spanish routes
+const pathMap = [
+  ["/cursos", "/courses"], ["/tienda", "/resources"], ["/noticias", "/news"], ["/informes", "/reports"],
+  ["/consultoria", "/consulting"], ["/registro", "/register"], ["/aprender", "/learn"],
+  ["/panel", "/dashboard"], ["/contacto", "/contact"], ["categoria=", "category="],
+];
+const slugPairs = [
+  ...Object.entries(legacySlugs.courses), ...Object.entries(legacySlugs.products), ...Object.entries(legacySlugs.articles),
+];
+for (const row of db.prepare("SELECT key, value FROM site_content WHERE value LIKE '/%'").all()) {
+  let next = row.value;
+  for (const [a, b] of pathMap) next = next.split(a).join(b);
+  for (const [a, b] of slugPairs) next = next.split(a).join(b);
+  if (next !== row.value) {
+    db.prepare("UPDATE site_content SET value = ? WHERE key = ?").run(next, row.key);
+    console.log(`[bootstrap] Migrated site_content link ${row.key}: ${row.value} -> ${next}`);
+  }
+}
+
+// 3) Default "reference frameworks" for courses that have none yet (NULL only:
+//    once you edit or clear the field in the admin it is never overwritten again)
+const frameworksByCategory = {
+  sms: [
+    "14 CFR Part 5 (FAA SMS rule): the four SMS components of Safety Policy, Safety Risk Management, Safety Assurance, and Safety Promotion",
+    "FAA Advisory Circular 120-92D: Safety Management Systems for Aviation Service Providers (guidance for Part 5 and voluntary SMS)",
+    "ICAO Annex 19 and Doc 9859 (Safety Management Manual): the international SMS framework",
+    "IS-BAO (IBAC): the maturity-stage approach to SMS (Stages 1-3), including its RPAS option",
+  ].join("\n"),
+};
+const frameworksBySlug = {
+  "bvlos-operations-fundamentals": [
+    "FAA 14 CFR Part 107 and the Part 107 waiver pathway, plus the proposed Part 108 (not yet final)",
+    "EASA specific category operations and SORA 2.5",
+  ].join("\n"),
+};
+for (const [category, text] of Object.entries(frameworksByCategory)) {
+  db.prepare("UPDATE courses SET frameworks = ? WHERE frameworks IS NULL AND category = ?").run(text, category);
+}
+for (const [slug, text] of Object.entries(frameworksBySlug)) {
+  db.prepare("UPDATE courses SET frameworks = ? WHERE frameworks IS NULL AND slug = ?").run(text, slug);
 }
 
 db.close();

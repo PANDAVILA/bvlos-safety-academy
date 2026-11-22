@@ -6,7 +6,10 @@ import { eq } from "drizzle-orm";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import { CheckCircle2, Lock, PlayCircle, Clock } from "lucide-react";
+import Link from "next/link";
 import BuyButtons from "@/components/BuyButtons";
+import DisclaimerNote from "@/components/DisclaimerNote";
+import { formatPrice } from "@/lib/format";
 
 export default function CourseDetail({ params }: { params: { slug: string } }) {
   const course = db.select().from(courses).where(eq(courses.slug, params.slug)).get();
@@ -19,7 +22,7 @@ export default function CourseDetail({ params }: { params: { slug: string } }) {
   }));
 
   const totalLessons = allLessons.reduce((acc, m) => acc + m.lessons.length, 0);
-  const price = course.priceCents === 0 ? "Free" : `$${(course.priceCents / 100).toFixed(0)} ${course.currency}`;
+  const price = formatPrice(course.priceCents, course.currency, { withCode: true });
 
   return (
     <div>
@@ -40,7 +43,7 @@ export default function CourseDetail({ params }: { params: { slug: string } }) {
             </div>
             <p className="mt-6 font-display text-2xl text-white">{price}</p>
             <div className="mt-4">
-              <BuyButtons itemType="course" itemId={course.id} priceCents={course.priceCents} currency={course.currency} />
+              <BuyButtons itemType="course" itemId={course.id} priceCents={course.priceCents} currency={course.currency} tone="dark" />
             </div>
           </div>
         </div>
@@ -70,6 +73,33 @@ export default function CourseDetail({ params }: { params: { slug: string } }) {
               </>
             )}
 
+            {course.frameworks && course.frameworks.trim() && (
+              <div className="mt-12 border border-navy-900/10 bg-navy-900/[0.03] p-6">
+                <h2 className="font-display text-xl text-navy-900">Curriculum reference frameworks</h2>
+                <p className="mt-2 text-sm text-navy-900/60">
+                  This course is organized around the frameworks below so your training records map cleanly to the
+                  structure auditors, insurers, and clients already use.
+                </p>
+                <ul className="mt-4 space-y-2">
+                  {course.frameworks
+                    .split("\n")
+                    .map((line) => line.trim())
+                    .filter(Boolean)
+                    .map((line) => (
+                      <li key={line} className="flex items-start gap-3 text-sm text-navy-900/80">
+                        <CheckCircle2 size={16} className="mt-0.5 shrink-0 text-gold-600" />
+                        <span>{line}</span>
+                      </li>
+                    ))}
+                </ul>
+                <p className="mt-4 text-xs text-navy-900/50">
+                  &quot;Mapped to&quot; describes how our curriculum is organized. It does not mean this course is approved,
+                  accredited, or endorsed by the FAA, EASA, ICAO, IBAC, or any other body.{" "}
+                  <Link href="/standards" className="text-gold-600 underline">See the full standards map</Link>.
+                </p>
+              </div>
+            )}
+
             <h2 className="mt-14 font-display text-2xl text-navy-900">Course content</h2>
             <div className="mt-6 divide-y divide-navy-900/10 border border-navy-900/10">
               {allLessons.map(({ module, lessons: ls }) => (
@@ -91,12 +121,13 @@ export default function CourseDetail({ params }: { params: { slug: string } }) {
             </div>
           </div>
 
-          <aside className="h-fit border border-navy-900/10 bg-navy-900 p-6 text-white">
+          <aside className="h-fit space-y-6">
+           <div className="border border-navy-900/10 bg-navy-900 p-6 text-white">
             <p className="eyebrow text-gold-400">Included</p>
             <ul className="mt-4 space-y-3 text-sm text-white/80">
               {[
                 "Lifetime access to the content",
-                "Certificate of completion",
+                "BSA certificate of completion (not an FAA/EASA/ICAO credential)",
                 "Downloadable templates and resources",
                 "Regulatory updates included",
               ].map((i) => (
@@ -106,7 +137,32 @@ export default function CourseDetail({ params }: { params: { slug: string } }) {
                 </li>
               ))}
             </ul>
+           </div>
+
+           <div className="border border-navy-900/10 bg-white p-6">
+             <p className="eyebrow text-gold-600">Training a team?</p>
+             <p className="mt-3 text-sm text-navy-900/70">
+               Team licenses for 5 to 20+ people, with learning paths for executives, Safety Managers, and line pilots,
+               invoiced and enrolled for you.
+             </p>
+             <Link href="/teams" className="mt-4 inline-block text-sm font-medium text-navy-900 underline hover:text-gold-600">
+               See team licensing
+             </Link>
+           </div>
+
+           <div className="border border-navy-900/10 bg-white p-6">
+             <p className="eyebrow text-gold-600">Need it implemented?</p>
+             <p className="mt-3 text-sm text-navy-900/70">
+               Want help turning this into your own SMS manual, ConOps, or a gap audit of your operation?
+             </p>
+             <Link href="/consulting#contact" className="mt-4 inline-block text-sm font-medium text-navy-900 underline hover:text-gold-600">
+               Talk to a consultant
+             </Link>
+           </div>
           </aside>
+        </div>
+        <div className="mx-auto max-w-7xl px-6 pb-16">
+          <DisclaimerNote />
         </div>
       </section>
     </div>

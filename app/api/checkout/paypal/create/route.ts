@@ -10,7 +10,7 @@ export async function POST(req: Request) {
   try {
     if (!paypalConfigured) {
       return NextResponse.json(
-        { error: "PayPal is not configured. Add PAYPAL_CLIENT_ID and PAYPAL_CLIENT_SECRET to your .env.local" },
+        { error: "PayPal checkout is not available yet. Please pay by card or email info@bvlossafetyacademy.com." },
         { status: 501 }
       );
     }

@@ -74,7 +74,7 @@ export default function AeroSafetyCasePage() {
           <div className="mt-16 border border-navy-900/10 bg-navy-900 p-10 text-center text-white">
             <p className="font-display text-2xl">Want a guided demo for your team?</p>
             <p className="mt-3 text-white/60">Our consulting team can support you through implementation.</p>
-            <a href="/consultoria#contacto" className="mt-6 inline-flex items-center gap-2 bg-gold-500 px-6 py-3 font-medium text-navy-950 hover:bg-gold-400">
+            <a href="/consulting#contact" className="mt-6 inline-flex items-center gap-2 bg-gold-500 px-6 py-3 font-medium text-navy-950 hover:bg-gold-400">
               Request a demo
             </a>
           </div>

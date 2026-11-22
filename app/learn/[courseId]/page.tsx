@@ -18,7 +18,7 @@ export default async function LearnPage({ params }: { params: { courseId: string
 
   const isFree = course.priceCents === 0;
   const enrollment = db.select().from(enrollments).where(eq(enrollments.courseId, course.id)).all().find((e) => e.userId === userId);
-  if (!enrollment && !isFree) redirect(`/cursos/${course.slug}`);
+  if (!enrollment && !isFree) redirect(`/courses/${course.slug}`);
 
   const courseModules = db.select().from(modules).where(eq(modules.courseId, course.id)).all().sort((a, b) => a.order - b.order);
   const progressRows = db.select().from(lessonProgress).all().filter((p) => p.userId === userId);

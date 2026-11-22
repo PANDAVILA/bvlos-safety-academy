@@ -32,7 +32,7 @@ export default async function PanelPage() {
         <h2 className="mt-14 font-display text-xl text-navy-900">My courses</h2>
         {myCourses.length === 0 ? (
           <p className="mt-4 text-navy-900/60">
-            You're not enrolled in any courses yet. <Link href="/cursos" className="text-gold-600 hover:underline">Browse the catalog</Link>.
+            You're not enrolled in any courses yet. <Link href="/courses" className="text-gold-600 hover:underline">Browse the catalog</Link>.
           </p>
         ) : (
           <div className="mt-6 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -40,7 +40,7 @@ export default async function PanelPage() {
               course ? (
                 <Link
                   key={enrollment.id}
-                  href={`/aprender/${course.id}`}
+                  href={`/learn/${course.id}`}
                   className="group flex flex-col border border-navy-900/10 bg-white"
                 >
                   <div className="relative aspect-[4/3] overflow-hidden bg-navy-900">

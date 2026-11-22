@@ -28,6 +28,7 @@ export async function createCourse(formData: FormData) {
       subtitle: String(formData.get("subtitle") || ""),
       description: String(formData.get("description") || ""),
       learningOutcomes: String(formData.get("learningOutcomes") || ""),
+      frameworks: String(formData.get("frameworks") || ""),
       level: String(formData.get("level") || "foundation"),
       category: String(formData.get("category") || "bvlos"),
       priceCents: Math.round(parseFloat(String(formData.get("price") || "0")) * 100),
@@ -38,7 +39,7 @@ export async function createCourse(formData: FormData) {
     .run();
 
   revalidatePath("/admin/courses");
-  revalidatePath("/cursos");
+  revalidatePath("/courses");
   redirect("/admin/courses");
 }
 
@@ -51,6 +52,7 @@ export async function updateCourse(courseId: string, formData: FormData) {
       subtitle: String(formData.get("subtitle") || ""),
       description: String(formData.get("description") || ""),
       learningOutcomes: String(formData.get("learningOutcomes") || ""),
+      frameworks: String(formData.get("frameworks") || ""),
       level: String(formData.get("level") || "foundation"),
       category: String(formData.get("category") || "bvlos"),
       priceCents: Math.round(parseFloat(String(formData.get("price") || "0")) * 100),
@@ -62,7 +64,7 @@ export async function updateCourse(courseId: string, formData: FormData) {
     .run();
 
   revalidatePath("/admin/courses");
-  revalidatePath("/cursos");
+  revalidatePath("/courses");
   revalidatePath(`/admin/courses/${courseId}`);
 }
 
@@ -81,14 +83,14 @@ export async function deleteCourse(courseId: string) {
   db.delete(courses).where(eq(courses.id, courseId)).run();
 
   revalidatePath("/admin/courses");
-  revalidatePath("/cursos");
+  revalidatePath("/courses");
 }
 
 export async function togglePublishCourse(courseId: string, published: boolean) {
   await requireAdmin();
   db.update(courses).set({ published }).where(eq(courses.id, courseId)).run();
   revalidatePath("/admin/courses");
-  revalidatePath("/cursos");
+  revalidatePath("/courses");
 }
 
 // ---- Modules ----
@@ -120,7 +122,7 @@ export async function updateModuleQuiz(courseId: string, moduleId: string, quizJ
   await requireAdmin();
   db.update(modules).set({ quizJson }).where(eq(modules.id, moduleId)).run();
   revalidatePath(`/admin/courses/${courseId}`);
-  revalidatePath(`/aprender/${courseId}`);
+  revalidatePath(`/learn/${courseId}`);
 }
 
 export async function moveModule(courseId: string, moduleId: string, direction: "up" | "down") {
@@ -174,7 +176,7 @@ export async function updateLesson(courseId: string, lessonId: string, formData:
     .where(eq(lessons.id, lessonId))
     .run();
   revalidatePath(`/admin/courses/${courseId}`);
-  revalidatePath(`/aprender/${courseId}`);
+  revalidatePath(`/learn/${courseId}`);
 }
 
 export async function deleteLesson(courseId: string, lessonId: string) {
@@ -206,5 +208,5 @@ export async function enrollSelfForPreview(courseId: string) {
   if (!existing) {
     db.insert(enrollments).values({ userId, courseId }).run();
   }
-  redirect(`/aprender/${courseId}`);
+  redirect(`/learn/${courseId}`);
 }

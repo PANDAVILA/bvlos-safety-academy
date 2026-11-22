@@ -21,6 +21,7 @@ export const courses = sqliteTable("courses", {
   subtitle: text("subtitle"),
   description: text("description").notNull(),
   learningOutcomes: text("learning_outcomes"), // newline-separated bullet points
+  frameworks: text("frameworks"), // newline-separated reference frameworks the curriculum is mapped to
   level: text("level").notNull().default("foundation"), // foundation | advanced | specialist
   category: text("category").notNull().default("bvlos"), // bvlos | sms | conops | risk-assessment
   priceCents: integer("price_cents").notNull().default(0),

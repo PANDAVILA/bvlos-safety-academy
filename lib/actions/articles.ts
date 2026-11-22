@@ -33,8 +33,8 @@ export async function createArticle(formData: FormData) {
     .run();
 
   revalidatePath("/admin/articles");
-  revalidatePath("/noticias");
-  revalidatePath("/informes");
+  revalidatePath("/news");
+  revalidatePath("/reports");
   redirect("/admin/articles");
 }
 
@@ -55,8 +55,8 @@ export async function updateArticle(id: string, formData: FormData) {
     .run();
 
   revalidatePath("/admin/articles");
-  revalidatePath("/noticias");
-  revalidatePath("/informes");
+  revalidatePath("/news");
+  revalidatePath("/reports");
   redirect("/admin/articles");
 }
 
@@ -64,6 +64,6 @@ export async function deleteArticle(id: string) {
   await requireAdmin();
   db.delete(articles).where(eq(articles.id, id)).run();
   revalidatePath("/admin/articles");
-  revalidatePath("/noticias");
-  revalidatePath("/informes");
+  revalidatePath("/news");
+  revalidatePath("/reports");
 }

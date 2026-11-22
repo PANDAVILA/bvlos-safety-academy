@@ -12,7 +12,8 @@ const db = new Database(dbPath);
 db.pragma("journal_mode = WAL");
 
 const uuid = () => crypto.randomUUID();
-const COURSE_SLUG = "fundamentos-bvlos";
+const COURSE_SLUG = "bvlos-operations-fundamentals";
+const LEGACY_COURSE_SLUG = "fundamentos-bvlos"; // pre-migration slug, kept so this script still works on older databases
 
 function q(question, options, correctIndex) {
   return {
@@ -140,7 +141,7 @@ The practical lesson for this course: don't assume the framework you learned fir
       q("In VLOS operations, what primarily performs the 'detect and avoid' function?", ["The remote pilot's or observer's own eyes", "A ground radar station", "The aircraft's autopilot alone", "Air traffic control exclusively"], 0),
       q("What is EVLOS?", ["Extended Visual Line of Sight, using observers to relay information", "A synonym for BVLOS", "A certification level for pilots", "A type of detect-and-avoid sensor"], 0),
       q("What does C2 link refer to?", ["The command-and-control link between ground station and aircraft", "A certification category for pilots", "A type of contingency volume", "A ground risk classification"], 0),
-      q("What is the primary legal pathway for BVLOS operations in the US as of mid-2026?", ["Part 107 waivers", "Part 108, already in force", "No pathway exists at all", "Only Part 135 air carrier certificates"], 0),
+      q("What is the primary legal pathway for BVLOS operations in the US as of late 2026?", ["Part 107 waivers", "Part 108, already in force", "No pathway exists at all", "Only Part 135 air carrier certificates"], 0),
       q("As proposed, what does Part 108 introduce instead of single-flight waivers for repetitive operations?", ["Area-based approvals", "Unlimited automatic approval", "A ban on repetitive operations", "Manual air traffic control clearance every flight"], 0),
       q("What methodology underlies BVLOS risk assessment in the EASA Specific category?", ["SORA (Specific Operations Risk Assessment)", "Part 108", "FAA Order 8900.1", "ICAO Annex 2 exclusively"], 0),
       q("When did SORA 2.5 become mandatory across the EU?", ["March 2026", "2016", "2030", "It has not been adopted yet"], 0),
@@ -508,7 +509,9 @@ This is really the throughline of this entire foundations course: BVLOS safety i
 // 3. Apply everything to the database
 // ---------------------------------------------------------------------------
 
-const course = db.prepare("SELECT * FROM courses WHERE slug = ?").get(COURSE_SLUG);
+const course =
+  db.prepare("SELECT * FROM courses WHERE slug = ?").get(COURSE_SLUG) ||
+  db.prepare("SELECT * FROM courses WHERE slug = ?").get(LEGACY_COURSE_SLUG);
 if (!course) {
   console.error(`[seed] No course found with slug "${COURSE_SLUG}". Aborting — nothing was changed.`);
   process.exit(1);

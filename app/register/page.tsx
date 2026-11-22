@@ -28,7 +28,7 @@ export default function RegisterPage() {
     const signInRes = await signIn("credentials", { email: form.email, password: form.password, redirect: false });
     setLoading(false);
     if (signInRes?.error) router.push("/login");
-    else router.push("/panel");
+    else router.push("/dashboard");
   }
 
   return (

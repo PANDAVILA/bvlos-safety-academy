@@ -1,17 +1,18 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Clock, BarChart3 } from "lucide-react";
+import { formatPrice } from "@/lib/format";
 
 const levelLabel: Record<string, string> = {
-  foundation: "Fundamentos",
-  advanced: "Avanzado",
-  specialist: "Especialista",
+  foundation: "Foundation",
+  advanced: "Advanced",
+  specialist: "Specialist",
 };
 
 export default function CourseCard({ course }: { course: any }) {
-  const price = course.priceCents === 0 ? "Gratis" : `$${(course.priceCents / 100).toFixed(0)}`;
+  const price = formatPrice(course.priceCents, course.currency || "USD");
   return (
-    <Link href={`/cursos/${course.slug}`} className="group flex flex-col border border-navy-900/10 bg-white">
+    <Link href={`/courses/${course.slug}`} className="group flex flex-col border border-navy-900/10 bg-white">
       <div className="relative aspect-[4/3] overflow-hidden bg-navy-900">
         {course.coverImage && (
           <Image

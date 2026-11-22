@@ -14,10 +14,11 @@ const categories = [
   { value: "conops", label: "ConOps" },
 ];
 
-export default function CoursesPage({ searchParams }: { searchParams: { categoria?: string } }) {
+export default function CoursesPage({ searchParams }: { searchParams: { category?: string; categoria?: string } }) {
   const all = db.select().from(courses).where(eq(courses.published, true)).all();
-  const filtered = searchParams.categoria
-    ? all.filter((c) => c.category === searchParams.categoria)
+  const activeCategory = searchParams.category ?? searchParams.categoria ?? "";
+  const filtered = activeCategory
+    ? all.filter((c) => c.category === activeCategory)
     : all;
 
   return (
@@ -42,9 +43,9 @@ export default function CoursesPage({ searchParams }: { searchParams: { categori
             {categories.map((c) => (
               <a
                 key={c.value}
-                href={c.value ? `/cursos?categoria=${c.value}` : "/cursos"}
+                href={c.value ? `/courses?category=${c.value}` : "/courses"}
                 className={`eyebrow border px-4 py-2 ${
-                  (searchParams.categoria ?? "") === c.value
+                  activeCategory === c.value
                     ? "border-navy-900 bg-navy-900 text-white"
                     : "border-navy-900/15 text-navy-900/70 hover:border-navy-900"
                 }`}

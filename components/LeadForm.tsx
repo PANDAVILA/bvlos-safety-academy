@@ -2,6 +2,7 @@
 import { useState } from "react";
 
 const services = [
+  "Team training license",
   "SMS assessment",
   "ConOps design",
   "SMS audit / design",
@@ -10,8 +11,21 @@ const services = [
   "Other",
 ];
 
-export default function LeadForm() {
-  const [form, setForm] = useState({ name: "", email: "", company: "", serviceInterest: services[0], message: "" });
+const seatOptions = ["Just me", "2-4", "5-9", "10-20", "20+"];
+
+export default function LeadForm({
+  defaultService = "SMS assessment",
+  showSeats = false,
+  submitLabel = "Request a proposal",
+  messageLabel = "Tell us about your operation",
+}: {
+  defaultService?: string;
+  showSeats?: boolean;
+  submitLabel?: string;
+  messageLabel?: string;
+}) {
+  const [form, setForm] = useState({ name: "", email: "", company: "", serviceInterest: defaultService, message: "" });
+  const [seats, setSeats] = useState("5-9");
   const [status, setStatus] = useState<"idle" | "loading" | "sent" | "error">("idle");
 
   async function handleSubmit(e: React.FormEvent) {
@@ -20,7 +34,10 @@ export default function LeadForm() {
     const res = await fetch("/api/leads", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(form),
+      body: JSON.stringify({
+        ...form,
+        message: showSeats ? `Seats: ${seats}\n\n${form.message}`.trim() : form.message,
+      }),
     });
     setStatus(res.ok ? "sent" : "error");
   }
@@ -56,13 +73,21 @@ export default function LeadForm() {
           {services.map((s) => <option key={s}>{s}</option>)}
         </select>
       </div>
+      {showSeats && (
+        <div>
+          <label className="eyebrow text-navy-900/60">Number of learners</label>
+          <select value={seats} onChange={(e) => setSeats(e.target.value)} className="mt-2 w-full border border-navy-900/20 px-4 py-3 focus:border-gold-500 focus:outline-none">
+            {seatOptions.map((o) => <option key={o}>{o}</option>)}
+          </select>
+        </div>
+      )}
       <div>
-        <label className="eyebrow text-navy-900/60">Tell us about your operation</label>
+        <label className="eyebrow text-navy-900/60">{messageLabel}</label>
         <textarea rows={4} value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} className="mt-2 w-full border border-navy-900/20 px-4 py-3 focus:border-gold-500 focus:outline-none" />
       </div>
       {status === "error" && <p className="text-sm text-red-600">Something went wrong. Please try again.</p>}
       <button type="submit" disabled={status === "loading"} className="bg-navy-900 px-6 py-3 font-medium text-white hover:bg-navy-800 disabled:opacity-60">
-        {status === "loading" ? "Sending…" : "Request a proposal"}
+        {status === "loading" ? "Sending…" : submitLabel}
       </button>
     </form>
   );

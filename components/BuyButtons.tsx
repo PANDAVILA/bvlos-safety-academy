@@ -10,12 +10,15 @@ export default function BuyButtons({
   itemId,
   priceCents,
   currency,
+  tone = "light",
 }: {
   itemType: "course" | "product";
   itemId: string;
   priceCents: number;
   currency: string;
+  tone?: "light" | "dark";
 }) {
+  const dark = tone === "dark";
   const { data: session } = useSession();
   const router = useRouter();
   const [loading, setLoading] = useState<"stripe" | "paypal" | null>(null);
@@ -33,11 +36,11 @@ export default function BuyButtons({
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ itemType, itemId }),
           });
-          if (res.ok) router.push("/panel");
+          if (res.ok) router.push("/dashboard");
         }}
         className="w-full bg-gold-500 px-6 py-3 font-medium text-navy-950 hover:bg-gold-400"
       >
-        Acceder gratis
+        Enroll for free
       </button>
     );
   }
@@ -53,9 +56,9 @@ export default function BuyButtons({
       });
       const data = await res.json();
       if (data.url) window.location.href = data.url;
-      else setError(data.error || "No se pudo iniciar el pago con tarjeta.");
+      else setError(data.error || "We could not start checkout. Please try again or email info@bvlossafetyacademy.com.");
     } catch {
-      setError("No se pudo iniciar el pago con tarjeta.");
+      setError("We could not start checkout. Please try again or email info@bvlossafetyacademy.com.");
     } finally {
       setLoading(null);
     }
@@ -67,10 +70,12 @@ export default function BuyButtons({
       <button
         onClick={handleStripe}
         disabled={loading !== null}
-        className="flex w-full items-center justify-center gap-2 bg-navy-900 px-6 py-3 font-medium text-white hover:bg-navy-800 disabled:opacity-60"
+        className={`flex w-full items-center justify-center gap-2 px-6 py-3 font-medium disabled:opacity-60 ${
+          dark ? "bg-gold-500 text-navy-950 hover:bg-gold-400" : "bg-navy-900 text-white hover:bg-navy-800"
+        }`}
       >
         <CreditCard size={16} />
-        {loading === "stripe" ? "Redirigiendo…" : "Pagar con tarjeta (Stripe)"}
+        {loading === "stripe" ? "Redirecting to secure checkout…" : "Pay by card"}
       </button>
 
       {paypalClientId ? (
@@ -84,7 +89,7 @@ export default function BuyButtons({
                 body: JSON.stringify({ itemType, itemId }),
               });
               const data = await res.json();
-              if (!data.id) throw new Error(data.error || "Error PayPal");
+              if (!data.id) throw new Error(data.error || "PayPal could not create the order.");
               return data.id;
             }}
             onApprove={async (data) => {
@@ -95,14 +100,13 @@ export default function BuyButtons({
               });
               router.push("/checkout/success");
             }}
-            onError={() => setError("No se pudo completar el pago con PayPal.")}
+            onError={() => setError("We could not complete the PayPal payment. Please try again.")}
           />
         </PayPalScriptProvider>
-      ) : (
-        <p className="text-xs text-navy-900/40">
-          PayPal no está configurado (falta NEXT_PUBLIC_PAYPAL_CLIENT_ID).
-        </p>
-      )}
+      ) : null}
+      <p className={`text-center text-xs ${dark ? "text-white/50" : "text-navy-900/50"}`}>
+        Prices in {currency.toUpperCase()}. Card payments are processed securely by Stripe; we never see or store your card number.
+      </p>
     </div>
   );
 }

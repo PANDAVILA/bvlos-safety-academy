@@ -10,7 +10,7 @@ export async function POST(req: Request) {
   try {
     if (!stripeConfigured) {
       return NextResponse.json(
-        { error: "Stripe is not configured. Add STRIPE_SECRET_KEY to your .env.local" },
+        { error: "Online checkout is not available yet. To enroll, please email info@bvlossafetyacademy.com and we will send you an invoice." },
         { status: 501 }
       );
     }
@@ -30,6 +30,7 @@ export async function POST(req: Request) {
 
     const checkoutSession = await stripe.checkout.sessions.create({
       mode: "payment",
+      locale: "en",
       payment_method_types: ["card"],
       customer_email: session?.user?.email ?? undefined,
       line_items: [
@@ -64,6 +65,6 @@ export async function POST(req: Request) {
     return NextResponse.json({ url: checkoutSession.url });
   } catch (err: any) {
     console.error(err);
-    return NextResponse.json({ error: err.message || "Error creating the payment" }, { status: 500 });
+    return NextResponse.json({ error: "We could not start checkout. Please try again or email info@bvlossafetyacademy.com." }, { status: 500 });
   }
 }

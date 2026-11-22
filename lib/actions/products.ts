@@ -33,7 +33,7 @@ export async function createProduct(formData: FormData) {
     .run();
 
   revalidatePath("/admin/products");
-  revalidatePath("/tienda");
+  revalidatePath("/resources");
   redirect("/admin/products");
 }
 
@@ -54,7 +54,7 @@ export async function updateProduct(id: string, formData: FormData) {
     .run();
 
   revalidatePath("/admin/products");
-  revalidatePath("/tienda");
+  revalidatePath("/resources");
   redirect("/admin/products");
 }
 
@@ -62,5 +62,5 @@ export async function deleteProduct(id: string) {
   await requireAdmin();
   db.delete(products).where(eq(products.id, id)).run();
   revalidatePath("/admin/products");
-  revalidatePath("/tienda");
+  revalidatePath("/resources");
 }

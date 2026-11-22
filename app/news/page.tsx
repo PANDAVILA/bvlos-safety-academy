@@ -1,10 +1,9 @@
-export const dynamic = "force-dynamic";
 import { db } from "@/lib/db";
 import { articles } from "@/lib/db/schema";
 import { eq, desc, and } from "drizzle-orm";
 import ArticleCard from "@/components/ArticleCard";
 
-export default function NoticiasPage() {
+export default function NewsPage() {
   const list = db
     .select()
     .from(articles)
@@ -16,11 +15,10 @@ export default function NoticiasPage() {
     <div>
       <section className="chart-bg">
         <div className="mx-auto max-w-7xl px-6 py-20">
-          <p className="eyebrow text-gold-400">Actualidad</p>
-          <h1 className="mt-4 font-display text-4xl font-semibold text-white sm:text-5xl">Noticias BVLOS</h1>
+          <p className="eyebrow text-gold-400">Industry updates</p>
+          <h1 className="mt-4 font-display text-4xl font-semibold text-white sm:text-5xl">BVLOS News</h1>
           <p className="mt-4 max-w-xl text-white/70">
-            Seguimiento regulatorio y del sector, curado por nuestro equipo editorial especializado en operaciones
-            no tripuladas.
+            Regulatory and industry updates for uncrewed and BVLOS operations, curated by our editorial team.
           </p>
         </div>
       </section>

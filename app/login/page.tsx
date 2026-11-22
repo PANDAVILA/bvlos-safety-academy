@@ -18,7 +18,7 @@ export default function LoginPage() {
     const res = await signIn("credentials", { email, password, redirect: false });
     setLoading(false);
     if (res?.error) setError("Incorrect email or password.");
-    else router.push("/panel");
+    else router.push("/dashboard");
   }
 
   return (
@@ -57,7 +57,7 @@ export default function LoginPage() {
           </button>
         </form>
         <p className="mt-6 text-sm text-navy-900/60">
-          Don't have an account? <Link href="/registro" className="text-gold-600 hover:underline">Create one here</Link>
+          Don't have an account? <Link href="/register" className="text-gold-600 hover:underline">Create one here</Link>
         </p>
       </div>
     </div>

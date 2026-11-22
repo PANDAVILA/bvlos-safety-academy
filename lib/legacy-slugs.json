@@ -1,0 +1,22 @@
+{
+  "courses": {
+    "fundamentos-bvlos": "bvlos-operations-fundamentals",
+    "metodologia-sms-avanzada": "advanced-sms-risk-methodology",
+    "sms-para-operadores-uas": "sms-for-uas-operators",
+    "conops-y-volumen-operacional": "conops-and-operational-volume-design",
+    "gestion-de-mitigaciones-bvlos": "mitigation-management-bvlos",
+    "introduccion-espacio-aereo-no-segregado": "intro-to-non-segregated-airspace"
+  },
+  "products": {
+    "ebook-guia-sms-paso-a-paso": "step-by-step-sms-guide-ebook",
+    "plantilla-conops-editable": "editable-conops-template",
+    "checklist-preflight-bvlos": "bvlos-preflight-checklist",
+    "ebook-gestion-mitigaciones": "mitigation-management-catalog-ebook"
+  },
+  "articles": {
+    "easa-actualiza-marco-bvlos-2026": "easa-updates-bvlos-framework-2026",
+    "corredores-bvlos-infraestructura-critica": "bvlos-corridors-critical-infrastructure",
+    "estudio-deriva-operacional-2025": "operational-drift-study-2025",
+    "benchmark-sms-operadores-uas": "sms-maturity-benchmark-uas-operators"
+  }
+}

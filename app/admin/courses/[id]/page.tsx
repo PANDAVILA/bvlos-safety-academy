@@ -80,6 +80,17 @@ export default function EditCoursePage({ params }: { params: { id: string } }) {
           />
           <p className="mt-1 text-xs text-navy-900/40">Shown as a bullet checklist on the course page before purchase.</p>
         </div>
+        <div>
+          <label className="eyebrow text-navy-900/60">Reference frameworks (one per line, optional)</label>
+          <textarea
+            name="frameworks"
+            defaultValue={course.frameworks ?? ""}
+            rows={4}
+            placeholder={"14 CFR Part 5: Safety Policy, Safety Risk Management, Safety Assurance, Safety Promotion\nFAA AC 120-92D: Safety Management Systems for Aviation Service Providers"}
+            className="mt-2 w-full border border-navy-900/20 px-4 py-2.5 focus:border-gold-500 focus:outline-none"
+          />
+          <p className="mt-1 text-xs text-navy-900/40">Shown on the course page as &quot;Curriculum reference frameworks&quot;. Only list what the lessons actually cover. Use &quot;mapped to&quot; language, never &quot;compliant&quot; or &quot;certified&quot;.</p>
+        </div>
         <div className="grid grid-cols-2 gap-4">
           <div>
             <label className="eyebrow text-navy-900/60">Level</label>
