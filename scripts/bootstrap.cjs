@@ -302,3 +302,13 @@ for (const [slug, text] of Object.entries(frameworksBySlug)) {
 }
 
 db.close();
+
+// ---------------------------------------------------------------------------
+// One-time SMS course load (guarded by a marker file, see scripts/auto-seed.cjs).
+// Runs here so it happens on every start path that runs bootstrap.
+// ---------------------------------------------------------------------------
+try {
+  require("child_process").spawnSync(process.execPath, [require("path").join(__dirname, "auto-seed.cjs")], { stdio: "inherit" });
+} catch (e) {
+  console.log("[bootstrap] auto-seed skipped:", e && e.message);
+}
