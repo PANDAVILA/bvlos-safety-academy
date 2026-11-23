@@ -8,7 +8,7 @@
   "scripts": {
     "dev": "node scripts/bootstrap.cjs && next dev",
     "build": "next build",
-    "start": "node scripts/bootstrap.cjs && next start",
+    "start": "node scripts/bootstrap.cjs && node scripts/auto-seed.cjs && next start",
     "lint": "next lint"
   },
   "dependencies": {
