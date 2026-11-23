@@ -1,0 +1,9 @@
+Finally, let's anchor our framework in law and international standards. At the global level, the International Civil Aviation Organization, ICAO, established Annex 19, Safety Management. Annex 19 requires member states, including the United States, to implement a State Safety Programme and to require Safety Management Systems from aviation service providers. The operational guidance behind Annex 19 is ICAO Document 9859, the Safety Management Manual, which describes the four pillars of SMS that form the backbone of this course.
+
+In the United States, the Federal Aviation Administration codifies SMS requirements in Title 14 of the Code of Federal Regulations, Part 5. Originally required for Part 121 airlines, Part 5 was expanded by a final rule in 2024 to cover Part 135 certificate holders, which includes drone delivery companies operating under Part 135, as well as commercial air tour operators with a Section 91.147 authorization and certain Part 21 certificate holders. Part 135 operators are given a phase-in period of 36 months from the rule's effective date.
+
+The FAA's main guidance for building a compliant system is Advisory Circular 120-92D.
+
+What if your organization operates strictly under 14 CFR Part 107? Part 5 does not apply to Part 107 operations, so an SMS is voluntary. But when you apply for a complex waiver, such as Beyond Visual Line of Sight, operations over people, or multiple aircraft, the FAA evaluates your operational safety case. Clients, insurers and enterprise customers ask the same question. A documented, functioning SMS is one of the strongest ways to show that your organization manages risk in a disciplined way.
+
+In Module 2, we will dive into Pillar 1: Safety Policy and Objectives. See you in the next lesson.

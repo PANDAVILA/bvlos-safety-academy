@@ -1,0 +1,13 @@
+When designing risk controls in Step 5, effective safety managers follow the Hierarchy of Controls, moving from the most reliable barriers to the least.
+
+Elimination is physically removing the hazard. Cancelling a mission when convective storms approach is elimination.
+
+Substitution is replacing a high-risk element with a safer alternative, for example moving from a single 2.4 gigahertz radio link to dual redundant C2 links using different technologies.
+
+Engineering controls are hardware and software safeguards that work independently of human memory, such as geofencing, obstacle sensing, and parachute recovery systems built to ASTM F3322, which reduce impact energy.
+
+Administrative controls are Standard Operating Procedures, two-person challenge-and-response checklists, and crew duty-time limits.
+
+Personal protective equipment is the last line: high-visibility vests, eye protection, and fire-resistant battery containment bags.
+
+For complex operations and international work, there is also JARUS SORA, the Specific Operations Risk Assessment. SORA looks at the Ground Risk Class, the risk to people on the ground, and the Air Risk Class, the risk of meeting manned aircraft, to arrive at a Specific Assurance and Integrity Level, or SAIL. SORA is used by EASA and many other authorities. FAA waivers and approvals follow the FAA's own process, but the same ground-risk and air-risk logic is a useful way to structure your safety case.

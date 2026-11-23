@@ -1,0 +1,112 @@
+[
+ {
+  "question": "Which is the best example of at-risk behaviour?",
+  "explanation": "At-risk behaviour is a shortcut taken because the risk is not recognized or has become normal. The response is coaching and removing incentives for the shortcut.",
+  "options": [
+   {
+    "text": "Misreading a battery cell voltage during a busy turnaround",
+    "correct": false
+   },
+   {
+    "text": "Flying under the influence of alcohol",
+    "correct": false
+   },
+   {
+    "text": "Routinely skipping a 2-minute compass check because it has never caused a problem",
+    "correct": true
+   },
+   {
+    "text": "An unpredictable ESC hardware failure",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "What does closed-loop safety communication mean?",
+  "explanation": "Reports sent into a silent black hole teach people to stop reporting.",
+  "options": [
+   {
+    "text": "Locking the report database",
+    "correct": false
+   },
+   {
+    "text": "Sending every report to the regulator",
+    "correct": false
+   },
+   {
+    "text": "Publishing reports with names attached",
+    "correct": false
+   },
+   {
+    "text": "Telling the person who reported a hazard what was done about it",
+    "correct": true
+   }
+  ]
+ },
+ {
+  "question": "How should an organization respond to reckless behaviour?",
+  "explanation": "Reckless behaviour is a conscious disregard of a substantial and unjustifiable risk. A just culture does not protect it.",
+  "options": [
+   {
+    "text": "With clear disciplinary accountability",
+    "correct": true
+   },
+   {
+    "text": "With a console-and-learn conversation only",
+    "correct": false
+   },
+   {
+    "text": "By ignoring it to protect morale",
+    "correct": false
+   },
+   {
+    "text": "By rewriting the checklist",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "A pilot misreads a battery voltage and reports it honestly. In a just culture, what is the right response?",
+  "explanation": "Human error is not punished. The aim is to make the system more error-tolerant.",
+  "options": [
+   {
+    "text": "Terminate employment",
+    "correct": false
+   },
+   {
+    "text": "Console the pilot, fix the system design that made the slip easy, and share the lesson",
+    "correct": true
+   },
+   {
+    "text": "Hide the report",
+    "correct": false
+   },
+   {
+    "text": "Charge the pilot for the repair",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "An ESC overheating anomaly is discovered. Which communication tool fits best?",
+  "explanation": "Urgent technical threats need immediate, tracked communication.",
+  "options": [
+   {
+    "text": "A line in next year's newsletter",
+    "correct": false
+   },
+   {
+    "text": "A rumor among observers",
+    "correct": false
+   },
+   {
+    "text": "A Safety Alert with mandatory read-and-sign acknowledgment",
+    "correct": true
+   },
+   {
+    "text": "A note in the annual budget",
+    "correct": false
+   }
+  ]
+ }
+]

@@ -12,6 +12,7 @@ import {
   deleteModule,
   moveModule,
   updateModuleQuiz,
+  updateModuleVideo,
   createLesson,
   updateLesson,
   deleteLesson,
@@ -243,6 +244,22 @@ export default function EditCoursePage({ params }: { params: { id: string } }) {
                   </button>
                 </div>
               </form>
+
+              <details className="border-t border-navy-900/10 p-4">
+                <summary className="eyebrow cursor-pointer text-gold-600">Module video {m.videoUrl ? "(set)" : "(none)"}</summary>
+                <form action={updateModuleVideo.bind(null, course.id, m.id)} className="mt-4 space-y-2">
+                  <input
+                    name="videoUrl"
+                    defaultValue={m.videoUrl ?? ""}
+                    placeholder="https://share.synthesia.io/..."
+                    className="w-full border border-navy-900/20 px-3 py-2 text-sm focus:border-gold-500 focus:outline-none"
+                  />
+                  <p className="text-xs text-navy-900/40">
+                    Optional overview video for the whole module (Synthesia, YouTube, Vimeo, Loom, Google Drive or .mp4). Students see it at the top of the module&apos;s first lesson. Each lesson can also have its own video.
+                  </p>
+                  <button type="submit" className="eyebrow bg-navy-900 px-4 py-2 text-white hover:bg-navy-800">Save module video</button>
+                </form>
+              </details>
 
               <details className="border-t border-navy-900/10 p-4">
                 <summary className="eyebrow cursor-pointer text-gold-600">Module quiz ({(() => {

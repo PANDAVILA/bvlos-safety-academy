@@ -1,0 +1,112 @@
+[
+ {
+  "question": "Which is a lagging Safety Performance Indicator?",
+  "explanation": "Lagging indicators count outcomes that already happened. The others measure proactive behaviour or condition.",
+  "options": [
+   {
+    "text": "Percentage of pre-flight briefings completed",
+    "correct": false
+   },
+   {
+    "text": "Hazard reports submitted per month",
+    "correct": false
+   },
+   {
+    "text": "Battery internal-resistance trend",
+    "correct": false
+   },
+   {
+    "text": "Number of lost C2 link events per 1,000 flight hours",
+    "correct": true
+   }
+  ]
+ },
+ {
+  "question": "What is practical drift?",
+  "explanation": "Safety Assurance exists to detect drift early with data, audits and honest reporting.",
+  "options": [
+   {
+    "text": "The gradual gap between work-as-imagined in the manual and work-as-done in the field",
+    "correct": true
+   },
+   {
+    "text": "A drone drifting in the wind",
+    "correct": false
+   },
+   {
+    "text": "A battery losing charge in storage",
+    "correct": false
+   },
+   {
+    "text": "A compass calibration error",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "Which change should trigger a formal Management of Change review?",
+  "explanation": "Firmware, new airspace, night operations, a new contractor or rapid growth can all invalidate existing controls.",
+  "options": [
+   {
+    "text": "Changing the office printer",
+    "correct": false
+   },
+   {
+    "text": "Updating the company logo",
+    "correct": false
+   },
+   {
+    "text": "Rolling out a new autopilot firmware version across the fleet",
+    "correct": true
+   },
+   {
+    "text": "Hiring an accountant",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "An investigation concludes 'pilot error'. What should the investigator do next?",
+  "explanation": "Pilot error is a symptom. The 5 Whys and HFACS help trace it back to systemic causes.",
+  "options": [
+   {
+    "text": "Close the case",
+    "correct": false
+   },
+   {
+    "text": "Keep asking why, to find the training, procedure or organizational causes behind the error",
+    "correct": true
+   },
+   {
+    "text": "Discipline the pilot",
+    "correct": false
+   },
+   {
+    "text": "Delete the logs",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "Which situation is excluded from the FAA protection described in AC 00-46F for ASRS reports?",
+  "explanation": "Protection is limited to inadvertent events with no accident or criminal act, subject to the other conditions in the AC. It waives civil penalty and suspension only.",
+  "options": [
+   {
+    "text": "An accident or a criminal act",
+    "correct": true
+   },
+   {
+    "text": "A near miss with a bird",
+    "correct": false
+   },
+   {
+    "text": "An inadvertent airspace deviation",
+    "correct": false
+   },
+   {
+    "text": "A report filed within 10 days",
+    "correct": false
+   }
+  ]
+ }
+]

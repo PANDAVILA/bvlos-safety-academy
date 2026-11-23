@@ -26,6 +26,7 @@ export default async function LearnPage({ params }: { params: { courseId: string
   const moduleGroups = courseModules.map((m) => ({
     id: m.id,
     title: m.title,
+    videoUrl: m.videoUrl,
     quiz: (() => {
       try {
         return JSON.parse(m.quizJson || "[]");

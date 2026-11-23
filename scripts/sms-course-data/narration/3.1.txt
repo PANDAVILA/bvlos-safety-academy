@@ -1,0 +1,13 @@
+Welcome to Module 3: Safety Risk Management, or SRM. If Safety Policy is your foundation, SRM is the analytical engine of your SMS. SRM is a proactive design process. You execute SRM before launching a new drone platform, before entering a new class of airspace, and before deploying new BVLOS procedures.
+
+Under FAA Advisory Circular 120-92D, SRM follows five steps.
+
+Step 1, System Analysis. You begin by describing the operation: the airframe, the Ground Control Station, the C2 link, the airspace classification, terrain and obstacles, population density, and weather limits. You cannot manage risks in a system you haven't clearly defined.
+
+Step 2, Hazard Identification. Let's be precise with terminology. A hazard is a condition, object, or activity with the potential to cause injury, equipment damage, or loss of control. A consequence is the potential outcome. For example, high-tension powerlines producing electromagnetic interference is a hazard. Compass heading drift leading to a crash is the consequence.
+
+Step 3, Risk Analysis. Once hazards are listed, you evaluate the likelihood, how often the event might occur, and the severity, the worst credible outcome if it does.
+
+Step 4, Risk Assessment. You plot likelihood against severity on a 5 by 5 risk matrix to classify the risk as low, medium or high, using the acceptance criteria your organization has defined. In our example matrix, any hazard in the red zone is unacceptable, and operations are prohibited until controls are applied.
+
+Step 5, Risk Control. Finally, you design barriers to reduce the residual risk to ALARP, as low as reasonably practicable.

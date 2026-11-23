@@ -1,0 +1,17 @@
+To visualize how organizational flaws lead to operational accidents, aviation relies on Professor James Reason's Swiss Cheese Model of accident causation.
+
+Imagine an organization's defenses against failure as a series of slices of Swiss cheese arranged one behind the other. Each slice represents a protective barrier: corporate policy, supervisory oversight, pre-flight checklists, and redundant aircraft systems. In an ideal world, these barriers are solid. In reality, every barrier has weaknesses, or holes, that are constantly opening, closing, and shifting position.
+
+Accidents do not happen because of a single failure. They occur when the holes in every layer momentarily align, allowing a hazard trajectory to pass straight through all defenses.
+
+Practitioners often describe four layers, following the HFACS framework that was built on Reason's work. Let's apply them to a realistic UAS scenario.
+
+Layer 1, Organizational Influences. Management sets an aggressive daily quota for powerline inspections without allocating budget for spare batteries. That is a latent hole.
+
+Layer 2, Unsafe Supervision. A Chief Pilot notices crews are rushing turnaround times between flights but fails to intervene. The second hole aligns.
+
+Layer 3, Preconditions for Unsafe Acts. Ambient temperatures drop near freezing, increasing internal lithium-polymer battery resistance, while the GCS battery-health warning threshold is set too low. The third hole opens.
+
+Layer 4, Unsafe Acts. Under pressure to finish the last corridor before sunset, the Remote Pilot commands an aggressive full-throttle climb. The battery experiences a sudden voltage sag, triggers a critical failsafe, and the aircraft descends uncontrolled onto a roadway.
+
+Was the crash pilot error? Technically, the pilot moved the stick. Systemically, however, the accident was set up months earlier by organizational decisions. A robust SMS exists to detect and close those upstream holes before they align.

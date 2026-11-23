@@ -1,0 +1,11 @@
+Welcome to Module 4: Safety Assurance. Here is a critical distinction every Safety Manager must master. SRM designs risk controls into your operation on paper. Safety Assurance continuously monitors daily flight operations to prove those controls actually work in the real world.
+
+Over time, every organization experiences practical drift: the gradual gap between work as imagined in your manuals and work as done in the field. Safety Assurance detects practical drift early using Safety Performance Indicators, or SPIs, and Safety Performance Targets, or SPTs.
+
+Lagging SPIs measure past failures, such as fly-aways, hard landings, or airspace deviations per 1,000 flight hours.
+
+Leading SPIs measure proactive health, such as pre-flight briefing completion rates, battery internal-resistance trends, and monthly hazard report submissions.
+
+To capture frontline data, your organization must operate a confidential, non-punitive hazard reporting system. In the United States, crews can also report to the NASA Aviation Safety Reporting System, ASRS, which accepts reports from UAS operators. When an inadvertent regulatory error occurs, and no accident or criminal act is involved, filing an ASRS report within 10 days can protect the pilot from civil penalty and certificate suspension under FAA Advisory Circular 00-46F, among other conditions, while NASA de-identifies the data to improve safety. Read the current conditions before you rely on it.
+
+Two reporting duties are separate from ASRS. An accident that meets the NTSB definition must be reported to the NTSB immediately. And under 14 CFR 107.9, a Part 107 remote pilot must report to the FAA within 10 calendar days a serious injury, a loss of consciousness, or property damage above 500 dollars.

@@ -17,8 +17,10 @@ type Lesson = {
   durationMinutes: number;
   completed: boolean;
 };
-type QuizQuestion = { question: string; options: { text: string; correct: boolean }[] };
-type ModuleGroup = { id: string; title: string; quiz: QuizQuestion[]; lessons: Lesson[] };
+type QuizQuestion = { question: string; explanation?: string; options: { text: string; correct: boolean }[] };
+type ModuleGroup = { id: string; title: string; videoUrl?: string | null; quiz: QuizQuestion[]; lessons: Lesson[] };
+
+const PASS_PERCENT = 80;
 
 function Quiz({ quiz }: { quiz: QuizQuestion[] }) {
   const [answers, setAnswers] = useState<Record<number, number>>({});
@@ -26,15 +28,23 @@ function Quiz({ quiz }: { quiz: QuizQuestion[] }) {
 
   if (!quiz || quiz.length === 0) return null;
 
+  const isFinal = quiz.length >= 30;
   const score = quiz.reduce((acc, q, qi) => {
     const chosen = answers[qi];
     return acc + (chosen !== undefined && q.options[chosen]?.correct ? 1 : 0);
   }, 0);
+  const percent = Math.round((score / quiz.length) * 100);
+  const passed = percent >= PASS_PERCENT;
+  const needed = Math.ceil((quiz.length * PASS_PERCENT) / 100);
 
   return (
     <div className="mt-12 border border-gold-500/30 bg-gold-500/5 p-6">
-      <p className="eyebrow text-gold-600">Module quiz</p>
-      <p className="mt-1 text-sm text-navy-900/60">Check your understanding before moving to the next module.</p>
+      <p className="eyebrow text-gold-600">{isFinal ? "Final assessment" : "Module quiz"}</p>
+      <p className="mt-1 text-sm text-navy-900/60">
+        {isFinal
+          ? `${quiz.length} questions. You need ${needed} correct answers (${PASS_PERCENT}%) to pass.`
+          : "Check your understanding before moving to the next module."}
+      </p>
 
       <div className="mt-6 space-y-6">
         {quiz.map((q, qi) => (
@@ -64,23 +74,83 @@ function Quiz({ quiz }: { quiz: QuizQuestion[] }) {
                 );
               })}
             </div>
+            {submitted && q.explanation && (
+              <p className="mt-2 border-l-2 border-gold-500 pl-3 text-sm text-navy-900/70">{q.explanation}</p>
+            )}
           </div>
         ))}
       </div>
 
       {!submitted ? (
-        <button
-          onClick={() => setSubmitted(true)}
-          disabled={Object.keys(answers).length < quiz.length}
-          className="mt-6 bg-gold-500 px-6 py-2.5 font-medium text-navy-950 hover:bg-gold-400 disabled:opacity-40"
-        >
-          Check answers
-        </button>
+        <div className="mt-6 flex items-center gap-4">
+          <button
+            onClick={() => setSubmitted(true)}
+            disabled={Object.keys(answers).length < quiz.length}
+            className="bg-gold-500 px-6 py-2.5 font-medium text-navy-950 hover:bg-gold-400 disabled:opacity-40"
+          >
+            Check answers
+          </button>
+          <span className="coord text-xs text-navy-900/40">
+            {Object.keys(answers).length} / {quiz.length} answered
+          </span>
+        </div>
       ) : (
-        <p className="mt-6 font-display text-lg text-navy-900">
-          Score: {score} / {quiz.length}
-        </p>
+        <div className="mt-6">
+          <p className="font-display text-lg text-navy-900">
+            Score: {score} / {quiz.length} ({percent}%)
+          </p>
+          <p className={`mt-1 text-sm font-medium ${passed ? "text-green-700" : "text-red-700"}`}>
+            {passed
+              ? isFinal
+                ? "Passed. You met the 80% pass mark."
+                : "Well done. You are ready for the next module."
+              : `Not yet. The pass mark is ${PASS_PERCENT}%. Review the lessons and try again.`}
+          </p>
+          {!passed && (
+            <button
+              onClick={() => {
+                setAnswers({});
+                setSubmitted(false);
+              }}
+              className="mt-3 border border-navy-900/20 px-4 py-2 text-sm text-navy-900 hover:border-gold-500"
+            >
+              Retake quiz
+            </button>
+          )}
+        </div>
       )}
+    </div>
+  );
+}
+
+function VideoPanel({ source, title }: { source: NonNullable<ReturnType<typeof parseVideoUrl>>; title: string }) {
+  if (source.kind === "iframe") {
+    return (
+      <div className="aspect-video overflow-hidden border border-navy-900/10 bg-navy-900">
+        <iframe
+          src={source.src}
+          title={title}
+          className="h-full w-full"
+          allow="autoplay; fullscreen; picture-in-picture; encrypted-media"
+          allowFullScreen
+          referrerPolicy="strict-origin-when-cross-origin"
+        />
+      </div>
+    );
+  }
+  if (source.kind === "file") {
+    return (
+      <div className="aspect-video overflow-hidden border border-navy-900/10 bg-black">
+        <video src={source.src} controls playsInline className="h-full w-full" />
+      </div>
+    );
+  }
+  return (
+    <div className="flex aspect-video flex-col items-center justify-center gap-4 border border-navy-900/10 bg-navy-900 p-6 text-center">
+      <p className="text-white/70">This video opens in a new tab.</p>
+      <a href={source.src} target="_blank" rel="noopener noreferrer" className="bg-gold-500 px-6 py-3 font-medium text-navy-950 hover:bg-gold-400">
+        Watch video
+      </a>
     </div>
   );
 }
@@ -118,6 +188,8 @@ export default function LessonViewer({
   const completedCount = Object.values(progress).filter(Boolean).length;
   const percent = flat.length ? Math.round((completedCount / flat.length) * 100) : 0;
   const video = parseVideoUrl(active?.videoUrl);
+  const isFirstLessonInModule = activeModule?.lessons[0]?.id === active?.id;
+  const moduleVideo = isFirstLessonInModule ? parseVideoUrl(activeModule?.videoUrl) : null;
 
   return (
     <div className="grid min-h-[calc(100vh-64px)] grid-cols-1 lg:grid-cols-[320px_1fr]">
@@ -166,35 +238,31 @@ export default function LessonViewer({
             </p>
             <h1 className="mt-3 font-display text-2xl text-navy-900 sm:text-3xl">{active.title}</h1>
 
-            {video?.kind === "iframe" ? (
-              <div className="mt-8 aspect-video overflow-hidden border border-navy-900/10 bg-navy-900">
-                <iframe
-                  src={video.src}
-                  title={active.title}
-                  className="h-full w-full"
-                  allow="autoplay; fullscreen; picture-in-picture; encrypted-media"
-                  allowFullScreen
-                  referrerPolicy="strict-origin-when-cross-origin"
-                />
+            {moduleVideo && (
+              <div className="mt-8">
+                <p className="eyebrow mb-2 text-navy-900/50">Module video</p>
+                <VideoPanel source={moduleVideo} title={`${activeModule?.title ?? "Module"} video`} />
               </div>
-            ) : video?.kind === "file" ? (
-              <div className="mt-8 aspect-video overflow-hidden border border-navy-900/10 bg-black">
-                <video src={video.src} controls playsInline className="h-full w-full" />
-              </div>
-            ) : video?.kind === "link" ? (
-              <div className="mt-8 flex aspect-video flex-col items-center justify-center gap-4 border border-navy-900/10 bg-navy-900 p-6 text-center">
-                <p className="text-white/70">This video opens in a new tab.</p>
-                <a href={video.src} target="_blank" rel="noopener noreferrer" className="bg-gold-500 px-6 py-3 font-medium text-navy-950 hover:bg-gold-400">
-                  Watch video
-                </a>
-              </div>
-            ) : active.image ? (
-              <div className="relative mt-8 aspect-video overflow-hidden border border-navy-900/10 bg-navy-900">
-                <Image src={active.image} alt={active.title} fill className="object-cover" unoptimized />
-              </div>
-            ) : (
-              <div className="mt-8 aspect-video border border-navy-900/10 bg-navy-900" />
             )}
+
+            {video && (
+              <div className="mt-8">
+                {moduleVideo && <p className="eyebrow mb-2 text-navy-900/50">Lesson video</p>}
+                <VideoPanel source={video} title={active.title} />
+              </div>
+            )}
+
+            {active.image ? (
+              <figure className={`relative mt-8 aspect-video overflow-hidden border border-navy-900/10 ${video || moduleVideo ? "bg-white" : "bg-navy-900"}`}>
+                <Image
+                  src={active.image}
+                  alt={active.title}
+                  fill
+                  className={video || moduleVideo ? "object-contain" : "object-cover"}
+                  unoptimized
+                />
+              </figure>
+            ) : null}
 
             <div
               className="prose-legal mt-8 max-w-none text-navy-900/75"

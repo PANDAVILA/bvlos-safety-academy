@@ -37,7 +37,8 @@ export const modules = sqliteTable("modules", {
   courseId: text("course_id").notNull().references(() => courses.id),
   title: text("title").notNull(),
   order: integer("order").notNull().default(0),
-  quizJson: text("quiz_json"), // JSON-encoded array of {question, options:[{text, correct}]}
+  quizJson: text("quiz_json"), // JSON-encoded array of {question, options:[{text, correct, explanation?}]}
+  videoUrl: text("video_url"), // optional module-level video (Synthesia, YouTube, Vimeo, ...)
 });
 
 export const lessons = sqliteTable("lessons", {

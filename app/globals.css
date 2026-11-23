@@ -182,3 +182,46 @@ h1, h2, h3, h4 {
     transition-duration: 0.001ms !important;
   }
 }
+
+/* Tables and collapsible transcripts inside lesson content */
+.prose-legal table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.25rem 0 1.5rem;
+  font-size: 0.9rem;
+}
+.prose-legal th,
+.prose-legal td {
+  border: 1px solid rgba(10, 27, 51, 0.15);
+  padding: 0.5rem 0.75rem;
+  text-align: left;
+  vertical-align: top;
+}
+.prose-legal th {
+  background: rgba(10, 27, 51, 0.05);
+  color: #0A1B33;
+  font-weight: 600;
+}
+.prose-legal ol {
+  list-style: decimal;
+  padding-left: 1.25rem;
+  margin-bottom: 1rem;
+}
+.prose-legal details {
+  margin: 2rem 0;
+  border: 1px solid rgba(10, 27, 51, 0.15);
+  background: #fff;
+  padding: 0.75rem 1rem;
+}
+.prose-legal details summary {
+  cursor: pointer;
+  font-weight: 600;
+  color: #0A1B33;
+}
+.prose-legal details p {
+  margin-top: 0.75rem;
+}
+.prose-legal a {
+  color: #8a6a28;
+  text-decoration: underline;
+}

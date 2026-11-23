@@ -1,0 +1,112 @@
+[
+ {
+  "question": "Who must sign the Safety Policy Statement?",
+  "explanation": "The Accountable Executive develops and signs the policy, communicates it and reviews it regularly. This is a core duty under 14 CFR §5.25.",
+  "options": [
+   {
+    "text": "The newest remote pilot",
+    "correct": false
+   },
+   {
+    "text": "The Safety Manager only",
+    "correct": false
+   },
+   {
+    "text": "The Accountable Executive",
+    "correct": true
+   },
+   {
+    "text": "An external auditor",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "Why is an independent reporting line from the Safety Manager to the Accountable Executive recommended?",
+  "explanation": "Flight operations are driven by delivery windows and flight hours. Independence protects the authority to stop unsafe operations.",
+  "options": [
+   {
+    "text": "So safety concerns cannot be overruled by production or schedule pressure",
+    "correct": true
+   },
+   {
+    "text": "So the Safety Manager can approve flights alone",
+    "correct": false
+   },
+   {
+    "text": "So pilots do not need to file reports",
+    "correct": false
+   },
+   {
+    "text": "Because the Chief Pilot may not read safety data",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "Who holds Stop-Work Authority in a well-run UAS operation?",
+  "explanation": "Anyone who sees an unmitigated hazard must be able to pause or abort without fear of reprisal.",
+  "options": [
+   {
+    "text": "Only the Chief Pilot",
+    "correct": false
+   },
+   {
+    "text": "Only the Accountable Executive",
+    "correct": false
+   },
+   {
+    "text": "Only the Safety Manager",
+    "correct": false
+   },
+   {
+    "text": "Every crew member, with full backing from leadership",
+    "correct": true
+   }
+  ]
+ },
+ {
+  "question": "A drone crash causes a serious injury to a bystander. Which agency must be notified immediately under 49 CFR Part 830?",
+  "explanation": "Death or serious injury to any person is an unmanned aircraft accident. Your ERP's notification tree should list the NTSB. A Part 107 pilot must also report to the FAA within 10 calendar days under §107.9.",
+  "options": [
+   {
+    "text": "The FCC",
+    "correct": false
+   },
+   {
+    "text": "The NTSB",
+    "correct": true
+   },
+   {
+    "text": "The EPA",
+    "correct": false
+   },
+   {
+    "text": "The Department of Energy",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "How long must individual training records be kept under 14 CFR §5.97?",
+  "explanation": "§5.97 sets different retention periods: SRM outputs while the control is relevant, safety assurance outputs for at least 5 years, training records while employed, and safety communications for at least 24 months.",
+  "options": [
+   {
+    "text": "30 days",
+    "correct": false
+   },
+   {
+    "text": "Exactly 12 months",
+    "correct": false
+   },
+   {
+    "text": "For as long as the individual is employed by the certificate holder",
+    "correct": true
+   },
+   {
+    "text": "Until the next audit",
+    "correct": false
+   }
+  ]
+ }
+]

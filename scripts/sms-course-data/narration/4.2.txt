@@ -1,0 +1,5 @@
+One of the highest-risk moments in any UAS company is rapid growth or technical change. A new autopilot firmware release, a move from daytime VLOS to nighttime BVLOS, or onboarding third-party maintenance contractors can silently invalidate your existing risk controls. That is why Safety Assurance includes a formal Management of Change workflow. Before any significant technical or operational change goes live, Management of Change triggers a targeted SRM review to catch newly introduced hazards.
+
+When an incident or near miss does occur, Safety Assurance conducts a Root Cause Analysis. We never stop at pilot error. Pilot error is a symptom, not a root cause. Using structured tools like the 5 Whys and HFACS, the Human Factors Analysis and Classification System, we trace backward from the event to uncover flawed training, ambiguous checklists, or organizational scheduling pressure.
+
+Then we implement permanent corrective actions, and verify that they worked through scheduled audits under your Internal Evaluation Program.

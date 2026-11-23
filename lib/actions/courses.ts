@@ -125,6 +125,14 @@ export async function updateModuleQuiz(courseId: string, moduleId: string, quizJ
   revalidatePath(`/learn/${courseId}`);
 }
 
+export async function updateModuleVideo(courseId: string, moduleId: string, formData: FormData) {
+  await requireAdmin();
+  const videoUrl = String(formData.get("videoUrl") || "").trim() || null;
+  db.update(modules).set({ videoUrl }).where(eq(modules.id, moduleId)).run();
+  revalidatePath(`/admin/courses/${courseId}`);
+  revalidatePath(`/learn/${courseId}`);
+}
+
 export async function moveModule(courseId: string, moduleId: string, direction: "up" | "down") {
   await requireAdmin();
   const all = db.select().from(modules).where(eq(modules.courseId, courseId)).all().sort((a, b) => a.order - b.order);

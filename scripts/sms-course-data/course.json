@@ -1,0 +1,69 @@
+{
+  "slug": "sms-for-uas-operators",
+  "legacySlug": "sms-para-operadores-uas",
+  "subtitle": "Design, implement and audit a Safety Management System for UAS operations, mapped to FAA Part 5 and ICAO Annex 19.",
+  "description": "A complete SMS course for unmanned aircraft operators, built around the four pillars of ICAO Doc 9859 and FAA 14 CFR Part 5: Safety Policy, Safety Risk Management, Safety Assurance and Safety Promotion. Each module has a short video lesson, a diagram, written notes and a transcript, and ends with a knowledge check. The capstone gives you an editable SMS Manual and a 5x5 Risk Register, and a 50-question final assessment (80% to pass) closes the course. Syllabus mapped to FAA 14 CFR Part 5 and AC 120-92D and ICAO Annex 19 and Doc 9859. Independent training, not affiliated with or endorsed by any aviation authority.",
+  "learningOutcomes": [
+    "Explain how aviation safety thinking evolved and analyze an accident with the Swiss Cheese model",
+    "Map the regulatory architecture from ICAO Annex 19 to FAA 14 CFR Part 5 and AC 120-92D, and know when an SMS is required or voluntary",
+    "Write a Safety Policy Statement and define accountabilities, reporting lines and Stop-Work Authority",
+    "Build an Emergency Response Plan for fly-aways, battery fires and collisions",
+    "Run the five-step SRM process with a 5x5 risk matrix and the Hierarchy of Controls",
+    "Set up SPIs, hazard reporting, Management of Change and root cause analysis",
+    "Build a Just Culture with closed-loop safety communication",
+    "Produce a working SMS Manual and Risk Register for your own operation"
+  ],
+  "modules": [
+    {
+      "title": "Module 1 — Fundamentals of Aviation Safety & the Regulatory Framework",
+      "quiz": "m1",
+      "lessons": [
+        { "file": "welcome", "title": "Welcome: How This Course Works", "duration": 5, "preview": true, "image": "/courses/sms/1-3-four-pillars.png" },
+        { "file": "1.1", "title": "1.1 The Evolution of Aviation Safety Thinking", "duration": 10, "image": "/courses/sms/1-1-four-eras.png" },
+        { "file": "1.2", "title": "1.2 Reason's Swiss Cheese Model in UAS Operations", "duration": 10, "image": "/courses/sms/1-2-swiss-cheese.png" },
+        { "file": "1.3", "title": "1.3 FAA & ICAO Regulatory Architecture for UAS", "duration": 10, "image": "/courses/sms/1-3-regulatory-architecture.png" }
+      ]
+    },
+    {
+      "title": "Module 2 — Pillar 1: Safety Policy and Objectives",
+      "quiz": "m2",
+      "lessons": [
+        { "file": "2.1", "title": "2.1 Management Commitment & the Accountable Executive", "duration": 8, "image": "/courses/sms/2-1-pillar-1-overview.png" },
+        { "file": "2.2", "title": "2.2 Key Safety Personnel & Avoiding Conflicts of Interest", "duration": 8, "image": "/courses/sms/2-2-reporting-lines.png" },
+        { "file": "2.3", "title": "2.3 UAS Emergency Response Planning (ERP)", "duration": 12, "image": "/courses/sms/2-3-erp-flow.png" }
+      ]
+    },
+    {
+      "title": "Module 3 — Pillar 2: Safety Risk Management",
+      "quiz": "m3",
+      "lessons": [
+        { "file": "3.1", "title": "3.1 The 5-Step SRM Process and the Risk Matrix", "duration": 12, "image": "/courses/sms/3-1-risk-matrix.png" },
+        { "file": "3.2", "title": "3.2 The Hierarchy of Controls & SORA", "duration": 10, "image": "/courses/sms/3-2-hierarchy-of-controls.png" }
+      ]
+    },
+    {
+      "title": "Module 4 — Pillar 3: Safety Assurance",
+      "quiz": "m4",
+      "lessons": [
+        { "file": "4.1", "title": "4.1 Continuous Monitoring, SPIs & Hazard Reporting", "duration": 10, "image": "/courses/sms/4-1-srm-sa-loop.png" },
+        { "file": "4.2", "title": "4.2 Management of Change & Root Cause Analysis", "duration": 8, "image": "/courses/sms/4-2-root-cause-iceberg.png" }
+      ]
+    },
+    {
+      "title": "Module 5 — Pillar 4: Safety Promotion",
+      "quiz": "m5",
+      "lessons": [
+        { "file": "5.1", "title": "5.1 Training, Communication & Just Culture", "duration": 10, "image": "/courses/sms/5-1-just-culture.png" }
+      ]
+    },
+    {
+      "title": "Module 6 — Capstone Toolkit & Final Assessment",
+      "quiz": "final",
+      "lessons": [
+        { "file": "capstone", "title": "6.1 Capstone Implementation Toolkit", "duration": 60, "image": null,
+          "attachmentUrl": "/courses/sms/templates/UAS-SMS-Manual-Template.docx", "attachmentName": "UAS SMS Manual template (Word)" },
+        { "file": "exam", "title": "6.2 Final Assessment", "duration": 45, "image": null }
+      ]
+    }
+  ]
+}

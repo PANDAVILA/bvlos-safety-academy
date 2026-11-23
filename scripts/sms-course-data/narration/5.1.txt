@@ -1,0 +1,15 @@
+Welcome to Module 5: Safety Promotion. You can build the finest risk matrices and audit checklists in the industry, but if your flight crews don't understand them, or are afraid to speak up, your SMS will fail. Safety Promotion builds the competence and trust that keep the whole system alive.
+
+First, role-based training. Executives need training on resource allocation and accountability. Safety Managers need mastery of SRM and root-cause investigation. Remote pilots need hands-on scenario training in abnormal procedures, crew resource management, and human factors.
+
+Second, closed-loop safety communication. Whenever an employee submits a hazard report, management must close the loop by telling that person what was done. Nothing damages a reporting culture faster than sending reports into a silent black hole. Urgent technical threats, such as a newly discovered ESC overheating anomaly, must be broadcast immediately through safety alerts with read-and-sign tracking.
+
+Third, and most important, a true Just Culture. A Just Culture is not a blame-free culture where anything goes. It draws a clear, fair line across three kinds of behavior.
+
+Human error is an unintentional slip or lapse, such as misreading a battery cell voltage during a busy turnaround. We console the individual, fix the system design, and share the lesson.
+
+At-risk behavior is taking a shortcut because the risk isn't recognized or has become normal, like skipping a compass check to save two minutes. Here we coach the individual and remove the incentives that reward shortcuts.
+
+Reckless behavior is conscious disregard of a substantial and unjustifiable risk, such as flying under the influence of alcohol or deliberately entering a restricted TFR. Reckless behavior crosses the line and warrants disciplinary action.
+
+When your people know they will be treated fairly for honest mistakes, and that reckless behavior will not be tolerated, trust grows. Your SMS stops being a regulatory obligation and becomes an operational advantage. Congratulations on completing the core curriculum. Proceed to the Capstone Implementation Toolkit and the Final Assessment.

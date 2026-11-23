@@ -1,0 +1,11 @@
+Even with rigorous preventive controls, emergencies can still occur. Pillar 1 calls for a documented, rehearsed Emergency Response Plan, or ERP. The purpose of an ERP is to ensure an orderly, coordinated transition from normal operations to emergency operations, and a controlled return to normal operations once the crisis is resolved. In emergencies, remember the priority order: aviate, navigate, communicate, and mitigate.
+
+Unlike manned aviation, UAS emergencies have unique technical profiles that your ERP must address explicitly.
+
+First, uncontrolled fly-away or loss of C2 link. Your ERP must define the exact steps to verify the automated failsafe, such as return-to-home or hover, track the last known position and heading, alert Air Traffic Control immediately if the aircraft threatens controlled airspace, and use a flight termination system or parachute if public safety is at risk.
+
+Second, lithium battery thermal runaway fires. High-energy LiPo and Li-ion batteries can burn violently after an impact or internal short circuit. Your ERP must keep people away and upwind, because the smoke is toxic and can contain hydrogen fluoride. Follow your battery manufacturer's guidance on suppression. For lithium-ion packs that usually means cooling with large amounts of water, and calling the fire service if the fire threatens people or property. Do not assume a small extinguisher will be enough.
+
+Third, mid-air collision or near mid-air collision. Crews must know the immediate notification sequence: emergency services first if anyone is hurt, then the NTSB if the event meets the definition of an accident under 49 CFR Part 830, the FAA, and internal leadership. Preserve all logs, memory cards and wreckage untouched.
+
+Finally, an untested ERP is an unreliable ERP. Part 5 expects your plan to be coordinated with the organizations you interface with. A common practice is to run tabletop exercises about twice a year and a live field drill annually, followed by a debrief to fix communication bottlenecks before a real emergency occurs.

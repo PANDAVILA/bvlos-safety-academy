@@ -1,0 +1,11 @@
+Welcome to Module 1 of Aviation Safety Management Systems for Unmanned Aircraft Systems. Whether you are operating a single multirotor under Part 107 or managing a fleet of BVLOS delivery aircraft under Part 135, the transition from hobbyist flying to scalable commercial aviation hinges on one critical discipline: proactive safety management.
+
+To understand where Unmanned Aircraft Systems, or UAS, fit into the modern National Airspace System, we must first understand how aviation safety itself evolved over the last century. Safety thinking didn't start with complex algorithms or predictive analytics. It evolved through four distinct eras.
+
+First was the Technical Era, spanning from the early 1900s to the 1960s. During this period, aviation was fragile. Accidents were overwhelmingly caused by mechanical failures: structural fatigue, engine seizures, and unreliable instruments. Safety efforts focused on engineering better hardware and establishing strict airworthiness standards.
+
+By the 1970s, aircraft had become remarkably reliable, yet accidents continued to happen. This ushered in the Human Factors Era. Investigators realized that well-built machines were still crashing because of how humans interacted with them. This era gave birth to Crew Resource Management, or CRM, ergonomic cockpit design, and human-machine interface optimization. In UAS operations today, human factors govern how a Remote Pilot in Command interacts with a Ground Control Station, how telemetry alerts are displayed, and how cognitive overload is managed during multi-aircraft operations.
+
+In the 1990s, aviation entered the Organizational Era. Safety experts recognized that human error does not occur in a vacuum. A pilot who launches a drone with a degraded battery is rarely acting out of malice. More often, they are responding to organizational pressures, inadequate Standard Operating Procedures, or poor maintenance oversight. Safety became a core management function.
+
+Today, we operate in the Total System Era. Modern safety management looks beyond isolated operators to examine the entire aviation ecosystem, integrating manned aircraft, Unmanned Traffic Management, or UTM, weather data networks, and predictive data analytics to identify hazards before an incident ever occurs.

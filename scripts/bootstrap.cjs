@@ -48,7 +48,8 @@ CREATE TABLE IF NOT EXISTS modules (
   course_id TEXT NOT NULL REFERENCES courses(id),
   title TEXT NOT NULL,
   "order" INTEGER NOT NULL DEFAULT 0,
-  quiz_json TEXT
+  quiz_json TEXT,
+  video_url TEXT
 );
 
 CREATE TABLE IF NOT EXISTS lessons (
@@ -155,6 +156,7 @@ function ensureColumn(table, column, definition) {
 ensureColumn("courses", "learning_outcomes", "TEXT");
 ensureColumn("courses", "frameworks", "TEXT");
 ensureColumn("modules", "quiz_json", "TEXT");
+ensureColumn("modules", "video_url", "TEXT");
 ensureColumn("lessons", "image", "TEXT");
 ensureColumn("lessons", "attachment_url", "TEXT");
 ensureColumn("lessons", "attachment_name", "TEXT");

@@ -1,0 +1,112 @@
+[
+ {
+  "question": "Which era of aviation safety introduced Crew Resource Management and a focus on how people interact with cockpit or Ground Control Station displays?",
+  "explanation": "The Human Factors Era (from the 1970s) recognized that reliable machines still crashed because of how people interacted with them. CRM and ergonomic design came from it.",
+  "options": [
+   {
+    "text": "The Technical Era",
+    "correct": false
+   },
+   {
+    "text": "The Human Factors Era",
+    "correct": true
+   },
+   {
+    "text": "The Organizational Era",
+    "correct": false
+   },
+   {
+    "text": "The Total System Era",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "In Reason's Swiss Cheese Model, when does an accident occur?",
+  "explanation": "Accidents rarely have a single cause. Each layer has weaknesses, and harm happens when they momentarily align.",
+  "options": [
+   {
+    "text": "When a single barrier fails completely",
+    "correct": false
+   },
+   {
+    "text": "Only when the remote pilot ignores a checklist",
+    "correct": false
+   },
+   {
+    "text": "Whenever a drone flies BVLOS",
+    "correct": false
+   },
+   {
+    "text": "When holes in several defensive layers line up and a hazard passes through all of them",
+    "correct": true
+   }
+  ]
+ },
+ {
+  "question": "In the freezing-weather battery scenario, which is the best example of a latent condition?",
+  "explanation": "Latent conditions are created upstream by management decisions and sit hidden until other factors combine with them. The throttle input and the voltage sag are active failures at the sharp end.",
+  "options": [
+   {
+    "text": "Management set a daily inspection quota without funding spare batteries",
+    "correct": true
+   },
+   {
+    "text": "The pilot's full-throttle climb command",
+    "correct": false
+   },
+   {
+    "text": "The voltage sag during climb",
+    "correct": false
+   },
+   {
+    "text": "The final uncontrolled descent onto the road",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "Which ICAO document is the Safety Management Manual that describes the four pillars of an SMS?",
+  "explanation": "Annex 19 sets the requirement; Doc 9859 is the guidance manual that explains how to implement it.",
+  "options": [
+   {
+    "text": "ICAO Annex 2",
+    "correct": false
+   },
+   {
+    "text": "ICAO Doc 4444",
+    "correct": false
+   },
+   {
+    "text": "ICAO Doc 9859",
+    "correct": true
+   },
+   {
+    "text": "ICAO Annex 8",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "A company flies only under 14 CFR Part 107. Is a Part 5 SMS legally required?",
+  "explanation": "Part 5 covers Part 121, Part 135, §91.147 LOA holders and certain Part 21 holders. Part 107 operators can adopt an SMS voluntarily, and many clients and insurers value it.",
+  "options": [
+   {
+    "text": "Yes, every commercial drone operator must have one",
+    "correct": false
+   },
+   {
+    "text": "No. Part 5 does not apply to Part 107 operators, but a voluntary SMS strengthens a waiver or client safety case",
+    "correct": true
+   },
+   {
+    "text": "Yes, but only for BVLOS flights",
+    "correct": false
+   },
+   {
+    "text": "Yes, once the fleet has more than five aircraft",
+    "correct": false
+   }
+  ]
+ }
+]

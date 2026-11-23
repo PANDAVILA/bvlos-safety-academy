@@ -1,0 +1,112 @@
+[
+ {
+  "question": "What is the first step of the SRM process described in AC 120-92D?",
+  "explanation": "You cannot manage hazards in a system you have not described: airframe, GCS, C2 link, airspace, population and weather.",
+  "options": [
+   {
+    "text": "System analysis: describing the operation and its environment",
+    "correct": true
+   },
+   {
+    "text": "Choosing the mitigation",
+    "correct": false
+   },
+   {
+    "text": "Plotting the risk matrix",
+    "correct": false
+   },
+   {
+    "text": "Writing the audit report",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "Which of the following is a hazard rather than a consequence?",
+  "explanation": "A hazard is a condition with the potential to cause harm. The impact, injury and loss are consequences.",
+  "options": [
+   {
+    "text": "Aircraft impact with a road",
+    "correct": false
+   },
+   {
+    "text": "GPS jamming near a transmitter site",
+    "correct": true
+   },
+   {
+    "text": "Serious injury to a bystander",
+    "correct": false
+   },
+   {
+    "text": "Total loss of the airframe",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "A risk is assessed as 2B (Hazardous severity, Probable likelihood). What does the 5x5 matrix in this course say?",
+  "explanation": "2A and 2B are red. The operation may not proceed until controls reduce the risk.",
+  "options": [
+   {
+    "text": "It is green: acceptable",
+    "correct": false
+   },
+   {
+    "text": "It is yellow: acceptable with Accountable Executive sign-off",
+    "correct": false
+   },
+   {
+    "text": "It cannot be plotted",
+    "correct": false
+   },
+   {
+    "text": "It is in the red zone: unacceptable until mitigated",
+    "correct": true
+   }
+  ]
+ },
+ {
+  "question": "Which control is highest in the Hierarchy of Controls?",
+  "explanation": "Elimination removes the hazard entirely. PPE and procedures sit at the bottom because they rely on people.",
+  "options": [
+   {
+    "text": "A two-person checklist",
+    "correct": false
+   },
+   {
+    "text": "Fire-retardant battery bag",
+    "correct": false
+   },
+   {
+    "text": "Eliminating the hazard, for example cancelling the flight in convective weather",
+    "correct": true
+   },
+   {
+    "text": "A reminder in the pilot briefing",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "Which statement about SORA is accurate?",
+  "explanation": "SORA is widely used in Europe and internationally. For FAA approvals you follow the FAA's own process, but SORA is still a useful structured method.",
+  "options": [
+   {
+    "text": "It is mandatory for every FAA Part 107 waiver",
+    "correct": false
+   },
+   {
+    "text": "It is a JARUS method that combines Ground Risk Class and Air Risk Class to set a SAIL. The FAA does not require it for Part 107 waivers",
+    "correct": true
+   },
+   {
+    "text": "It replaces the 5x5 risk matrix",
+    "correct": false
+   },
+   {
+    "text": "It only measures battery risk",
+    "correct": false
+   }
+  ]
+ }
+]

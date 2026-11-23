@@ -1,0 +1,1102 @@
+[
+ {
+  "question": "What is the primary goal of an aviation Safety Management System (SMS)?",
+  "explanation": "Zero risk is impossible in aviation; SMS systematically identifies hazards and mitigates risk to ALARP.",
+  "options": [
+   {
+    "text": "To eliminate 100% of operational risks before authorizing flight",
+    "correct": false
+   },
+   {
+    "text": "To establish a systematic, proactive approach to managing safety risks and assuring the effectiveness of controls",
+    "correct": true
+   },
+   {
+    "text": "To replace FAA regulatory inspections with internal self-certification",
+    "correct": false
+   },
+   {
+    "text": "To assign legal liability to the Remote Pilot in Command after an incident",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "Which ICAO document establishes the international Standards and Recommended Practices (SARPs) specifically dedicated to Safety Management?",
+  "explanation": "ICAO Annex 19 consolidates overarching safety management provisions across aviation sectors.",
+  "options": [
+   {
+    "text": "ICAO Annex 2",
+    "correct": false
+   },
+   {
+    "text": "ICAO Annex 8",
+    "correct": false
+   },
+   {
+    "text": "ICAO Doc 4444",
+    "correct": false
+   },
+   {
+    "text": "ICAO Annex 19",
+    "correct": true
+   }
+  ]
+ },
+ {
+  "question": "Which FAA regulation codifies the mandatory requirements for an aviation Safety Management System in the United States?",
+  "explanation": "14 CFR Part 5 contains the SMS requirements. It applies to Part 121 air carriers, Part 135 certificate holders, §91.147 air tour LOA holders and certain Part 21 certificate holders. A Part 107 operator is not required to have one, but may adopt an SMS voluntarily.",
+  "options": [
+   {
+    "text": "14 CFR Part 89",
+    "correct": false
+   },
+   {
+    "text": "14 CFR Part 5",
+    "correct": true
+   },
+   {
+    "text": "14 CFR Part 107",
+    "correct": false
+   },
+   {
+    "text": "49 CFR Part 830",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "Which FAA Advisory Circular provides comprehensive guidance for aviation service providers developing and implementing an SMS?",
+  "explanation": "FAA AC 120-92D is the primary guidance document for Part 5 SMS compliance.",
+  "options": [
+   {
+    "text": "AC 120-92D",
+    "correct": true
+   },
+   {
+    "text": "AC 107-2A",
+    "correct": false
+   },
+   {
+    "text": "AC 91-57C",
+    "correct": false
+   },
+   {
+    "text": "AC 43-13",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "What are the Four Pillars of an SMS according to ICAO Doc 9859 and FAA Part 5?",
+  "explanation": "The four foundational pillars are Policy, SRM, Safety Assurance, and Safety Promotion.",
+  "options": [
+   {
+    "text": "Planning, Execution, Auditing, and Enforcement",
+    "correct": false
+   },
+   {
+    "text": "Hazard Identification, Risk Mitigation, Training, and Emergency Response",
+    "correct": false
+   },
+   {
+    "text": "Safety Policy, Safety Risk Management, Safety Assurance, and Safety Promotion",
+    "correct": true
+   },
+   {
+    "text": "Airworthiness, Pilot Certification, Airspace Authorization, and Maintenance",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "Under 14 CFR Part 5, who must sign the organization’s Safety Policy Statement?",
+  "explanation": "The Accountable Executive must sign the Safety Policy to demonstrate top-level corporate commitment.",
+  "options": [
+   {
+    "text": "The Chief Remote Pilot",
+    "correct": false
+   },
+   {
+    "text": "The Accountable Executive",
+    "correct": true
+   },
+   {
+    "text": "The Director of Safety",
+    "correct": false
+   },
+   {
+    "text": "The FAA Principal Operations Inspector",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "Which statement best describes the Accountable Executive (AE) in a UAS organization?",
+  "explanation": "Under 14 CFR §5.25 the accountable executive has final authority over operations under the certificate, controls the financial and human resources, and carries ultimate responsibility for safety performance. Day-to-day tasks can be delegated; this accountability cannot.",
+  "options": [
+   {
+    "text": "A single, identifiable person with ultimate corporate authority over human and financial resources",
+    "correct": true
+   },
+   {
+    "text": "A contracted safety consultant who audits flight logs monthly",
+    "correct": false
+   },
+   {
+    "text": "Any Visual Observer assigned to monitor airspace during BVLOS flights",
+    "correct": false
+   },
+   {
+    "text": "The lead software engineer responsible for autopilot firmware",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "Why should the Director of Safety / Safety Manager have a direct reporting line to the Accountable Executive rather than the Director of Flight Operations?",
+  "explanation": "Part 5 requires management personnel who report regularly to the accountable executive. A reporting line that is independent of flight operations is the widely recommended way to avoid conflicts of interest, because operations are driven by production targets.",
+  "options": [
+   {
+    "text": "To reduce administrative paperwork",
+    "correct": false
+   },
+   {
+    "text": "Because the Director of Flight Operations is not permitted to read hazard reports",
+    "correct": false
+   },
+   {
+    "text": "To prevent conflicts of interest between operational production pressures and safety oversight",
+    "correct": true
+   },
+   {
+    "text": "To comply with Remote ID broadcast rules",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "In Reason’s \"Swiss Cheese\" Model, what do the \"holes\" in the defensive layers represent?",
+  "explanation": "Holes represent active errors at the sharp end and latent systemic weaknesses upstream.",
+  "options": [
+   {
+    "text": "Intentional sabotage by competitors",
+    "correct": false
+   },
+   {
+    "text": "Approved FAA airspace waivers",
+    "correct": false
+   },
+   {
+    "text": "Active failures and latent organizational conditions",
+    "correct": true
+   },
+   {
+    "text": "Redundant C2 communication frequencies",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "What does the acronym ALARP stand for in Safety Risk Management?",
+  "explanation": "ALARP defines the threshold where further risk reduction is disproportionate to the time, trouble, or cost involved.",
+  "options": [
+   {
+    "text": "As Low As Reasonably Practicable",
+    "correct": true
+   },
+   {
+    "text": "Aviation Logistics and Risk Protocol",
+    "correct": false
+   },
+   {
+    "text": "Automated Launch and Recovery Procedure",
+    "correct": false
+   },
+   {
+    "text": "Airspace Limitation and Restriction Policy",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "Which of the following is an example of a Hazard rather than a Consequence in UAS operations?",
+  "explanation": "EMI is a condition with the potential to cause harm (a hazard); collisions and damage are consequences.",
+  "options": [
+   {
+    "text": "Mid-air collision with a manned helicopter",
+    "correct": false
+   },
+   {
+    "text": "Severe laceration to a bystander",
+    "correct": false
+   },
+   {
+    "text": "Destruction of the airframe upon ground impact",
+    "correct": false
+   },
+   {
+    "text": "High-voltage electromagnetic interference (EMI) near a cellular tower",
+    "correct": true
+   }
+  ]
+ },
+ {
+  "question": "During the 5-step Safety Risk Management (SRM) process, when is SRM normally triggered?",
+  "explanation": "SRM is a proactive design and change-management process applied prior to operational deployment.",
+  "options": [
+   {
+    "text": "Only after a reportable NTSB accident occurs",
+    "correct": false
+   },
+   {
+    "text": "Exclusively during annual tax audits",
+    "correct": false
+   },
+   {
+    "text": "Only when a pilot requests vacation time",
+    "correct": false
+   },
+   {
+    "text": "Proactively before introducing new aircraft, changing operational procedures, or entering new operating environments",
+    "correct": true
+   }
+  ]
+ },
+ {
+  "question": "In a standard FAA 5x5 Risk Matrix, which two variables are plotted to determine initial and residual risk levels?",
+  "explanation": "Risk is evaluated as a function of how likely an event is and how severe its worst credible outcome would be.",
+  "options": [
+   {
+    "text": "Altitude and Airspeed",
+    "correct": false
+   },
+   {
+    "text": "Likelihood (Probability) and Severity (Consequence)",
+    "correct": true
+   },
+   {
+    "text": "Cost and Flight Duration",
+    "correct": false
+   },
+   {
+    "text": "Battery Voltage and Wind Speed",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "If a proposed BVLOS operation plots into the \"High Risk (Red)\" zone on the 5x5 Risk Matrix, what action is required?",
+  "explanation": "High (Red) risk is unacceptable; operations cannot proceed without risk controls that lower severity or likelihood.",
+  "options": [
+   {
+    "text": "Proceed with flight operations if the RPIC signs a waiver",
+    "correct": false
+   },
+   {
+    "text": "Notify NASA ASRS and launch immediately",
+    "correct": false
+   },
+   {
+    "text": "Prohibit the operation until additional mitigations reduce the residual risk to an acceptable level",
+    "correct": true
+   },
+   {
+    "text": "Reduce visual observer staffing to save costs",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "According to the Hierarchy of Controls, which risk mitigation strategy is the MOST effective?",
+  "explanation": "Physically removing or avoiding the hazard (e.g., canceling flight in icing conditions) is the highest level of control.",
+  "options": [
+   {
+    "text": "Personal Protective Equipment (PPE)",
+    "correct": false
+   },
+   {
+    "text": "Elimination of the hazard",
+    "correct": true
+   },
+   {
+    "text": "Administrative Controls (checklists and briefings)",
+    "correct": false
+   },
+   {
+    "text": "Warning placards on the Ground Control Station",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "Installing an ASTM F3322-compliant Parachute Recovery System (PRS) on a multirotor drone is an example of which type of risk control?",
+  "explanation": "Hardware modifications that physically reduce impact kinetic energy are Engineering Controls.",
+  "options": [
+   {
+    "text": "Elimination",
+    "correct": false
+   },
+   {
+    "text": "Administrative Control",
+    "correct": false
+   },
+   {
+    "text": "Engineering Control",
+    "correct": true
+   },
+   {
+    "text": "Safety Promotion",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "What is the primary distinction between Safety Risk Management (SRM) and Safety Assurance (SA)?",
+  "explanation": "SRM builds the safety baseline; Safety Assurance audits and validates performance over time.",
+  "options": [
+   {
+    "text": "SRM designs risk controls into new systems; SA continuously monitors operations to verify those controls remain effective",
+    "correct": true
+   },
+   {
+    "text": "SRM applies to pilots; SA applies only to mechanics",
+    "correct": false
+   },
+   {
+    "text": "SRM is required by ICAO; SA is only used in Europe",
+    "correct": false
+   },
+   {
+    "text": "SRM is reactive; SA is purely theoretical",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "Which of the following is a Leading Safety Performance Indicator (SPI) for a commercial UAS fleet?",
+  "explanation": "Leading indicators measure proactive safety behaviors before an accident happens; the others are lagging indicators.",
+  "options": [
+   {
+    "text": "Number of fly-away incidents per 1,000 flight hours",
+    "correct": false
+   },
+   {
+    "text": "Total dollar value of hull insurance claims paid last year",
+    "correct": false
+   },
+   {
+    "text": "Percentage of pre-flight crew briefings completed prior to launch",
+    "correct": true
+   },
+   {
+    "text": "Number of airspace violations cited by the FAA",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "What is the NASA Aviation Safety Reporting System (ASRS)?",
+  "explanation": "NASA's ASRS accepts confidential, voluntary reports from UAS operators about hazards, close calls and inadvertent errors. FAA protection from civil penalty and certificate suspension depends on the conditions in AC 00-46F (for example, report within 10 days, no accident, no criminal act). Accidents are not reported through ASRS.",
+  "options": [
+   {
+    "text": "A mandatory criminal database for reckless drone pilots",
+    "correct": false
+   },
+   {
+    "text": "A real-time LAANC airspace authorization portal",
+    "correct": false
+   },
+   {
+    "text": "A battery recycling registry managed by the EPA",
+    "correct": false
+   },
+   {
+    "text": "A voluntary, confidential, non-punitive safety reporting system run by NASA, with limited FAA protection from civil penalty when its conditions are met",
+    "correct": true
+   }
+  ]
+ },
+ {
+  "question": "Under 14 CFR Part 5, how long must an operator retain records of Safety Assurance outputs (such as audit results and continuous monitoring data)?",
+  "explanation": "14 CFR §5.97 requires safety assurance outputs to be kept for a minimum of 5 years.",
+  "options": [
+   {
+    "text": "A minimum of 5 years",
+    "correct": true
+   },
+   {
+    "text": "30 days",
+    "correct": false
+   },
+   {
+    "text": "1 year",
+    "correct": false
+   },
+   {
+    "text": "90 days after aircraft retirement",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "Which event requires immediate notification to the National Transportation Safety Board (NTSB) under 49 CFR Part 830?",
+  "explanation": "49 CFR 830.2 defines an unmanned aircraft accident as death or serious injury to any person, or substantial damage to an aircraft with a maximum gross takeoff weight of 300 lb or more. Such accidents require immediate notification to the NTSB. Separately, 14 CFR 107.9 requires a Part 107 remote pilot to report serious injury, loss of consciousness, or property damage over $500 to the FAA within 10 calendar days.",
+  "options": [
+   {
+    "text": "Any person suffers death or serious injury, or an unmanned aircraft with a maximum gross takeoff weight of 300 lbs or more sustains substantial damage",
+    "correct": true
+   },
+   {
+    "text": "A hard landing that breaks a replaceable carbon-fiber propeller",
+    "correct": false
+   },
+   {
+    "text": "A temporary 3-second GPS glitch with no loss of control",
+    "correct": false
+   },
+   {
+    "text": "A minor discrepancy in a pre-flight checklist log",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "What is the purpose of a Management of Change (MOC) process within Safety Assurance?",
+  "explanation": "System changes (new software, night ops, scaling fleet size) frequently introduce unanalyzed hazards.",
+  "options": [
+   {
+    "text": "To identify and mitigate new hazards introduced by organizational, technical, or operational changes",
+    "correct": true
+   },
+   {
+    "text": "To track employee payroll raises",
+    "correct": false
+   },
+   {
+    "text": "To update company marketing logos",
+    "correct": false
+   },
+   {
+    "text": "To bypass SRM when deploying urgent firmware patches",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "In a \"Just Culture,\" how should management respond when an RPIC makes an honest, unintentional human error (e.g., misreading a telemetry unit) and self-reports it?",
+  "explanation": "Just Culture distinguishes honest human error from reckless behavior, protecting reporters to preserve safety data flow.",
+  "options": [
+   {
+    "text": "Immediate termination of employment",
+    "correct": false
+   },
+   {
+    "text": "Deduct the cost of inspection from the pilot's paycheck",
+    "correct": false
+   },
+   {
+    "text": "Console the individual, analyze system design flaws, and share lessons learned without punitive action",
+    "correct": true
+   },
+   {
+    "text": "Conceal the report from the Safety Manager",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "Which behavior falls outside the protection of a Just Culture and warrants disciplinary action?",
+  "explanation": "Reckless behavior—conscious disregard of substantial and unjustifiable risk—is never protected under Just Culture.",
+  "options": [
+   {
+    "text": "Forgetting to sign a routine battery log during a busy shift",
+    "correct": false
+   },
+   {
+    "text": "Intentionally disabling geofencing and flying into an active Presidential TFR while impaired",
+    "correct": true
+   },
+   {
+    "text": "Reporting a near-miss with a bird during a coastal survey",
+    "correct": false
+   },
+   {
+    "text": "Requesting a weather hold due to gusty crosswinds",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "Why is \"Closed-Loop Feedback\" essential in a confidential hazard reporting program?",
+  "explanation": "If employees never see results from their reports, reporting culture collapses rapidly.",
+  "options": [
+   {
+    "text": "It locks the database so employees cannot view past reports",
+    "correct": false
+   },
+   {
+    "text": "It automatically forwards every internal report to local news media",
+    "correct": false
+   },
+   {
+    "text": "It informs the submitter of the actions taken on their report, sustaining trust and future participation",
+    "correct": true
+   },
+   {
+    "text": "It ensures only managers can submit safety concerns",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "When conducting a Root Cause Analysis (RCA) after a UAS incident, what does the \"5 Whys\" technique accomplish?",
+  "explanation": "Asking \"why\" repeatedly exposes latent organizational, procedural, or design root causes.",
+  "options": [
+   {
+    "text": "It identifies five employees to blame for the incident",
+    "correct": false
+   },
+   {
+    "text": "It iteratively asks \"why\" to move past superficial symptoms (\"pilot error\") and uncover underlying systemic causes",
+    "correct": true
+   },
+   {
+    "text": "It limits investigations to exactly five minutes",
+    "correct": false
+   },
+   {
+    "text": "It replaces the need for an Emergency Response Plan",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "Which scenario best represents \"At-Risk Behavior\" in a Just Culture framework?",
+  "explanation": "At-risk behavior occurs when shortcuts become normalized because the risk is underestimated; it requires coaching and removing incentives for shortcuts.",
+  "options": [
+   {
+    "text": "A sudden, unpredicted ESC hardware failure mid-flight",
+    "correct": false
+   },
+   {
+    "text": "Crews routinely skipping the 2-minute compass calibration check because it has \"never caused a problem before\"",
+    "correct": true
+   },
+   {
+    "text": "Deliberately flying a drone into a manned aircraft",
+    "correct": false
+   },
+   {
+    "text": "Following every checklist item accurately",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "What is the primary function of an Emergency Response Plan (ERP) in a UAS SMS?",
+  "explanation": "An ERP defines roles, notification trees, and immediate actions during critical emergencies (fly-aways, LiPo fires, MACs).",
+  "options": [
+   {
+    "text": "To prevent weather delays",
+    "correct": false
+   },
+   {
+    "text": "To replace pilot flight training",
+    "correct": false
+   },
+   {
+    "text": "To calculate return on investment for new sensors",
+    "correct": false
+   },
+   {
+    "text": "To ensure an orderly, coordinated transition from normal to emergency operations and safe recovery to normal operations",
+    "correct": true
+   }
+  ]
+ },
+ {
+  "question": "Which of the following must be included in a UAS Emergency Response Plan (ERP)?",
+  "explanation": "A usable ERP names who has authority in an emergency, who must be notified, what the crew does immediately, and how evidence (logs, media, wreckage) is preserved. Part 5 also requires the plan to be coordinated with the emergency plans of organizations you interface with.",
+  "options": [
+   {
+    "text": "Shareholder dividend schedules",
+    "correct": false
+   },
+   {
+    "text": "Social media promotional templates",
+    "correct": false
+   },
+   {
+    "text": "Competitor pricing lists",
+    "correct": false
+   },
+   {
+    "text": "Local ATC/FSDO contact numbers, LiPo fire suppression protocols, fly-away containment procedures, and post-incident evidence preservation",
+    "correct": true
+   }
+  ]
+ },
+ {
+  "question": "In the JARUS SORA (Specific Operations Risk Assessment) methodology, what two primary risk classes are combined to determine the SAIL (Specific Assurance and Integrity Level)?",
+  "explanation": "SORA evaluates uninvolved people on the ground (GRC) and manned aviation encounter risk in the airspace (ARC).",
+  "options": [
+   {
+    "text": "Financial Risk Class and Legal Risk Class",
+    "correct": false
+   },
+   {
+    "text": "Ground Risk Class (GRC) and Air Risk Class (ARC)",
+    "correct": true
+   },
+   {
+    "text": "Battery Risk Class and Weather Risk Class",
+    "correct": false
+   },
+   {
+    "text": "Pilot Risk Class and Sensor Risk Class",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "What is a \"Latent Condition\" in aviation safety?",
+  "explanation": "Latent conditions sit hidden in the system until combined with local triggering factors.",
+  "options": [
+   {
+    "text": "A propeller blade snapping during flight",
+    "correct": false
+   },
+   {
+    "text": "A dormant flaw in system design, training, or management policy that exists long before an incident is triggered",
+    "correct": true
+   },
+   {
+    "text": "A thunderstorm directly over the launch pad",
+    "correct": false
+   },
+   {
+    "text": "A battery fire occurring on the workbench",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "Which SMS pillar encompasses initial and recurrent safety training, safety bulletins, and organizational lessons learned?",
+  "explanation": "Safety Promotion builds competency and communicates safety-critical information across the organization.",
+  "options": [
+   {
+    "text": "Safety Policy",
+    "correct": false
+   },
+   {
+    "text": "Safety Promotion",
+    "correct": true
+   },
+   {
+    "text": "Safety Risk Management",
+    "correct": false
+   },
+   {
+    "text": "Safety Assurance",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "During a BVLOS UAS operation, the primary 900 MHz Command and Control (C2) link is lost, and the aircraft automatically switches to a secondary LTE link. How should the SMS treat this event?",
+  "explanation": "Redundancy prevented an accident, but primary link loss is a critical leading indicator requiring trend analysis.",
+  "options": [
+   {
+    "text": "Ignore it completely because the backup system worked",
+    "correct": false
+   },
+   {
+    "text": "Log it as a safety occurrence/SPI data point and investigate why the primary C2 link failed",
+    "correct": true
+   },
+   {
+    "text": "Immediately ground the pilot permanently",
+    "correct": false
+   },
+   {
+    "text": "Delete the telemetry log to maintain a clean safety record",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "What does \"Constructive Immunity\" under the NASA ASRS program mean?",
+  "explanation": "The protection waives civil penalties and certificate suspension only. It does not apply to accidents or criminal acts, and it does not protect against everything. Always read the current conditions in AC 00-46F.",
+  "options": [
+   {
+    "text": "The FAA may still find that a violation occurred, but waives the civil penalty or certificate suspension if the conditions of AC 00-46F are met, including that the event was inadvertent and the report was filed within 10 days",
+    "correct": true
+   },
+   {
+    "text": "The FAA cannot suspend a pilot's certificate under any circumstances",
+    "correct": false
+   },
+   {
+    "text": "The pilot is immune from criminal prosecution",
+    "correct": false
+   },
+   {
+    "text": "The operator does not need to hold a Part 107 certificate",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "Which factor is critical when conducting an Internal Evaluation Program (IEP) audit?",
+  "explanation": "IEP audits identify where daily habits have drifted away from approved procedures.",
+  "options": [
+   {
+    "text": "Auditing only teams that have zero incidents",
+    "correct": false
+   },
+   {
+    "text": "Giving crews 6 months' notice so they can hide discrepancies",
+    "correct": false
+   },
+   {
+    "text": "Focusing exclusively on financial accounting",
+    "correct": false
+   },
+   {
+    "text": "Evaluating actual daily operational practices against written Standard Operating Procedures (SOPs) to detect \"practical drift\"",
+    "correct": true
+   }
+  ]
+ },
+ {
+  "question": "What is \"Practical Drift\" in aviation operations?",
+  "explanation": "Practical drift happens when crews subtly adapt rules over time for efficiency until a safety margin is breached.",
+  "options": [
+   {
+    "text": "The gradual divergence between written safety procedures (\"work-as-imagined\") and actual daily field execution (\"work-as-done\")",
+    "correct": true
+   },
+   {
+    "text": "Wind blowing a hovering multirotor off its GPS waypoint",
+    "correct": false
+   },
+   {
+    "text": "Compass calibration error near iron deposits",
+    "correct": false
+   },
+   {
+    "text": "Gradual discharge of a LiPo battery in storage",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "Under 14 CFR Part 5, how long must outputs of the Safety Risk Management (SRM) process be retained?",
+  "explanation": "14 CFR §5.97 requires SRM outputs to be kept for as long as the control remains relevant to the operation.",
+  "options": [
+   {
+    "text": "For exactly 6 months",
+    "correct": false
+   },
+   {
+    "text": "For 48 hours after each flight",
+    "correct": false
+   },
+   {
+    "text": "Retention is optional under Part 5",
+    "correct": false
+   },
+   {
+    "text": "For as long as the risk control remains relevant to the operation",
+    "correct": true
+   }
+  ]
+ },
+ {
+  "question": "Which communication tool is best suited for rapidly alerting all UAS flight crews to an urgent, newly discovered firmware bug that causes uncommanded motor shutdowns?",
+  "explanation": "Time-critical hazards require immediate Safety Alerts with tracked crew acknowledgment.",
+  "options": [
+   {
+    "text": "An immediate Safety Alert / Safety Bulletin requiring mandatory read-and-sign acknowledgment",
+    "correct": true
+   },
+   {
+    "text": "The annual holiday newsletter",
+    "correct": false
+   },
+   {
+    "text": "A footnote in next year's budget report",
+    "correct": false
+   },
+   {
+    "text": "Verbal rumor passed between Visual Observers",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "Why is human-machine interface (HMI) design of a Ground Control Station (GCS) a major focus in UAS Human Factors?",
+  "explanation": "Clear HMI prevents mode confusion and cognitive tunneling during critical flight phases.",
+  "options": [
+   {
+    "text": "Because poor alert prioritization, mode confusion, and cluttered telemetry displays increase pilot error during high-workload emergencies",
+    "correct": true
+   },
+   {
+    "text": "Because GCS screens must look appealing in marketing photos",
+    "correct": false
+   },
+   {
+    "text": "Because FAA regulations dictate exact screen colors",
+    "correct": false
+   },
+   {
+    "text": "Because pilots are not allowed to use checklists",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "Which statement regarding Safety Performance Targets (SPTs) is correct?",
+  "explanation": "Realistic, measurable SPTs allow management to track progress against specific safety goals.",
+  "options": [
+   {
+    "text": "SPTs must always be set to \"zero incidents\" regardless of operational reality",
+    "correct": false
+   },
+   {
+    "text": "SPTs are kept secret from the Safety Manager",
+    "correct": false
+   },
+   {
+    "text": "SPTs are concrete, measurable objectives used to evaluate whether safety performance is improving over a defined timeframe",
+    "correct": true
+   },
+   {
+    "text": "SPTs apply only to manned Boeing and Airbus aircraft",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "What should occur immediately after a UAS Emergency Response Plan (ERP) tabletop or live drill is completed?",
+  "explanation": "Drills exist to test and refine the ERP before a real emergency happens.",
+  "options": [
+   {
+    "text": "Shred all drill notes",
+    "correct": false
+   },
+   {
+    "text": "Cancel all flight operations for 30 days",
+    "correct": false
+   },
+   {
+    "text": "Issue fines to participants who asked questions",
+    "correct": false
+   },
+   {
+    "text": "Conduct a post-exercise debrief to identify communication bottlenecks and update the ERP accordingly",
+    "correct": true
+   }
+  ]
+ },
+ {
+  "question": "In HFACS (Human Factors Analysis and Classification System), what category encompasses fatigued pilots, spatial disorientation, and complacency?",
+  "explanation": "Physiological and mental states of operators fall under Preconditions for Unsafe Acts.",
+  "options": [
+   {
+    "text": "Organizational Influences",
+    "correct": false
+   },
+   {
+    "text": "Regulatory Enforcement",
+    "correct": false
+   },
+   {
+    "text": "Maintenance Airworthiness Directives",
+    "correct": false
+   },
+   {
+    "text": "Preconditions for Unsafe Acts",
+    "correct": true
+   }
+  ]
+ },
+ {
+  "question": "When integrating third-party contractors (e.g., external maintenance providers or contract RPICs) into a Part 135 UAS operation, how does SMS apply?",
+  "explanation": "The certificate holder stays accountable for the safety outcome of contracted work, so contractors must be covered by its hazard reporting, risk management and emergency procedures.",
+  "options": [
+   {
+    "text": "Contractors are exempt from the operator's SMS",
+    "correct": false
+   },
+   {
+    "text": "Only the contractor's insurance company manages risk",
+    "correct": false
+   },
+   {
+    "text": "The certificate holder remains responsible for ensuring contracted services meet its SMS safety standards and interface properly with its ERP and reporting systems",
+    "correct": true
+   },
+   {
+    "text": "Contractors must write their own independent FAA regulations",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "What is the most effective way for an Accountable Executive to demonstrate visible safety leadership?",
+  "explanation": "Resource allocation and backing \"no-go\" decisions prove genuine executive commitment.",
+  "options": [
+   {
+    "text": "Memorizing the entire CFR manual",
+    "correct": false
+   },
+   {
+    "text": "Writing all pre-flight checklists personally",
+    "correct": false
+   },
+   {
+    "text": "Actively funding safety mitigations, participating in safety reviews, and refusing to pressure crews to launch in marginal weather",
+    "correct": true
+   },
+   {
+    "text": "Ignoring minor incident reports to keep morale high",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "A commercial drone operator plans to transition from daytime agricultural spraying to nighttime operations. Which SMS workflow must be executed first?",
+  "explanation": "Transitioning to night ops alters visual cues, spatial orientation, and collision risks, requiring formal MOC/SRM.",
+  "options": [
+   {
+    "text": "Purchase brighter strobe lights and launch immediately",
+    "correct": false
+   },
+   {
+    "text": "Update the company website",
+    "correct": false
+   },
+   {
+    "text": "Submit a Management of Change (MOC) request and perform a full Safety Risk Management (SRM) analysis for night-specific hazards",
+    "correct": true
+   },
+   {
+    "text": "Wait for an incident to occur to see what hazards exist",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "Which of the following is an example of an Administrative Control in UAS operations?",
+  "explanation": "Policies, procedures, checklists, and scheduling limits are Administrative Controls.",
+  "options": [
+   {
+    "text": "Dual-redundant GPS receivers",
+    "correct": false
+   },
+   {
+    "text": "Implementing a mandatory two-person challenge-and-response pre-flight checklist and crew duty-time limits",
+    "correct": true
+   },
+   {
+    "text": "Geofencing hard-deck altitude limits",
+    "correct": false
+   },
+   {
+    "text": "Flame-retardant LiPo storage bunkers",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "What role does predictive safety data analysis play in a mature UAS SMS?",
+  "explanation": "Predictive analytics leverages routine telemetry to spot degrading performance prior to failure.",
+  "options": [
+   {
+    "text": "It predicts stock market prices for drone manufacturers",
+    "correct": false
+   },
+   {
+    "text": "It replaces the need for physical pre-flight inspections",
+    "correct": false
+   },
+   {
+    "text": "It assigns blame to pilots for weather changes",
+    "correct": false
+   },
+   {
+    "text": "It analyzes routine flight telemetry (e.g., vibration trends, battery internal resistance drift, GPS HDOP spikes) to detect anomalies before component failure occurs",
+    "correct": true
+   }
+  ]
+ },
+ {
+  "question": "If an internal safety audit uncovers a systemic non-compliance with battery charging SOPs, what is the proper corrective action sequence?",
+  "explanation": "Effective Corrective Action Plans (CAPs) address root causes and verify long-term effectiveness.",
+  "options": [
+   {
+    "text": "Identify why the SOP isn't being followed (e.g., lack of chargers or unclear instructions), implement systemic corrective actions, and schedule a follow-up verification audit",
+    "correct": true
+   },
+   {
+    "text": "Fire the technician and close the audit",
+    "correct": false
+   },
+   {
+    "text": "Rewrite the audit report to say everything passed",
+    "correct": false
+   },
+   {
+    "text": "Stop charging batteries altogether",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "Why is standardized aeronautical phraseology and CRM important in multi-crew UAS operations (RPIC, Visual Observer, Payload Operator)?",
+  "explanation": "Clear, standardized callouts prevent miscommunication during critical phases of flight.",
+  "options": [
+   {
+    "text": "It eliminates ambiguity during high-stress abnormal events, ensuring shared situational awareness across the crew",
+    "correct": true
+   },
+   {
+    "text": "It sounds impressive to clients on site",
+    "correct": false
+   },
+   {
+    "text": "It is only required when talking to military aircraft",
+    "correct": false
+   },
+   {
+    "text": "It eliminates the need for GCS telemetry",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "Ultimately, what transforms an SMS from a binder on a shelf into a living operational advantage?",
+  "explanation": "An SMS is a continuous management cycle sustained by organizational culture and active feedback loops.",
+  "options": [
+   {
+    "text": "Passing a single initial FAA document review",
+    "correct": false
+   },
+   {
+    "text": "Hiring the most expensive graphic designer for the manual",
+    "correct": false
+   },
+   {
+    "text": "Avoiding all complex UAS missions",
+    "correct": false
+   },
+   {
+    "text": "Continuous cycle of proactive risk management, honest non-punitive reporting, data-driven assurance, and active leadership engagement",
+    "correct": true
+   }
+  ]
+ }
+]

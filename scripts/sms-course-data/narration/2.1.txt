@@ -1,0 +1,7 @@
+Welcome to Module 2. Every effective Safety Management System begins with Pillar 1: Safety Policy and Objectives. Think of Safety Policy as the constitutional framework of your aviation organization. Without unambiguous commitment from top leadership, risk matrices and safety manuals become paper compliance: binders on a shelf that do nothing to prevent accidents in the field.
+
+Under FAA 14 CFR Part 5 and ICAO Doc 9859, safety management begins with a written Safety Policy Statement. This document cannot be drafted by a junior technician and filed away quietly. It must be signed by the Accountable Executive, communicated visibly to every employee, and reviewed periodically for relevance.
+
+So, who is the Accountable Executive? Under 14 CFR Section 5.25, the Accountable Executive is the person with final authority over operations, control of the financial and human resources for those operations, and ultimate responsibility for the organization's safety performance. In a UAS enterprise, this is typically the Chief Executive Officer, President, or Managing Director.
+
+Crucially, while the Accountable Executive can delegate daily safety administration, they cannot delegate ultimate accountability. If a safety mitigation requires funding for redundant Command and Control links or additional Visual Observers, the Accountable Executive holds the authority, and the responsibility, to approve those resources.
