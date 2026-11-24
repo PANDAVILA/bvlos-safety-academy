@@ -1,0 +1,112 @@
+[
+ {
+  "question": "What is the free-space path loss for 10 km at 868 MHz? Use FSPL = 20 log10(d km) + 20 log10(f MHz) + 32.44.",
+  "explanation": "20 log10(10) = 20, 20 log10(868) is about 58.8, and 20 + 58.8 + 32.44 is about 111.2 dB.",
+  "options": [
+   {
+    "text": "About 91 dB",
+    "correct": false
+   },
+   {
+    "text": "About 111 dB",
+    "correct": true
+   },
+   {
+    "text": "About 130 dB",
+    "correct": false
+   },
+   {
+    "text": "About 58 dB",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "Transmit power is 20 dBm, antenna gains total 8 dBi, path loss is 100 dB and other losses are 2 dB. The receiver sensitivity is -90 dBm. What is the fade margin?",
+  "explanation": "Received power = 20 + 8 - 100 - 2 = -74 dBm. Margin = -74 - (-90) = 16 dB.",
+  "options": [
+   {
+    "text": "6 dB",
+    "correct": false
+   },
+   {
+    "text": "26 dB",
+    "correct": false
+   },
+   {
+    "text": "16 dB",
+    "correct": true
+   },
+   {
+    "text": "8 dB",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "According to FAA waiver guidance, what should safety-critical BVLOS links not rely on?",
+  "explanation": "The guidance says C2 links for safety-critical BVLOS functions should not rely on devices authorized only on an interference basis.",
+  "options": [
+   {
+    "text": "Redundant links",
+    "correct": false
+   },
+   {
+    "text": "Authorized spectrum",
+    "correct": false
+   },
+   {
+    "text": "Encryption",
+    "correct": false
+   },
+   {
+    "text": "Devices that operate on an interference basis",
+    "correct": true
+   }
+  ]
+ },
+ {
+  "question": "Which sensor type does not see aircraft without a transponder?",
+  "explanation": "ADS-B In only sees equipped, cooperative aircraft.",
+  "options": [
+   {
+    "text": "ADS-B In",
+    "correct": true
+   },
+   {
+    "text": "Ground-based radar",
+    "correct": false
+   },
+   {
+    "text": "Onboard radar",
+    "correct": false
+   },
+   {
+    "text": "Airspace observers",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "A UA flies at 80 knots and detect-and-avoid takes 45 seconds. The observer detects traffic at 1.5 NM. How far from the observer may the UA fly?",
+  "explanation": "The UA covers 80 x 45 / 3600 = 1 NM during detect and avoid. 1.5 - 1.0 = 0.5 NM.",
+  "options": [
+   {
+    "text": "About 1.5 NM",
+    "correct": false
+   },
+   {
+    "text": "About 0.5 NM",
+    "correct": true
+   },
+   {
+    "text": "About 1.0 NM",
+    "correct": false
+   },
+   {
+    "text": "About 2.0 NM",
+    "correct": false
+   }
+  ]
+ }
+]

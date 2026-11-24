@@ -1,0 +1,13 @@
+Now we calculate the intrinsic ground risk class, the iGRC. You need two inputs.
+
+The first is the size and speed class of your aircraft. SORA two point five uses five classes: one metre and twenty-five metres per second, three metres and thirty-five, eight metres and seventy-five, twenty metres and one hundred and twenty, and forty metres and two hundred. Use the first class whose dimension and speed you do not exceed.
+
+The second input is the population density under the operation, measured in people per square kilometre. The table has columns for under five, under fifty, under five hundred, under five thousand, under fifty thousand, and above fifty thousand people. There is also a row for a controlled ground area.
+
+Let me read part of it. For a three metre aircraft, a controlled ground area gives one. Under five people per square kilometre gives three. Under fifty gives four. Under five hundred gives five. Under five thousand gives six. Remember that a final GRC above seven puts the operation outside the specific category, so a high intrinsic value has to be brought down by mitigations or the operation redesigned.
+
+There are special cases. A controlled ground area, which you can demonstrate, uses the first row. An aircraft of two hundred and fifty grams or less, with a maximum speed of twenty-five metres per second or less, is iGRC one regardless of density, unless it flies over assemblies of people. And the worst case wins: use the highest density that applies to the volume and the adjacent area, not an average over a large region.
+
+For population data, national statistics, census layers and the European GHSL population grid are common sources. Always record the source, the date and the resolution in your dossier.
+
+Here is a worked example. A fixed wing with a two point eight metre wingspan and a maximum speed of thirty metres per second uses the three metre class. Flown over a rural area below fifty people per square kilometre, the iGRC is four.

@@ -1,0 +1,9 @@
+Welcome. In this lesson we define the first and most important document of a BVLOS operation: the Concept of Operations, or ConOps.
+
+A ConOps describes, in plain language, what you intend to do, where, with what, with whom and under which limits. It is the first document in the chain. The risk assessment takes its inputs from it, and the operations manual implements it. It is not a marketing brochure, and it is not the manual. It does not contain checklists. It contains decisions.
+
+Who reads it? The authority asks whether the operation described matches the approval requested and whether the limits are clear. The client asks whether the service can be delivered within the site rules. The insurer asks what can go wrong and what controls exist. The crew needs to know the mission and what is out of scope. And other airspace users need to know where and when you will fly.
+
+Here is a structure that works. One, purpose and scope. Two, mission description and use cases. Three, the operating environment: terrain, population, airspace, weather, obstacles and radio. Four, the operational volume and routes. Five, the aircraft and its performance. Six, command and control link and navigation. Seven, detect and avoid and airspace integration. Eight, crew, roles and training. Nine, a summary of normal procedures. Ten, a summary of contingency and emergency procedures. Eleven, a summary of the risk assessment and residual risk. And twelve, limits, assumptions and change control.
+
+My rule of thumb: if a sentence in the ConOps cannot be traced to a decision, a number or a limit, cut it. Reviewers read ConOps documents closely, and vague text costs you credibility.

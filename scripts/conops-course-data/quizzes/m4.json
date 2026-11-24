@@ -1,0 +1,112 @@
+[
+ {
+  "question": "Which role does the proposed Part 108 define as responsible for overall safety, regulatory compliance and training of personnel?",
+  "explanation": "The operations supervisor holds overall responsibility. The flight coordinator oversees flights directly and can intervene.",
+  "options": [
+   {
+    "text": "The flight coordinator",
+    "correct": false
+   },
+   {
+    "text": "The payload operator",
+    "correct": false
+   },
+   {
+    "text": "The operations supervisor",
+    "correct": true
+   },
+   {
+    "text": "The ground crew",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "Why should a BVLOS crew be sized by tasks rather than by habit?",
+  "explanation": "List tasks per phase and check that workload is compatible, for example monitoring traffic and handling a payload anomaly.",
+  "options": [
+   {
+    "text": "To reduce the number of observers",
+    "correct": false
+   },
+   {
+    "text": "To avoid training",
+    "correct": false
+   },
+   {
+    "text": "To satisfy the insurance broker",
+    "correct": false
+   },
+   {
+    "text": "To make sure no person has to do two incompatible tasks at the same time",
+    "correct": true
+   }
+  ]
+ },
+ {
+  "question": "Which element belongs to competence \"behaviours\"?",
+  "explanation": "Behaviours include CRM, communication, workload management and assertiveness.",
+  "options": [
+   {
+    "text": "Crew resource management and communication",
+    "correct": true
+   },
+   {
+    "text": "The aircraft's wingspan",
+    "correct": false
+   },
+   {
+    "text": "The wind limit",
+    "correct": false
+   },
+   {
+    "text": "The route length",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "Which statement about go/no-go criteria is correct?",
+  "explanation": "Clear criteria and clear authority prevent pressure from overriding safety.",
+  "options": [
+   {
+    "text": "They should be decided only on the day",
+    "correct": false
+   },
+   {
+    "text": "They should be written as numbers where possible, and the pilot in command must have authority to say no-go",
+    "correct": true
+   },
+   {
+    "text": "Only the client decides",
+    "correct": false
+   },
+   {
+    "text": "They apply only to the first flight",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "When control passes from one person to another during a flight, what is good practice?",
+  "explanation": "Handovers are error-prone. A structured handover with read-back reduces mistakes.",
+  "options": [
+   {
+    "text": "A silent handover",
+    "correct": false
+   },
+   {
+    "text": "A handover only if there is a problem",
+    "correct": false
+   },
+   {
+    "text": "A defined handover with a read-back",
+    "correct": true
+   },
+   {
+    "text": "No handover is allowed",
+    "correct": false
+   }
+  ]
+ }
+]

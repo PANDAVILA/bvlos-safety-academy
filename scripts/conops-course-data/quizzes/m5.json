@@ -1,0 +1,112 @@
+[
+ {
+  "question": "Which describes an emergency, as opposed to a contingency?",
+  "explanation": "A contingency is foreseen and handled in the contingency volume. An emergency is an immediate threat.",
+  "options": [
+   {
+    "text": "A foreseen abnormal event handled inside the contingency volume",
+    "correct": false
+   },
+   {
+    "text": "A delayed take-off",
+    "correct": false
+   },
+   {
+    "text": "A change of client",
+    "correct": false
+   },
+   {
+    "text": "An immediate threat to people or property, where protecting people comes first",
+    "correct": true
+   }
+  ]
+ },
+ {
+  "question": "Which five elements should each emergency procedure have?",
+  "explanation": "A clear trigger and owner remove hesitation, and an end state tells the crew when it is over.",
+  "options": [
+   {
+    "text": "Trigger, first action, decision owner, time limit and end state",
+    "correct": true
+   },
+   {
+    "text": "Title, author, date, price and logo",
+    "correct": false
+   },
+   {
+    "text": "Aircraft, battery, pilot, client and site",
+    "correct": false
+   },
+   {
+    "text": "Plan, do, check, act and close",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "In the lesson, what deadline is given for notifying reportable occurrences in the EU?",
+  "explanation": "The lesson uses 72 hours and notes that authorizations may add their own conditions.",
+  "options": [
+   {
+    "text": "24 hours",
+    "correct": false
+   },
+   {
+    "text": "72 hours from becoming aware of the event",
+    "correct": true
+   },
+   {
+    "text": "10 days",
+    "correct": false
+   },
+   {
+    "text": "30 days",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "The ConOps says the operational ceiling is 120 m AGL. What should the Operations Manual say?",
+  "explanation": "The three documents must be consistent. A different ceiling in the manual contradicts the ConOps and the risk assessment.",
+  "options": [
+   {
+    "text": "A ceiling of 150 m AGL",
+    "correct": false
+   },
+   {
+    "text": "No ceiling",
+    "correct": false
+   },
+   {
+    "text": "The same ceiling, 120 m AGL, as an operating limit",
+    "correct": true
+   },
+   {
+    "text": "Whatever the pilot decides",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "A risk assessment gives credit for a parachute (M2). What should the manual contain?",
+  "explanation": "Each credited mitigation must be implemented in the manual so that it exists in practice.",
+  "options": [
+   {
+    "text": "Nothing, the credit is enough",
+    "correct": false
+   },
+   {
+    "text": "Only the brand name",
+    "correct": false
+   },
+   {
+    "text": "A note that parachutes are optional",
+    "correct": false
+   },
+   {
+    "text": "An inspection and repack schedule and the procedure for use",
+    "correct": true
+   }
+  ]
+ }
+]

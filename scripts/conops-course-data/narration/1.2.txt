@@ -1,0 +1,11 @@
+Let us write the heart of the ConOps: the mission and the environment.
+
+Start with one sentence for the mission, then list the facts that bound it. The purpose, for example inspect a forty-two kilometre gas pipeline. The frequency and duration, meaning flights per day, hours per flight, season, and day or night. The payload and tasks. And the success criteria: what the client receives, and when.
+
+Typical BVLOS use cases show the variety. Linear infrastructure, such as pipelines, power lines and railways, means long corridors, rural areas and repetitive routes. Wind and solar farms are wide areas with obstacles and local airspace. Agriculture and environment work means large areas at low altitude with seasonal weather. Logistics and delivery means point-to-point routes with mixed populations and landing infrastructure. And public safety and emergency work means variable locations, short notice and coordination with other agencies.
+
+Now the operating environment. Describe every factor that can change the safety case or the performance. Terrain and obstacles, including masts, lines and wind turbines. Population, including residential areas, roads, railways, events and the highest density near the route. Airspace: class, restricted and danger areas, nearby airfields and helicopter routes. Weather: wind, temperature, icing and visibility, and the limits for the aircraft. The radio environment, including cellular coverage and interference. And infrastructure: launch and landing sites, emergency landing areas and access for the crew.
+
+Finally, write the assumptions and limitations. What must be true for the operation to be safe? Ground crew at the launch site, C2 coverage above a defined level along the route, wind below twelve metres per second. These become the limits in the operations manual and the go or no-go criteria on the day.
+
+A good example: daylight BVLOS inspection of a forty-two kilometre pipeline corridor, flown at eighty to one hundred and twenty metres above ground, in uncontrolled airspace, in rural areas below fifty people per square kilometre, with a fixed wing aircraft of two point eight metres wingspan.

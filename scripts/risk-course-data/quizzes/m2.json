@@ -1,0 +1,112 @@
+[
+ {
+  "question": "A fixed-wing UA has a 2.8 m wingspan and a maximum speed of 30 m/s. It will fly over a rural area with fewer than 50 people per km². What is the iGRC in SORA 2.5?",
+  "explanation": "It falls in the 3 m / 35 m/s class. In the row for fewer than 50 people per km² that class has an iGRC of 4.",
+  "options": [
+   {
+    "text": "3",
+    "correct": false
+   },
+   {
+    "text": "5",
+    "correct": false
+   },
+   {
+    "text": "4",
+    "correct": true
+   },
+   {
+    "text": "6",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "What is the purpose of the ground risk buffer?",
+  "explanation": "The buffer is sized for how the UA fails (glide, ballistic descent or fly-away) and protects people outside the flight geography and contingency volume.",
+  "options": [
+   {
+    "text": "To provide extra space for normal flight",
+    "correct": false
+   },
+   {
+    "text": "To set the minimum altitude of the operation",
+    "correct": false
+   },
+   {
+    "text": "To define the area where the remote pilot must stand",
+    "correct": false
+   },
+   {
+    "text": "To cover the ground area where a UA that has lost control could come down",
+    "correct": true
+   }
+  ]
+ },
+ {
+  "question": "A 240 g UA with a maximum speed of 20 m/s flies over a residential area, not over assemblies of people. What is its iGRC?",
+  "explanation": "A UA of 250 g or less and 25 m/s or less is iGRC 1 regardless of population density, unless it flies over assemblies of people.",
+  "options": [
+   {
+    "text": "1",
+    "correct": true
+   },
+   {
+    "text": "3",
+    "correct": false
+   },
+   {
+    "text": "5",
+    "correct": false
+   },
+   {
+    "text": "It cannot be assessed with SORA",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "Which mitigation does a certified parachute normally support?",
+  "explanation": "A parachute reduces the energy and effects of impact on the ground, which is the M2 mitigation.",
+  "options": [
+   {
+    "text": "M1(A), sheltering",
+    "correct": false
+   },
+   {
+    "text": "M2, reduced effects of UA impact dynamics",
+    "correct": true
+   },
+   {
+    "text": "M1(C), ground observation",
+    "correct": false
+   },
+   {
+    "text": "Strategic air-risk mitigation",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "A UA has an iGRC of 5. You justify M1(B) at medium robustness (-1) and M2 at medium robustness (-1). What is the final GRC?",
+  "explanation": "5 - 1 - 1 = 3. The result can never go below 1, and SORA limits total reductions, so also check the cap in Step 3.",
+  "options": [
+   {
+    "text": "4",
+    "correct": false
+   },
+   {
+    "text": "2",
+    "correct": false
+   },
+   {
+    "text": "3",
+    "correct": true
+   },
+   {
+    "text": "5",
+    "correct": false
+   }
+  ]
+ }
+]

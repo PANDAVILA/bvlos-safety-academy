@@ -1,0 +1,11 @@
+Even the best plan meets reality. Your procedures decide what happens next.
+
+First, a distinction. A contingency is a foreseen abnormal event that the operation can handle inside the contingency volume, such as a degraded link or a low battery warning. The aim is to return to normal operations or land safely. An emergency is a situation with an immediate threat to people or property, such as loss of control or a fire. The aim is to protect people first.
+
+Write every procedure with five elements: a trigger, a first action, a decision owner, a time limit and an end state.
+
+The failure cases to cover. Lost C2 link: time before the failsafe, programmed behaviour, route to a safe area and link recovery attempts. GNSS loss or degradation: alternative navigation, return rules and geofence behaviour. A detect-and-avoid alert: the avoidance manoeuvre, notification and resumption criteria. Low battery or fuel: decision points, nearest emergency landing area and minimum reserves. Propulsion or control failure: descent mode, parachute or termination, and the area to avoid. A fly-away: last known position, tracking, notification of air traffic and a termination option. Battery fire: people away and upwind, follow the manufacturer's guidance, and call the fire service. And weather deterioration: limits, abort rules and alternate sites.
+
+Then reporting. Preserve logs, memory cards and wreckage. In the United States, accidents are reported to the NTSB under Part 830, and Part 107 pilots report certain injuries or property damage to the FAA within ten calendar days. In the EU, reportable occurrences must be notified within seventy-two hours of becoming aware. Spain's AESA states this deadline, and accidents and serious incidents also go to the accident investigation authority. Your authorization may add its own conditions.
+
+And close the loop. Feed occurrences into your hazard log and update the risk assessment and the manual. Run drills: a tabletop exercise about twice a year and a live exercise every year are common practice. Do not improvise: decide what to do about a fly-away before the flight, with the crew and the data.

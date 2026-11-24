@@ -1,0 +1,11 @@
+The SAIL tells you how much proof is needed. Now let us see what you have to prove. Two topics: containment and operational safety objectives.
+
+The operational volume is a promise. Containment shows that, even when something fails, the aircraft stays inside the area you assessed, or, if it leaves, that the risk is still acceptable. In SORA two point five, the containment requirement is low, medium or high, and depends on factors such as maximum speed, the operational environment, and how likely it is that the aircraft leaves the volume. Typical ways to demonstrate it are geofencing, an independent termination or recovery system, flight termination, reliable fail-safes, and procedures that stop the flight before the boundary.
+
+Operational safety objectives, or OSOs, are the safety goals the operation must meet. They are grouped by area. A technical issue with the aircraft, covering design, maintenance, software and hardware reliability. Deterioration of external systems, such as the command and control link, GNSS and contracted services. Human error, covering training, competence, procedures and crew coordination. Adverse operating conditions, which means weather limits and your ability to detect them. And emergency response, including the emergency response plan and the protection of involved persons.
+
+For each OSO, the SAIL sets a required robustness: optional, low, medium or high. The numbering and some wording changed between SORA two point zero and two point five, so always use the annex that matches your version.
+
+Robustness is the combination of integrity and assurance. Integrity is how good the mitigation is. Assurance is how well you proved it. At low robustness, a declaration and supporting documents are typical. At medium, test results, procedures and training records the authority can review. At high, third-party validation or certification-grade evidence.
+
+My advice: build an OSO matrix, one row per objective, with the required robustness, your evidence, the document and page, the owner and the status. You will make one in the capstone workbook.

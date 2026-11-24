@@ -1,0 +1,11 @@
+Now we turn volumes into routes. Good route design removes risk before any mitigation is needed.
+
+Five principles. Keep it simple: fewer turns, fewer waypoints and a shorter exposure over populated areas. Fly where the risk is low, for example along the less populated side of a road or railway. Respect obstacle clearance: set the minimum height above the highest obstacle in the corridor plus a margin, and make sure wires and masts are in your database. Design for the contingency, so every leg has a reachable safe recovery option. And check the whole volume, not only the route line.
+
+Be precise about altitude. Above ground level, above mean sea level and height above the take-off point are different things. Over variable terrain, a constant height above ground needs terrain following, while a constant altitude above sea level changes your height above people. Make the vertical limits explicit, for example an operational ceiling of one hundred and twenty metres above ground.
+
+Plan your sites. Launch and landing sites need access control, wind exposure analysis, obstacle clearances and a way to keep uninvolved people away. Emergency landing areas are pre-surveyed open areas, free of people, along the route and within reach of the aircraft's glide or descent. For long routes, set the spacing so the aircraft can always reach one. For aircraft with endurance limits, add an alternate landing site for weather or battery reserve.
+
+Plan the energy as well: the route, the return or alternate, and a safety reserve, with minimum energy decision points along the way.
+
+An example. A fixed wing at one hundred and twenty metres with a glide ratio of twenty to one can glide about two point four kilometres. If emergency landing areas are four kilometres apart, no point on the route is more than two kilometres from one, which leaves margin for wind. On a forty-two kilometre corridor, that means about eleven sites.

@@ -1,0 +1,112 @@
+[
+ {
+  "question": "Which three parts make up a safety case?",
+  "explanation": "A safety case states a claim (the operation is acceptably safe), explains why through an argument, and supports it with evidence such as tests, declarations and records.",
+  "options": [
+   {
+    "text": "Policy, procedure and checklist",
+    "correct": false
+   },
+   {
+    "text": "Claim, argument and evidence",
+    "correct": true
+   },
+   {
+    "text": "Hazard, risk and severity",
+    "correct": false
+   },
+   {
+    "text": "Plan, budget and schedule",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "A client sends you a spreadsheet listing 30 hazards with a risk score and calls it a safety case. What is missing?",
+  "explanation": "A risk table is an input. A safety case adds the claim, the argument and the evidence that support it.",
+  "options": [
+   {
+    "text": "A longer list of hazards",
+    "correct": false
+   },
+   {
+    "text": "A colour for each risk score",
+    "correct": false
+   },
+   {
+    "text": "A structured argument that links the risks to evidence showing why the residual risk is acceptable",
+    "correct": true
+   },
+   {
+    "text": "Nothing, a risk table is a safety case",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "Which pair of harm scenarios drives a SORA-based assessment of a BVLOS operation?",
+  "explanation": "SORA looks at ground risk (harm on the surface) and air risk (collision with crewed aircraft). Other topics matter but do not drive the two classes.",
+  "options": [
+   {
+    "text": "Battery failure and software crash",
+    "correct": false
+   },
+   {
+    "text": "Noise complaints and privacy breaches",
+    "correct": false
+   },
+   {
+    "text": "Loss of revenue and loss of reputation",
+    "correct": false
+   },
+   {
+    "text": "Impact with people or vehicles on the ground, and collision with a crewed aircraft",
+    "correct": true
+   }
+  ]
+ },
+ {
+  "question": "Why does BVLOS need a stronger argument than VLOS?",
+  "explanation": "In VLOS the pilot sees and avoids. In BVLOS you must show how technology, procedures, buffers or restrictions provide an equivalent barrier.",
+  "options": [
+   {
+    "text": "The remote pilot's direct view of traffic and people is no longer a barrier, so something else must replace it",
+    "correct": true
+   },
+   {
+    "text": "Beyond visual line of sight, risk assessments are optional",
+    "correct": false
+   },
+   {
+    "text": "BVLOS aircraft are always heavier than VLOS aircraft",
+    "correct": false
+   },
+   {
+    "text": "Authorities do not review VLOS operations",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "An operator in the EU finds that its operation matches a published PDRA. What is the main advantage?",
+  "explanation": "A PDRA is a pre-filled risk assessment accepted as a means of compliance for Article 11. An operational authorization is still needed, but the process is simpler.",
+  "options": [
+   {
+    "text": "No application to the authority is needed",
+    "correct": false
+   },
+   {
+    "text": "The authority's risk assessment already exists, so the operator completes the PDRA table, prepares the Operations Manual and applies for authorization",
+    "correct": true
+   },
+   {
+    "text": "The operation is allowed in any country without approval",
+    "correct": false
+   },
+   {
+    "text": "SORA is still required in full",
+    "correct": false
+   }
+  ]
+ }
+]

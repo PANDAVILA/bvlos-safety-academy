@@ -1,0 +1,17 @@
+The intrinsic GRC is rarely where you finish. Mitigations can lower it, but only if you can prove them.
+
+SORA two point five has four ground risk mitigations.
+
+M1 A is sheltering. People below are protected by buildings or vehicles, so an aircraft that cannot penetrate a normal dwelling reduces the exposure. It gives minus one at low robustness and minus two at medium.
+
+M1 B is operational restrictions. You reduce the number of people at risk by choosing the time of day, the route, the altitude or the areas to avoid. It gives minus one at medium robustness and minus two at high.
+
+M1 C is ground observation, a tactical mitigation. Observers on the ground can see the area below and stop the operation if people enter. It gives minus one at low robustness.
+
+M2 is reduced effects of the aircraft impact dynamics, for example a parachute, a frangible design or an energy-absorbing structure. Parachutes for small aircraft can be tested against standards such as ASTM F3322. It gives minus one at medium robustness and minus two at high.
+
+The final GRC is the intrinsic GRC plus the credits you can justify, and it can never be lower than one. SORA also limits how far the mitigations may reduce the result, so read Step three of the version you use.
+
+Every credit needs a claim, an integrity argument and assurance. The claim says what you are asserting. The integrity argument explains what the mitigation does, with test data, standards or a manufacturer declaration. The assurance shows how you know it works, for example through flight tests, third-party validation or an inspection programme.
+
+Back to our example. The intrinsic GRC is four. A certified parachute at medium robustness gives minus one. An operational restriction that avoids the only village on the route, at medium robustness, gives another minus one. The final GRC is two.

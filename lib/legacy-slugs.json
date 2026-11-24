@@ -1,9 +1,9 @@
 {
   "courses": {
     "fundamentos-bvlos": "bvlos-operations-fundamentals",
-    "metodologia-sms-avanzada": "advanced-sms-risk-methodology",
+    "metodologia-sms-avanzada": "bvlos-risk-assessment-safety-case",
     "sms-para-operadores-uas": "sms-for-uas-operators",
-    "conops-y-volumen-operacional": "conops-and-operational-volume-design",
+    "conops-y-volumen-operacional": "conops-and-operations-manual-bvlos",
     "gestion-de-mitigaciones-bvlos": "mitigation-management-bvlos",
     "introduccion-espacio-aereo-no-segregado": "intro-to-non-segregated-airspace"
   },

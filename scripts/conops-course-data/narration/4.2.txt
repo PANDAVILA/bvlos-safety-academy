@@ -1,0 +1,11 @@
+Let us write the normal procedures. Think of the mission in seven phases.
+
+Planning: the mission brief, the route and volume check, NOTAMs and airspace status, weather, C2 coverage, and aircraft and crew readiness. Site setup: site control, equipment layout, observers in position and communication checks. Pre-flight: aircraft inspection, software and configuration, battery or fuel state, link test and failsafe verification. Launch and climb: clearances, take-off checks and monitoring of the first leg. En route: monitoring, reporting and handovers. Approach and landing: landing site status, energy check and go-around criteria. And post-flight: inspection, data, defect reports and a debrief.
+
+The key decision is go or no-go. Write the criteria as numbers where you can. Wind and gusts below the limit for the aircraft and for the emergency landing areas. Visibility and ceiling above the minimum. C2 link quality above the threshold on the test. Battery or fuel with the required reserve. Airspace status confirmed, with no conflicting activity. Crew fit and within duty limits. No unresolved defects. If any item fails, the answer is no-go. Give the remote pilot in command the authority to say so, and a way to record it.
+
+Brief before each flight: mission, route, limits, roles, contingencies and communication plan. When control passes from one person to another, use a defined handover with a read-back.
+
+Finally, checklists. Keep them short and in the order of work. Use challenge and response for critical items. Separate normal, abnormal and emergency checklists. Test them with the crew, and update them after every lesson learnt.
+
+For example: proceed only if sustained wind is below ten metres per second, gusts below fourteen, the C2 margin is above fifteen decibels on the test, and battery reserve at the point of no return is above twenty-five percent. Your own numbers must come from your aircraft and your risk assessment.

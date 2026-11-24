@@ -1,0 +1,15 @@
+Every number in a risk assessment depends on the description of the operation. This is Step one of SORA, and many dossiers fail here.
+
+Write down the aircraft: its type, its maximum characteristic dimension, its maximum speed, its mass, and the safety features it really has. Write down the mission: the purpose, the route or area, the altitude, whether you fly by day or at night. Describe the environment: terrain, population, airspace and weather limits. And describe the people and procedures: crew roles, training, normal and contingency procedures, plus your command and control link and your detect and avoid concept. If your description is vague, the assessor will assume the worst case.
+
+Next, the operational volume. It has three nested layers.
+
+The flight geography is where the aircraft is intended to fly in normal operation.
+
+The contingency volume is the extra space the aircraft may use while you apply contingency procedures, for example a commanded return.
+
+The ground risk buffer is the ground area below and around those volumes where an aircraft that has lost control could come down. You size it for the way your aircraft fails: a glide, a ballistic descent, or a fly-away. A common starting point is a one to one relationship between height and horizontal distance, adjusted for speed, wind and failure mode. It is a starting point, not a replacement for analysis.
+
+Finally, look beyond the volume. The adjacent area is the zone a stray aircraft could reach after leaving the volume. In SORA two point five it is sized from how far the aircraft could travel in a short defined time, and the vertical limit uses the altitude it could gain in three minutes at maximum climb rate. Read the main body for the exact limits of your version.
+
+My practical tip: draw it. One map with all the layers and the population density marked will save your reviewer a lot of time.

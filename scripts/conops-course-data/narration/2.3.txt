@@ -1,0 +1,11 @@
+BVLOS flights share the sky. Before you finalise the route, collect the facts about the airspace.
+
+Airspace class along the whole volume, including the vertical limits. Restricted, danger and prohibited areas, temporary restrictions and UAS geographical zones. Airfields and helipads near the corridor, with their traffic patterns and hours. Low-level traffic: helicopters, aerial work, agricultural aircraft, paragliders and gliders. And special airspace, such as military low-flying areas or U-space and UTM zones.
+
+Then choose your coordination. Coordination with air traffic services is required in controlled airspace and often useful near airfields. Agree who calls whom, on which channel, and what happens during contingencies. A NOTAM or equivalent notification informs other airspace users, but it does not separate traffic. Letters of agreement with airfield operators, military units or other airspace users make arrangements formal. Segregated airspace, such as a temporary restricted area, can make encounters unlikely. And outreach to local flying clubs, helicopter operators and farmers is cheap and effective.
+
+Think about identification and visibility. In the United States, many unmanned aircraft must broadcast Remote ID. In the EU, direct remote identification and geo-awareness requirements apply depending on class and category. Anti-collision lighting and conspicuity measures help crewed pilots see your aircraft. Cooperative electronic conspicuity, such as ADS-B In on the aircraft or a ground receiver, helps you see them.
+
+Finally, document the airspace argument. Show what you found, what coordination you agreed and what residual traffic risk remains. This is the evidence behind the strategic mitigations you claim in the risk assessment.
+
+One caution: airspace rules, remote identification classes and notification procedures differ by country and change. Confirm what applies to your operation with the competent authority.

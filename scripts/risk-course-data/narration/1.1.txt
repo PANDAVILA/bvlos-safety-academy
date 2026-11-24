@@ -1,0 +1,13 @@
+Welcome to the first lesson. Before we calculate anything, we need to agree on what we are building.
+
+A hazard is a condition that can cause harm, for example a lost command and control link. Risk combines two things: how severe the harm could be, and how likely it is. And a safety case is something more: it is a structured argument, supported by evidence, that the remaining risk of one specific operation is acceptable.
+
+That difference matters. A table of risks is not a safety case. A safety case has three parts. First, a claim, such as: this operation is acceptably safe inside this volume and under these limits. Second, an argument that explains why the claim holds, split into ground risk, air risk, the reliability of the system, the people, and the procedures. Third, the evidence, which means test reports, manufacturer declarations, procedures, training records and data.
+
+Why is this more important beyond visual line of sight? Because inside visual line of sight the remote pilot is the main barrier. They see the traffic, they see the people, and they can react. Beyond visual line of sight, that barrier disappears, so your assessment must show what replaces it: technology, procedures, buffers or restrictions.
+
+There are two main ways a flight can hurt someone. The first is ground risk: the aircraft hits a person or a vehicle. That depends on its size and speed, the population below, and how well you can reduce the impact or the exposure. The second is air risk: a collision with a crewed aircraft. That depends on where you fly, how busy the airspace is, and how well you can detect and avoid traffic.
+
+Both lines of analysis end in one number that controls the rest of your dossier. It is called the SAIL, and we will derive it in Module four.
+
+A risk assessment answers how risky the operation is. A safety case answers why anyone should believe that, and what happens when something fails.

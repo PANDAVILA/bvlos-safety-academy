@@ -1,0 +1,11 @@
+Let us see the same work through the eyes of the FAA.
+
+Part 107 waivers are requested through the FAA Aviation Safety Hub. The guide recommends a start date at least ninety days after you apply, and the end date cannot be more than forty-eight months after the start date. You complete a section for each rule you want waived, and you answer the Waiver Safety Explanation Guidelines. A concept of operations is recommended, describing the operation, the aircraft, the procedures, the location, the limitations, the hazards and the mitigations. Add maps, diagrams, procedures and safety material.
+
+For a waiver of the visual line of sight rule, evaluators look at five things. How the remote pilot always knows the position, altitude and state of the aircraft and keeps it inside the intended area. How the operation detects and avoids other aircraft, people and obstacles. How the aircraft's visibility is increased and how the pilot is alerted to degraded functions. Whether the crew has the knowledge, experience and skill for BVLOS. And the command and control links and their authorizations. Safety-critical links should not rely on equipment authorized only on an interference basis.
+
+Your risk analysis lists, for each hazard, severity and likelihood before mitigation and after it, plus the predicted residual risk. The FAA recommends mapping each mitigation to the exact place in your manual where it is implemented. The responsible person is accountable for everything submitted.
+
+Where does SORA help? The FAA does not require it, but the same ground and air work gives you the content: population exposure, ground buffers, detect and avoid performance and a documented residual risk.
+
+And Part 108? The FAA proposed it in August 2025, with permits and certificates, for aircraft up to one thousand three hundred and twenty pounds, generally at or below four hundred feet. Certificate holders would need a safety management system and a training programme. In September 2026 it was still under White House review. So plan for waivers today, and build your safety case so you can reuse it. And always check the current status before you advise a client.

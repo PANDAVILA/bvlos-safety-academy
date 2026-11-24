@@ -1,0 +1,11 @@
+The command and control link, the C2 link, is the lifeline of a BVLOS operation. Let us look at the options and a simple way to check them.
+
+Direct radio line of sight is simple and independent of networks, but limited by terrain and range. Cellular, LTE or 5G, gives long range where coverage exists, but coverage, latency and handovers vary with height and location. Satellite gives global coverage, with higher latency and cost. And mixed or redundant links combine a primary link with an independent backup and a defined switch-over. Whatever you choose, describe the lost-link behaviour: what the aircraft does after how many seconds, and what the crew does.
+
+Now a simple link budget. Free-space path loss in decibels equals twenty times the log of the distance in kilometres, plus twenty times the log of the frequency in megahertz, plus thirty-two point four four. For five kilometres at two thousand four hundred megahertz, that is about fourteen plus sixty-seven point six, plus thirty-two point four, which gives roughly one hundred and fourteen decibels.
+
+Received power equals transmit power plus antenna gains, minus path loss, minus other losses. With thirty dBm of transmit power, antennas of three and eight dBi, and three decibels of other losses, you get minus seventy-six dBm. If the receiver needs minus ninety-five, your fade margin is nineteen decibels. Many designers look for at least ten to twenty decibels, but define your own criterion and justify it.
+
+On spectrum: use frequencies and equipment authorized for the purpose. In FAA waiver guidance, links for safety-critical BVLOS functions should not rely on devices that operate on an interference basis. Check coverage maps, measure along the route including at height, and plan for interference.
+
+And security: authenticate and encrypt the link, control who can command the aircraft, and keep software and configuration under change control.

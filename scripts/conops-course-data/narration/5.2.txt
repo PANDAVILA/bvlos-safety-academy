@@ -1,0 +1,13 @@
+The Operations Manual is where the promises of your ConOps and your risk assessment become instructions.
+
+A solid structure has twelve parts. Document control. General information. Organization and responsibilities. The aircraft system: description, limits, configuration, maintenance and inspection. Operating limits: weather, performance, volumes, altitudes and airspace conditions. Normal procedures and checklists. Contingency and emergency procedures. Detect and avoid, airspace and coordination. Security, data and cyber. Occurrence reporting and records. Safety management. And appendices with forms, maps, contact lists and emergency landing area sheets.
+
+The most important skill is alignment. Three documents describe the same operation, and they must say the same thing. If the ConOps says you fly at eighty to one hundred and twenty metres above ground, the risk assessment must use a highest point of one hundred and twenty metres, and the manual must state an operational ceiling of one hundred and twenty metres. If the risk assessment gives credit for observers, the manual needs an observer procedure and a placement table. If it gives credit for a parachute, the manual needs an inspection and repack schedule.
+
+Whenever one document changes, check the other two. A practical trick: add a column to each mitigation in the risk assessment that says where in the manual it is implemented.
+
+Now change control and records. Use a revision list and an effective date. Review the manual after every occurrence, every aircraft or software change, and at least once a year. Keep training, maintenance, flight and occurrence records for the period your authority and your safety management system require. Control who may change the manual, and make sure the crew uses the current version in the field.
+
+Authorities differ: some approve the manual with the authorization, others review it. Even where it is not approved, a clear and consistent manual is evidence that you can run the operation as promised.
+
+One final tip: test the manual. Ask someone who did not write it to run a mission brief from it. Every question they ask shows a gap.

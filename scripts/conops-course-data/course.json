@@ -1,0 +1,154 @@
+{
+ "slug": "conops-and-operations-manual-bvlos",
+ "legacySlug": [
+  "conops-and-operational-volume-design",
+  "conops-y-volumen-operacional"
+ ],
+ "subtitle": "Design the operation, size the volumes and write the ConOps and Operations Manual that authorities and clients expect.",
+ "description": "A hands-on course for designing a BVLOS operation and documenting it. You define the mission and environment, size the flight geography, contingency volume and ground risk buffer, design routes and emergency landing areas, plan airspace integration, specify the C2 link and detect-and-avoid concept, assign crew roles and competence, and write normal and emergency procedures. The course ends with the structure of an Operations Manual and how to keep it consistent with your ConOps and risk assessment. Each module has a short video lesson, a diagram, written notes and a transcript, and ends with a knowledge check. The capstone gives you an editable ConOps template, an Operations Manual template and an Excel toolkit with a volume calculator, a link budget, a go/no-go sheet and a crew matrix, and a 50-question final assessment (80% to pass) closes the course. Independent training, not affiliated with or endorsed by any aviation authority.",
+ "frameworks": "JARUS SORA 2.5 terminology for the operational volume: flight geography, contingency volume, ground risk buffer and adjacent area\nRegulation (EU) 2019/947 and the content of an Operations Manual for the specific category\n14 CFR Part 107 waiver guidance: Concept of Operations, ground risk buffer and detect-and-avoid expectations\nFAA proposed Part 108 roles (operations supervisor and flight coordinator), status to be verified before use",
+ "learningOutcomes": [
+  "Write a ConOps that answers what authorities, clients and insurers ask",
+  "Size the flight geography, contingency volume and ground risk buffer, and compute the corridor footprint",
+  "Design routes, launch and landing sites, emergency landing areas and an energy plan",
+  "Plan airspace integration, coordination and identification",
+  "Build a C2 link budget and define a detect-and-avoid concept with a time budget",
+  "Define crew roles, competence and fatigue rules",
+  "Write normal and emergency procedures with clear go/no-go criteria and reporting duties",
+  "Assemble an Operations Manual that stays consistent with the ConOps and the risk assessment"
+ ],
+ "meta": {
+  "title": "ConOps and Operations Manual for BVLOS",
+  "level": "specialist",
+  "category": "conops",
+  "priceCents": 19999,
+  "durationHours": 6,
+  "coverImage": "/courses/conops/cover.png",
+  "published": true
+ },
+ "modules": [
+  {
+   "title": "Module 1 — Fundamentals of the Concept of Operations",
+   "quiz": "m1",
+   "lessons": [
+    {
+     "file": "welcome",
+     "title": "Welcome: How This Course Works",
+     "duration": 5,
+     "preview": true,
+     "image": "/courses/conops/0-document-stack.png"
+    },
+    {
+     "file": "1.1",
+     "title": "1.1 What a ConOps Is and Who Reads It",
+     "duration": 10,
+     "image": "/courses/conops/1-1-conops-structure.png"
+    },
+    {
+     "file": "1.2",
+     "title": "1.2 Defining the Mission and the Operating Environment",
+     "duration": 10,
+     "image": "/courses/conops/1-2-mission-environment.png"
+    }
+   ]
+  },
+  {
+   "title": "Module 2 — Operational Volume, Routes and Airspace",
+   "quiz": "m2",
+   "lessons": [
+    {
+     "file": "2.1",
+     "title": "2.1 Flight Geography, Contingency Volume and Ground Risk Buffer",
+     "duration": 12,
+     "image": "/courses/conops/2-1-volume-layers.png"
+    },
+    {
+     "file": "2.2",
+     "title": "2.2 Route, Corridor and Landing Site Design",
+     "duration": 12,
+     "image": "/courses/conops/2-2-route-ela.png"
+    },
+    {
+     "file": "2.3",
+     "title": "2.3 Airspace Integration and Coordination",
+     "duration": 10,
+     "image": "/courses/conops/2-3-airspace-coordination.png"
+    }
+   ]
+  },
+  {
+   "title": "Module 3 — Systems, C2 Link and Detect and Avoid",
+   "quiz": "m3",
+   "lessons": [
+    {
+     "file": "3.1",
+     "title": "3.1 C2 Link Architecture and Link Budget",
+     "duration": 12,
+     "image": "/courses/conops/3-1-link-budget.png"
+    },
+    {
+     "file": "3.2",
+     "title": "3.2 Detect and Avoid and Situational Awareness",
+     "duration": 12,
+     "image": "/courses/conops/3-2-daa-chain.png"
+    }
+   ]
+  },
+  {
+   "title": "Module 4 — Crew, Roles and Normal Procedures",
+   "quiz": "m4",
+   "lessons": [
+    {
+     "file": "4.1",
+     "title": "4.1 Crew Roles, Competence and Training",
+     "duration": 10,
+     "image": "/courses/conops/4-1-crew-roles.png"
+    },
+    {
+     "file": "4.2",
+     "title": "4.2 Normal Procedures, Go/No-Go and Checklists",
+     "duration": 12,
+     "image": "/courses/conops/4-2-mission-phases.png"
+    }
+   ]
+  },
+  {
+   "title": "Module 5 — Contingencies, Emergencies and the Operations Manual",
+   "quiz": "m5",
+   "lessons": [
+    {
+     "file": "5.1",
+     "title": "5.1 Contingency and Emergency Procedures and Reporting",
+     "duration": 12,
+     "image": "/courses/conops/5-1-contingency-emergency.png"
+    },
+    {
+     "file": "5.2",
+     "title": "5.2 Writing and Maintaining the Operations Manual",
+     "duration": 12,
+     "image": "/courses/conops/5-2-alignment.png"
+    }
+   ]
+  },
+  {
+   "title": "Module 6 — Capstone Toolkit & Final Assessment",
+   "quiz": "final",
+   "lessons": [
+    {
+     "file": "capstone",
+     "title": "6.1 Capstone ConOps and Manual Toolkit",
+     "duration": 60,
+     "image": null,
+     "attachmentUrl": "/courses/conops/templates/BVLOS-ConOps-Template.docx",
+     "attachmentName": "BVLOS ConOps template (Word)"
+    },
+    {
+     "file": "exam",
+     "title": "6.2 Final Assessment",
+     "duration": 45,
+     "image": null
+    }
+   ]
+  }
+ ]
+}

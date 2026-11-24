@@ -1,0 +1,15 @@
+In this lesson we map the regulatory pathways. The method you will learn is the same, but the paperwork changes depending on where you fly.
+
+Start with the United States. Under Part 107, flying beyond visual line of sight is not allowed by the standard rule, so operators request a waiver and show how they reach an equivalent level of safety. Waivers are requested through the FAA Aviation Safety Hub. The FAA does not require SORA, but it expects a concept of operations, a hazard analysis and clear mitigations. In August 2025 the FAA also proposed a new BVLOS rule, Part 108, with permits for lower-risk operations and certificates for higher-risk ones. Treat it as a direction, not a requirement, until it is final.
+
+Now the European Union. Regulation 2019 slash 947 defines three categories: open, specific and certified. BVLOS normally sits in the specific category, where the operator must show that the risk is acceptable. There are three routes.
+
+The first is a standard scenario. STS-zero-two covers BVLOS over a controlled ground area in a sparsely populated area, with limits on distance and the use of airspace observers.
+
+The second is a predefined risk assessment, or PDRA. EASA has already done the risk assessment for scenarios such as S-zero-one, S-zero-two, and G-zero-one to G-zero-three. You prepare an operations manual and apply to your national authority, and the process is simpler.
+
+The third is SORA, a full risk assessment, which EASA and national authorities have been moving to version two point five.
+
+How should you choose? If a standard scenario or a PDRA matches your operation, start there, because it is usually faster. If it does not match, use SORA, and accept that the extra effort is the evidence. In the United States, build the same ground and air argument and present it in the structure the waiver form asks for.
+
+One warning: conditions in standard scenarios and PDRAs are revised from time to time. Always read the current text.

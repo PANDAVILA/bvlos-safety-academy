@@ -1,0 +1,112 @@
+[
+ {
+  "question": "What is a Concept of Operations (ConOps)?",
+  "explanation": "The ConOps records decisions and limits. Checklists belong in the Operations Manual.",
+  "options": [
+   {
+    "text": "A checklist for the pre-flight inspection",
+    "correct": false
+   },
+   {
+    "text": "A marketing brochure for clients",
+    "correct": false
+   },
+   {
+    "text": "An insurance policy",
+    "correct": false
+   },
+   {
+    "text": "A plain-language description of what you intend to do, where, with what, with whom and under which limits",
+    "correct": true
+   }
+  ]
+ },
+ {
+  "question": "Which reader of a ConOps mainly asks \"does the described operation match the approval requested?\"",
+  "explanation": "Authorities compare the described operation with the approval requested and look for clear limits.",
+  "options": [
+   {
+    "text": "The authority",
+    "correct": true
+   },
+   {
+    "text": "The client's accounting department",
+    "correct": false
+   },
+   {
+    "text": "The aircraft manufacturer's sales team",
+    "correct": false
+   },
+   {
+    "text": "A competitor",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "Which of these belongs in the ConOps rather than in the Operations Manual?",
+  "explanation": "The ConOps defines what and where. Detailed procedures and records belong in the manual.",
+  "options": [
+   {
+    "text": "The step-by-step pre-flight checklist",
+    "correct": false
+   },
+   {
+    "text": "The mission, the operating environment and the operational volume",
+    "correct": true
+   },
+   {
+    "text": "The battery maintenance log",
+    "correct": false
+   },
+   {
+    "text": "The crew training attendance sheet",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "A ConOps sentence says \"operations will be as safe as possible\". What is the problem?",
+  "explanation": "Vague text weakens credibility. Replace it with limits and decisions.",
+  "options": [
+   {
+    "text": "It is too short",
+    "correct": false
+   },
+   {
+    "text": "It uses the word safe",
+    "correct": false
+   },
+   {
+    "text": "It cannot be traced to a decision, a number or a limit",
+    "correct": true
+   },
+   {
+    "text": "It is written in the present tense",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "Which is an example of an assumption or limitation to record?",
+  "explanation": "Assumptions and limits become the limits in the manual and the go/no-go criteria.",
+  "options": [
+   {
+    "text": "The colour of the aircraft",
+    "correct": false
+   },
+   {
+    "text": "The name of the client's CEO",
+    "correct": false
+   },
+   {
+    "text": "The price per flight hour",
+    "correct": false
+   },
+   {
+    "text": "Wind below 12 m/s and C2 coverage above a defined level along the route",
+    "correct": true
+   }
+  ]
+ }
+]

@@ -1,0 +1,15 @@
+The operational volume is the backbone of a BVLOS operation. It has three layers.
+
+The flight geography is the planned flight path with the tolerance you can really fly. It includes navigation accuracy and corridor width, not just the centre line.
+
+The contingency volume is the space around it that the aircraft may enter while you apply contingency procedures, such as a pilot-commanded return or a manual recovery. Its size comes from the aircraft's response time and its speed.
+
+The ground risk buffer is the ground footprint beyond the contingency volume where an aircraft that has lost control could come down.
+
+Flight geography and contingency volume together are the operational volume. The buffer sits on the ground below and around it.
+
+How do you size them? For the flight geography, take the planned route plus navigation error. If position error is ten metres and the corridor tolerance is twenty metres, the half-width is at least thirty metres. For the contingency volume, calculate how far the aircraft travels from the moment a problem occurs until the contingency procedure takes effect. At twenty-five metres per second with a six second reaction time, that is one hundred and fifty metres. For the ground risk buffer, consider fly-away and ballistic descent. A common starting point is a one to one ratio between flight height and horizontal distance. At one hundred and twenty metres height, that gives a buffer of one hundred and twenty metres, which you then adjust for speed, wind and failure mode.
+
+For a linear route, the total footprint is two times the sum of the flight geography half-width, the contingency volume and the buffer. With thirty, one hundred and fifty and one hundred and twenty metres, the half-width is three hundred metres and the footprint is six hundred metres wide. Population density must be checked across that whole footprint.
+
+The FAA waiver guidance uses the same idea, with a common starting point of at least a one to one relationship between altitude and horizontal distance from people. Whatever you choose, show your numbers and how you derived them.

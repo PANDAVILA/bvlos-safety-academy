@@ -1,0 +1,112 @@
+[
+ {
+  "question": "A rural inspection is flown at 300 ft AGL in uncontrolled airspace, far from airports. What is the initial ARC in the simplified flow used in this course?",
+  "explanation": "At or below 500 ft AGL in uncontrolled rural airspace the initial ARC is b.",
+  "options": [
+   {
+    "text": "ARC-a",
+    "correct": false
+   },
+   {
+    "text": "ARC-c",
+    "correct": false
+   },
+   {
+    "text": "ARC-d",
+    "correct": false
+   },
+   {
+    "text": "ARC-b",
+    "correct": true
+   }
+  ]
+ },
+ {
+  "question": "The same route is moved to 700 ft AGL, still uncontrolled and rural. What happens to the initial ARC?",
+  "explanation": "Above 500 ft AGL, uncontrolled rural airspace gives ARC-c in the simplified flow.",
+  "options": [
+   {
+    "text": "It rises to ARC-c",
+    "correct": true
+   },
+   {
+    "text": "It stays ARC-b",
+    "correct": false
+   },
+   {
+    "text": "It falls to ARC-a",
+    "correct": false
+   },
+   {
+    "text": "It rises to ARC-d",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "The residual ARC is ARC-c. What tactical mitigation performance requirement applies?",
+  "explanation": "ARC-a has no requirement, ARC-b low, ARC-c medium and ARC-d high.",
+  "options": [
+   {
+    "text": "None",
+    "correct": false
+   },
+   {
+    "text": "Medium",
+    "correct": true
+   },
+   {
+    "text": "Low",
+    "correct": false
+   },
+   {
+    "text": "High",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "Which of these is a strategic air-risk mitigation?",
+  "explanation": "Strategic mitigations lower the number of encounters before flight. Radar alerts, observers and avoidance manoeuvres are tactical.",
+  "options": [
+   {
+    "text": "A radar that alerts the pilot to approaching aircraft",
+    "correct": false
+   },
+   {
+    "text": "A pilot who looks for traffic during the flight",
+    "correct": false
+   },
+   {
+    "text": "Restricting flights to times of day with low crewed traffic, supported by traffic data",
+    "correct": true
+   },
+   {
+    "text": "An automatic avoidance manoeuvre",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "Why should detect-and-avoid performance be assessed separately for cooperative and non-cooperative traffic?",
+  "explanation": "A combined figure can overstate performance. Non-cooperative aircraft are often the harder case.",
+  "options": [
+   {
+    "text": "Cooperative traffic does not exist at low altitude",
+    "correct": false
+   },
+   {
+    "text": "Non-cooperative traffic is never a threat",
+    "correct": false
+   },
+   {
+    "text": "Authorities only accept cooperative sensors",
+    "correct": false
+   },
+   {
+    "text": "An average can hide poor performance against aircraft without transponders",
+    "correct": true
+   }
+  ]
+ }
+]

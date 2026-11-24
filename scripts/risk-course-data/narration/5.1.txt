@@ -1,0 +1,9 @@
+Now we put the pieces together into a safety case and an authorization package. First, the ten steps of SORA two point five, in order.
+
+One, documentation of the proposed operation. Two, ground risk, including the adjacent area and the intrinsic GRC. Three, the final GRC after ground mitigations. Four, air risk, the initial ARC and the adjacent airspace. Five, strategic mitigations and the residual ARC. Six, the tactical mitigation performance requirement. Seven, the SAIL. Eight, containment. Nine, operational safety objectives. And ten, the comprehensive safety portfolio, which includes service level agreements for any external service you rely on, such as a C2 network provider or a weather service.
+
+Now think about structure. The top claim is that the operation is acceptably safe in its operational volume. Under it you have sub-claims: ground risk is controlled, air risk is controlled, the aircraft is reliable, the crew is competent, and emergencies are handled. Each sub-claim points to evidence: a document, a test report or a record. And you state the assumptions and limits within which the claims are valid, such as wind, visibility, density and traffic limits.
+
+For an application in the European specific category, the operator normally submits to the authority of the state of registration: the application with the SORA or the matching PDRA, the operations manual with procedures that match your mitigations, the evidence for each OSO at the robustness the SAIL requires, and the training and technical records. Some authorities accept a declaration for low SAILs and review evidence for higher ones. Ask early, because requirements differ by country.
+
+The golden rule is traceability. Every mitigation you claim must appear in the operations manual, and every important manual procedure must trace back to a risk it controls. If a reviewer cannot find the link, they will assume it does not exist.

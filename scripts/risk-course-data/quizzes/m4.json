@@ -1,0 +1,112 @@
+[
+ {
+  "question": "The final GRC is 3 and the residual ARC is ARC-c. What is the SAIL?",
+  "explanation": "In the SAIL table, GRC 3 with ARC-c gives SAIL IV.",
+  "options": [
+   {
+    "text": "IV",
+    "correct": true
+   },
+   {
+    "text": "II",
+    "correct": false
+   },
+   {
+    "text": "III",
+    "correct": false
+   },
+   {
+    "text": "V",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "The final GRC is 2 and the residual ARC is ARC-b. What is the SAIL?",
+  "explanation": "GRC 1 or 2 with ARC-b gives SAIL II.",
+  "options": [
+   {
+    "text": "I",
+    "correct": false
+   },
+   {
+    "text": "II",
+    "correct": true
+   },
+   {
+    "text": "III",
+    "correct": false
+   },
+   {
+    "text": "IV",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "What does the SAIL tell you?",
+  "explanation": "The SAIL sets the level of proof, such as OSO robustness and containment, rather than describing the risk itself.",
+  "options": [
+   {
+    "text": "How many flights the operator may do per day",
+    "correct": false
+   },
+   {
+    "text": "The maximum number of people the UA may fly over",
+    "correct": false
+   },
+   {
+    "text": "How much assurance and integrity the operation must demonstrate",
+    "correct": true
+   },
+   {
+    "text": "The size of the ground risk buffer",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "Which statement describes robustness of a mitigation?",
+  "explanation": "A mitigation needs both a good design and proof that it works. Robustness is the combination.",
+  "options": [
+   {
+    "text": "It is the number of people protected",
+    "correct": false
+   },
+   {
+    "text": "It is the cost of the mitigation",
+    "correct": false
+   },
+   {
+    "text": "It is the age of the equipment",
+    "correct": false
+   },
+   {
+    "text": "It combines integrity (how good the mitigation is) with assurance (how well it is proven)",
+    "correct": true
+   }
+  ]
+ },
+ {
+  "question": "In SORA 2.5, at which levels is the containment requirement set?",
+  "explanation": "SORA 2.5 sets containment as low, medium or high, replacing the earlier basic and enhanced wording.",
+  "options": [
+   {
+    "text": "Low, medium or high",
+    "correct": true
+   },
+   {
+    "text": "Basic or enhanced",
+    "correct": false
+   },
+   {
+    "text": "I to VI",
+    "correct": false
+   },
+   {
+    "text": "Only high",
+    "correct": false
+   }
+  ]
+ }
+]

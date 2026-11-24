@@ -1,0 +1,11 @@
+Now we bring both risks together. The SAIL, the Specific Assurance and Integrity Level, comes from the final ground risk class and the residual air risk class.
+
+Here is how to read the table. For a final GRC of one or two: ARC-a gives SAIL one, ARC-b gives two, ARC-c gives four and ARC-d gives six. For a final GRC of three: ARC-a and ARC-b give two, ARC-c gives four, ARC-d gives six. For GRC four: ARC-a and b give three, c gives four, d gives six. For GRC five: a, b and c give four and d gives six. For GRC six: a, b and c give five and d gives six. And for GRC seven, everything is SAIL six. Above seven, the operation moves to the certified category.
+
+SAIL one and two are low assurance, three and four are medium, and five and six are high. Notice what the SAIL really means. It does not say how risky your operation is. It says how much proof you must provide.
+
+The SAIL drives the robustness of each operational safety objective, the containment requirement, and how much third-party validation and testing the authority expects.
+
+Let us run some examples. A pipeline inspection with final GRC two and residual ARC-b is SAIL two. The same aircraft at six hundred feet, residual ARC-c, becomes SAIL four. Staying below five hundred feet saves a lot of evidence. An urban delivery with final GRC four and residual ARC-c is SAIL four. And a final GRC six with ARC-d is SAIL six, the highest assurance level.
+
+Use the table as a design tool. Before you invest in a new mitigation, ask what it does to the SAIL. If a parachute lowers the final GRC from four to three but the ARC stays c, the SAIL stays four and your evidence burden does not fall. Spend your effort where the table moves.

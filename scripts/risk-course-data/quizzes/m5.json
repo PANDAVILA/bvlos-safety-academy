@@ -1,0 +1,112 @@
+[
+ {
+  "question": "In SORA 2.5, which step comes right after the tactical mitigation performance requirement?",
+  "explanation": "The order is documentation, ground risk, final GRC, initial ARC, strategic mitigations, TMPR, SAIL, containment, OSOs and portfolio.",
+  "options": [
+   {
+    "text": "Documentation of the operation",
+    "correct": false
+   },
+   {
+    "text": "SAIL determination",
+    "correct": true
+   },
+   {
+    "text": "Initial ARC",
+    "correct": false
+   },
+   {
+    "text": "Comprehensive safety portfolio",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "A reviewer cannot find where a claimed mitigation is implemented in the Operations Manual. What is the most likely outcome?",
+  "explanation": "Traceability matters. A mitigation that cannot be traced to procedures and evidence will not be credited.",
+  "options": [
+   {
+    "text": "The reviewer assumes it exists",
+    "correct": false
+   },
+   {
+    "text": "The reviewer lowers the SAIL",
+    "correct": false
+   },
+   {
+    "text": "The reviewer treats the mitigation as unproven",
+    "correct": true
+   },
+   {
+    "text": "The application is approved automatically",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "What start date does the FAA ASHub guide recommend for a Part 107 waiver application?",
+  "explanation": "The guide recommends at least 90 days to allow for FAA review. The end date cannot be more than 48 months after the start date.",
+  "options": [
+   {
+    "text": "The same day",
+    "correct": false
+   },
+   {
+    "text": "At least 7 days after",
+    "correct": false
+   },
+   {
+    "text": "At least 5 years after",
+    "correct": false
+   },
+   {
+    "text": "At least 90 days after the application date",
+    "correct": true
+   }
+  ]
+ },
+ {
+  "question": "Under the August 2025 proposal for Part 108, which operations would need a certificate and an SMS?",
+  "explanation": "The proposal uses permits for lower-risk operations and certificates, with an SMS and a training program, for higher-risk operations.",
+  "options": [
+   {
+    "text": "Higher-risk BVLOS operations",
+    "correct": true
+   },
+   {
+    "text": "Every recreational flight",
+    "correct": false
+   },
+   {
+    "text": "Only flights above 10,000 ft",
+    "correct": false
+   },
+   {
+    "text": "No operations",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "Does the FAA require SORA for a Part 107 BVLOS waiver?",
+  "explanation": "The FAA uses its own waiver process, with a CONOPS and a hazard analysis. SORA is a JARUS and EASA method that helps structure the same content.",
+  "options": [
+   {
+    "text": "Yes, SORA 2.5 is mandatory",
+    "correct": false
+   },
+   {
+    "text": "No, but the same ground and air risk work provides the content the FAA asks for",
+    "correct": true
+   },
+   {
+    "text": "Yes, but only for night flights",
+    "correct": false
+   },
+   {
+    "text": "No, and risk analysis is not needed at all",
+    "correct": false
+   }
+  ]
+ }
+]

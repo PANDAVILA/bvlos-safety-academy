@@ -1,0 +1,13 @@
+Now, how does your aircraft, or your crew, see other aircraft?
+
+First, two types of traffic. Cooperative aircraft broadcast their position, for example with ADS-B or a transponder. Non-cooperative aircraft do not. They include many light aircraft, gliders, paragliders, drones and some helicopters. Your concept must handle both, because many low-altitude encounters involve aircraft without a transponder.
+
+The main options. Airspace observers or visual observers are simple and flexible, but limited by range, terrain, visibility and fatigue. ADS-B In and transponder receivers are reliable for equipped traffic, but do not see the rest. Ground-based radar sees non-cooperative traffic inside its coverage, but has clutter and licensing constraints. Onboard radar, optical, infrared or acoustic sensors move with the aircraft, but face range, weather and false alarms. And segregated airspace removes most traffic, but needs authorization and coordination.
+
+Define your concept in five points. What is detected, and at what range. How the crew is alerted, and how fast. The decision rule: who decides, and what the avoidance manoeuvre is. The well-clear separation you protect. And the time budget: detection, decision, command and manoeuvre.
+
+To validate it, use standards such as ASTM F3442 and RTCA DO-365, which give performance requirements for detect-and-avoid systems. In FAA waiver guidance, validation grows with risk: an applicant statement and data for lower risk, third-party validation with a standard for medium risk, and certification for high risk. Always evaluate cooperative and non-cooperative traffic separately.
+
+A worked calculation for observers. If detect and avoid takes thirty seconds and the aircraft flies at one hundred and twenty knots, it covers one nautical mile. With a detection distance of one and a half miles, the maximum distance of the aircraft from the observer is about half a mile.
+
+Remember: detect and avoid is a chain: sensor, alert, decision, command, manoeuvre. Test the whole chain, not just the sensor.

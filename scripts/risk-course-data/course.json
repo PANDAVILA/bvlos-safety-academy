@@ -1,0 +1,154 @@
+{
+ "slug": "bvlos-risk-assessment-safety-case",
+ "legacySlug": [
+  "advanced-sms-risk-methodology",
+  "metodologia-sms-avanzada"
+ ],
+ "subtitle": "Assess ground and air risk with SORA 2.5 and build the safety case behind FAA waivers and EASA authorizations.",
+ "description": "A practical course on assessing the risk of BVLOS operations and turning the result into a safety case. You work through the ten steps of JARUS SORA 2.5: operational volume, intrinsic and final Ground Risk Class, Air Risk Class, tactical mitigation performance, SAIL, containment and Operational Safety Objectives. Then you learn how to package the evidence for an FAA Part 107 waiver and for an EASA specific category authorization. Each module has a short video lesson, a diagram, written notes and a transcript, and ends with a knowledge check. The capstone gives you an editable Safety Case template and a SORA 2.5 workbook in Excel, and a 50-question final assessment (80% to pass) closes the course. Syllabus mapped to JARUS SORA 2.5, Regulation (EU) 2019/947 and 14 CFR Part 107 waivers. Independent training, not affiliated with or endorsed by any aviation authority.",
+ "frameworks": "JARUS SORA 2.5 (Specific Operations Risk Assessment): the ten-step method for ground risk, air risk, SAIL, containment and OSOs\nRegulation (EU) 2019/947, Article 11, and EASA predefined risk assessments (PDRA) and standard scenarios (STS)\n14 CFR Part 107: waivers of the visual line of sight rule (§107.31) requested through the FAA Aviation Safety Hub\nFAA proposed Part 108 (BVLOS permits and certificates), status to be verified before use",
+ "learningOutcomes": [
+  "Explain what a safety case is and choose the right regulatory pathway in the US and the EU",
+  "Define the operational volume, ground risk buffer and adjacent area for a BVLOS mission",
+  "Calculate the intrinsic and final Ground Risk Class with SORA 2.5 mitigations",
+  "Determine the initial and residual Air Risk Class and the tactical mitigation performance requirement",
+  "Derive the SAIL and use it as a design tool",
+  "Set containment and build an OSO matrix with the right level of evidence",
+  "Prepare an FAA waiver package and an EASA authorization dossier with full traceability",
+  "Produce a working Safety Case and SORA workbook for your own operation"
+ ],
+ "meta": {
+  "title": "BVLOS Risk Assessment and Safety Case",
+  "level": "advanced",
+  "category": "risk-assessment",
+  "priceCents": 19999,
+  "durationHours": 6,
+  "coverImage": "/courses/risk/cover.png",
+  "published": true
+ },
+ "modules": [
+  {
+   "title": "Module 1 — Foundations: Risk, Safety Cases and Regulatory Pathways",
+   "quiz": "m1",
+   "lessons": [
+    {
+     "file": "welcome",
+     "title": "Welcome: How This Course Works",
+     "duration": 5,
+     "preview": true,
+     "image": "/courses/risk/0-safety-case-pipeline.png"
+    },
+    {
+     "file": "1.1",
+     "title": "1.1 What a BVLOS Risk Assessment and a Safety Case Are",
+     "duration": 10,
+     "image": "/courses/risk/1-1-claim-argument-evidence.png"
+    },
+    {
+     "file": "1.2",
+     "title": "1.2 Regulatory Pathways: FAA Waivers, EASA SORA, PDRA and STS",
+     "duration": 10,
+     "image": "/courses/risk/1-2-pathways.png"
+    }
+   ]
+  },
+  {
+   "title": "Module 2 — Describing the Operation and Ground Risk",
+   "quiz": "m2",
+   "lessons": [
+    {
+     "file": "2.1",
+     "title": "2.1 Documenting the Operation and Designing the Operational Volume",
+     "duration": 10,
+     "image": "/courses/risk/2-1-operational-volume.png"
+    },
+    {
+     "file": "2.2",
+     "title": "2.2 Intrinsic Ground Risk Class (iGRC)",
+     "duration": 12,
+     "image": "/courses/risk/2-2-igrc-table.png"
+    },
+    {
+     "file": "2.3",
+     "title": "2.3 Ground Risk Mitigations and Final GRC",
+     "duration": 12,
+     "image": "/courses/risk/2-3-ground-mitigations.png"
+    }
+   ]
+  },
+  {
+   "title": "Module 3 — Air Risk",
+   "quiz": "m3",
+   "lessons": [
+    {
+     "file": "3.1",
+     "title": "3.1 Initial Air Risk Class (ARC)",
+     "duration": 10,
+     "image": "/courses/risk/3-1-arc-flow.png"
+    },
+    {
+     "file": "3.2",
+     "title": "3.2 Strategic Mitigations, Residual ARC and TMPR",
+     "duration": 12,
+     "image": "/courses/risk/3-2-tmpr-daa.png"
+    }
+   ]
+  },
+  {
+   "title": "Module 4 — SAIL, Containment and Operational Safety Objectives",
+   "quiz": "m4",
+   "lessons": [
+    {
+     "file": "4.1",
+     "title": "4.1 Determining the SAIL",
+     "duration": 10,
+     "image": "/courses/risk/4-1-sail-matrix.png"
+    },
+    {
+     "file": "4.2",
+     "title": "4.2 Containment and Operational Safety Objectives (OSOs)",
+     "duration": 12,
+     "image": "/courses/risk/4-2-oso-robustness.png"
+    }
+   ]
+  },
+  {
+   "title": "Module 5 — From Risk Assessment to Authorization",
+   "quiz": "m5",
+   "lessons": [
+    {
+     "file": "5.1",
+     "title": "5.1 Building the Safety Case and the EASA Application",
+     "duration": 12,
+     "image": "/courses/risk/5-1-ten-steps.png"
+    },
+    {
+     "file": "5.2",
+     "title": "5.2 The FAA Waiver Package and the Road to Part 108",
+     "duration": 12,
+     "image": "/courses/risk/5-2-faa-package.png"
+    }
+   ]
+  },
+  {
+   "title": "Module 6 — Capstone Toolkit & Final Assessment",
+   "quiz": "final",
+   "lessons": [
+    {
+     "file": "capstone",
+     "title": "6.1 Capstone Safety Case Toolkit",
+     "duration": 60,
+     "image": null,
+     "attachmentUrl": "/courses/risk/templates/BVLOS-Safety-Case-Template.docx",
+     "attachmentName": "BVLOS Safety Case template (Word)"
+    },
+    {
+     "file": "exam",
+     "title": "6.2 Final Assessment",
+     "duration": 45,
+     "image": null
+    }
+   ]
+  }
+ ]
+}

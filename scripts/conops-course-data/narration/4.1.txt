@@ -1,0 +1,11 @@
+A BVLOS operation is run by people, and the people need clear roles.
+
+The remote pilot in command is responsible for the safe conduct of the flight, with authority to stop or abort. The remote pilot or operator at the control station flies or monitors the aircraft. A payload operator handles sensors or release systems. Visual or airspace observers detect traffic and report. Ground crew handle launch, recovery and site safety. A mission or operations manager plans, approves and keeps the operation within the limits of the manual. And a safety manager audits, investigates and reviews occurrences.
+
+The proposed Part 108 uses two roles that map to these. An operations supervisor, responsible for overall safety, regulatory compliance and training of personnel. And a flight coordinator, who directly oversees flights and can intervene.
+
+Now competence. For each role, define what the person must know and be able to do, and how you check it. Knowledge: regulations, airspace, meteorology, aircraft systems, the ConOps and the manual. Skills: normal and abnormal handling, lost-link and fly-away response, simulator or flight checks. Behaviours: crew resource management, communication, workload management and assertiveness. And currency: recent experience and recurrent training. Keep records of who trained, when, on what, by whom, and the result.
+
+Size the crew by tasks, not by habit. List the tasks for each phase and check that no one needs to do two incompatible tasks at the same time, such as monitoring traffic and handling a payload anomaly.
+
+And manage fatigue. Set maximum duty periods, breaks and handover rules for long corridor missions. A tired observer is a failed barrier.

@@ -1,0 +1,1102 @@
+[
+ {
+  "question": "Which of these is the correct order of the document stack?",
+  "explanation": "The ConOps says what you will do, the risk assessment shows why it is safe, and the manual tells the crew how.",
+  "options": [
+   {
+    "text": "Operations Manual, ConOps, risk assessment",
+    "correct": false
+   },
+   {
+    "text": "Risk assessment, Operations Manual, ConOps",
+    "correct": false
+   },
+   {
+    "text": "ConOps, risk assessment, Operations Manual",
+    "correct": true
+   },
+   {
+    "text": "Checklist, ConOps, risk assessment",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "An insurer reads your ConOps. What is it mainly looking for?",
+  "explanation": "Insurers assess exposure and the controls that reduce it.",
+  "options": [
+   {
+    "text": "The logo quality",
+    "correct": false
+   },
+   {
+    "text": "The colour of the aircraft",
+    "correct": false
+   },
+   {
+    "text": "The size of the client list",
+    "correct": false
+   },
+   {
+    "text": "What can go wrong and what controls exist",
+    "correct": true
+   }
+  ]
+ },
+ {
+  "question": "Why does a ConOps not contain pre-flight checklists?",
+  "explanation": "The ConOps is a decision document. Procedures are detailed in the manual.",
+  "options": [
+   {
+    "text": "It contains decisions and limits, and checklists belong in the Operations Manual",
+    "correct": true
+   },
+   {
+    "text": "Checklists are illegal",
+    "correct": false
+   },
+   {
+    "text": "The authority forbids lists",
+    "correct": false
+   },
+   {
+    "text": "ConOps must be fewer than two pages",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "Which item belongs to the operating environment section?",
+  "explanation": "The environment section lists factors that change the safety case or the performance.",
+  "options": [
+   {
+    "text": "The training budget",
+    "correct": false
+   },
+   {
+    "text": "Terrain, population, airspace, weather, obstacles and radio conditions",
+    "correct": true
+   },
+   {
+    "text": "The sales plan",
+    "correct": false
+   },
+   {
+    "text": "The pilot's salary",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "Which use case typically has long corridors, rural areas and repetitive routes?",
+  "explanation": "Pipelines, power lines and railways are linear corridors with repeated routes.",
+  "options": [
+   {
+    "text": "Indoor warehouse inventory",
+    "correct": false
+   },
+   {
+    "text": "Stadium light shows",
+    "correct": false
+   },
+   {
+    "text": "Linear infrastructure inspection",
+    "correct": true
+   },
+   {
+    "text": "Drone racing",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "What does the flight geography include, according to the lesson?",
+  "explanation": "The FG must reflect real navigation accuracy and tolerance, not just the line on the map.",
+  "options": [
+   {
+    "text": "Only the centre line of the route",
+    "correct": false
+   },
+   {
+    "text": "The whole country",
+    "correct": false
+   },
+   {
+    "text": "The take-off site only",
+    "correct": false
+   },
+   {
+    "text": "The planned route with the navigation accuracy and corridor tolerance you can really fly",
+    "correct": true
+   }
+  ]
+ },
+ {
+  "question": "A UA flies at 25 m/s and the contingency procedure takes 6 seconds to take effect. What distance does the contingency volume need to cover at minimum for this effect?",
+  "explanation": "Distance = speed x time = 25 x 6 = 150 m.",
+  "options": [
+   {
+    "text": "150 m",
+    "correct": true
+   },
+   {
+    "text": "25 m",
+    "correct": false
+   },
+   {
+    "text": "31 m",
+    "correct": false
+   },
+   {
+    "text": "600 m",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "A UA flies at 120 m height. Using the 1:1 starting point, what ground risk buffer results before adjustments?",
+  "explanation": "A 1:1 relationship between height and horizontal distance gives 120 m, to be adjusted for speed, wind and failure mode.",
+  "options": [
+   {
+    "text": "12 m",
+    "correct": false
+   },
+   {
+    "text": "120 m",
+    "correct": true
+   },
+   {
+    "text": "240 m",
+    "correct": false
+   },
+   {
+    "text": "1,200 m",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "FG half-width is 30 m, CV is 150 m and GRB is 120 m. What is the total corridor footprint?",
+  "explanation": "Half-width = 30 + 150 + 120 = 300 m. Footprint = 2 x 300 = 600 m.",
+  "options": [
+   {
+    "text": "300 m",
+    "correct": false
+   },
+   {
+    "text": "150 m",
+    "correct": false
+   },
+   {
+    "text": "600 m",
+    "correct": true
+   },
+   {
+    "text": "1,200 m",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "Which statement about the 1:1 ratio is correct?",
+  "explanation": "The 1:1 rule is a starting point, not a substitute for analysis.",
+  "options": [
+   {
+    "text": "It is a legal requirement everywhere",
+    "correct": false
+   },
+   {
+    "text": "It applies only to multirotors",
+    "correct": false
+   },
+   {
+    "text": "It replaces all analysis",
+    "correct": false
+   },
+   {
+    "text": "It is a common starting point and must be justified and adjusted",
+    "correct": true
+   }
+  ]
+ },
+ {
+  "question": "What is the best definition of the contingency volume?",
+  "explanation": "The contingency volume is the extra operational space used during contingencies.",
+  "options": [
+   {
+    "text": "The space around the flight geography that the UA may enter while contingency procedures are applied",
+    "correct": true
+   },
+   {
+    "text": "The area where the UA takes off",
+    "correct": false
+   },
+   {
+    "text": "The full airspace class",
+    "correct": false
+   },
+   {
+    "text": "The ground below the UA",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "Which principle helps reduce route risk before any mitigation?",
+  "explanation": "Good route design removes exposure rather than mitigating it later.",
+  "options": [
+   {
+    "text": "Maximise the number of waypoints",
+    "correct": false
+   },
+   {
+    "text": "Fly where the risk is low, with fewer turns and shorter exposure over populated areas",
+    "correct": true
+   },
+   {
+    "text": "Cross towns whenever possible",
+    "correct": false
+   },
+   {
+    "text": "Fly as low as possible everywhere",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "Why must the reference for altitude be stated clearly?",
+  "explanation": "Over variable terrain, a constant AMSL changes the height above ground, and the opposite is true for constant AGL.",
+  "options": [
+   {
+    "text": "It is only a formatting matter",
+    "correct": false
+   },
+   {
+    "text": "They are always identical",
+    "correct": false
+   },
+   {
+    "text": "AGL, AMSL and height above take-off are different and change the height above people and obstacles",
+    "correct": true
+   },
+   {
+    "text": "Only the authority cares",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "A route of 42 km with ELAs spaced 4 km apart needs about how many sites?",
+  "explanation": "42 / 4 is 10.5, so about 11 sites including both ends.",
+  "options": [
+   {
+    "text": "About 4",
+    "correct": false
+   },
+   {
+    "text": "About 21",
+    "correct": false
+   },
+   {
+    "text": "About 42",
+    "correct": false
+   },
+   {
+    "text": "About 11",
+    "correct": true
+   }
+  ]
+ },
+ {
+  "question": "What is the purpose of an alternate landing site?",
+  "explanation": "An alternate gives the operation a safe option when the planned landing site is not usable.",
+  "options": [
+   {
+    "text": "To provide a second option for weather or energy reserve problems",
+    "correct": true
+   },
+   {
+    "text": "To store spare batteries",
+    "correct": false
+   },
+   {
+    "text": "To park the client's vehicles",
+    "correct": false
+   },
+   {
+    "text": "To advertise the service",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "Which airspace information should you collect before finalising the route?",
+  "explanation": "The airspace argument needs all the above facts.",
+  "options": [
+   {
+    "text": "Only the airline schedules",
+    "correct": false
+   },
+   {
+    "text": "Airspace class, restricted areas, airfields, low-level traffic and special zones",
+    "correct": true
+   },
+   {
+    "text": "Only the weather forecast",
+    "correct": false
+   },
+   {
+    "text": "Only the client's address",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "A letter of agreement with an airfield operator is an example of what?",
+  "explanation": "Letters of agreement formalise how the operation and the airfield coordinate.",
+  "options": [
+   {
+    "text": "A pilot licence",
+    "correct": false
+   },
+   {
+    "text": "A weather limit",
+    "correct": false
+   },
+   {
+    "text": "A formal coordination arrangement",
+    "correct": true
+   },
+   {
+    "text": "A battery check",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "What does Remote ID or direct remote identification support?",
+  "explanation": "Remote identification requirements differ by country, class and category, so check locally.",
+  "options": [
+   {
+    "text": "Higher payload capacity",
+    "correct": false
+   },
+   {
+    "text": "Longer battery life",
+    "correct": false
+   },
+   {
+    "text": "Better camera quality",
+    "correct": false
+   },
+   {
+    "text": "Identification of the UA by authorities and others, depending on class and category",
+    "correct": true
+   }
+  ]
+ },
+ {
+  "question": "Which C2 architecture offers long range where coverage exists, but varying latency and coverage with height?",
+  "explanation": "Cellular coverage and handovers vary with height and location.",
+  "options": [
+   {
+    "text": "Cellular LTE or 5G",
+    "correct": true
+   },
+   {
+    "text": "Wired tether",
+    "correct": false
+   },
+   {
+    "text": "Voice radio only",
+    "correct": false
+   },
+   {
+    "text": "Visual signals",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "What is the free-space path loss for 5 km at 2,400 MHz, using FSPL = 20 log10(d km) + 20 log10(f MHz) + 32.44?",
+  "explanation": "14.0 + 67.6 + 32.4 = about 114 dB.",
+  "options": [
+   {
+    "text": "About 14 dB",
+    "correct": false
+   },
+   {
+    "text": "About 114 dB",
+    "correct": true
+   },
+   {
+    "text": "About 68 dB",
+    "correct": false
+   },
+   {
+    "text": "About 214 dB",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "With a received power of -76 dBm and a receiver sensitivity of -95 dBm, what is the fade margin?",
+  "explanation": "Margin = -76 - (-95) = 19 dB.",
+  "options": [
+   {
+    "text": "171 dB",
+    "correct": false
+   },
+   {
+    "text": "76 dB",
+    "correct": false
+   },
+   {
+    "text": "19 dB",
+    "correct": true
+   },
+   {
+    "text": "95 dB",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "What should the description of lost-link behaviour include?",
+  "explanation": "Lost-link behaviour must be defined for both the aircraft and the crew.",
+  "options": [
+   {
+    "text": "Only the name of the manufacturer",
+    "correct": false
+   },
+   {
+    "text": "Only the frequency",
+    "correct": false
+   },
+   {
+    "text": "Nothing, it is automatic",
+    "correct": false
+   },
+   {
+    "text": "What the UA does after how many seconds and what the crew does",
+    "correct": true
+   }
+  ]
+ },
+ {
+  "question": "Which is a security measure for the C2 link?",
+  "explanation": "Authenticate and encrypt the link and keep configuration under change control.",
+  "options": [
+   {
+    "text": "Authentication and encryption, with control over who can command the UA",
+    "correct": true
+   },
+   {
+    "text": "Sharing the password with all staff",
+    "correct": false
+   },
+   {
+    "text": "Disabling updates",
+    "correct": false
+   },
+   {
+    "text": "Using the default settings",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "Which kind of aircraft is non-cooperative?",
+  "explanation": "Non-cooperative aircraft do not broadcast their position.",
+  "options": [
+   {
+    "text": "An airliner with ADS-B Out",
+    "correct": false
+   },
+   {
+    "text": "A glider without a transponder",
+    "correct": true
+   },
+   {
+    "text": "A helicopter broadcasting ADS-B Out",
+    "correct": false
+   },
+   {
+    "text": "A transponder-equipped light aircraft",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "Which detect-and-avoid option can see non-cooperative traffic inside its coverage?",
+  "explanation": "Radar detects by reflection, so it can see aircraft that do not broadcast.",
+  "options": [
+   {
+    "text": "ADS-B In",
+    "correct": false
+   },
+   {
+    "text": "A transponder receiver",
+    "correct": false
+   },
+   {
+    "text": "Ground-based radar",
+    "correct": true
+   },
+   {
+    "text": "A weather report",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "Which standards give performance requirements for detect-and-avoid systems, as mentioned in the lesson?",
+  "explanation": "ASTM F3442 and RTCA DO-365 address detect-and-avoid performance.",
+  "options": [
+   {
+    "text": "ISO 9001 and ISO 14001",
+    "correct": false
+   },
+   {
+    "text": "IEC 60950 and IEC 62368",
+    "correct": false
+   },
+   {
+    "text": "ASTM F3322 and ASTM D638",
+    "correct": false
+   },
+   {
+    "text": "ASTM F3442 and RTCA DO-365",
+    "correct": true
+   }
+  ]
+ },
+ {
+  "question": "A UA flies at 120 knots and detect-and-avoid takes 30 seconds. With 1.5 NM detection distance, how far can the UA be from the observer?",
+  "explanation": "The UA covers 1 NM in 30 seconds at 120 kt. 1.5 - 1.0 = 0.5 NM.",
+  "options": [
+   {
+    "text": "About 0.5 NM",
+    "correct": true
+   },
+   {
+    "text": "About 1.5 NM",
+    "correct": false
+   },
+   {
+    "text": "About 2.5 NM",
+    "correct": false
+   },
+   {
+    "text": "About 1.0 NM",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "Which is a link in the detect-and-avoid chain?",
+  "explanation": "The whole chain must be tested, not just the sensor.",
+  "options": [
+   {
+    "text": "Plan, budget, schedule and invoice",
+    "correct": false
+   },
+   {
+    "text": "Sensor, alert, decision, command and manoeuvre",
+    "correct": true
+   },
+   {
+    "text": "Take-off, landing and storage",
+    "correct": false
+   },
+   {
+    "text": "Policy and procedure only",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "Which role directly oversees flights and can intervene, in the proposed Part 108?",
+  "explanation": "The flight coordinator oversees flights directly. The operations supervisor is responsible for overall safety and compliance.",
+  "options": [
+   {
+    "text": "The operations supervisor",
+    "correct": false
+   },
+   {
+    "text": "The accountant",
+    "correct": false
+   },
+   {
+    "text": "The flight coordinator",
+    "correct": true
+   },
+   {
+    "text": "The sales manager",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "What is the purpose of recording competence of each crew member?",
+  "explanation": "Records prove competence and allow you to catch expiring checks.",
+  "options": [
+   {
+    "text": "To decide holiday rotas",
+    "correct": false
+   },
+   {
+    "text": "To advertise the company",
+    "correct": false
+   },
+   {
+    "text": "To pay overtime",
+    "correct": false
+   },
+   {
+    "text": "To show who is trained, on what, when and with what result, and when it expires",
+    "correct": true
+   }
+  ]
+ },
+ {
+  "question": "Which statement about fatigue is best?",
+  "explanation": "A tired observer or pilot is a failed barrier.",
+  "options": [
+   {
+    "text": "Set maximum duty periods, breaks and handover rules for long corridor missions",
+    "correct": true
+   },
+   {
+    "text": "Fatigue is not relevant to BVLOS",
+    "correct": false
+   },
+   {
+    "text": "Only pilots can be tired",
+    "correct": false
+   },
+   {
+    "text": "Fatigue is solved by coffee",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "In which phase do you verify the failsafe and test the link?",
+  "explanation": "Failsafe verification and link tests belong in the pre-flight phase.",
+  "options": [
+   {
+    "text": "Post-flight",
+    "correct": false
+   },
+   {
+    "text": "Pre-flight",
+    "correct": true
+   },
+   {
+    "text": "Planning, only on paper",
+    "correct": false
+   },
+   {
+    "text": "Never, it is automatic",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "A go/no-go item fails. What is the correct decision?",
+  "explanation": "If any item fails, the answer is no-go.",
+  "options": [
+   {
+    "text": "Go, if the client is waiting",
+    "correct": false
+   },
+   {
+    "text": "Go, if the failure is small",
+    "correct": false
+   },
+   {
+    "text": "No-go, record the reason and fix or wait",
+    "correct": true
+   },
+   {
+    "text": "Ask the observer to decide",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "What is the benefit of challenge-and-response for critical checklist items?",
+  "explanation": "A spoken challenge and a confirmed response catch errors.",
+  "options": [
+   {
+    "text": "It shortens the flight",
+    "correct": false
+   },
+   {
+    "text": "It removes the need for training",
+    "correct": false
+   },
+   {
+    "text": "It replaces the manual",
+    "correct": false
+   },
+   {
+    "text": "It reduces the chance of skipping or assuming a step",
+    "correct": true
+   }
+  ]
+ },
+ {
+  "question": "Which of these is a contingency rather than an emergency?",
+  "explanation": "A contingency is a foreseen abnormal event that can be handled in the contingency volume.",
+  "options": [
+   {
+    "text": "A degraded C2 link that can be solved inside the contingency volume",
+    "correct": true
+   },
+   {
+    "text": "A battery fire at the launch site",
+    "correct": false
+   },
+   {
+    "text": "A mid-air collision",
+    "correct": false
+   },
+   {
+    "text": "A fly-away over a town",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "Which failure case should be given a procedure that includes \"people away and upwind\"?",
+  "explanation": "A fire releases toxic smoke, so keep people away and upwind and follow the manufacturer's guidance.",
+  "options": [
+   {
+    "text": "Weather deterioration",
+    "correct": false
+   },
+   {
+    "text": "Battery fire",
+    "correct": true
+   },
+   {
+    "text": "GNSS degradation",
+    "correct": false
+   },
+   {
+    "text": "Low battery warning",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "In the US, within how many calendar days must a Part 107 remote pilot report certain injuries or property damage over $500 to the FAA?",
+  "explanation": "Section 107.9 requires the report within 10 calendar days for the events it lists.",
+  "options": [
+   {
+    "text": "24 hours",
+    "correct": false
+   },
+   {
+    "text": "30 days",
+    "correct": false
+   },
+   {
+    "text": "10 calendar days",
+    "correct": true
+   },
+   {
+    "text": "1 year",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "After an occurrence, what should the crew preserve?",
+  "explanation": "Data and wreckage help the investigation.",
+  "options": [
+   {
+    "text": "Only the battery",
+    "correct": false
+   },
+   {
+    "text": "Nothing",
+    "correct": false
+   },
+   {
+    "text": "Only the remote controller",
+    "correct": false
+   },
+   {
+    "text": "Logs, memory cards and wreckage",
+    "correct": true
+   }
+  ]
+ },
+ {
+  "question": "What is a tabletop exercise?",
+  "explanation": "Tabletop exercises test plans and communication without flying.",
+  "options": [
+   {
+    "text": "A discussion-based exercise that walks through an emergency scenario",
+    "correct": true
+   },
+   {
+    "text": "A flight test at maximum speed",
+    "correct": false
+   },
+   {
+    "text": "A sales meeting",
+    "correct": false
+   },
+   {
+    "text": "A battery test",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "Which is part of the structure of an Operations Manual?",
+  "explanation": "The manual covers organization, aircraft, limits, procedures, reporting and records.",
+  "options": [
+   {
+    "text": "Marketing slogans",
+    "correct": false
+   },
+   {
+    "text": "Normal procedures, contingency and emergency procedures, and occurrence reporting",
+    "correct": true
+   },
+   {
+    "text": "Competitor analysis",
+    "correct": false
+   },
+   {
+    "text": "Staff salaries",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "The risk assessment credits observers. Which manual content must exist?",
+  "explanation": "A credited mitigation must be implemented in the manual.",
+  "options": [
+   {
+    "text": "Nothing",
+    "correct": false
+   },
+   {
+    "text": "A note that observers are optional",
+    "correct": false
+   },
+   {
+    "text": "An observer procedure and a placement table",
+    "correct": true
+   },
+   {
+    "text": "A chapter about marketing",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "What trick helps keep the risk assessment and the manual aligned?",
+  "explanation": "A cross-reference makes gaps easy to find.",
+  "options": [
+   {
+    "text": "Print both on the same colour of paper",
+    "correct": false
+   },
+   {
+    "text": "Write them on the same day",
+    "correct": false
+   },
+   {
+    "text": "Delete duplicates",
+    "correct": false
+   },
+   {
+    "text": "Add a column to each mitigation that says where in the manual it is implemented",
+    "correct": true
+   }
+  ]
+ },
+ {
+  "question": "When should the Operations Manual be reviewed?",
+  "explanation": "Regular and event-driven reviews keep it accurate.",
+  "options": [
+   {
+    "text": "After every occurrence, every aircraft or software change and at least annually",
+    "correct": true
+   },
+   {
+    "text": "Only when the authority asks",
+    "correct": false
+   },
+   {
+    "text": "Never",
+    "correct": false
+   },
+   {
+    "text": "Only after an accident",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "Why test the manual with someone who did not write it?",
+  "explanation": "Fresh readers expose assumptions and unclear steps.",
+  "options": [
+   {
+    "text": "It makes the manual shorter",
+    "correct": false
+   },
+   {
+    "text": "Every question they ask shows a gap in the text",
+    "correct": true
+   },
+   {
+    "text": "It saves translation costs",
+    "correct": false
+   },
+   {
+    "text": "It satisfies the lawyers",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "Which is true about approval of the manual?",
+  "explanation": "Practices differ by authority, so ask early.",
+  "options": [
+   {
+    "text": "All authorities approve manuals in the same way",
+    "correct": false
+   },
+   {
+    "text": "Manuals are never read",
+    "correct": false
+   },
+   {
+    "text": "Some authorities approve it and others review it, but a clear and consistent manual is evidence in both cases",
+    "correct": true
+   },
+   {
+    "text": "Only the client approves it",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "What does the ConOps limit \"daylight only\" mean for the operations manual?",
+  "explanation": "Limits in the ConOps must appear as limits in the manual.",
+  "options": [
+   {
+    "text": "It can be ignored in the manual",
+    "correct": false
+   },
+   {
+    "text": "It applies only to the client's staff",
+    "correct": false
+   },
+   {
+    "text": "It means any time of day is acceptable",
+    "correct": false
+   },
+   {
+    "text": "The manual must state daylight as an operating limit and include a go/no-go check for it",
+    "correct": true
+   }
+  ]
+ },
+ {
+  "question": "Which is the best reason for planning energy decision points along a route?",
+  "explanation": "Decision points tie remaining energy to the options still available.",
+  "options": [
+   {
+    "text": "They define where the flight must continue, return or divert based on remaining energy",
+    "correct": true
+   },
+   {
+    "text": "They shorten the route",
+    "correct": false
+   },
+   {
+    "text": "They avoid the need for batteries",
+    "correct": false
+   },
+   {
+    "text": "They make the aircraft heavier",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "Which factor does a ConOps NOT need to contain to be useful to the authority?",
+  "explanation": "Keep the ConOps focused on decisions and limits. Contact details belong in the manual appendices.",
+  "options": [
+   {
+    "text": "The operating volume",
+    "correct": false
+   },
+   {
+    "text": "The personal phone numbers of every employee",
+    "correct": true
+   },
+   {
+    "text": "The aircraft limits",
+    "correct": false
+   },
+   {
+    "text": "The crew roles",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "Which statement about spectrum is correct?",
+  "explanation": "Spectrum use must be authorized and verified in the field.",
+  "options": [
+   {
+    "text": "Any frequency is fine for BVLOS",
+    "correct": false
+   },
+   {
+    "text": "Coverage never changes with height",
+    "correct": false
+   },
+   {
+    "text": "Use authorized equipment and measure coverage along the route, including at height",
+    "correct": true
+   },
+   {
+    "text": "Interference is not a risk",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "What is the main value of using a volume calculator in the toolkit?",
+  "explanation": "A repeatable calculation makes the volumes traceable and easy to update.",
+  "options": [
+   {
+    "text": "It replaces the risk assessment",
+    "correct": false
+   },
+   {
+    "text": "It approves the operation",
+    "correct": false
+   },
+   {
+    "text": "It increases the speed of the UA",
+    "correct": false
+   },
+   {
+    "text": "It returns the corridor footprint consistently from the inputs so the numbers can be traced",
+    "correct": true
+   }
+  ]
+ }
+]

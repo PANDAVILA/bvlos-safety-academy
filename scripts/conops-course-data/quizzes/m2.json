@@ -1,0 +1,112 @@
+[
+ {
+  "question": "A UA flies a corridor with 8 m navigation error and 15 m route tolerance. Reaction time is 5 s at 20 m/s and the flight height is 100 m with a 1:1 ground risk buffer. What is the total footprint width across the corridor, if you use the FG half-width, CV and GRB as in the lesson?",
+  "explanation": "FG half-width = 8 + 15 = 23 m. CV = 20 x 5 = 100 m. GRB = 100 m. Half-width = 223 m, so the footprint is 2 x 223 = 446 m.",
+  "options": [
+   {
+    "text": "446 m",
+    "correct": true
+   },
+   {
+    "text": "223 m",
+    "correct": false
+   },
+   {
+    "text": "300 m",
+    "correct": false
+   },
+   {
+    "text": "600 m",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "What does the contingency volume depend on most directly?",
+  "explanation": "The CV must cover the distance travelled while the problem is detected and the contingency procedure is applied.",
+  "options": [
+   {
+    "text": "The colour of the UA",
+    "correct": false
+   },
+   {
+    "text": "The UA's speed and the time it takes for the contingency procedure to take effect",
+    "correct": true
+   },
+   {
+    "text": "The number of observers",
+    "correct": false
+   },
+   {
+    "text": "The price of the mission",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "A fixed wing flies at 150 m with a glide ratio of 15:1. About how far can it glide?",
+  "explanation": "Glide distance is height x glide ratio, 150 x 15 = 2,250 m.",
+  "options": [
+   {
+    "text": "About 150 m",
+    "correct": false
+   },
+   {
+    "text": "About 15 km",
+    "correct": false
+   },
+   {
+    "text": "About 2.25 km",
+    "correct": true
+   },
+   {
+    "text": "About 225 m",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "With the glide range of 2.25 km, which spacing of emergency landing areas along a corridor lets every point reach one, ignoring wind?",
+  "explanation": "The farthest point from an ELA is half the spacing. A 4 km spacing gives 2 km, within 2.25 km. A 6 km spacing gives 3 km, which is too far.",
+  "options": [
+   {
+    "text": "6 km",
+    "correct": false
+   },
+   {
+    "text": "9 km",
+    "correct": false
+   },
+   {
+    "text": "12 km",
+    "correct": false
+   },
+   {
+    "text": "4 km",
+    "correct": true
+   }
+  ]
+ },
+ {
+  "question": "Why does a NOTAM not replace coordination with air traffic services in controlled airspace?",
+  "explanation": "Coordination and clearance are separate from notification.",
+  "options": [
+   {
+    "text": "A NOTAM informs other users but does not separate traffic or grant a clearance",
+    "correct": true
+   },
+   {
+    "text": "NOTAMs are not allowed for UAS",
+    "correct": false
+   },
+   {
+    "text": "NOTAMs are only issued in the US",
+    "correct": false
+   },
+   {
+    "text": "NOTAMs cover only the ground",
+    "correct": false
+   }
+  ]
+ }
+]

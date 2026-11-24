@@ -1,0 +1,11 @@
+Now the sky. The air risk class, or ARC, is a qualitative class from a to d that describes how likely your aircraft is to meet a crewed aircraft. It depends on the airspace you fly in, not on your aircraft.
+
+ARC-a means atypical or segregated airspace, with a very low encounter rate. ARC-b is a low encounter rate. ARC-c is medium. ARC-d is high.
+
+Here is the simplified flow we use in this course. If the airspace is atypical or segregated, for example a restricted area where crewed traffic is excluded, the class is ARC-a. Above flight level six hundred, it is ARC-b. In an airport or heliport environment, it is ARC-d in class B, C or D airspace, and ARC-c otherwise. Above five hundred feet above ground level, a Mode C veil, a transponder mandatory zone or controlled airspace give ARC-d, and other airspace gives ARC-c. At or below five hundred feet, a Mode C veil, controlled airspace or an urban area give ARC-c, and uncontrolled rural airspace gives ARC-b.
+
+In a real dossier, follow the figure and the airspace encounter categories of the SORA version your authority accepts, and justify your choice with airspace data.
+
+Some common mistakes. Using the lowest altitude of the route instead of the highest point of the volume. Forgetting helicopters, aerial work, gliders and paragliders at low level. Treating class G as empty, because crewed aircraft fly there too, often without a transponder. And forgetting the contingency volume when you check the airspace.
+
+An example. A rural pipeline inspection flown at one hundred and twenty feet above ground, in uncontrolled airspace away from airports, is ARC-b. The same route flown at six hundred feet becomes ARC-c. Altitude alone changed the class.

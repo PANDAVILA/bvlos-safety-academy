@@ -1,0 +1,13 @@
+Once you have the initial ARC, you can try to reduce it, and then you must show how you will handle the traffic that remains.
+
+Strategic mitigations lower the number of encounters that could happen. You apply them before the flight, and the authority has to accept them. Examples are restrictions by boundary, by time of day or by time of exposure, flying in or next to special use airspace, pre-agreements with air navigation or U-space service providers, a NOTAM, notification of military low flying, and outreach to local flying clubs. Be careful. A NOTAM alone rarely lowers the class, because crewed pilots may not read it and it does not prevent a collision. Bring data, such as traffic counts.
+
+After strategic mitigations you have the residual ARC. It sets the tactical mitigation performance requirement, or TMPR. ARC-a has no requirement. ARC-b needs low performance. ARC-c needs medium. ARC-d needs high.
+
+How do you meet it? With airspace observers, ground-based radar, ADS-B and other cooperative sensors, onboard sensors, or a full detect and avoid system. Always assess cooperative and non-cooperative traffic separately, because an average can hide poor performance against aircraft without transponders.
+
+From the FAA waiver point of view, the validation grows with the risk. For low risk, a statement and data can be enough. For medium risk, evaluators expect third-party validation and an industry standard such as ASTM F3442 or RTCA DO-365. For high risk, certification. Ground radars need an FCC grant number.
+
+For visual observers, the FAA guidance gives reference detection distances of about one and a half statute miles for traffic coming towards you, and two to two and a half on tangential tracks. If your detect and avoid time is thirty seconds and the aircraft flies at one hundred and twenty knots, you need one nautical mile. With a detection distance of one and a half, the observer limit is about half a nautical mile.
+
+A mitigation counts only if you can show how you know it works.

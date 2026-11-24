@@ -1,0 +1,1102 @@
+[
+ {
+  "question": "A reviewer asks, \"Why should we believe your operation is acceptably safe?\" Which part of the safety case answers it?",
+  "explanation": "The claim says the operation is safe. The argument explains why, and the evidence (tests, declarations, records) supports each step.",
+  "options": [
+   {
+    "text": "The cover page",
+    "correct": false
+   },
+   {
+    "text": "The argument, supported by evidence",
+    "correct": true
+   },
+   {
+    "text": "The list of hazards alone",
+    "correct": false
+   },
+   {
+    "text": "The insurance certificate",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "Which item is evidence rather than a claim?",
+  "explanation": "Evidence is something a reviewer can inspect: reports, data, procedures and records.",
+  "options": [
+   {
+    "text": "The statement \"the parachute is reliable\"",
+    "correct": false
+   },
+   {
+    "text": "The goal \"no one is harmed\"",
+    "correct": false
+   },
+   {
+    "text": "A third-party test report for the parachute",
+    "correct": true
+   },
+   {
+    "text": "The sentence \"risk is low\"",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "A US operator wants to fly BVLOS today under Part 107, while Part 108 is still a proposal. Which route applies?",
+  "explanation": "Part 108 is not final. BVLOS under Part 107 needs a waiver, requested through ASHub.",
+  "options": [
+   {
+    "text": "Apply for a Part 108 permit",
+    "correct": false
+   },
+   {
+    "text": "Notify the FAA by email and fly",
+    "correct": false
+   },
+   {
+    "text": "Use an EASA STS declaration",
+    "correct": false
+   },
+   {
+    "text": "Request a waiver of the visual line of sight rule in the FAA Aviation Safety Hub, with a CONOPS and hazard analysis",
+    "correct": true
+   }
+  ]
+ },
+ {
+  "question": "In which EU category does BVLOS normally sit?",
+  "explanation": "BVLOS normally needs an operational risk assessment and authorization, which is the specific category.",
+  "options": [
+   {
+    "text": "The specific category",
+    "correct": true
+   },
+   {
+    "text": "The open category, subcategory A1",
+    "correct": false
+   },
+   {
+    "text": "The open category, subcategory A3",
+    "correct": false
+   },
+   {
+    "text": "It is not allowed at all",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "Which standard scenario targets BVLOS over a controlled ground area in a sparsely populated area, with limits on distance and the use of airspace observers?",
+  "explanation": "STS-02 is the European standard scenario for BVLOS with a UA over a controlled ground area in a sparsely populated area.",
+  "options": [
+   {
+    "text": "STS-01",
+    "correct": false
+   },
+   {
+    "text": "STS-02",
+    "correct": true
+   },
+   {
+    "text": "A1/A3",
+    "correct": false
+   },
+   {
+    "text": "G-03",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "Which predefined risk assessment is for BVLOS up to 1 km, or 2 km with airspace observers, over a controlled ground area in a sparsely populated area?",
+  "explanation": "S-02 covers BVLOS up to 1 km or 2 km with airspace observers over a controlled ground area. Conditions are revised from time to time, so check the current text.",
+  "options": [
+   {
+    "text": "PDRA S-01",
+    "correct": false
+   },
+   {
+    "text": "PDRA G-02",
+    "correct": false
+   },
+   {
+    "text": "PDRA S-02",
+    "correct": true
+   },
+   {
+    "text": "PDRA G-03",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "Which item belongs in the Step 1 description of the operation?",
+  "explanation": "A vague description makes the assessor assume the worst case, so describe the UAS, mission, environment, people and procedures.",
+  "options": [
+   {
+    "text": "Only the UA brand and price",
+    "correct": false
+   },
+   {
+    "text": "Only the planned flight date",
+    "correct": false
+   },
+   {
+    "text": "Only the pilot's licence number",
+    "correct": false
+   },
+   {
+    "text": "The safety features the UAS really has, the mission, the environment, the crew and the procedures",
+    "correct": true
+   }
+  ]
+ },
+ {
+  "question": "Which layer of the operational volume provides space for applying contingency procedures?",
+  "explanation": "The flight geography is the normal route. The contingency volume is the extra space used while contingency procedures are applied.",
+  "options": [
+   {
+    "text": "The contingency volume",
+    "correct": true
+   },
+   {
+    "text": "The flight geography",
+    "correct": false
+   },
+   {
+    "text": "The adjacent area",
+    "correct": false
+   },
+   {
+    "text": "The take-off site",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "Which failure modes should the size of the ground risk buffer reflect?",
+  "explanation": "The buffer is sized for the way this UA fails and descends, adjusted for speed, wind and altitude.",
+  "options": [
+   {
+    "text": "Only the battery capacity",
+    "correct": false
+   },
+   {
+    "text": "Glide, ballistic descent and fly-away of the specific UA",
+    "correct": true
+   },
+   {
+    "text": "Only the pilot's reaction time",
+    "correct": false
+   },
+   {
+    "text": "Only the distance to the nearest road",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "At 100 m height a team sets a 100 m horizontal buffer using the 1:1 rule. What is true about this value?",
+  "explanation": "The 1:1 rule is a rule of thumb. The final size must be justified for the UA and conditions.",
+  "options": [
+   {
+    "text": "It is the legal minimum everywhere",
+    "correct": false
+   },
+   {
+    "text": "It replaces the need for analysis",
+    "correct": false
+   },
+   {
+    "text": "It is a common starting point that must be adjusted for speed, wind and failure mode",
+    "correct": true
+   },
+   {
+    "text": "It only applies to fixed-wing UA",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "In SORA 2.5, how is the vertical extent of the adjacent area limited?",
+  "explanation": "The vertical limit uses the altitude gained in three minutes at maximum climb rate, with a minimum above the top of the volume.",
+  "options": [
+   {
+    "text": "By the maximum height of the nearest building",
+    "correct": false
+   },
+   {
+    "text": "By a fixed value of 120 m",
+    "correct": false
+   },
+   {
+    "text": "It is not considered",
+    "correct": false
+   },
+   {
+    "text": "By the altitude the UA could gain in 3 minutes at maximum climb rate, with a minimum margin above the volume",
+    "correct": true
+   }
+  ]
+ },
+ {
+  "question": "A multirotor has a maximum dimension of 0.9 m and a maximum speed of 20 m/s. It flies over an area with 3,000 people per km². What is the iGRC?",
+  "explanation": "The 1 m / 25 m/s class in the row for fewer than 5,000 people per km² gives an iGRC of 5.",
+  "options": [
+   {
+    "text": "5",
+    "correct": true
+   },
+   {
+    "text": "3",
+    "correct": false
+   },
+   {
+    "text": "6",
+    "correct": false
+   },
+   {
+    "text": "7",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "A UA with a 7 m wingspan and a maximum speed of 70 m/s flies over an area with 300 people per km². What is the iGRC?",
+  "explanation": "It uses the 8 m / 75 m/s class. In the row for fewer than 500 people per km² that class has an iGRC of 6.",
+  "options": [
+   {
+    "text": "5",
+    "correct": false
+   },
+   {
+    "text": "6",
+    "correct": true
+   },
+   {
+    "text": "7",
+    "correct": false
+   },
+   {
+    "text": "4",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "A UA with an 18 m wingspan and a maximum speed of 100 m/s flies over an area with 20 people per km². What is the iGRC?",
+  "explanation": "It uses the 20 m / 120 m/s class. In the row for fewer than 50 people per km² that class has an iGRC of 6.",
+  "options": [
+   {
+    "text": "5",
+    "correct": false
+   },
+   {
+    "text": "7",
+    "correct": false
+   },
+   {
+    "text": "6",
+    "correct": true
+   },
+   {
+    "text": "3",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "A 2.5 m UA flying at 30 m/s operates inside a demonstrated controlled ground area. What is the iGRC?",
+  "explanation": "The 3 m / 35 m/s class in the controlled ground area row has an iGRC of 1.",
+  "options": [
+   {
+    "text": "3",
+    "correct": false
+   },
+   {
+    "text": "4",
+    "correct": false
+   },
+   {
+    "text": "2",
+    "correct": false
+   },
+   {
+    "text": "1",
+    "correct": true
+   }
+  ]
+ },
+ {
+  "question": "The route crosses a village. How should population density be chosen?",
+  "explanation": "The worst case applies. Averages over a large area can hide dense pockets.",
+  "options": [
+   {
+    "text": "Use the highest density that applies to the volume and the adjacent area",
+    "correct": true
+   },
+   {
+    "text": "Use the average over the whole region",
+    "correct": false
+   },
+   {
+    "text": "Use the lowest density along the route",
+    "correct": false
+   },
+   {
+    "text": "Ignore the village if the flight is short",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "What must you demonstrate to use the controlled ground area row?",
+  "explanation": "A controlled ground area means access is controlled, so uninvolved people are not exposed.",
+  "options": [
+   {
+    "text": "That the area is far from airports",
+    "correct": false
+   },
+   {
+    "text": "That the operator controls who is on the ground in the area",
+    "correct": true
+   },
+   {
+    "text": "That the UA is lighter than 25 kg",
+    "correct": false
+   },
+   {
+    "text": "That the flight is during daylight",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "A 35 m wingspan UA at 190 m/s is planned over a city with more than 50,000 people per km². What does SORA say about this iGRC?",
+  "explanation": "In the iGRC table that combination is marked as not part of SORA.",
+  "options": [
+   {
+    "text": "It is iGRC 10",
+    "correct": false
+   },
+   {
+    "text": "It is iGRC 1",
+    "correct": false
+   },
+   {
+    "text": "It is outside the scope of SORA",
+    "correct": true
+   },
+   {
+    "text": "It is iGRC 5",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "M1(A) sheltering at medium robustness gives which credit?",
+  "explanation": "Sheltering gives -1 at low and -2 at medium robustness. High is not available.",
+  "options": [
+   {
+    "text": "-1",
+    "correct": false
+   },
+   {
+    "text": "-3",
+    "correct": false
+   },
+   {
+    "text": "0",
+    "correct": false
+   },
+   {
+    "text": "-2",
+    "correct": true
+   }
+  ]
+ },
+ {
+  "question": "At which robustness is M1(A) sheltering not available?",
+  "explanation": "M1(A) is available at low and medium robustness only.",
+  "options": [
+   {
+    "text": "High",
+    "correct": true
+   },
+   {
+    "text": "Low",
+    "correct": false
+   },
+   {
+    "text": "Medium",
+    "correct": false
+   },
+   {
+    "text": "It is available at all levels",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "M1(C), ground observation, is classed as which kind of mitigation, and at what credit?",
+  "explanation": "Observers on the ground act during the flight, so M1(C) is tactical and gives -1 at low robustness.",
+  "options": [
+   {
+    "text": "A strategic mitigation, -2 at high robustness",
+    "correct": false
+   },
+   {
+    "text": "A tactical mitigation, -1 at low robustness",
+    "correct": true
+   },
+   {
+    "text": "A design mitigation, -1 at medium robustness",
+    "correct": false
+   },
+   {
+    "text": "An air-risk mitigation, -1 at low robustness",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "A UA has an iGRC of 6. You justify M1(A) at medium robustness and M2 at medium robustness. What is the final GRC, before checking any cap?",
+  "explanation": "6 - 2 - 1 = 3.",
+  "options": [
+   {
+    "text": "2",
+    "correct": false
+   },
+   {
+    "text": "4",
+    "correct": false
+   },
+   {
+    "text": "3",
+    "correct": true
+   },
+   {
+    "text": "5",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "What is the lowest value the final GRC can take?",
+  "explanation": "The final GRC is never lower than 1.",
+  "options": [
+   {
+    "text": "0",
+    "correct": false
+   },
+   {
+    "text": "-1",
+    "correct": false
+   },
+   {
+    "text": "2",
+    "correct": false
+   },
+   {
+    "text": "1",
+    "correct": true
+   }
+  ]
+ },
+ {
+  "question": "In the claim, integrity argument and assurance structure for a mitigation, what does assurance show?",
+  "explanation": "Integrity is how good the mitigation is. Assurance is the proof.",
+  "options": [
+   {
+    "text": "How you know the mitigation really works, for example tests and validation",
+    "correct": true
+   },
+   {
+    "text": "How much the mitigation costs",
+    "correct": false
+   },
+   {
+    "text": "How long the crew trained",
+    "correct": false
+   },
+   {
+    "text": "Which manufacturer made the part",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "In the simplified flow, an operation in Class D airspace in an airport environment has which initial ARC?",
+  "explanation": "An airport or heliport environment in Class B, C or D airspace gives ARC-d.",
+  "options": [
+   {
+    "text": "ARC-b",
+    "correct": false
+   },
+   {
+    "text": "ARC-d",
+    "correct": true
+   },
+   {
+    "text": "ARC-c",
+    "correct": false
+   },
+   {
+    "text": "ARC-a",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "An urban operation is flown at 200 ft AGL, outside controlled airspace. What is the initial ARC in the simplified flow?",
+  "explanation": "At or below 500 ft AGL, urban areas give ARC-c.",
+  "options": [
+   {
+    "text": "ARC-b",
+    "correct": false
+   },
+   {
+    "text": "ARC-d",
+    "correct": false
+   },
+   {
+    "text": "ARC-c",
+    "correct": true
+   },
+   {
+    "text": "ARC-a",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "The highest point of an operational volume is 520 ft AGL, in uncontrolled rural airspace. What is the initial ARC?",
+  "explanation": "Above 500 ft AGL, uncontrolled rural airspace gives ARC-c. Use the highest point of the volume, not the typical cruise altitude.",
+  "options": [
+   {
+    "text": "ARC-b",
+    "correct": false
+   },
+   {
+    "text": "ARC-a",
+    "correct": false
+   },
+   {
+    "text": "ARC-d",
+    "correct": false
+   },
+   {
+    "text": "ARC-c",
+    "correct": true
+   }
+  ]
+ },
+ {
+  "question": "What is a common mistake when determining the initial ARC?",
+  "explanation": "Crewed aircraft, often without transponders, fly in Class G, especially at low level.",
+  "options": [
+   {
+    "text": "Treating Class G airspace as empty of crewed traffic",
+    "correct": true
+   },
+   {
+    "text": "Including the contingency volume",
+    "correct": false
+   },
+   {
+    "text": "Using airspace data",
+    "correct": false
+   },
+   {
+    "text": "Using the highest altitude of the volume",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "Which is a strategic mitigation that can lower the encounter rate?",
+  "explanation": "Strategic mitigations such as limits by boundary, chronology or time of exposure reduce how often encounters could happen.",
+  "options": [
+   {
+    "text": "Hoping that no aircraft are present",
+    "correct": false
+   },
+   {
+    "text": "Limiting the time of exposure within an airspace, supported by traffic data",
+    "correct": true
+   },
+   {
+    "text": "Installing a bigger battery",
+    "correct": false
+   },
+   {
+    "text": "Training the pilot to fly faster",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "Why does a NOTAM alone rarely lower the ARC?",
+  "explanation": "A NOTAM informs but does not separate traffic. Support the claim with data and other measures.",
+  "options": [
+   {
+    "text": "NOTAMs are illegal for UAS",
+    "correct": false
+   },
+   {
+    "text": "NOTAMs are only for military flights",
+    "correct": false
+   },
+   {
+    "text": "Crewed pilots may not read it, and it does not by itself prevent a collision",
+    "correct": true
+   },
+   {
+    "text": "NOTAMs always cost money",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "What tactical mitigation performance requirement applies to a residual ARC-b?",
+  "explanation": "ARC-b needs low performance. ARC-a has no requirement.",
+  "options": [
+   {
+    "text": "None",
+    "correct": false
+   },
+   {
+    "text": "Medium",
+    "correct": false
+   },
+   {
+    "text": "High",
+    "correct": false
+   },
+   {
+    "text": "Low",
+    "correct": true
+   }
+  ]
+ },
+ {
+  "question": "What tactical mitigation performance requirement applies to a residual ARC-d?",
+  "explanation": "ARC-d, the highest encounter rate, needs a high performance level.",
+  "options": [
+   {
+    "text": "High",
+    "correct": true
+   },
+   {
+    "text": "Low",
+    "correct": false
+   },
+   {
+    "text": "Medium",
+    "correct": false
+   },
+   {
+    "text": "None",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "A visual observer detects approaching traffic at 1.5 NM. Your total detect-and-avoid time is 40 seconds and the UA flies at 90 knots. What is the maximum distance of the UA from the observer?",
+  "explanation": "In 40 seconds at 90 kt the UA covers 1 NM (90 x 40 / 3600). Subtract that from 1.5 NM to get about 0.5 NM.",
+  "options": [
+   {
+    "text": "About 1.5 NM",
+    "correct": false
+   },
+   {
+    "text": "About 0.5 NM",
+    "correct": true
+   },
+   {
+    "text": "About 1 NM",
+    "correct": false
+   },
+   {
+    "text": "About 2.5 NM",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "For a medium-risk BVLOS waiver, what validation of detect-and-avoid do FAA evaluators expect?",
+  "explanation": "Validation scales with risk. Low risk can use a statement and data, medium risk needs third-party validation and a standard, high risk needs certification.",
+  "options": [
+   {
+    "text": "A statement from the applicant alone",
+    "correct": false
+   },
+   {
+    "text": "No validation at all",
+    "correct": false
+   },
+   {
+    "text": "Third-party validation and an industry standard such as ASTM F3442 or RTCA DO-365",
+    "correct": true
+   },
+   {
+    "text": "Certification by the pilot",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "An operator plans to use a ground-based radar for a waiver. What should the application include?",
+  "explanation": "The FAA guidance says that ground-based radars need an FCC grant number in the application or a waiver will normally not be issued.",
+  "options": [
+   {
+    "text": "A photo of the antenna",
+    "correct": false
+   },
+   {
+    "text": "The pilot's age",
+    "correct": false
+   },
+   {
+    "text": "Nothing, radars need no authorization",
+    "correct": false
+   },
+   {
+    "text": "The FCC grant number of the radar",
+    "correct": true
+   }
+  ]
+ },
+ {
+  "question": "The final GRC is 5 and the residual ARC is ARC-b. What is the SAIL?",
+  "explanation": "In the SAIL table, GRC 5 with ARC-a, b or c gives SAIL IV.",
+  "options": [
+   {
+    "text": "IV",
+    "correct": true
+   },
+   {
+    "text": "III",
+    "correct": false
+   },
+   {
+    "text": "II",
+    "correct": false
+   },
+   {
+    "text": "V",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "The final GRC is 3 and the residual ARC is ARC-b. What is the SAIL?",
+  "explanation": "GRC 3 with ARC-a or ARC-b gives SAIL II.",
+  "options": [
+   {
+    "text": "III",
+    "correct": false
+   },
+   {
+    "text": "II",
+    "correct": true
+   },
+   {
+    "text": "IV",
+    "correct": false
+   },
+   {
+    "text": "I",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "The final GRC is 7 and the residual ARC is ARC-a. What is the SAIL?",
+  "explanation": "A final GRC of 7 gives SAIL VI in every ARC column.",
+  "options": [
+   {
+    "text": "IV",
+    "correct": false
+   },
+   {
+    "text": "V",
+    "correct": false
+   },
+   {
+    "text": "VI",
+    "correct": true
+   },
+   {
+    "text": "I",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "A final GRC of 8 is reached after all mitigations. What follows?",
+  "explanation": "Above a final GRC of 7 the SAIL table sends the operation to the certified category.",
+  "options": [
+   {
+    "text": "SAIL VII",
+    "correct": false
+   },
+   {
+    "text": "SAIL VI with extra evidence",
+    "correct": false
+   },
+   {
+    "text": "The operation is approved",
+    "correct": false
+   },
+   {
+    "text": "The operation falls outside the specific category and needs the certified category",
+    "correct": true
+   }
+  ]
+ },
+ {
+  "question": "A parachute lowers the final GRC from 4 to 3, but the ARC stays ARC-c. What is the effect on SAIL?",
+  "explanation": "GRC 4 and GRC 3 both give SAIL IV with ARC-c, so the evidence burden does not fall.",
+  "options": [
+   {
+    "text": "None, it stays at SAIL IV",
+    "correct": true
+   },
+   {
+    "text": "It falls to SAIL II",
+    "correct": false
+   },
+   {
+    "text": "It falls to SAIL III",
+    "correct": false
+   },
+   {
+    "text": "It rises to SAIL V",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "A route with final GRC 3 is lowered from 600 ft AGL to 450 ft AGL, in uncontrolled rural airspace. How does the SAIL change?",
+  "explanation": "The residual ARC changes from c to b, so GRC 3 moves from SAIL IV to SAIL II.",
+  "options": [
+   {
+    "text": "From II to IV",
+    "correct": false
+   },
+   {
+    "text": "From IV to II",
+    "correct": true
+   },
+   {
+    "text": "It does not change",
+    "correct": false
+   },
+   {
+    "text": "From IV to III",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "In SORA 2.5, what are the containment levels?",
+  "explanation": "SORA 2.5 sets containment at low, medium or high.",
+  "options": [
+   {
+    "text": "Basic and enhanced",
+    "correct": false
+   },
+   {
+    "text": "I to VI",
+    "correct": false
+   },
+   {
+    "text": "Low, medium and high",
+    "correct": true
+   },
+   {
+    "text": "Yes and no",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "Which is a way to demonstrate containment?",
+  "explanation": "Containment shows that the UA stays in the volume or that leaving it is acceptably safe. Geofencing, independent termination and fail-safes are typical.",
+  "options": [
+   {
+    "text": "A bigger logo on the UA",
+    "correct": false
+   },
+   {
+    "text": "A longer manual",
+    "correct": false
+   },
+   {
+    "text": "A faster UA",
+    "correct": false
+   },
+   {
+    "text": "A geofence or an independent termination system together with reliable fail-safes",
+    "correct": true
+   }
+  ]
+ },
+ {
+  "question": "What kind of evidence is typical for medium robustness of an OSO?",
+  "explanation": "Low can rely on a declaration. Medium needs reviewable evidence. High needs third-party validation or similar.",
+  "options": [
+   {
+    "text": "Test results, procedures and training records that the authority can review",
+    "correct": true
+   },
+   {
+    "text": "Only a verbal statement",
+    "correct": false
+   },
+   {
+    "text": "Certification-grade evidence for everything",
+    "correct": false
+   },
+   {
+    "text": "No evidence",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "Which of the following is an OSO area?",
+  "explanation": "OSOs cover technical issues, external systems, human error, adverse conditions and emergency response.",
+  "options": [
+   {
+    "text": "Pricing strategy",
+    "correct": false
+   },
+   {
+    "text": "Human error, including competence, procedures and crew coordination",
+    "correct": true
+   },
+   {
+    "text": "Brand awareness",
+    "correct": false
+   },
+   {
+    "text": "Customer satisfaction",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "What does Step 10 of SORA 2.5 ask you to document regarding external services?",
+  "explanation": "Step 10 builds the comprehensive safety portfolio and requires service level agreements for external services such as C2 networks or weather services.",
+  "options": [
+   {
+    "text": "The names of the staff",
+    "correct": false
+   },
+   {
+    "text": "The price of the services",
+    "correct": false
+   },
+   {
+    "text": "Service level agreements for the services you rely on",
+    "correct": true
+   },
+   {
+    "text": "Nothing",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "When filling in an FAA waiver risk analysis, what should you list for each hazard?",
+  "explanation": "Evaluators want to see risk before and after mitigations and how each mitigation reduces it.",
+  "options": [
+   {
+    "text": "Only the name of the hazard",
+    "correct": false
+   },
+   {
+    "text": "Only the final risk colour",
+    "correct": false
+   },
+   {
+    "text": "Only the manufacturer's name",
+    "correct": false
+   },
+   {
+    "text": "Severity and likelihood before and after mitigation, plus the predicted residual risk",
+    "correct": true
+   }
+  ]
+ },
+ {
+  "question": "What is the longest period allowed between the start and the end date of a Part 107 waiver requested in ASHub, according to the guide?",
+  "explanation": "The end date cannot be more than 48 months after the start date. The guide also recommends a start at least 90 days after applying.",
+  "options": [
+   {
+    "text": "48 months",
+    "correct": true
+   },
+   {
+    "text": "12 months",
+    "correct": false
+   },
+   {
+    "text": "6 months",
+    "correct": false
+   },
+   {
+    "text": "10 years",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "Which description fits the August 2025 Part 108 proposal?",
+  "explanation": "The proposal uses permits and certificates and covers aircraft up to 1,320 lb including payload.",
+  "options": [
+   {
+    "text": "A ban on BVLOS",
+    "correct": false
+   },
+   {
+    "text": "Permits for lower-risk BVLOS operations and certificates for higher-risk ones, for aircraft up to 1,320 lb",
+    "correct": true
+   },
+   {
+    "text": "A rule that removes all requirements",
+    "correct": false
+   },
+   {
+    "text": "A rule only for helicopters",
+    "correct": false
+   }
+  ]
+ },
+ {
+  "question": "A client asks if Part 108 is in force. What is the best way to answer?",
+  "explanation": "Rules change. Always verify the current status in official sources before advising.",
+  "options": [
+   {
+    "text": "It was published, so it applies",
+    "correct": false
+   },
+   {
+    "text": "It never will be",
+    "correct": false
+   },
+   {
+    "text": "Check the current status with the FAA, because it was still a proposal when this course was written",
+    "correct": true
+   },
+   {
+    "text": "Ask the pilot",
+    "correct": false
+   }
+  ]
+ }
+]
