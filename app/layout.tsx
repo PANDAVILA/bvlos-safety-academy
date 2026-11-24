@@ -11,6 +11,7 @@ import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Providers from "@/components/Providers";
+import { headers } from "next/headers";
 import { getTheme, buildThemeCssVars } from "@/lib/theme";
 
 export const dynamic = "force-dynamic";
@@ -27,6 +28,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const theme = await getTheme();
+  const inMaintenance = headers().get("x-maintenance") === "1";
   const cssVars = buildThemeCssVars(theme);
   const cssVarsString = Object.entries(cssVars)
     .map(([k, v]) => `${k}: ${v};`)
@@ -39,9 +41,9 @@ export default async function RootLayout({
       </head>
       <body className="font-body bg-paper text-ink antialiased">
         <Providers>
-          <Header />
+          {!inMaintenance && <Header />}
           <main>{children}</main>
-          <Footer />
+          {!inMaintenance && <Footer />}
         </Providers>
       </body>
     </html>
