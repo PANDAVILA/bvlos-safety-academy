@@ -4,11 +4,11 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import { db } from "@/lib/db";
-import { enrollments, courses, orders } from "@/lib/db/schema";
+import { enrollments, courses, orders, products } from "@/lib/db/schema";
 import { eq } from "drizzle-orm";
 import Link from "next/link";
 import Image from "next/image";
-import { PlayCircle, ShoppingBag } from "lucide-react";
+import { PlayCircle, ShoppingBag, Download } from "lucide-react";
 
 export default async function PanelPage() {
   const session = await getServerSession(authOptions);
@@ -22,6 +22,14 @@ export default async function PanelPage() {
   }));
 
   const myOrders = db.select().from(orders).where(eq(orders.userId, userId)).all();
+
+  // Downloads: every product the user has paid for (plus free products with a file).
+  const paidIds = new Set(myOrders.filter((o) => o.itemType === "product" && o.status === "paid").map((o) => o.itemId));
+  const myDownloads = db
+    .select()
+    .from(products)
+    .all()
+    .filter((p) => p.fileUrl && (paidIds.has(p.id) || p.priceCents === 0));
 
   return (
     <div className="chart-bg-light min-h-[calc(100vh-64px)]">
@@ -58,6 +66,27 @@ export default async function PanelPage() {
                 </Link>
               ) : null
             )}
+          </div>
+        )}
+
+        <h2 className="mt-16 font-display text-xl text-navy-900">My downloads</h2>
+        {myDownloads.length === 0 ? (
+          <p className="mt-4 text-navy-900/60">
+            Your purchased resources will appear here. <Link href="/resources" className="text-gold-600 hover:underline">Browse resources</Link>.
+          </p>
+        ) : (
+          <div className="mt-6 divide-y divide-navy-900/10 border border-navy-900/10 bg-white">
+            {myDownloads.map((p) => (
+              <div key={p.id} className="flex items-center justify-between gap-4 p-4 text-sm">
+                <Link href={`/resources/${p.slug}`} className="text-navy-900 hover:underline">{p.title}</Link>
+                <a
+                  href={`/api/products/${p.id}/download`}
+                  className="flex shrink-0 items-center gap-2 bg-gold-500 px-4 py-2 font-semibold text-navy-950 hover:bg-gold-400"
+                >
+                  <Download size={14} /> Download
+                </a>
+              </div>
+            ))}
           </div>
         )}
 

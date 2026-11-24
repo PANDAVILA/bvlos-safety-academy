@@ -15,6 +15,11 @@ const COURSES = [
   { folder: "conops-course-data", marker: "conops-course-v1", applyMeta: true },
 ];
 
+// One-off scripts (run once per marker; bump the marker name to run again)
+const SCRIPTS = [
+  { script: "seed-resources.cjs", marker: "resources-v1" },
+];
+
 const dbPath = process.env.DATABASE_PATH || path.join(process.cwd(), "data", "bvlos.db");
 const dataDir = path.dirname(dbPath);
 
@@ -38,6 +43,25 @@ for (const c of COURSES) {
     }
   } catch (e) {
     console.log(`[auto-seed] ${c.folder}: skipped:`, e && e.message);
+  }
+}
+for (const s of SCRIPTS) {
+  try {
+    const marker = path.join(dataDir, `.${s.marker}.done`);
+    if (fs.existsSync(marker)) {
+      console.log(`[auto-seed] ${s.script}: already done, skipping.`);
+      continue;
+    }
+    console.log(`[auto-seed] ${s.script}: running...`);
+    const res = spawnSync(process.execPath, [path.join(__dirname, s.script)], { stdio: "inherit" });
+    if (res.status === 0) {
+      fs.writeFileSync(marker, new Date().toISOString() + "\n");
+      console.log(`[auto-seed] ${s.script}: done.`);
+    } else {
+      console.log(`[auto-seed] ${s.script}: did not finish (exit ${res.status}). Will retry on next start.`);
+    }
+  } catch (e) {
+    console.log(`[auto-seed] ${s.script}: skipped:`, e && e.message);
   }
 }
 process.exit(0);

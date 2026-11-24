@@ -1,0 +1,70 @@
+[
+  {
+    "slug": "step-by-step-sms-guide-ebook",
+    "title": "The Step-by-Step SMS Guide (eBook)",
+    "description": "Build, run and prove a safety management system for BVLOS drone operations, following 14 CFR Part 5, FAA AC 120-92D and ICAO Annex 19.\n\nAn 85-page PDF guide written for small and medium UAS operators.\n\nIncludes:\n• Nine build steps: gap analysis, policy, risk management, reporting, assurance, promotion, records, emergency response, roll-out\n• Five fully worked risk assessments (lost C2 link, road crossing, crewed aircraft, fatigue, change management)\n• The AC 120-92D sample risk matrix with ICAO risk-index codes, acceptance rules and the META method\n• Special topics: suppliers, human factors, SMS to waiver package, preparing for Part 108\n• Part 5 and ICAO Annex 19 crosswalks, forms, sample safety policy, 40-item checklist, glossary\n• Diagrams throughout\n\nFAA and ICAO references only.",
+    "type": "ebook",
+    "coverImage": "/resources/step-by-step-sms-guide-ebook.png",
+    "fileUrl": "BVLOS-UAS-SMS-Step-by-Step-Guide.pdf"
+  },
+  {
+    "slug": "mitigation-management-catalog-ebook",
+    "title": "UAS Hazard and Risk Control Catalog (eBook)",
+    "description": "A working reference of 34 BVLOS hazards with example ratings before and after controls, preventive and recovery controls, evidence and indicators.\n\nA 47-page PDF catalog that follows 14 CFR Part 5, AC 120-92D and ICAO Annex 19.\n\nIncludes:\n• 34 hazards in eight groups: aircraft, C2 link, airspace, ground risk, people, environment, maintenance, planning and response\n• For each hazard: causes, consequences, ratings (AC 120-92D matrix, ICAO codes), controls, evidence to keep, indicators\n• How to choose and justify controls, and how to prove they work\n• Index of hazards and ratings, control register template, abbreviations\n\nPair it with the SMS Risk Register Workbook.",
+    "type": "ebook",
+    "coverImage": "/resources/mitigation-management-catalog-ebook.png",
+    "fileUrl": "BVLOS-UAS-Hazard-and-Risk-Control-Catalog.pdf"
+  },
+  {
+    "slug": "uas-sms-manual-template",
+    "title": "UAS SMS Manual Template (Word)",
+    "description": "A complete, editable SMS manual for a UAS operator, structured on 14 CFR Part 5 and ICAO Annex 19.\n\nAn editable Word document of about 43 pages. Fill the highlighted fields and adapt.\n\nIncludes:\n• Part 5 compliance statement with chapter and evidence for every requirement\n• 12 chapters: policy, accountability, emergency response, safety risk management, change, reporting, assurance, training, records, BVLOS interface, suppliers\n• Severity and likelihood scales, the AC 120-92D risk matrix, acceptance rules and a worked example\n• 10 forms (F-1 to F-10) and the ICAO Annex 19 crosswalk\n• Retention periods, SPI tables, management review agenda\n• 14 diagrams\n\nNot legal advice. Not endorsed by the FAA.",
+    "type": "template",
+    "coverImage": "/resources/uas-sms-manual-template.png",
+    "fileUrl": "BVLOS-UAS-SMS-Manual-Template.docx",
+    "priceCents": 3900
+  },
+  {
+    "slug": "editable-conops-template",
+    "title": "BVLOS ConOps Template (Word)",
+    "description": "An editable Concept of Operations for a BVLOS operation, built around what the FAA asks for in a Part 107 waiver request.\n\nAn editable Word document of about 23 pages.\n\nIncludes:\n• Operation summary and rules to be waived (§107.31 and related)\n• Aircraft, C2 link, navigation and contingency functions\n• Operating area and ground risk; airspace, air risk and detection-time budget\n• Crew, training, procedures, go / no-go criteria, contingencies\n• Safety risk assessment with the AC 120-92D matrix, before and after controls\n• Limits, assurance, proposed conditions and evidence index\n\nUse with the SMS Manual Template and the Waiver Kit.",
+    "type": "template",
+    "coverImage": "/resources/editable-conops-template.png",
+    "fileUrl": "BVLOS-UAS-ConOps-Template.docx"
+  },
+  {
+    "slug": "bvlos-preflight-checklist",
+    "title": "BVLOS Flight Checklist Pack (PDF + Word)",
+    "description": "Printable and editable checklists for the full BVLOS mission, from planning to debrief.\n\nA ZIP with the pack as PDF (19 pages, ready to print) and Word (editable).\n\nIncludes:\n• 15 checklists: planning, site and airspace, crew briefing, aircraft, GCS and C2 link, detect-and-avoid, batteries, go / no-go, in-flight monitoring, approach, post-flight, observers, night add-on, maintenance\n• 10 contingency and emergency cards (lost link, flyaway, low battery, GNSS loss, traffic, person in path, motor failure, weather, battery fire, injury)\n• Forms: mission risk check with the AC 120-92D matrix, go / no-go record, flight log, briefing record",
+    "type": "checklist",
+    "coverImage": "/resources/bvlos-preflight-checklist.png",
+    "fileUrl": "BVLOS-Flight-Checklist-Pack.zip"
+  },
+  {
+    "slug": "uas-emergency-response-plan-template",
+    "title": "UAS Emergency Response Plan Template (Word)",
+    "description": "An editable emergency response plan for UAS operators that meets the coordination requirement of 14 CFR §5.27.\n\nAn editable Word document of about 18 pages.\n\nIncludes:\n• Emergency levels, roles, succession and call order\n• Nine scenario cards: lost link, flyaway, person hurt, battery fire, traffic conflict, navigation loss, medical, weather, security\n• Notification matrix (NTSB, §107.9, waiver conditions, insurer, customer)\n• Site control, evidence preservation, media statement, return-to-operations conditions\n• Drills, contact list, emergency log, witness statement, drill report, one-page quick reference\n\nNot legal advice. Check current reporting rules.",
+    "type": "template",
+    "coverImage": "/resources/uas-emergency-response-plan-template.png",
+    "fileUrl": "UAS-Emergency-Response-Plan-Template.docx",
+    "priceCents": 1500
+  },
+  {
+    "slug": "part-107-bvlos-waiver-kit",
+    "title": "Part 107 BVLOS Waiver Application Kit (Word)",
+    "description": "Worksheets and templates to prepare a request to waive §107.31 and related Part 107 rules.\n\nAn editable Word document of about 23 pages.\n\nIncludes:\n• Is a waiver the right tool? Decision guide and readiness check\n• The FAA application process and the Waiver Safety Explanation Guidelines, summarized\n• Nine worksheets for the safety explanation: operation, aircraft, people, air risk, ground risk, procedures, emergencies, safety management, section-specific questions\n• Hazard table before and after controls with the AC 120-92D matrix, traceability and evidence plan\n• 18-point pre-submission checklist, common gaps, after-approval guide\n• Example safety explanation, cover letter, timeline planner\n\nA waiver is an FAA decision. The kit does not promise approval.",
+    "type": "template",
+    "coverImage": "/resources/part-107-bvlos-waiver-kit.png",
+    "fileUrl": "Part-107-BVLOS-Waiver-Application-Kit.docx",
+    "priceCents": 2900
+  },
+  {
+    "slug": "sms-risk-register-workbook",
+    "title": "SMS Risk Register and Matrix Workbook (Excel)",
+    "description": "A ready-to-use risk register with automatic risk index and rating, using the AC 120-92D sample matrix with ICAO codes.\n\nAn Excel workbook with 8 sheets and formulas pre-built.\n\nIncludes:\n• Editable matrix, severity and likelihood scales, acceptance rules\n• Risk register with 34 BVLOS hazards pre-loaded as examples, automatic index, rating, who must accept and review flags\n• One-page SRM worksheet\n• SPI tracker with Green / Amber / Red status\n• Corrective action tracker with overdue flags\n• Dashboard with counts, residual risk map and chart\n• Hazard library with causes, controls, evidence and indicators",
+    "type": "template",
+    "coverImage": "/resources/sms-risk-register-workbook.png",
+    "fileUrl": "SMS-Risk-Register-and-Matrix-Workbook.xlsx",
+    "priceCents": 1900
+  }
+]
