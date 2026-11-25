@@ -30,7 +30,7 @@ export default function Footer() {
             <ul className="mt-4 space-y-2 text-sm text-white/70">
               <li><Link href="/news" className="hover:text-gold-400">News</Link></li>
               <li><Link href="/reports" className="hover:text-gold-400">Technical reports</Link></li>
-              <li><Link href="/aerosafety-case" className="hover:text-gold-400">AeroSafety Case</Link></li>
+              <li><Link href="/aerosafety-case" className="hover:text-gold-400">SMS AI APP (AeroSafety Case)</Link></li>
             </ul>
           </div>
 

@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useState } from "react";
 import { useSession, signOut } from "next-auth/react";
 import { Menu, X, ChevronRight } from "lucide-react";
+import SafetiMark from "@/components/SafetiMark";
 
 const nav = [
   { href: "/courses", label: "Courses" },
@@ -12,7 +13,7 @@ const nav = [
   { href: "/teams", label: "Teams" },
   { href: "/consulting", label: "Consulting" },
   { href: "/resources", label: "Resources" },
-  { href: "/aerosafety-case", label: "AeroSafety Case" },
+  { href: "/aerosafety-case", label: "SMS AI APP", safeti: true },
 ];
 
 export default function Header() {
@@ -31,8 +32,9 @@ export default function Header() {
             <Link
               key={item.href}
               href={item.href}
-              className="eyebrow text-navy-900/70 transition hover:text-gold-600"
+              className="eyebrow flex items-center gap-1.5 text-navy-900/70 transition hover:text-gold-600"
             >
+              {"safeti" in item && <SafetiMark size={28} />}
               {item.label}
             </Link>
           ))}
@@ -81,7 +83,8 @@ export default function Header() {
         <div className="border-t border-navy-900/10 bg-paper px-6 py-4 lg:hidden">
           <nav className="flex flex-col gap-4">
             {nav.map((item) => (
-              <Link key={item.href} href={item.href} className="eyebrow" onClick={() => setOpen(false)}>
+              <Link key={item.href} href={item.href} className="eyebrow flex items-center gap-2" onClick={() => setOpen(false)}>
+                {"safeti" in item && <SafetiMark size={28} />}
                 {item.label}
               </Link>
             ))}
