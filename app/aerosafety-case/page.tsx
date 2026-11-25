@@ -2,7 +2,8 @@ import { ArrowUpRight, Gauge, ListChecks, ShieldAlert } from "lucide-react";
 import DisclaimerNote from "@/components/DisclaimerNote";
 
 export default function AeroSafetyCasePage() {
-  const appUrl = process.env.NEXT_PUBLIC_AEROSAFETY_CASE_URL || "#";
+  // The app is served from this same site (files in public/tools/aerosafety-case).
+  const appUrl = "/tools/aerosafety-case/index.html";
 
   return (
     <div>
@@ -12,8 +13,8 @@ export default function AeroSafetyCasePage() {
             <p className="eyebrow text-gold-400">Tool</p>
             <h1 className="mt-4 font-display text-4xl font-semibold text-white sm:text-5xl">AeroSafety Case</h1>
             <p className="mt-6 max-w-lg text-white/70">
-              The risk assessment and safety case documentation platform for UAS operations, built by our team.
-              Model your mission, calculate the risk, and generate your dossier's documentation.
+              The operational risk and safety management tool for UAS operations, built by our team.
+              Model your mission, assess the risk with a 5×5 matrix, and generate a printable mission report.
             </p>
             <div className="mt-9 flex flex-wrap gap-4">
               <a
@@ -29,22 +30,17 @@ export default function AeroSafetyCasePage() {
                 See what's included
               </a>
             </div>
-            {appUrl === "#" && (
-              <p className="mt-4 text-xs text-white/40">
-                Set NEXT_PUBLIC_AEROSAFETY_CASE_URL in your .env.local to link your deployed instance.
-              </p>
-            )}
             <div className="mt-8">
               <DisclaimerNote variant="dark" />
             </div>
           </div>
           <div className="border border-white/15 bg-navy-950/40 p-6">
             <div className="flex items-center justify-between border-b border-white/10 pb-3 text-xs text-white/50">
-              <span className="coord">MISSION_ID: BVLOS-0417</span>
-              <span className="coord text-gold-400">GRC 4 · ARC-c</span>
+              <span className="coord">DEMO MISSION · BVLOS</span>
+              <span className="coord text-gold-400">GO WITH MITIGATIONS</span>
             </div>
             <div className="mt-4 space-y-3">
-              {["ConOps definition", "Intrinsic GRC calculation", "ARC determination", "Mitigation strategy"].map((s, i) => (
+              {["Mission, location and crew", "Hazard identification", "5×5 risk matrix", "GO / NO-GO decision"].map((s, i) => (
                 <div key={s} className="flex items-center justify-between border border-white/10 px-4 py-3 text-sm text-white/80">
                   <span>{s}</span>
                   <span className="coord text-xs text-gold-400">{String(i + 1).padStart(2, "0")}</span>
@@ -59,9 +55,9 @@ export default function AeroSafetyCasePage() {
         <div className="mx-auto max-w-7xl px-6 py-24">
           <div className="grid gap-px overflow-hidden border border-navy-900/10 bg-navy-900/10 sm:grid-cols-3">
             {[
-              { icon: Gauge, title: "Risk assessment", desc: "Calculate GRC and ARC following the SMS methodology, with full traceability of every assumption." },
-              { icon: ListChecks, title: "Mitigation tracking", desc: "Catalog and monitor the status of every operational and technical mitigation for your operation." },
-              { icon: ShieldAlert, title: "Safety case documentation", desc: "Generate the documentation package ready to submit to the competent authority." },
+              { icon: Gauge, title: "Risk assessment", desc: "Assess every hazard on a 5×5 severity × probability matrix, before and after mitigations, with each assumption recorded." },
+              { icon: ListChecks, title: "Mitigation tracking", desc: "Link operational and technical mitigations to each hazard and follow their status until they are implemented and verified." },
+              { icon: ShieldAlert, title: "Safety case documentation", desc: "Generate a printable mission report with hazards, mitigations, pre-flight checklist and the GO / NO-GO decision." },
             ].map((f) => (
               <div key={f.title} className="bg-white p-8">
                 <f.icon size={22} className="text-gold-600" />

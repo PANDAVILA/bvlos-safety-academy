@@ -1,0 +1,1496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AeroSafety Case — UAS Safety Management System</title>
+<link rel="icon" href="./icons/icon-32.png" type="image/png">
+<link rel="apple-touch-icon" href="./icons/icon-180.png">
+<link rel="manifest" href="./manifest.webmanifest">
+<meta name="theme-color" content="#0B2347">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="AeroSafety Case">
+<meta name="description" content="AeroSafety Case — UAS/RPAS operational risk management and Safety Management System (SMS) platform, aligned with ICAO methodology.">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js" crossorigin="anonymous"></script>
+<style>
+:root{
+  --navy-900:#0B2347; --navy-800:#142C56; --navy-700:#1D3A61; --blue-accent:#1E88C9; --blue-soft:#E9F2FB;
+  --bg:#F2F4F7; --surface:#FFFFFF; --border:#DCE2E9; --text:#0F1D2E; --text-mute:#5C6B7A;
+  --risk-low:#28804A; --risk-low-bg:#E5F3EA; --risk-med:#A8790A; --risk-med-bg:#FBF0D6;
+  --risk-high:#C9651A; --risk-high-bg:#FBE6D6; --risk-crit:#B3261E; --risk-crit-bg:#FBE2E0;
+  --cyan-accent:#03C5FD;
+  --mono: ui-monospace, "SF Mono", "Cascadia Mono", "Roboto Mono", monospace;
+  --sans: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;height:100%;}
+body{font-family:var(--sans);background:var(--bg);color:var(--text);font-size:14px;-webkit-font-smoothing:antialiased;}
+#app{min-height:100vh;}
+button{font-family:inherit;}
+a{color:inherit;text-decoration:none;}
+svg{width:1em;height:1em;}
+
+/* ---------- shell ---------- */
+.shell{display:flex;min-height:100vh;}
+.sidebar{width:228px;background:var(--navy-900);color:#cfe0f3;flex-shrink:0;display:flex;flex-direction:column;}
+.sidebar-logo{padding:20px 20px;border-bottom:1px solid rgba(255,255,255,.08);display:flex;align-items:center;gap:10px;}
+.sidebar-logo .mark{width:32px;height:32px;border-radius:7px;flex-shrink:0;object-fit:cover;display:block;}
+.sidebar-logo .word{font-weight:800;font-size:14px;letter-spacing:.02em;color:#fff;line-height:1.15;}
+.sidebar-logo .sub{font-size:9.5px;letter-spacing:.14em;color:#7E97B8;margin-top:2px;text-transform:uppercase;}
+.nav{padding:14px 10px;flex:1;}
+.navgroup-label{font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:#56708F;padding:14px 12px 6px;}
+.navitem{display:flex;align-items:center;gap:10px;width:100%;text-align:left;padding:9px 12px;border-radius:6px;color:#A9C0DC;background:none;border:none;font-size:13px;font-weight:500;cursor:pointer;margin-bottom:2px;}
+.navitem svg{width:16px;height:16px;flex-shrink:0;stroke-width:1.6;}
+.navitem.active{background:var(--navy-700);color:#fff;}
+.navitem:hover{background:rgba(255,255,255,.07);color:#fff;}
+.sidebar-foot{padding:13px 18px;border-top:1px solid rgba(255,255,255,.08);font-size:10.5px;color:#5E7A9E;line-height:1.5;}
+.main{flex:1;display:flex;flex-direction:column;min-width:0;}
+.topbar{height:56px;background:var(--surface);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 22px;flex-shrink:0;}
+.topbar .crumbs{font-size:10.5px;color:var(--text-mute);text-transform:uppercase;letter-spacing:.07em;margin-bottom:2px;}
+.topbar .title{font-size:15px;font-weight:700;}
+.topbar-right{display:flex;align-items:center;gap:18px;}
+.clock{font-family:var(--mono);font-size:12px;color:var(--text-mute);text-align:right;}
+.clock b{color:var(--text);}
+.userchip{display:flex;align-items:center;gap:9px;border-left:1px solid var(--border);padding-left:16px;}
+.avatar{width:30px;height:30px;border-radius:50%;background:var(--navy-700);color:#fff;display:flex;align-items:center;justify-content:center;font-size:11.5px;font-weight:700;flex-shrink:0;}
+.userchip .uname{font-size:12.5px;font-weight:700;line-height:1.2;}
+.userchip .urole{font-size:10.5px;color:var(--text-mute);}
+.content{padding:22px 26px 60px;overflow-y:auto;flex:1;}
+
+/* ---------- generic ---------- */
+.card{background:var(--surface);border:1px solid var(--border);border-radius:9px;padding:20px;}
+.card+.card{margin-top:16px;}
+.row-between{display:flex;align-items:center;justify-content:space-between;gap:12px;}
+.section-label{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text-mute);margin:0 0 12px;}
+h1.pagetitle{font-size:20px;font-weight:800;margin:0 0 4px;}
+.subtle{color:var(--text-mute);font-size:12.5px;}
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;}
+.kpi{background:var(--surface);border:1px solid var(--border);border-radius:9px;padding:15px 16px;}
+.kpi .num{font-family:var(--mono);font-size:25px;font-weight:800;line-height:1;}
+.kpi .lbl{font-size:10.5px;color:var(--text-mute);text-transform:uppercase;letter-spacing:.05em;margin-top:6px;}
+.kpi.accent .num{color:var(--blue-accent);}
+.kpi.danger .num{color:var(--risk-crit);}
+.kpi.warn .num{color:var(--risk-high);}
+.kpi.good .num{color:var(--risk-low);}
+
+.badge{display:inline-flex;align-items:center;gap:4px;padding:3px 9px;border-radius:20px;font-size:10px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;white-space:nowrap;}
+.badge.low{background:var(--risk-low-bg);color:var(--risk-low);}
+.badge.med{background:var(--risk-med-bg);color:var(--risk-med);}
+.badge.high{background:var(--risk-high-bg);color:var(--risk-high);}
+.badge.crit{background:var(--risk-crit-bg);color:var(--risk-crit);}
+.badge.neutral{background:#EDEFF2;color:var(--text-mute);}
+.badge.go{background:#E5F3EA;color:var(--risk-low);}
+.badge.gowm{background:#FBF0D6;color:var(--risk-med);}
+.badge.hold{background:#E8EEF5;color:var(--blue-accent);}
+.badge.nogo{background:var(--risk-crit-bg);color:var(--risk-crit);}
+.badge.draft{background:#EDEFF2;color:var(--text-mute);}
+
+.btn{display:inline-flex;align-items:center;gap:6px;padding:8px 15px;border-radius:6px;font-size:12.5px;font-weight:700;cursor:pointer;border:1px solid transparent;line-height:1.2;}
+.btn svg{width:14px;height:14px;}
+.btn-primary{background:var(--navy-900);color:#fff;}
+.btn-primary:hover{background:var(--navy-800);}
+.btn-secondary{background:#fff;border-color:var(--border);color:var(--text);}
+.btn-secondary:hover{border-color:var(--navy-700);}
+.btn-danger{background:#fff;border-color:var(--risk-crit-bg);color:var(--risk-crit);}
+.btn-ghost{background:none;color:var(--blue-accent);padding:7px 6px;}
+.btn-sm{padding:5px 10px;font-size:11.5px;}
+.btn[disabled]{opacity:.45;cursor:not-allowed;}
+
+table.table{width:100%;border-collapse:collapse;font-size:12.8px;}
+table.table th{text-align:left;font-size:10.5px;text-transform:uppercase;letter-spacing:.04em;color:var(--text-mute);padding:8px 10px;border-bottom:1px solid var(--border);}
+table.table td{padding:10px 10px;border-bottom:1px solid var(--border);vertical-align:middle;}
+table.table tr:last-child td{border-bottom:none;}
+table.table tr.clickable:hover{background:var(--blue-soft);cursor:pointer;}
+
+.field{margin-bottom:14px;}
+.field label{display:block;font-size:10.7px;font-weight:700;text-transform:uppercase;letter-spacing:.045em;color:var(--text-mute);margin-bottom:6px;}
+.field .hint{font-size:11px;color:var(--text-mute);margin-top:4px;}
+input,select,textarea{width:100%;padding:8px 10px;border:1px solid var(--border);border-radius:6px;font-size:13px;font-family:inherit;background:#fff;color:var(--text);}
+input:focus,select:focus,textarea:focus{outline:2px solid var(--blue-accent);outline-offset:0;border-color:var(--blue-accent);}
+textarea{resize:vertical;}
+.checkrow{display:flex;align-items:flex-start;gap:10px;padding:10px 0;border-bottom:1px solid var(--border);}
+.checkrow:last-child{border-bottom:none;}
+.checkrow input[type=checkbox]{width:17px;height:17px;margin-top:1px;flex-shrink:0;}
+.checkrow .ctext{font-size:13px;flex:1;}
+.checkrow .ctext small{display:block;color:var(--text-mute);font-size:11px;margin-top:2px;}
+
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;}
+@media (max-width:900px){.grid2,.grid3{grid-template-columns:1fr;}}
+
+/* ---------- wizard ---------- */
+.wizard{display:flex;gap:20px;align-items:flex-start;}
+.wizard-steps{width:215px;flex-shrink:0;background:var(--surface);border:1px solid var(--border);border-radius:9px;padding:10px;}
+.wstep{display:flex;gap:10px;align-items:flex-start;padding:9px 9px;border-radius:6px;cursor:pointer;font-size:12px;color:var(--text-mute);font-weight:600;}
+.wstep.active{background:var(--blue-soft);color:var(--navy-900);}
+.wstep .num{width:19px;height:19px;border-radius:50%;background:#E4E8ED;color:var(--text-mute);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;flex-shrink:0;margin-top:1px;}
+.wstep.active .num{background:var(--navy-800);color:#fff;}
+.wstep.done .num{background:var(--risk-low);color:#fff;}
+.wizard-content{flex:1;min-width:0;}
+.wizard-nav{display:flex;justify-content:space-between;margin-top:18px;}
+
+/* ---------- map (schematic fallback) ---------- */
+.mapwrap{border:1px solid var(--border);border-radius:9px;overflow:hidden;}
+.maptools{display:flex;gap:6px;padding:10px;background:var(--navy-900);flex-wrap:wrap;align-items:center;}
+.maptool{background:rgba(255,255,255,.08);color:#cfe0f3;border:1px solid rgba(255,255,255,.14);font-size:11px;padding:6px 11px;border-radius:6px;cursor:pointer;font-weight:700;}
+.maptool.active{background:var(--blue-accent);color:#fff;border-color:var(--blue-accent);}
+.maptool.danger{color:#f3c8c4;}
+.mapspacer{flex:1;}
+.maplegend{font-size:10.5px;color:#9bb6d4;display:flex;gap:12px;padding:6px 12px 0;flex-wrap:wrap;background:var(--navy-900);}
+.maplegend span{display:inline-flex;align-items:center;gap:5px;}
+.maplegend i{width:9px;height:9px;border-radius:50%;display:inline-block;}
+svg.mapsvg{display:block;width:100%;height:auto;background:#142B40;cursor:crosshair;}
+
+/* ---------- map (Google Maps live) ---------- */
+.gmap-search{margin-bottom:8px;}
+#gmap-canvas{width:100%;height:430px;background:#142B40;}
+.gmap-status{font-size:11px;color:var(--text-mute);padding:8px 12px;background:var(--navy-900);border-top:1px solid rgba(255,255,255,.08);}
+
+.callout{display:flex;gap:12px;align-items:flex-start;background:var(--blue-soft);border:1px solid #bcd3ea;border-radius:8px;padding:14px 16px;margin-bottom:14px;font-size:12.5px;}
+.callout svg{width:18px;height:18px;flex-shrink:0;color:var(--blue-accent);margin-top:1px;}
+.key-status{display:inline-flex;align-items:center;gap:6px;font-size:10.5px;font-weight:800;padding:4px 10px;border-radius:20px;letter-spacing:.03em;text-transform:uppercase;}
+.key-status.on{background:var(--risk-low-bg);color:var(--risk-low);}
+.key-status.off{background:#EDEFF2;color:var(--text-mute);}
+
+/* hazard / mitigation cards */
+.hz-card{border:1px solid var(--border);border-radius:8px;padding:14px 16px;margin-bottom:12px;}
+.hz-card .hz-head{display:flex;justify-content:space-between;gap:10px;align-items:flex-start;margin-bottom:10px;}
+.hz-name{font-weight:700;font-size:13.5px;}
+.hz-cat{font-size:10.5px;color:var(--text-mute);text-transform:uppercase;letter-spacing:.04em;}
+.mini-grid{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:10px;align-items:end;}
+@media (max-width:900px){.mini-grid{grid-template-columns:1fr 1fr;}}
+.mit-row{border-top:1px dashed var(--border);padding-top:10px;margin-top:10px;}
+.mit-item{display:flex;gap:8px;align-items:center;font-size:12px;background:#FAFBFC;border:1px solid var(--border);border-radius:6px;padding:7px 10px;margin-bottom:6px;}
+.mit-item .mit-desc{flex:1;}
+.pill-row{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px;}
+.pill{font-size:10.5px;border:1px solid var(--border);background:#fff;padding:4px 9px;border-radius:14px;cursor:pointer;color:var(--text-mute);}
+.pill:hover{border-color:var(--blue-accent);color:var(--blue-accent);}
+
+/* lib */
+.lib-tabs{display:flex;gap:6px;margin-bottom:16px;flex-wrap:wrap;}
+.lib-tab{font-size:11.5px;font-weight:700;padding:7px 12px;border-radius:20px;border:1px solid var(--border);background:#fff;cursor:pointer;color:var(--text-mute);}
+.lib-tab.active{background:var(--navy-900);color:#fff;border-color:var(--navy-900);}
+.lib-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:8px;}
+.lib-item{border:1px solid var(--border);border-radius:6px;padding:9px 11px;font-size:12.3px;display:flex;justify-content:space-between;align-items:center;gap:8px;}
+
+/* decision */
+.decision-banner{border-radius:9px;padding:18px 20px;border:1px solid var(--border);}
+.decision-banner.GO{background:var(--risk-low-bg);border-color:#bfe3cb;}
+.decision-banner.GOWM{background:var(--risk-med-bg);border-color:#f0ddae;}
+.decision-banner.HOLD{background:var(--blue-soft);border-color:#bcd3ea;}
+.decision-banner.NOGO{background:var(--risk-crit-bg);border-color:#f0c3c0;}
+.decision-title{font-size:19px;font-weight:900;letter-spacing:.02em;}
+.reason-list{margin:10px 0 0;padding-left:18px;font-size:12.5px;}
+.reason-list li{margin-bottom:4px;}
+
+/* report */
+.report-page{background:#fff;border:1px solid var(--border);border-radius:9px;padding:34px;font-size:12.7px;}
+.report-page h2{font-size:17px;margin:0 0 2px;}
+.report-page .org{font-size:11px;color:var(--text-mute);text-transform:uppercase;letter-spacing:.06em;}
+.report-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px 22px;margin:14px 0;font-size:12.5px;}
+.report-grid div b{color:var(--text-mute);font-weight:600;display:block;font-size:10.3px;text-transform:uppercase;letter-spacing:.04em;}
+.report-section-title{font-size:11.5px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--navy-800);border-bottom:2px solid var(--navy-800);padding-bottom:5px;margin:22px 0 10px;}
+.disclaimer{margin-top:22px;padding:14px 16px;background:#FAFAFA;border:1px solid var(--border);border-radius:6px;font-size:11px;color:var(--text-mute);line-height:1.55;}
+.sig-row{display:flex;gap:40px;margin-top:24px;}
+.sig-box{flex:1;border-top:1px solid var(--text);padding-top:6px;font-size:11px;}
+.report-page img.report-map{width:100%;border-radius:6px;display:block;}
+
+/* login */
+.login-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at 30% 20%, #11254a 0%, #0B2347 55%, #060f1f 100%);}
+.login-card{width:380px;background:#fff;border-radius:12px;padding:34px 32px;box-shadow:0 20px 60px rgba(0,0,0,.35);}
+.login-mark{display:flex;align-items:center;gap:10px;margin-bottom:18px;}
+.login-mark .mark{width:42px;height:42px;border-radius:9px;object-fit:cover;display:block;}
+.login-title{font-size:17px;font-weight:800;}
+.login-sub{font-size:11px;color:var(--text-mute);text-transform:uppercase;letter-spacing:.1em;}
+.disclaimer-mini{font-size:10.5px;color:var(--text-mute);margin-top:16px;line-height:1.5;border-top:1px solid var(--border);padding-top:14px;}
+
+.toast{position:fixed;bottom:22px;right:22px;background:var(--navy-900);color:#fff;padding:12px 18px;border-radius:8px;font-size:12.5px;font-weight:600;box-shadow:0 8px 24px rgba(0,0,0,.25);z-index:999;}
+
+.alertbox{display:flex;gap:10px;align-items:flex-start;background:var(--risk-crit-bg);color:var(--risk-crit);border:1px solid #f0c3c0;border-radius:8px;padding:12px 14px;font-size:12.3px;margin-bottom:16px;}
+.alertbox svg{width:16px;height:16px;flex-shrink:0;margin-top:1px;}
+.alertbox ul{margin:6px 0 0;padding-left:16px;}
+
+.empty{text-align:center;padding:50px 20px;color:var(--text-mute);}
+.empty svg{width:40px;height:40px;opacity:.4;margin-bottom:10px;}
+
+.burger{display:none;background:none;border:none;cursor:pointer;color:var(--text);padding:6px;border-radius:6px;flex-shrink:0;}
+.burger svg{width:22px;height:22px;}
+.burger:hover{background:var(--bg);}
+.sidebar-overlay{position:fixed;inset:0;background:rgba(8,16,28,.45);z-index:49;}
+
+@media print{
+  body *{visibility:hidden;}
+  #report-print, #report-print *{visibility:visible;}
+  #report-print{position:absolute;left:0;top:0;width:100%;padding:0;}
+  .no-print{display:none!important;}
+}
+@media (max-width:880px){
+  .burger{display:flex;}
+  .sidebar{position:fixed;left:-228px;top:0;height:100%;z-index:50;transition:left .2s;}
+  .sidebar.open{left:0;}
+  .wizard{flex-direction:column;}
+  .wizard-steps{width:100%;display:flex;overflow-x:auto;gap:4px;}
+  .wstep{flex-direction:column;align-items:center;text-align:center;min-width:78px;}
+  .content{padding:16px 14px 50px;}
+  .kpi-grid{grid-template-columns:repeat(2,1fr);}
+  .grid3{grid-template-columns:1fr;}
+  table.table{font-size:11.5px;}
+  .topbar{padding:0 14px;}
+  .userchip .uname,.userchip .urole{max-width:90px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  .maptools{padding:8px;}
+  .maptool{padding:7px 10px;font-size:10.5px;}
+  #leaflet-map{height:320px!important;}
+}
+@media (max-width:480px){
+  .clock{display:none;}
+  .kpi-grid{grid-template-columns:1fr 1fr;}
+  .login-card{width:92vw;padding:26px 22px;}
+}
+</style>
+</head>
+<body>
+<div id="app">Loading AeroSafety Case…</div>
+<script>
+/* ============================================================
+   AEROSAFETY CASE — MVP (UAS Safety Management System, free maps)
+   Single-file demo application (no backend). Persists via
+   localStorage (when deployed standalone, e.g. GitHub Pages) or the host's
+   window.storage API (when viewed inside the Claude preview). Built for
+   evaluation / prototyping purposes.
+   Google Maps is optional: provide your own API key in
+   Settings to enable real satellite imagery and address
+   search. Without a key the app falls back to a schematic
+   operational map so it remains fully usable offline.
+   ============================================================ */
+
+/* ---------------- ICONS ---------------- */
+function icon(name){
+  const p = {
+    dashboard:'<rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/>',
+    missions:'<path d="M3 7.5 12 3l9 4.5v9L12 21l-9-4.5z"/><path d="M3 7.5 12 12l9-4.5"/><path d="M12 12v9"/>',
+    map:'<path d="M9 20 3.6 18a1 1 0 0 1-.6-.9V5.6a1 1 0 0 1 1.4-.9L9 7m0 13 6-3m-6 3V7m6 10 5.4 2.1a1 1 0 0 0 1.6-.8V6.6a1 1 0 0 0-.6-.9L15 4m0 13V4m0 0L9 7"/>',
+    library:'<path d="M5 19.5A2.5 2.5 0 0 1 7.5 17H20"/><path d="M7.5 2H20v20H7.5A2.5 2.5 0 0 1 5 19.5v-15A2.5 2.5 0 0 1 7.5 2z"/>',
+    uas:'<circle cx="12" cy="12" r="2.4"/><path d="M6 6l3 3M18 6l-3 3M6 18l3-3M18 18l-3-3"/><circle cx="5.3" cy="5.3" r="2.2"/><circle cx="18.7" cy="5.3" r="2.2"/><circle cx="5.3" cy="18.7" r="2.2"/><circle cx="18.7" cy="18.7" r="2.2"/>',
+    sms:'<path d="M12 2 3 6v6c0 5 4 8.5 9 10 5-1.5 9-5 9-10V6z"/><path d="m9 12 2 2 4-4"/>',
+    settings:'<circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1a2.1 2.1 0 1 1-3 3l-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.6V21a2.1 2.1 0 0 1-4.2 0v-.1a1.7 1.7 0 0 0-1-1.6 1.7 1.7 0 0 0-1.9.3l-.1.1a2.1 2.1 0 1 1-3-3l.1-.1a1.7 1.7 0 0 0 .3-1.9 1.7 1.7 0 0 0-1.6-1H3a2.1 2.1 0 0 1 0-4.2h.1a1.7 1.7 0 0 0 1.6-1 1.7 1.7 0 0 0-.3-1.9l-.1-.1a2.1 2.1 0 1 1 3-3l.1.1a1.7 1.7 0 0 0 1.9.3h0a1.7 1.7 0 0 0 1-1.6V3a2.1 2.1 0 0 1 4.2 0v.1a1.7 1.7 0 0 0 1 1.6 1.7 1.7 0 0 0 1.9-.3l.1-.1a2.1 2.1 0 1 1 3 3l-.1.1a1.7 1.7 0 0 0-.3 1.9v0a1.7 1.7 0 0 0 1.6 1H21a2.1 2.1 0 0 1 0 4.2h-.1a1.7 1.7 0 0 0-1.6 1z"/>',
+    plus:'<path d="M12 5v14M5 12h14"/>',
+    check:'<path d="m20 6-11 11-5-5"/>',
+    x:'<path d="M18 6 6 18M6 6l12 12"/>',
+    alert:'<path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9v4M12 17h.01"/>',
+    print:'<path d="M6 9V2h12v7"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/>',
+    trash:'<path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m3 0-1 14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2L4 6"/>',
+    pin:'<path d="M12 21s-7-7.6-7-12a7 7 0 1 1 14 0c0 4.4-7 12-7 12z"/><circle cx="12" cy="9" r="2.4"/>',
+    chev:'<path d="m9 18 6-6-6-6"/>',
+    logout:'<path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="m16 17 5-5-5-5"/><path d="M21 12H9"/>',
+    radar:'<circle cx="12" cy="12" r="9"/><path d="M12 12 18 7"/><circle cx="12" cy="12" r="1.4" fill="currentColor"/>',
+    file:'<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/>',
+    bolt:'<path d="M13 2 3 14h7l-1 8 11-12h-7z"/>',
+    info:'<circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v5h1"/>',
+    key:'<path d="M21 2 11.6 11.4"/><circle cx="7.5" cy="15.5" r="5.5"/><path d="m15.5 7.5 3 3M18.5 4.5l3 3"/>',
+    menu:'<path d="M4 6h16M4 12h16M4 18h16"/>',
+    user:'<circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/>'
+  };
+  return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">'+(p[name]||'')+'</svg>';
+}
+
+/* ---------------- REFERENCE DATA ---------------- */
+const SEVERITY = [
+  {v:1,label:'1 · Negligible',desc:'No damage, no injuries, no relevant operational impact.'},
+  {v:2,label:'2 · Minor',desc:'Light damage, minor injuries, minor interruption.'},
+  {v:3,label:'3 · Moderate',desc:'Significant material damage, moderate injuries, partial mission loss.'},
+  {v:4,label:'4 · Major',desc:'Serious injuries, loss of the UAS, significant risk to third parties.'},
+  {v:5,label:'5 · Catastrophic',desc:'Potential fatality, collision with a manned aircraft.'}
+];
+const PROBABILITY = [
+  {v:1,label:'1 · Rare',desc:'Very unlikely, not expected under normal conditions.'},
+  {v:2,label:'2 · Unlikely',desc:'Could occur, but is not expected.'},
+  {v:3,label:'3 · Possible',desc:'May occur during the operation.'},
+  {v:4,label:'4 · Likely',desc:'Reasonably expected to occur.'},
+  {v:5,label:'5 · Frequent',desc:'Likely to occur repeatedly.'}
+];
+function riskLevel(r){
+  if(r==null) return {key:'na',label:'Not assessed',cls:'neutral'};
+  if(r<=4) return {key:'low',label:'Low',cls:'low'};
+  if(r<=9) return {key:'medium',label:'Medium',cls:'med'};
+  if(r<=14) return {key:'high',label:'High',cls:'high'};
+  return {key:'intolerable',label:'Intolerable',cls:'crit'};
+}
+
+const OPERATION_TYPES = ['VLOS','EVLOS','BVLOS','Urban','Rural','Industrial','Linear inspection','Powerline inspection',
+  'Infrastructure inspection','Photogrammetry','LiDAR','Thermography','Surveillance','Security','Emergency','Agriculture','Training','Other'];
+const OPERATION_CATEGORIES = ['Open','Specific','Certified','STS','PDRA','SORA','Own operational authorisation','Operational declaration','Not determined'];
+const ENVIRONMENTS = [
+  {v:'rural',label:'Rural'},{v:'urban',label:'Urban'},{v:'industrial',label:'Industrial'},{v:'critical',label:'Critical infrastructure'}
+];
+
+const HAZARD_LIBRARY = {
+  'A · Operational':['Loss of control','Loss of C2 link','Flight outside the operational volume','Incursion into unauthorised airspace',
+    'Insufficient separation from manned aircraft','Misconfigured waypoints','Misconfigured RTH','Unsafe landing point',
+    'Insufficient buffer','Incomplete briefing','Crew fatigue','Commercial pressure to fly'],
+  'B · Technical':['Motor failure','Battery failure','Degraded battery','Overheating','Autopilot failure','GNSS loss',
+    'GNSS spoofing','GNSS jamming','Loss of telemetry','Geofence disabled','Overdue maintenance','Abnormal vibration'],
+  'C · Human':['Pilot unfamiliar with the area','Fatigued pilot','Untrained observer','Loss of situational awareness',
+    'Distraction','Missing briefing','Late decision to abort','Overconfidence'],
+  'D · Environmental':['Strong wind','Gusts','Rain','Storm / lightning','Fog / low visibility','Extreme temperature','Ice',
+    'Flight over water','Wildlife / birds','Rapidly changing weather'],
+  'E · Third parties':['Non-participating persons','Vehicles','Road traffic','Field workers','Curious onlookers','Heavy machinery',
+    'Third-party drones','General aviation','Domestic animals / livestock'],
+  'F · Regulatory':['Operation outside the authorised scenario','Missing authorisation','Unverified UAS geographical zone','Missing insurance',
+    'Unregistered UAS','Expired documentation','Operation in controlled airspace without coordination'],
+  'G · Security':['Unauthorised access to the UAS','Equipment theft','Intentional jamming','Intentional spoofing','Cyberattack',
+    'Capture of sensitive imagery','Reputational risk'],
+  'H · BVLOS-specific':['Insufficient C2 coverage','Degraded mobile coverage','Lack of strategic observers','Insufficient DAA',
+    'Ineffective contingency','Flight outside the authorised corridor','Communications latency','Uncertainty about local air traffic'],
+  'I · Infrastructure':['Power line','Substation','Antenna / telecom tower','Tall building','Crane','Railway','Nearby road'],
+  'J · Privacy':['Capture of third-party imagery','Overflight of private property','Data protection non-compliance']
+};
+
+const MITIGATION_LIBRARY = {
+  'Operational':['Mandatory briefing','Prior reconnaissance of the area','Visual observers','Perimeter control / sterile zone',
+    'Reduced altitude','Reduced speed','Route change','Increased buffer','Low-exposure time window',
+    'Alternate landing point','Abort procedure','Safety Manager oversight'],
+  'Technical':['Battery inspection','Structural inspection','Firmware validation','Geofence enabled','RTH configured',
+    'Failsafe configured','Altitude limiter','C2 redundancy','Review of previous logs'],
+  'Environmental':['Pre-flight weather check','On-site wind measurement','Defined visibility minimums','Suspend for storms',
+    'Selection of a safe landing area'],
+  'Regulatory':['Verification of UAS geographical zones','Confirmation of operational authorisation','Confirmation of valid insurance',
+    'Confirmation of pilot competency','Archived documentary evidence'],
+  'Security':['Equipment access control','Equipment custody','Storage media encryption','Anti-jamming/spoofing procedure']
+};
+
+const PRECHECK_ITEMS = [
+  {id:'doc',text:'Documentation and operational authorisation verified',crit:true},
+  {id:'zone',text:'UAS geographical zone and restrictions reviewed',crit:true},
+  {id:'weather',text:'Weather reviewed and within minimums',crit:true},
+  {id:'notam',text:'NOTAMs reviewed (if applicable)',crit:false},
+  {id:'client',text:'Client informed',crit:false},
+  {id:'crew',text:'Pilot and observers assigned',crit:true},
+  {id:'uasassigned',text:'UAS and payload assigned',crit:true},
+  {id:'battery',text:'Batteries inspected and charged',crit:false},
+  {id:'route',text:'Route / operational volume and buffer defined',crit:true},
+  {id:'contingency',text:'Contingency and emergency areas defined',crit:true},
+  {id:'area',text:'Take-off/landing area clear of non-participating persons',crit:true},
+  {id:'c2',text:'C2 link and telemetry stable',crit:false},
+  {id:'gnss',text:'GNSS / RTK adequate',crit:false},
+  {id:'failsafe',text:'RTH, failsafe and geofence configured',crit:true},
+  {id:'comms',text:'Crew communication tested',crit:false},
+  {id:'briefing',text:'Pre-flight briefing completed',crit:true}
+];
+
+const DOC_TYPES = ['Operational authorisation','Third-party liability insurance','Pilot competency certificate','Operations manual'];
+
+
+/* ---------------- MAP HELPERS (Leaflet + OpenStreetMap/Esri, free, no API key) ---------------- */
+const LMap = { map:null, reportMap:null, takeoffMarker:null, landingMarker:null, hazardMarkers:{}, polygon:null, areaVertexMarkers:[], mode:null };
+
+function riskColor(h){
+  const lvl=riskLevel(h.riskResidual!=null?h.riskResidual:h.riskInitial);
+  return lvl.key==='low'?'#28804A':lvl.key==='medium'?'#A8790A':lvl.key==='high'?'#C9651A':lvl.key==='intolerable'?'#B3261E':'#888';
+}
+function setMapToolMode(mode){
+  LMap.mode = (LMap.mode===mode)? null : mode;
+  document.querySelectorAll('.maptool[data-mode]').forEach(function(b){ b.classList.toggle('active', b.getAttribute('data-mode')===LMap.mode); });
+}
+function clearAreaPath(){
+  if(LMap.polygon && LMap.map){ LMap.map.removeLayer(LMap.polygon); LMap.polygon=null; }
+  if(LMap.map){ (LMap.areaVertexMarkers||[]).forEach(function(m){ LMap.map.removeLayer(m); }); }
+  LMap.areaVertexMarkers=[];
+  if(App.state.draft) App.state.draft.location.areaPath=[];
+  const el=document.getElementById('map-coords'); if(el) el.textContent='Operational area cleared.';
+}
+function clearPoints(){
+  ['takeoff','landing'].forEach(function(k){
+    const mk=LMap[k+'Marker'];
+    if(mk && LMap.map){ LMap.map.removeLayer(mk); LMap[k+'Marker']=null; }
+    if(App.state.draft) App.state.draft.location[k]=null;
+  });
+}
+function placeLMarker(kind,latlng){
+  if(!LMap.map || typeof L==='undefined') return;
+  const isTakeoff = kind==='takeoff';
+  const color = isTakeoff? '#1E88C9':'#1D3A61';
+  const old=LMap[kind+'Marker'];
+  if(old) LMap.map.removeLayer(old);
+  const icon=L.divIcon({className:'', html:'<div style="width:24px;height:24px;border-radius:50%;background:'+color+';border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.4);display:flex;align-items:center;justify-content:center;color:#fff;font-size:11px;font-weight:700;">'+(isTakeoff?'T':'L')+'</div>', iconSize:[24,24], iconAnchor:[12,12]});
+  const marker=L.marker(latlng,{icon:icon, draggable:true, title:isTakeoff?'Take-off point':'Landing point'}).addTo(LMap.map);
+  marker.on('dragend',function(){
+    const p=marker.getLatLng();
+    if(!p) return;
+    App.setDraft('location.'+kind, {lat:p.lat, lng:p.lng}, false);
+  });
+  LMap[kind+'Marker']=marker;
+}
+function placeLHazardMarker(h){
+  if(!LMap.map || typeof L==='undefined' || h.lat==null) return;
+  const old=LMap.hazardMarkers[h.id];
+  if(old) LMap.map.removeLayer(old);
+  const color=riskColor(h);
+  const icon=L.divIcon({className:'', html:'<div style="width:18px;height:18px;border-radius:50%;background:'+color+';border:2px solid #0E2032;box-shadow:0 1px 3px rgba(0,0,0,.4);"></div>', iconSize:[18,18], iconAnchor:[9,9]});
+  const marker=L.marker({lat:h.lat,lng:h.lng},{icon:icon, draggable:true, title:h.name}).addTo(LMap.map);
+  marker.on('dragend',function(){
+    const p=marker.getLatLng();
+    if(!p) return;
+    h.lat=p.lat; h.lng=p.lng;
+  });
+  LMap.hazardMarkers[h.id]=marker;
+}
+function drawLPolygon(path){
+  if(!LMap.map || typeof L==='undefined') return;
+  if(LMap.polygon){ LMap.map.removeLayer(LMap.polygon); LMap.polygon=null; }
+  (LMap.areaVertexMarkers||[]).forEach(function(m){ LMap.map.removeLayer(m); });
+  LMap.areaVertexMarkers=[];
+  path.forEach(function(p){
+    const vm=L.circleMarker(p,{radius:8, color:'#1E88C9', weight:3, fillColor:'#fff', fillOpacity:1}).addTo(LMap.map);
+    LMap.areaVertexMarkers.push(vm);
+  });
+  if(path.length>=2){
+    LMap.polygon=L.polygon(path,{color:'#1E88C9', weight:2, fillColor:'#1E88C9', fillOpacity:.18}).addTo(LMap.map);
+  }
+}
+function initLocationMap(){
+  const d=App.state.draft;
+  const container=document.getElementById('leaflet-map');
+  if(!d || !container || typeof L==='undefined') return;
+  const loc=d.location;
+  const center=(loc.lat!=null)? [loc.lat,loc.lng] : [40.4168,-3.7038];
+  const map=L.map(container,{zoomControl:true, attributionControl:true}).setView(center, loc.zoom||(loc.lat!=null?15:5));
+  const street=L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19, attribution:'&copy; OpenStreetMap contributors'});
+  const satellite=L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',{maxZoom:19, attribution:'Tiles &copy; Esri'});
+  let satFailCount=0, streetFailCount=0, switchedToStreet=false;
+  function onSatError(){
+    satFailCount++;
+    if(satFailCount===8 && !switchedToStreet){
+      switchedToStreet=true;
+      try{ map.removeLayer(satellite); }catch(e){}
+      try{ street.addTo(map); }catch(e){}
+      const el=document.getElementById('map-coords');
+      if(el) el.textContent='Satellite imagery is blocked or unavailable in this environment — switched to the street map automatically. Open this file directly in your browser (not inside a chat preview) to get satellite view.';
+    }
+  }
+  function onStreetError(){
+    streetFailCount++;
+    if(streetFailCount===8){
+      const el=document.getElementById('map-coords');
+      if(el) el.textContent='Map tiles are not loading. Check your internet connection, or open this file directly in your browser instead of a chat preview.';
+    }
+  }
+  satellite.on('tileerror', onSatError);
+  street.on('tileerror', onStreetError);
+  satellite.addTo(map);
+  L.control.layers({'Satellite':satellite,'Street':street}).addTo(map);
+  const preservedMode = LMap.mode;
+  LMap.map=map; LMap.mode=preservedMode; LMap.hazardMarkers={};
+
+  map.on('moveend',function(){
+    const c=map.getCenter(); if(!c || !App.state.draft) return;
+    App.setDraft('location.lat', c.lat, false);
+    App.setDraft('location.lng', c.lng, false);
+    App.setDraft('location.zoom', map.getZoom(), false);
+    const el=document.getElementById('map-coords'); if(el && !switchedToStreet) el.textContent='Center: '+c.lat.toFixed(5)+', '+c.lng.toFixed(5);
+  });
+
+  map.on('click',function(e){
+    const mode=LMap.mode;
+    if(!mode || !App.state.draft || !e.latlng) return;
+    const latlng={lat:e.latlng.lat, lng:e.latlng.lng};
+    if(mode==='takeoff'){ App.setDraft('location.takeoff', latlng, false); placeLMarker('takeoff',latlng); setMapToolMode(null); }
+    else if(mode==='landing'){ App.setDraft('location.landing', latlng, false); placeLMarker('landing',latlng); setMapToolMode(null); }
+    else if(mode==='area'){
+      const loc2=App.state.draft.location;
+      loc2.areaPath=loc2.areaPath||[];
+      loc2.areaPath.push(latlng);
+      const n=loc2.areaPath.length;
+      LMap.mode='area';
+      App.showToast('Point '+n+' added to operational area'+(n<3?' — add '+(3-n)+' more to form an area.':'.'));
+    } else if(mode==='hazard'){
+      const hz={id:'H-'+Date.now()+Math.random().toString(36).slice(2,6), name:'Hazard detected on map', category:'Operational',
+        lat:latlng.lat, lng:latlng.lng, severityInitial:3, probabilityInitial:3, riskInitial:9, mitigations:[], severityResidual:3, probabilityResidual:3, riskResidual:9};
+      App.state.draft.hazards.push(hz);
+      placeLHazardMarker(hz);
+      setMapToolMode(null);
+      App.showToast('Hazard added. Complete it in the "Hazards" step.');
+    }
+  });
+
+  if(loc.takeoff) placeLMarker('takeoff', loc.takeoff);
+  if(loc.landing) placeLMarker('landing', loc.landing);
+  if(loc.areaPath && loc.areaPath.length) drawLPolygon(loc.areaPath);
+  (d.hazards||[]).forEach(function(h){ if(h.lat!=null) placeLHazardMarker(h); });
+  if(LMap.mode){
+    document.querySelectorAll('.maptool[data-mode]').forEach(function(b){ b.classList.toggle('active', b.getAttribute('data-mode')===LMap.mode); });
+  }
+  setTimeout(function(){ try{ map.invalidateSize(); map.setView(center, loc.zoom||(loc.lat!=null?15:5)); }catch(e){} }, 60);
+}
+function initReportMap(){
+  const d=App.state.draft;
+  const container=document.getElementById('leaflet-report-map');
+  if(!d || !container || typeof L==='undefined') return;
+  const loc=d.location;
+  const center=(loc.lat!=null)? [loc.lat,loc.lng] : [40.4168,-3.7038];
+  const map=L.map(container,{zoomControl:false, attributionControl:true, dragging:false, scrollWheelZoom:false, doubleClickZoom:false, boxZoom:false, keyboard:false, tap:false}).setView(center, loc.zoom||(loc.lat!=null?15:5));
+  L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',{maxZoom:19, attribution:'Tiles &copy; Esri'}).addTo(map);
+
+  const bounds=[];
+  if(loc.takeoff){ L.marker(loc.takeoff,{icon:L.divIcon({className:'',html:'<div style="width:20px;height:20px;border-radius:50%;background:#1E88C9;border:2px solid #fff;"></div>',iconSize:[20,20],iconAnchor:[10,10]})}).addTo(map); bounds.push([loc.takeoff.lat,loc.takeoff.lng]); }
+  if(loc.landing){ L.marker(loc.landing,{icon:L.divIcon({className:'',html:'<div style="width:20px;height:20px;border-radius:50%;background:#1D3A61;border:2px solid #fff;"></div>',iconSize:[20,20],iconAnchor:[10,10]})}).addTo(map); bounds.push([loc.landing.lat,loc.landing.lng]); }
+  (d.hazards||[]).forEach(function(h){ if(h.lat!=null){ L.circleMarker([h.lat,h.lng],{radius:7,color:'#0E2032',weight:2,fillColor:riskColor(h),fillOpacity:1}).addTo(map); bounds.push([h.lat,h.lng]); } });
+  if(loc.areaPath && loc.areaPath.length){ L.polygon(loc.areaPath,{color:'#1E88C9',weight:2,fillColor:'#1E88C9',fillOpacity:.18}).addTo(map); loc.areaPath.forEach(function(p){ bounds.push([p.lat,p.lng]); }); }
+  if(bounds.length>1){ try{ map.fitBounds(bounds,{padding:[24,24]}); }catch(e){} }
+  setTimeout(function(){ try{ map.invalidateSize(); }catch(e){} }, 60);
+}
+function searchAddress(){
+  const input=document.getElementById('map-search');
+  if(!input || !input.value.trim()) return;
+  const q=input.value.trim();
+  const status=document.getElementById('map-coords');
+  if(status) status.textContent='Searching…';
+  fetch('https://nominatim.openstreetmap.org/search?format=json&limit=1&q='+encodeURIComponent(q))
+    .then(function(r){ return r.json(); })
+    .then(function(results){
+      if(!results || !results.length){ if(status) status.textContent='No results found for "'+q+'".'; return; }
+      const r=results[0];
+      const lat=parseFloat(r.lat), lng=parseFloat(r.lon);
+      if(App.state.draft){
+        App.setDraft('location.lat', lat, false);
+        App.setDraft('location.lng', lng, false);
+        App.setDraft('location.zoom', 15, false);
+        App.setDraft('location.name', r.display_name, false);
+      }
+      if(LMap.map){ LMap.map.setView([lat,lng], 15); }
+      const nameInput=document.getElementById('loc-name-input'); if(nameInput) nameInput.value=r.display_name;
+      if(status) status.textContent='Center: '+lat.toFixed(5)+', '+lng.toFixed(5);
+    })
+    .catch(function(){ if(status) status.textContent='Address search failed (network unavailable).'; });
+}
+
+/* ---------------- STORAGE (dual-mode: Claude preview window.storage, or localStorage when deployed standalone) ---------------- */
+const Store = {
+  hasHostStorage(){ return typeof window!=='undefined' && !!window.storage; },
+  async get(key){
+    if(this.hasHostStorage()){
+      try{ const r=await window.storage.get(key); return r? r.value : null; }catch(e){ /* fall through */ }
+    }
+    try{ return localStorage.getItem(key); }catch(e){ return null; }
+  },
+  async set(key,value){
+    if(this.hasHostStorage()){
+      try{ await window.storage.set(key,value); return; }catch(e){ /* fall through */ }
+    }
+    try{ localStorage.setItem(key,value); }catch(e){}
+  },
+  async delete(key){
+    if(this.hasHostStorage()){
+      try{ await window.storage.delete(key); return; }catch(e){ /* fall through */ }
+    }
+    try{ localStorage.removeItem(key); }catch(e){}
+  }
+};
+
+/* ---------------- STATE ---------------- */
+const App = {
+  state:{
+    user:null,
+    view:'dashboard',
+    missions:[],
+    fleet:[],
+    draft:null,
+    wizardStep:1,
+    libTab:Object.keys(HAZARD_LIBRARY)[0],
+    sidebarOpen:false,
+    toast:null,
+    org:{name:'Aerial Risk Solutions', operatorNumber:'EU-UAS-00231'}
+  },
+
+  async init(){
+    let missions=[], fleet=[], org=null, savedUser=null;
+    try{ const r=await Store.get('srm_missions'); if(r) missions=JSON.parse(r); }catch(e){}
+    try{ const r=await Store.get('srm_fleet'); if(r) fleet=JSON.parse(r); }catch(e){}
+    try{ const r=await Store.get('srm_org'); if(r) org=JSON.parse(r); }catch(e){}
+    try{ const r=await Store.get('srm_user'); if(r) savedUser=JSON.parse(r); }catch(e){}
+    this.state.missions=missions||[];
+    this.state.fleet=fleet||[];
+    if(org) this.state.org=org;
+    if(savedUser) this.state.savedUser=savedUser;
+    this.render();
+    setInterval(()=>{ const c=document.getElementById('utcclock'); if(c) c.innerHTML=this.clockHtml(); },1000);
+  },
+
+  async persist(){
+    try{ await Store.set('srm_missions', JSON.stringify(this.state.missions)); }catch(e){}
+    try{ await Store.set('srm_fleet', JSON.stringify(this.state.fleet)); }catch(e){}
+  },
+
+  setOrgField(field,value){
+    this.state.org[field]=value;
+    try{ Store.set('srm_org', JSON.stringify(this.state.org)); }catch(e){}
+  },
+
+  showToast(msg){ this.state.toast=msg; this.render(); setTimeout(()=>{ this.state.toast=null; const t=document.querySelector('.toast'); if(t) t.remove(); },2600); },
+
+  login(name,role){
+    this.state.user={name:name||'Demo Pilot', role:role||'Safety Manager'};
+    try{ Store.set('srm_user', JSON.stringify(this.state.user)); }catch(e){}
+    this.state.view='dashboard';
+    this.render();
+  },
+  logout(){ this.state.user=null; this.render(); },
+  updateUserProfile(name,role){
+    if(!name || !name.trim()){ this.showToast('Please enter a name.'); return; }
+    this.state.user={name:name.trim(), role:role};
+    try{ Store.set('srm_user', JSON.stringify(this.state.user)); }catch(e){}
+    this.showToast('Profile updated.');
+  },
+
+  go(view){ this.state.view=view; this.state.sidebarOpen=false; this.render(); window.scrollTo(0,0); },
+
+  /* -------- mutate helpers (no rerender, preserves input focus) -------- */
+  setPath(root, path, value){
+    const parts=path.split('.');
+    let obj=root;
+    for(let i=0;i<parts.length-1;i++){ obj=obj[parts[i]]; }
+    obj[parts[parts.length-1]]=value;
+  },
+  setDraft(path,value,rerender){
+    if(!this.state.draft) return;
+    this.setPath(this.state.draft, path, value);
+    if(rerender) this.render();
+  },
+
+  /* -------- mission lifecycle -------- */
+  newDraft(){
+    const id='M-'+Date.now();
+    this.state.draft={
+      id, code:'OP-'+String(this.state.missions.length+1).padStart(3,'0'), name:'', client:'', date:'', startTime:'', endTime:'',
+      operationType:'', category:'', scenario:'', description:'', criticality:'Medium',
+      responsible:'', safetyManager:'', pilot:'', observers:'',
+      location:{name:'',country:'',city:'',env:'rural',lat:null,lng:null,zoom:null,takeoff:null,landing:null,areaPath:[]},
+      uas:{manufacturer:'',model:'',serial:'',type:'Multirotor',mtom:'',rth:true,geofence:true,failsafe:true,payload:'RGB'},
+      hazards:[], checklist:{}, documents: DOC_TYPES.map(t=>({type:t,name:'',expiry:''})),
+      flags:{weatherOutOfMins:false,uasNotApt:false,pilotNotCompetent:false,uncontrolledThirdParties:false},
+      decision:{final:'',justification:'',signedBy:'',signedRole:'',signedAt:''},
+      status:'Draft', createdAt:new Date().toISOString()
+    };
+    this.state.wizardStep=1;
+    this.go('wizard');
+  },
+
+  openMission(id){
+    const m=this.state.missions.find(x=>x.id===id);
+    if(!m) return;
+    this.state.draft=JSON.parse(JSON.stringify(m));
+    if(this.state.draft.location.areaPath==null) this.state.draft.location.areaPath=[];
+    this.state.wizardStep=1;
+    this.go('wizard');
+  },
+
+  deleteMission(id){
+    this.state.missions=this.state.missions.filter(x=>x.id!==id);
+    this.persist(); this.render();
+  },
+
+  saveDraft(asStatus){
+    const d=this.state.draft;
+    d.updatedAt=new Date().toISOString();
+    if(asStatus) d.status=asStatus;
+    const idx=this.state.missions.findIndex(x=>x.id===d.id);
+    if(idx>=0) this.state.missions[idx]=JSON.parse(JSON.stringify(d));
+    else this.state.missions.push(JSON.parse(JSON.stringify(d)));
+    this.persist();
+  },
+
+  loadDemo(){
+    const d=this.demoMission();
+    const idx=this.state.missions.findIndex(x=>x.id===d.id);
+    if(idx>=0) this.state.missions[idx]=d; else this.state.missions.push(d);
+    this.persist();
+    this.showToast('Demo mission "BVLOS power line inspection" loaded.');
+  },
+
+  demoMission(){
+    function hz(name,cat,si,pi,sr,pr,lat,lng,mits){
+      return {id:'H-'+name.replace(/\s/g,'')+Math.random().toString(36).slice(2,6), name, category:cat, lat, lng,
+        severityInitial:si, probabilityInitial:pi, riskInitial:si*pi,
+        severityResidual:sr, probabilityResidual:pr, riskResidual:sr*pr,
+        mitigations: mits.map(t=>({id:'MIT-'+Math.random().toString(36).slice(2,8), desc:t, type:'Operational', responsible:'Pilot in command', status:'Implemented', due:''}))
+      };
+    }
+    return {
+      id:'DEMO-001', code:'OP-DEMO-001', name:'BVLOS power line inspection', client:'Regional Electric Utility',
+      date:new Date().toISOString().slice(0,10), startTime:'09:00', endTime:'12:00',
+      operationType:'BVLOS', category:'SORA', scenario:'Linear inspection in a rural area',
+      description:'Power line inspection operation in a rural area with a nearby secondary road, farm tracks, a power line, possible non-participating persons, gusting wind and variable C2 coverage.',
+      criticality:'High', responsible:'Operations Manager', safetyManager:'Demo Safety Manager', pilot:'Demo Remote Pilot', observers:'Observer 1, Observer 2',
+      location:{name:'HV line segment, sector 4, rural area (Castilla y Leon, Spain)', country:'Spain', city:'—', env:'rural',
+        lat:41.6500, lng:-4.7230, zoom:15,
+        takeoff:{lat:41.6488,lng:-4.7255}, landing:{lat:41.6488,lng:-4.7255},
+        areaPath:[{lat:41.6535,lng:-4.7290},{lat:41.6538,lng:-4.7175},{lat:41.6458,lng:-4.7168},{lat:41.6452,lng:-4.7285}]},
+      uas:{manufacturer:'Industrial multirotor', model:'Heavy-Lift RTK', serial:'SN-44210', type:'Multirotor', mtom:'18 kg',
+        rth:true, geofence:true, failsafe:true, payload:'RGB + Thermal'},
+      hazards:[
+        hz('Power line','Infrastructure',4,3,3,2,41.6500,-4.7230,['Maintain lateral safety distance','Route parallel to the line','Controlled altitude','Specific briefing','Geofence enabled']),
+        hz('Non-participating persons','Third parties',4,3,3,2,41.6480,-4.7260,['Perimeter observers','Perimeter control','Low-exposure time window']),
+        hz('Nearby road','Infrastructure',4,2,3,2,41.6470,-4.7195,['Increased ground buffer','No direct overflight','Alternate emergency area']),
+        hz('Loss of C2 link','Operational',5,3,4,2,41.6512,-4.7245,['Pre-flight coverage test','RTH configured','Geofence enabled','Loss-of-link procedure']),
+        hz('Gusting wind','Environmental',3,4,3,2,41.6495,-4.7205,['On-site wind measurement','Defined wind limits','Suspend if minimums exceeded']),
+        hz('GNSS loss','Technical',4,3,3,2,41.6505,-4.7272,['Satellite check','RTK active','Avoid multipath areas','Manual flight procedure'])
+      ],
+      checklist: PRECHECK_ITEMS.reduce((a,it)=>{a[it.id]=true;return a;},{}),
+      documents: DOC_TYPES.map(t=>({type:t,name:t+' — Demo',expiry:'2026-12-31'})),
+      flags:{weatherOutOfMins:false,uasNotApt:false,pilotNotCompetent:false,uncontrolledThirdParties:false},
+      decision:{final:'GO WITH MITIGATIONS', justification:'Residual risks reduced to a medium level through operational and technical mitigations verified on site. The Safety Manager maintains active oversight throughout the operation.',
+        signedBy:'Demo Safety Manager', signedRole:'Safety Manager', signedAt:new Date().toISOString()},
+      status:'GO WITH MITIGATIONS', createdAt:new Date().toISOString(), updatedAt:new Date().toISOString()
+    };
+  },
+
+  /* -------- hazards / mitigations -------- */
+  addHazardManual(){
+    this.state.draft.hazards.push({id:'H-'+Date.now()+Math.random().toString(36).slice(2,6), name:'New hazard', category:'Operational',
+      x:null,y:null, severityInitial:3, probabilityInitial:3, riskInitial:9, mitigations:[], severityResidual:3, probabilityResidual:3, riskResidual:9});
+    this.render();
+  },
+  addHazardFromLib(name,cat){
+    this.state.draft.hazards.push({id:'H-'+Date.now()+Math.random().toString(36).slice(2,6), name, category:cat,
+      x:null,y:null, severityInitial:3, probabilityInitial:3, riskInitial:9, mitigations:[], severityResidual:3, probabilityResidual:3, riskResidual:9});
+    this.render();
+  },
+  removeHazard(id){ this.state.draft.hazards=this.state.draft.hazards.filter(h=>h.id!==id); this.render(); },
+  updateHazardNum(id,field,value){
+    const h=this.state.draft.hazards.find(x=>x.id===id); if(!h) return;
+    h[field]=parseInt(value,10);
+    h.riskInitial=h.severityInitial*h.probabilityInitial;
+    h.riskResidual=h.severityResidual*h.probabilityResidual;
+    this.render();
+  },
+  updateHazardText(id,field,value){
+    const h=this.state.draft.hazards.find(x=>x.id===id); if(!h) return;
+    h[field]=value;
+  },
+  addMitigation(hazardId,text){
+    const h=this.state.draft.hazards.find(x=>x.id===hazardId); if(!h) return;
+    h.mitigations.push({id:'MIT-'+Date.now()+Math.random().toString(36).slice(2,5), desc:text||'New mitigation', type:'Operational', responsible:'', status:'Proposed', due:''});
+    this.render();
+  },
+  removeMitigation(hazardId,mitId){
+    const h=this.state.draft.hazards.find(x=>x.id===hazardId); if(!h) return;
+    h.mitigations=h.mitigations.filter(m=>m.id!==mitId);
+    this.render();
+  },
+  setMitField(hazardId,mitId,field,value){
+    const h=this.state.draft.hazards.find(x=>x.id===hazardId); if(!h) return;
+    const m=h.mitigations.find(x=>x.id===mitId); if(!m) return;
+    m[field]=value;
+  },
+
+  /* -------- checklist / docs / decision -------- */
+  toggleCheck(id){ this.state.draft.checklist[id]=!this.state.draft.checklist[id]; this.render(); },
+  addDocRow(){ this.state.draft.documents.push({type:'Other document',name:'',expiry:''}); this.render(); },
+  removeDocRow(i){ this.state.draft.documents.splice(i,1); this.render(); },
+  setFlag(f){ this.state.draft.flags[f]=!this.state.draft.flags[f]; this.render(); },
+  setDecisionFinal(v){ this.state.draft.decision.final=v; this.render(); },
+
+  finalizeMission(){
+    const d=this.state.draft;
+    const evalr=evaluateMission(d);
+    if(!d.decision.final) d.decision.final=evalr.decision;
+    if(!d.decision.justification || !d.decision.signedBy){
+      this.showToast('Complete the signing responsible and justification before finalizing.');
+      return;
+    }
+    d.decision.signedAt=new Date().toISOString();
+    d.status=d.decision.final;
+    this.saveDraft(d.decision.final);
+    this.go('missions');
+    this.showToast('Mission "'+d.name+'" finalized as '+d.decision.final+'.');
+  },
+
+  clockHtml(){
+    const n=new Date();
+    const hh=String(n.getUTCHours()).padStart(2,'0'), mm=String(n.getUTCMinutes()).padStart(2,'0'), ss=String(n.getUTCSeconds()).padStart(2,'0');
+    return 'UTC <b>'+hh+':'+mm+':'+ss+'</b>';
+  },
+
+  render(){
+    document.getElementById('app').innerHTML = renderRoot();
+    this.afterRender();
+  },
+
+  afterRender(){
+    const onLocationStep = this.state.view==='wizard' && this.state.wizardStep===2;
+    const onReportStep = this.state.view==='wizard' && this.state.wizardStep===9;
+    if(onLocationStep && document.getElementById('leaflet-map')){
+      try{ initLocationMap(); }catch(e){}
+    }
+    if(onReportStep && document.getElementById('leaflet-report-map')){
+      try{ initReportMap(); }catch(e){}
+    }
+  }
+};
+window.App=App;
+
+/* ---------------- DECISION ENGINE ---------------- */
+function evaluateMission(m){
+  const reasons=[];
+  if(!m.location || !m.location.name) reasons.push({level:'hold',text:'Missing operation location.'});
+  if(!m.operationType) reasons.push({level:'hold',text:'Missing operation type.'});
+  if(!m.uas || !m.uas.model) reasons.push({level:'hold',text:'No UAS model has been recorded for this mission.'});
+  if(!m.pilot) reasons.push({level:'hold',text:'No remote pilot in command has been assigned.'});
+
+  const hazards=m.hazards||[];
+  const residualKeys=hazards.map(h=>riskLevel(h.riskResidual!=null?h.riskResidual:h.riskInitial).key);
+  const hasIntolerable=residualKeys.includes('intolerable');
+  const highOpen=hazards.filter(h=>{
+    const lvl=riskLevel(h.riskResidual!=null?h.riskResidual:h.riskInitial).key;
+    if(lvl!=='high') return false;
+    const closed=h.mitigations && h.mitigations.length>0 && h.mitigations.every(mm=>mm.status==='Implemented'||mm.status==='Verified');
+    return !closed;
+  });
+
+  if(m.flags && m.flags.weatherOutOfMins) reasons.push({level:'nogo',text:'Weather conditions are below operational minimums.'});
+  if(m.flags && m.flags.uasNotApt) reasons.push({level:'nogo',text:'UAS flagged as not airworthy for this operation.'});
+  if(m.flags && m.flags.pilotNotCompetent) reasons.push({level:'nogo',text:'Pilot without valid competency for this scenario.'});
+  if(m.flags && m.flags.uncontrolledThirdParties) reasons.push({level:'nogo',text:'Uncontrolled non-participating persons present in the area.'});
+  if(hasIntolerable) reasons.push({level:'nogo',text:'At least one residual risk is classified as intolerable.'});
+
+  const criticalPending=PRECHECK_ITEMS.filter(it=>it.crit && !(m.checklist && m.checklist[it.id])).length;
+  if(criticalPending>0) reasons.push({level:'hold',text:criticalPending+' critical checklist item(s) not completed.'});
+
+  const today=new Date();
+  const expiredDocs=(m.documents||[]).filter(d=>d.expiry && new Date(d.expiry)<today).length;
+  if(expiredDocs>0) reasons.push({level:'hold',text:expiredDocs+' document(s) expired.'});
+
+  if(highOpen.length>0) reasons.push({level:'hold',text:highOpen.length+' high risk(s) without a closed (implemented/verified) mitigation.'});
+
+  const nogo=reasons.filter(r=>r.level==='nogo');
+  const hold=reasons.filter(r=>r.level==='hold');
+  let decision;
+  if(nogo.length>0) decision='NO-GO';
+  else if(hold.length>0) decision='HOLD';
+  else{
+    const needsMitigation=hazards.some(h=>{
+      const lvl=riskLevel(h.riskInitial).key;
+      return (lvl==='medium'||lvl==='high') && h.mitigations && h.mitigations.length>0;
+    });
+    decision = needsMitigation ? 'GO WITH MITIGATIONS' : 'GO';
+  }
+  if(reasons.length===0) reasons.push({level:'ok',text:'No blocking issues detected. All residual risks are low or accepted medium.'});
+  return {decision, reasons};
+}
+
+/* ---------------- SHARED RENDER HELPERS ---------------- */
+function escapeHtml(s){ return (s==null?'':String(s)).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+function decisionBadgeCls(v){
+  if(v==='GO') return 'go'; if(v==='GO WITH MITIGATIONS') return 'gowm'; if(v==='HOLD') return 'hold'; if(v==='NO-GO') return 'nogo'; return 'draft';
+}
+function fmtDate(s){ if(!s) return '—'; try{ return new Date(s).toLocaleDateString('en-GB'); }catch(e){ return s; } }
+
+function navItem(view,iconName,label){
+  const active = App.state.view===view;
+  return '<button class="navitem'+(active?' active':'')+'" onclick="App.go(\''+view+'\')">'+icon(iconName)+'<span>'+label+'</span></button>';
+}
+
+function sidebarHtml(){
+  return '<div class="sidebar'+(App.state.sidebarOpen?' open':'')+'">'+
+    '<div class="sidebar-logo"><img class="mark" src="./icons/icon-96.png" alt="AeroSafety Case"><div><div class="word">AEROSAFETY<br>CASE</div><div class="sub">SMS · BVLOS · ICAO</div></div></div>'+
+    '<div class="nav">'+
+      navItem('dashboard','dashboard','Dashboard')+
+      navItem('missions','missions','Missions')+
+      navItem('library','library','Hazard library')+
+      navItem('fleet','uas','UAS fleet')+
+      '<div class="navgroup-label">SMS</div>'+
+      navItem('sms','sms','SMS indicators')+
+      navItem('settings','settings','Settings')+
+    '</div>'+
+    '<div class="sidebar-foot">This tool does not replace an official authorisation or a formal SORA assessment. Risk management and SMS support only.</div>'+
+  '</div>';
+}
+
+function topbarHtml(title,crumbs){
+  const u=App.state.user||{name:'',role:''};
+  const initials=(u.name||'?').split(' ').map(s=>s[0]).slice(0,2).join('').toUpperCase();
+  return '<div class="topbar">'+
+    '<div style="display:flex;align-items:center;gap:14px;">'+
+      '<button class="burger no-print" onclick="App.state.sidebarOpen=!App.state.sidebarOpen;App.render();" aria-label="Menu">'+icon('menu')+'</button>'+
+      '<div><div class="crumbs">'+crumbs+'</div><div class="title">'+title+'</div></div>'+
+    '</div>'+
+    '<div class="topbar-right">'+
+      '<div class="clock" id="utcclock">'+App.clockHtml()+'</div>'+
+      '<div class="userchip" style="cursor:pointer" onclick="App.go(\'settings\')" title="Edit profile"><div class="avatar">'+initials+'</div><div><div class="uname">'+escapeHtml(u.name)+'</div><div class="urole">'+escapeHtml(u.role)+'</div></div></div>'+
+      '<button class="btn-ghost" title="Log out" onclick="App.logout()">'+icon('logout')+'</button>'+
+    '</div>'+
+  '</div>';
+}
+
+function shell(title,crumbs,contentHtml){
+  return '<div class="shell">'+sidebarHtml()+(App.state.sidebarOpen?'<div class="sidebar-overlay no-print" onclick="App.state.sidebarOpen=false;App.render();"></div>':'')+'<div class="main">'+topbarHtml(title,crumbs)+'<div class="content">'+contentHtml+'</div></div></div>'+
+    (App.state.toast? '<div class="toast">'+escapeHtml(App.state.toast)+'</div>':'');
+}
+
+/* ---------------- LOGIN ---------------- */
+function renderLogin(){
+  const last=App.state.savedUser||{};
+  const name=last.name||'Alex Carter';
+  const role=last.role||'Safety Manager';
+  return '<div class="login-wrap"><div class="login-card">'+
+    '<div class="login-mark"><img class="mark" src="./icons/icon-96.png" alt="AeroSafety Case"><div><div class="login-title">AeroSafety Case</div><div class="login-sub">SMS · ICAO · BVLOS</div></div></div>'+
+    '<div class="field"><label>Name</label><input id="li_name" placeholder="e.g. Alex Carter" value="'+escapeHtml(name)+'"></div>'+
+    '<div class="field"><label>Role</label><select id="li_role">'+
+      ['Super Admin','Organization Admin','Safety Manager','Operations Manager','Remote Pilot','Observer / Support Crew','Auditor','Client']
+      .map(r=>'<option'+(r===role?' selected':'')+'>'+r+'</option>').join('')+
+    '</select></div>'+
+    '<button class="btn btn-primary" style="width:100%;justify-content:center;padding:11px;" onclick="App.login(document.getElementById(\'li_name\').value, document.getElementById(\'li_role\').value)">Enter the platform</button>'+
+    '<div class="disclaimer-mini">This tool does not replace an official authorisation, a formal SORA assessment, a regulatory review, or an approval from the competent aviation authority. It is a support tool for risk management, SMS, operational analysis, traceability and decision-making. The operator is responsible for verifying applicable regulations, permits, UAS geographical zones, NOTAMs, weather and other requirements before flight.</div>'+
+  '</div></div>';
+}
+
+/* ---------------- DASHBOARD ---------------- */
+function renderDashboard(){
+  const ms=App.state.missions;
+  const byStatus={};
+  ms.forEach(m=>{ byStatus[m.status]=(byStatus[m.status]||0)+1; });
+  const allHazards=ms.flatMap(m=>m.hazards||[]);
+  const riskCounts={low:0,medium:0,high:0,intolerable:0};
+  allHazards.forEach(h=>{ const lvl=riskLevel(h.riskResidual!=null?h.riskResidual:h.riskInitial).key; if(riskCounts[lvl]!=null) riskCounts[lvl]++; });
+  const expiredDocs=ms.flatMap(m=>m.documents||[]).filter(d=>d.expiry && new Date(d.expiry)<new Date()).length;
+
+  const recent=ms.slice().sort((a,b)=>new Date(b.updatedAt||b.createdAt)-new Date(a.updatedAt||a.createdAt)).slice(0,6);
+
+  const total=Math.max(1,allHazards.length);
+  const donutSegs=[
+    {k:'low',color:'var(--risk-low)',v:riskCounts.low},
+    {k:'medium',color:'var(--risk-med)',v:riskCounts.medium},
+    {k:'high',color:'var(--risk-high)',v:riskCounts.high},
+    {k:'intolerable',color:'var(--risk-crit)',v:riskCounts.intolerable}
+  ];
+  let acc=0;
+  const circumference=2*Math.PI*54;
+  const donut=donutSegs.map(s=>{
+    const frac=s.v/total; const len=frac*circumference;
+    const dash=len+' '+(circumference-len);
+    const offset=circumference - (acc/total)*circumference;
+    acc+=s.v;
+    return '<circle cx="64" cy="64" r="54" fill="none" stroke="'+s.color+'" stroke-width="16" stroke-dasharray="'+dash+'" stroke-dashoffset="'+offset+'" transform="rotate(-90 64 64)"/>';
+  }).join('');
+
+  return shell('Operational dashboard','Control centre · SMS',
+    '<h1 class="pagetitle">Operational summary</h1><div class="subtle" style="margin-bottom:18px;">Global status of missions, risk and SMS traceability.</div>'+
+
+    '<div class="kpi-grid">'+
+      '<div class="kpi"><div class="num">'+ms.length+'</div><div class="lbl">Total missions</div></div>'+
+      '<div class="kpi good"><div class="num">'+(byStatus['GO']||0)+'</div><div class="lbl">GO decisions</div></div>'+
+      '<div class="kpi warn"><div class="num">'+(byStatus['GO WITH MITIGATIONS']||0)+'</div><div class="lbl">GO with mitigations</div></div>'+
+      '<div class="kpi accent"><div class="num">'+(byStatus['HOLD']||0)+'</div><div class="lbl">On HOLD</div></div>'+
+      '<div class="kpi danger"><div class="num">'+(byStatus['NO-GO']||0)+'</div><div class="lbl">NO-GO</div></div>'+
+      '<div class="kpi danger"><div class="num">'+(riskCounts.high+riskCounts.intolerable)+'</div><div class="lbl">High / intolerable risks</div></div>'+
+      '<div class="kpi warn"><div class="num">'+expiredDocs+'</div><div class="lbl">Expired documents</div></div>'+
+      '<div class="kpi"><div class="num">'+allHazards.length+'</div><div class="lbl">Hazards logged</div></div>'+
+    '</div>'+
+
+    '<div class="grid2" style="margin-top:16px;">'+
+      '<div class="card">'+
+        '<div class="row-between"><div class="section-label" style="margin:0;">Residual risk distribution</div></div>'+
+        (allHazards.length? '<div style="display:flex;align-items:center;gap:22px;margin-top:10px;">'+
+          '<svg width="128" height="128" viewBox="0 0 128 128">'+donut+'</svg>'+
+          '<div style="font-size:12.5px;display:flex;flex-direction:column;gap:6px;">'+
+            '<div><span class="badge low">Low</span> '+riskCounts.low+'</div>'+
+            '<div><span class="badge med">Medium</span> '+riskCounts.medium+'</div>'+
+            '<div><span class="badge high">High</span> '+riskCounts.high+'</div>'+
+            '<div><span class="badge crit">Intolerable</span> '+riskCounts.intolerable+'</div>'+
+          '</div></div>'
+          : '<div class="empty">'+icon('alert')+'<div>No hazards logged yet.</div></div>')+
+      '</div>'+
+      '<div class="card">'+
+        '<div class="section-label">Quick actions</div>'+
+        '<div style="display:flex;flex-direction:column;gap:8px;">'+
+          '<button class="btn btn-primary" onclick="App.newDraft()">'+icon('plus')+' New UAS mission</button>'+
+          '<button class="btn btn-secondary" onclick="App.loadDemo()">'+icon('bolt')+' Load demo mission (BVLOS power line)</button>'+
+          '<button class="btn btn-secondary" onclick="App.go(\'library\')">'+icon('library')+' Browse hazard library</button>'+
+          '<button class="btn btn-secondary" onclick="App.go(\'fleet\')">'+icon('uas')+' Manage UAS fleet</button>'+
+        '</div>'+
+      '</div>'+
+    '</div>'+
+
+    '<div class="card" style="margin-top:16px;">'+
+      '<div class="row-between"><div class="section-label" style="margin:0;">Recent missions</div><button class="btn btn-secondary btn-sm" onclick="App.go(\'missions\')">View all '+icon('chev')+'</button></div>'+
+      (recent.length? '<table class="table" style="margin-top:10px;"><thead><tr><th>Code</th><th>Mission</th><th>Type</th><th>Date</th><th>Risk</th><th>Status</th></tr></thead><tbody>'+
+        recent.map(m=>{
+          const lvl=missionMaxRisk(m);
+          return '<tr class="clickable" onclick="App.openMission(\''+m.id+'\')"><td style="font-family:var(--mono)">'+escapeHtml(m.code)+'</td><td>'+escapeHtml(m.name||'(unnamed)')+'</td><td>'+escapeHtml(m.operationType||'—')+'</td><td>'+fmtDate(m.date)+'</td><td><span class="badge '+lvl.cls+'">'+lvl.label+'</span></td><td><span class="badge '+decisionBadgeCls(m.status)+'">'+escapeHtml(m.status)+'</span></td></tr>';
+        }).join('')+'</tbody></table>'
+        : '<div class="empty">'+icon('missions')+'<div>No missions created yet. Create the first one or load the demo mission.</div></div>')+
+    '</div>'
+  );
+}
+function missionMaxRisk(m){
+  const hs=m.hazards||[]; if(!hs.length) return {cls:'neutral',label:'No data'};
+  let max=0; hs.forEach(h=>{ const r=h.riskResidual!=null?h.riskResidual:h.riskInitial; if(r>max) max=r; });
+  return riskLevel(max);
+}
+
+/* ---------------- MISSIONS LIST ---------------- */
+function renderMissions(){
+  const ms=App.state.missions.slice().sort((a,b)=>new Date(b.updatedAt||b.createdAt)-new Date(a.updatedAt||a.createdAt));
+  return shell('Missions','UAS operations',
+    '<div class="row-between" style="margin-bottom:16px;">'+
+      '<div><h1 class="pagetitle">UAS missions</h1><div class="subtle">Create, assess and track your operations.</div></div>'+
+      '<div style="display:flex;gap:8px;"><button class="btn btn-secondary" onclick="App.loadDemo()">'+icon('bolt')+' Demo mission</button><button class="btn btn-primary" onclick="App.newDraft()">'+icon('plus')+' New mission</button></div>'+
+    '</div>'+
+    '<div class="card">'+
+    (ms.length? '<table class="table"><thead><tr><th>Code</th><th>Name</th><th>Client</th><th>Type</th><th>Date</th><th>Risk</th><th>Status</th><th></th></tr></thead><tbody>'+
+      ms.map(m=>{
+        const lvl=missionMaxRisk(m);
+        return '<tr><td class="clickable" style="font-family:var(--mono);cursor:pointer" onclick="App.openMission(\''+m.id+'\')">'+escapeHtml(m.code)+'</td>'+
+          '<td class="clickable" style="cursor:pointer" onclick="App.openMission(\''+m.id+'\')">'+escapeHtml(m.name||'(unnamed)')+'</td>'+
+          '<td>'+escapeHtml(m.client||'—')+'</td><td>'+escapeHtml(m.operationType||'—')+'</td><td>'+fmtDate(m.date)+'</td>'+
+          '<td><span class="badge '+lvl.cls+'">'+lvl.label+'</span></td>'+
+          '<td><span class="badge '+decisionBadgeCls(m.status)+'">'+escapeHtml(m.status)+'</span></td>'+
+          '<td><button class="btn-ghost btn-sm" title="Delete" onclick="event.stopPropagation();if(confirm(\'Delete this mission?\'))App.deleteMission(\''+m.id+'\')">'+icon('trash')+'</button></td></tr>';
+      }).join('')+'</tbody></table>'
+      : '<div class="empty">'+icon('missions')+'<div>No missions yet. Create one or load the demo data.</div></div>')+
+    '</div>'
+  );
+}
+
+/* ---------------- WIZARD ---------------- */
+const WIZARD_STEPS=[
+  {n:1,label:'General data'},
+  {n:2,label:'Location & map'},
+  {n:3,label:'UAS & crew'},
+  {n:4,label:'Hazards'},
+  {n:5,label:'Mitigations'},
+  {n:6,label:'Checklist'},
+  {n:7,label:'Documents'},
+  {n:8,label:'GO/NO-GO decision'},
+  {n:9,label:'Report'}
+];
+
+function renderWizard(){
+  const d=App.state.draft;
+  if(!d){ App.go('missions'); return ''; }
+  const step=App.state.wizardStep;
+  const stepsHtml=WIZARD_STEPS.map(s=>{
+    const cls = s.n===step?'active':(s.n<step?'done':'');
+    return '<div class="wstep '+cls+'" onclick="App.state.wizardStep='+s.n+';App.render();"><div class="num">'+(s.n<step?icon('check'):s.n)+'</div><div>'+s.label+'</div></div>';
+  }).join('');
+
+  let body='';
+  if(step===1) body=stepGeneral(d);
+  else if(step===2) body=stepLocation(d);
+  else if(step===3) body=stepUasCrew(d);
+  else if(step===4) body=stepHazards(d);
+  else if(step===5) body=stepMitigations(d);
+  else if(step===6) body=stepChecklist(d);
+  else if(step===7) body=stepDocuments(d);
+  else if(step===8) body=stepDecision(d);
+  else if(step===9) body=stepReport(d);
+
+  const nav='<div class="wizard-nav no-print">'+
+    '<div>'+(step>1?'<button class="btn btn-secondary" onclick="App.state.wizardStep='+(step-1)+';App.render();">&larr; Previous</button>':'')+'</div>'+
+    '<div style="display:flex;gap:8px;">'+
+      '<button class="btn btn-secondary" onclick="App.saveDraft(\'Draft\');App.showToast(\'Draft saved.\')">Save draft</button>'+
+      (step<9?'<button class="btn btn-primary" onclick="App.state.wizardStep='+(step+1)+';App.render();">Next &rarr;</button>':'')+
+    '</div></div>';
+
+  return shell('Mission: '+(d.name||'New mission'),'Assessment wizard · Step '+step+' of 9',
+    '<div class="row-between no-print" style="margin-bottom:14px;"><h1 class="pagetitle">'+(d.name||'New UAS mission')+' <span class="badge '+decisionBadgeCls(d.status)+'" style="margin-left:8px;">'+escapeHtml(d.status)+'</span></h1>'+
+    '<button class="btn btn-ghost" onclick="App.go(\'missions\')">Back to missions</button></div>'+
+    '<div class="wizard"><div class="wizard-steps no-print">'+stepsHtml+'</div><div class="wizard-content">'+body+nav+'</div></div>'
+  );
+}
+
+function stepGeneral(d){
+  return '<div class="card"><div class="section-label">General operation data</div>'+
+    '<div class="grid3">'+
+      field('Operation name','text',d.name,'name')+
+      field('Internal code','text',d.code,'code')+
+      field('Client','text',d.client,'client')+
+    '</div>'+
+    '<div class="grid3">'+
+      field('Planned date','date',d.date,'date')+
+      field('Start time','time',d.startTime,'startTime')+
+      field('End time','time',d.endTime,'endTime')+
+    '</div>'+
+    '<div class="grid3">'+
+      selectField('Operation type',d.operationType,'operationType',OPERATION_TYPES)+
+      selectField('Operational category',d.category,'category',OPERATION_CATEGORIES)+
+      selectField('Client criticality',d.criticality,'criticality',['Low','Medium','High'])+
+    '</div>'+
+    field('Applicable scenario','text',d.scenario,'scenario')+
+    '<div class="field"><label>Mission description</label><textarea rows="3" onchange="App.setDraft(\'description\',this.value)">'+escapeHtml(d.description)+'</textarea></div>'+
+    '<div class="grid3">'+
+      field('Operation responsible','text',d.responsible,'responsible')+
+      field('Assigned Safety Manager','text',d.safetyManager,'safetyManager')+
+      field('Remote pilot in command','text',d.pilot,'pilot')+
+    '</div>'+
+    field('Observers / support crew (comma-separated)','text',d.observers,'observers')+
+  '</div>';
+}
+
+function stepLocation(d){
+  const loc=d.location;
+  return '<div class="card"><div class="section-label">Location</div>'+
+    '<div class="grid3">'+
+      '<div class="field"><label>Site name</label><input id="loc-name-input" value="'+escapeHtml(loc.name)+'" onchange="App.setDraft(\'location.name\',this.value)"></div>'+
+      field('Country','text',loc.country,'location.country')+
+      field('City / area','text',loc.city,'location.city')+
+    '</div>'+
+    '<div class="field"><label>Operating environment</label><select onchange="App.setDraft(\'location.env\',this.value)">'+
+      ENVIRONMENTS.map(e=>'<option value="'+e.v+'"'+(loc.env===e.v?' selected':'')+'>'+e.label+'</option>').join('')+'</select></div>'+
+  '</div>'+
+  '<div class="card">'+
+    '<div class="section-label">Operational map</div>'+
+    '<div class="mapwrap">'+
+      '<div class="maptools no-print">'+
+        '<input id="map-search" placeholder="Search an address or place…" style="flex:1;min-width:200px;" onkeydown="if(event.key===\'Enter\'){event.preventDefault();searchAddress();}">'+
+        '<button class="maptool" onclick="searchAddress()">Search</button>'+
+      '</div>'+
+      '<div class="maptools no-print" style="padding-top:0;">'+
+        '<button class="maptool" data-mode="takeoff" onclick="setMapToolMode(\'takeoff\')">Mark take-off</button>'+
+        '<button class="maptool" data-mode="landing" onclick="setMapToolMode(\'landing\')">Mark landing</button>'+
+        '<button class="maptool" data-mode="area" onclick="setMapToolMode(\'area\')">Draw operational area</button>'+
+        '<button class="maptool" data-mode="hazard" onclick="setMapToolMode(\'hazard\')">Add hazard here</button>'+
+        '<div class="mapspacer"></div>'+
+        '<button class="maptool danger" onclick="clearAreaPath()">Clear area</button>'+
+        '<button class="maptool danger" onclick="clearPoints()">Clear points</button>'+
+      '</div>'+
+      '<div class="maplegend"><span><i style="background:#28804A"></i>Low risk</span><span><i style="background:#A8790A"></i>Medium</span><span><i style="background:#C9651A"></i>High</span><span><i style="background:#B3261E"></i>Intolerable</span><span><i style="background:#1E88C9"></i>Take-off / landing</span></div>'+
+      '<div id="leaflet-map" style="height:430px;"></div>'+
+      '<div class="gmap-status"><span id="map-coords">'+(loc.lat!=null? 'Center: '+loc.lat.toFixed(5)+', '+loc.lng.toFixed(5):'Search an address above, or click the map directly to set take-off, landing, the operational area or a hazard.')+'</span></div>'+
+    '</div>'+
+    '<div class="field hint" style="margin-top:8px;">Real map &mdash; map data &copy; OpenStreetMap contributors, satellite imagery &copy; Esri. Free, no account or API key required.</div>'+
+  '</div>';
+}
+
+
+function stepUasCrew(d){
+  const u=d.uas;
+  return '<div class="card"><div class="section-label">UAS data</div>'+
+    '<div class="grid3">'+
+      field('Manufacturer / reference','text',u.manufacturer,'uas.manufacturer')+
+      field('Model','text',u.model,'uas.model')+
+      field('Serial number','text',u.serial,'uas.serial')+
+    '</div>'+
+    '<div class="grid3">'+
+      '<div class="field"><label>Aircraft type</label><select onchange="App.setDraft(\'uas.type\',this.value)">'+
+        ['Multirotor','Fixed-wing','VTOL','Unmanned helicopter','Tethered / captive','Other'].map(t=>'<option'+(u.type===t?' selected':'')+'>'+t+'</option>').join('')+'</select></div>'+
+      field('MTOM','text',u.mtom,'uas.mtom')+
+      field('Main payload','text',u.payload,'uas.payload')+
+    '</div>'+
+    '<div class="pill-row" style="margin-top:4px;">'+
+      checkPill('RTH configured',u.rth,'uas.rth')+
+      checkPill('Geofence active',u.geofence,'uas.geofence')+
+      checkPill('Failsafe documented',u.failsafe,'uas.failsafe')+
+    '</div>'+
+    (!u.rth || !u.geofence || !u.failsafe? '<div class="alertbox" style="margin-top:14px;">'+icon('alert')+'<div>Warning: technical safety measures are not fully documented (RTH / geofence / failsafe). This may prevent a GO decision.</div></div>':'')+
+  '</div>'+
+  '<div class="card"><div class="section-label">Crew</div>'+
+    '<div class="grid3">'+
+      field('Remote pilot in command','text',d.pilot,'pilot')+
+      field('Safety Manager','text',d.safetyManager,'safetyManager')+
+      field('Observers','text',d.observers,'observers')+
+    '</div>'+
+  '</div>';
+}
+
+function checkPill(label,value,path){
+  return '<label class="pill" style="display:flex;align-items:center;gap:6px;cursor:pointer;'+(value?'border-color:var(--risk-low);color:var(--risk-low);':'')+'"><input type="checkbox" style="width:13px;height:13px;" '+(value?'checked':'')+' onchange="App.setDraft(\''+path+'\',this.checked,true)"> '+label+'</label>';
+}
+
+function stepHazards(d){
+  const libBtns=Object.keys(HAZARD_LIBRARY).map(cat=>'<details style="margin-bottom:6px;"><summary style="cursor:pointer;font-size:12px;font-weight:700;color:var(--navy-800);padding:6px 2px;">'+cat+'</summary>'+
+    '<div class="pill-row">'+HAZARD_LIBRARY[cat].map(h=>'<button class="pill" onclick="App.addHazardFromLib(\''+h.replace(/'/g,"\\'")+'\',\''+cat.replace(/'/g,"\\'")+'\')">+ '+h+'</button>').join('')+'</div></details>').join('');
+
+  const hzCards=(d.hazards||[]).map(h=>hazardCard(h,false)).join('');
+
+  return '<div class="card"><div class="section-label">Add hazard from the library</div>'+libBtns+
+    '<button class="btn btn-secondary btn-sm" style="margin-top:10px;" onclick="App.addHazardManual()">'+icon('plus')+' Add manual hazard</button></div>'+
+  '<div style="margin-top:16px;">'+
+    (hzCards || '<div class="card"><div class="empty">'+icon('alert')+'<div>No hazards have been identified for this operation yet.</div></div></div>')+
+  '</div>';
+}
+
+function hazardCard(h,withMitigations){
+  const ri=riskLevel(h.riskInitial);
+  return '<div class="hz-card">'+
+    '<div class="hz-head">'+
+      '<div><input value="'+escapeHtml(h.name)+'" onchange="App.updateHazardText(\''+h.id+'\',\'name\',this.value)" style="font-weight:700;font-size:13.5px;border:none;padding:0;width:100%;"> <div class="hz-cat">'+escapeHtml(h.category)+'</div></div>'+
+      '<button class="btn-ghost btn-sm" onclick="App.removeHazard(\''+h.id+'\')">'+icon('trash')+'</button>'+
+    '</div>'+
+    '<div class="mini-grid">'+
+      sevSelect('Initial severity',h.severityInitial,h.id,'severityInitial')+
+      probSelect('Initial probability',h.probabilityInitial,h.id,'probabilityInitial')+
+      '<div><div class="field"><label>Initial risk</label><span class="badge '+ri.cls+'" style="font-size:13px;padding:7px 12px;">'+h.riskInitial+' · '+ri.label+'</span></div></div>'+
+      '<div></div>'+
+    '</div>'+
+  '</div>';
+}
+
+function sevSelect(label,val,hid,field){
+  return '<div class="field"><label>'+label+'</label><select onchange="App.updateHazardNum(\''+hid+'\',\''+field+'\',this.value)">'+
+    SEVERITY.map(s=>'<option value="'+s.v+'"'+(val===s.v?' selected':'')+'>'+s.label+'</option>').join('')+'</select></div>';
+}
+function probSelect(label,val,hid,field){
+  return '<div class="field"><label>'+label+'</label><select onchange="App.updateHazardNum(\''+hid+'\',\''+field+'\',this.value)">'+
+    PROBABILITY.map(s=>'<option value="'+s.v+'"'+(val===s.v?' selected':'')+'>'+s.label+'</option>').join('')+'</select></div>';
+}
+
+function stepMitigations(d){
+  if(!d.hazards.length) return '<div class="card"><div class="empty">'+icon('alert')+'<div>Add hazards in the previous step before defining mitigations.</div></div></div>';
+  return d.hazards.map(h=>{
+    const ri=riskLevel(h.riskInitial), rr=riskLevel(h.riskResidual);
+    const mits=(h.mitigations||[]).map(m=>'<div class="mit-item"><span class="mit-desc">'+escapeHtml(m.desc)+'</span>'+
+      '<select style="width:140px;" onchange="App.setMitField(\''+h.id+'\',\''+m.id+'\',\'status\',this.value)">'+
+        ['Proposed','Pending','In progress','Implemented','Verified','Rejected'].map(s=>'<option'+(m.status===s?' selected':'')+'>'+s+'</option>').join('')+'</select>'+
+      '<button class="btn-ghost btn-sm" onclick="App.removeMitigation(\''+h.id+'\',\''+m.id+'\')">'+icon('x')+'</button></div>').join('');
+    const libCat=Object.keys(MITIGATION_LIBRARY);
+    const libPills=libCat.map(c=>MITIGATION_LIBRARY[c].slice(0,5).map(t=>'<button class="pill" onclick="App.addMitigation(\''+h.id+'\',\''+t.replace(/'/g,"\\'")+'\')">+ '+t+'</button>').join('')).join('');
+    return '<div class="hz-card">'+
+      '<div class="hz-head"><div><div class="hz-name">'+escapeHtml(h.name)+'</div><div class="hz-cat">'+escapeHtml(h.category)+' · Initial risk: <span class="badge '+ri.cls+'">'+h.riskInitial+'</span></div></div></div>'+
+      '<div class="mit-row">'+(mits||'<div class="subtle">No mitigations yet.</div>')+
+        '<div class="pill-row">'+libPills+'<button class="pill" style="font-weight:700;" onclick="App.addMitigation(\''+h.id+'\',\'New mitigation\')">'+icon('plus')+' Manual mitigation</button></div>'+
+      '</div>'+
+      '<div class="mini-grid" style="margin-top:14px;">'+
+        sevSelect('Residual severity',h.severityResidual,h.id,'severityResidual')+
+        probSelect('Residual probability',h.probabilityResidual,h.id,'probabilityResidual')+
+        '<div><div class="field"><label>Residual risk</label><span class="badge '+rr.cls+'" style="font-size:13px;padding:7px 12px;">'+h.riskResidual+' · '+rr.label+'</span></div></div>'+
+        '<div></div>'+
+      '</div>'+
+    '</div>';
+  }).join('');
+}
+
+function stepChecklist(d){
+  const done=PRECHECK_ITEMS.filter(it=>d.checklist[it.id]).length;
+  const pct=Math.round(done/PRECHECK_ITEMS.length*100);
+  const critPending=PRECHECK_ITEMS.filter(it=>it.crit && !d.checklist[it.id]).length;
+  return '<div class="card">'+
+    '<div class="row-between"><div class="section-label" style="margin:0;">Pre-flight checklist</div><div class="subtle">'+done+'/'+PRECHECK_ITEMS.length+' completed ('+pct+'%)</div></div>'+
+    '<div style="height:6px;background:#EDEFF2;border-radius:4px;margin:12px 0 16px;overflow:hidden;"><div style="height:100%;width:'+pct+'%;background:var(--blue-accent);"></div></div>'+
+    (critPending>0? '<div class="alertbox">'+icon('alert')+'<div>'+critPending+' critical item(s) pending. A GO decision cannot be issued until they are completed.</div></div>':'')+
+    PRECHECK_ITEMS.map(it=>'<div class="checkrow"><input type="checkbox" '+(d.checklist[it.id]?'checked':'')+' onchange="App.toggleCheck(\''+it.id+'\')"><div class="ctext">'+it.text+(it.crit?' <span class="badge crit" style="margin-left:6px;">Critical</span>':'')+'</div></div>').join('')+
+  '</div>';
+}
+
+function stepDocuments(d){
+  const today=new Date();
+  return '<div class="card"><div class="section-label">Document management</div>'+
+    '<table class="table"><thead><tr><th>Type</th><th>Name / reference</th><th>Expiry</th><th>Status</th><th></th></tr></thead><tbody>'+
+    d.documents.map((doc,i)=>{
+      let st={cls:'neutral',label:'No date'};
+      if(doc.expiry){
+        const exp=new Date(doc.expiry); const days=(exp-today)/86400000;
+        if(days<0) st={cls:'crit',label:'Expired'}; else if(days<30) st={cls:'med',label:'Expiring soon'}; else st={cls:'low',label:'Valid'};
+      }
+      return '<tr><td><input value="'+escapeHtml(doc.type)+'" onchange="App.state.draft.documents['+i+'].type=this.value"></td>'+
+        '<td><input value="'+escapeHtml(doc.name)+'" onchange="App.state.draft.documents['+i+'].name=this.value" placeholder="Reference / document no."></td>'+
+        '<td><input type="date" value="'+escapeHtml(doc.expiry)+'" onchange="App.state.draft.documents['+i+'].expiry=this.value;App.render()" style="width:150px;"></td>'+
+        '<td><span class="badge '+st.cls+'">'+st.label+'</span></td>'+
+        '<td><button class="btn-ghost btn-sm" onclick="App.removeDocRow('+i+')">'+icon('trash')+'</button></td></tr>';
+    }).join('')+
+    '</tbody></table>'+
+    '<button class="btn btn-secondary btn-sm" style="margin-top:12px;" onclick="App.addDocRow()">'+icon('plus')+' Add document</button>'+
+  '</div>';
+}
+
+function stepDecision(d){
+  const evalr=evaluateMission(d);
+  const cls=decisionCls(evalr.decision);
+  const finalVal=d.decision.final||evalr.decision;
+  const overriding = d.decision.final && d.decision.final!==evalr.decision;
+  return '<div class="decision-banner '+cls+'">'+
+    '<div class="subtle" style="text-transform:uppercase;letter-spacing:.06em;font-size:11px;">Automatic recommendation from the risk engine</div>'+
+    '<div class="decision-title">'+evalr.decision+'</div>'+
+    '<ul class="reason-list">'+evalr.reasons.map(r=>'<li>'+r.text+'</li>').join('')+'</ul>'+
+  '</div>'+
+  '<div class="card" style="margin-top:14px;"><div class="section-label">Additional factors (check if applicable)</div>'+
+    '<div class="pill-row">'+
+      checkPill('Weather below minimums',d.flags.weatherOutOfMins,'flags.weatherOutOfMins')+
+      checkPill('UAS not airworthy',d.flags.uasNotApt,'flags.uasNotApt')+
+      checkPill('Pilot without valid competency',d.flags.pilotNotCompetent,'flags.pilotNotCompetent')+
+      checkPill('Uncontrolled non-participating persons',d.flags.uncontrolledThirdParties,'flags.uncontrolledThirdParties')+
+    '</div>'+
+  '</div>'+
+  '<div class="card" style="margin-top:14px;"><div class="section-label">Final decision</div>'+
+    '<div class="field"><label>Decision</label><select onchange="App.setDecisionFinal(this.value)">'+
+      ['','GO','GO WITH MITIGATIONS','HOLD','NO-GO'].map(v=>'<option value="'+v+'"'+(finalVal===v?' selected':'')+'>'+(v||'(use recommendation: '+evalr.decision+')')+'</option>').join('')+'</select></div>'+
+    (overriding? '<div class="alertbox">'+icon('alert')+'<div>The selected decision differs from the automatic recommendation ('+evalr.decision+'). This override must be justified and signed by the Safety Manager.</div></div>':'')+
+    '<div class="field"><label>Justification</label><textarea rows="3" onchange="App.setDraft(\'decision.justification\',this.value)">'+escapeHtml(d.decision.justification)+'</textarea></div>'+
+    '<div class="grid2">'+
+      field('Signing responsible','text',d.decision.signedBy,'decision.signedBy')+
+      field('Role','text',d.decision.signedRole,'decision.signedRole')+
+    '</div>'+
+    '<button class="btn btn-primary" onclick="App.finalizeMission()">'+icon('check')+' Sign and finalize mission</button>'+
+  '</div>';
+}
+function decisionCls(v){ return v==='GO'?'GO':v==='GO WITH MITIGATIONS'?'GOWM':v==='HOLD'?'HOLD':'NOGO'; }
+
+function stepReport(d){
+  const evalr=evaluateMission(d);
+  const final=d.decision.final||evalr.decision;
+  const loc=d.location;
+  const mapHtml='<div id="leaflet-report-map" style="height:320px;border-radius:6px;overflow:hidden;"></div>';
+
+  return '<div class="no-print" style="margin-bottom:14px;display:flex;gap:8px;"><button class="btn btn-primary" onclick="window.print()">'+icon('print')+' Print / Save PDF</button></div>'+
+  '<div class="report-page" id="report-print">'+
+    '<div class="org">AeroSafety Case · UAS Operational Risk Assessment Report</div>'+
+    '<h2>'+escapeHtml(d.name||'Unnamed mission')+'</h2>'+
+    '<div class="subtle">Code: '+escapeHtml(d.code)+' · Generated: '+new Date().toLocaleString('en-GB')+'</div>'+
+    '<div class="report-grid">'+
+      reportField('Client',d.client)+reportField('Planned date',fmtDate(d.date)+' · '+d.startTime+'–'+d.endTime)+
+      reportField('Operation type',d.operationType)+reportField('Category',d.category)+
+      reportField('Responsible',d.responsible)+reportField('Safety Manager',d.safetyManager)+
+      reportField('Remote pilot',d.pilot)+reportField('Observers',d.observers)+
+      reportField('Location',(loc.name||'—')+' · '+(loc.city||'')+', '+(loc.country||''))+reportField('Environment',loc.env)+
+    '</div>'+
+    '<div class="report-section-title">Operation description</div>'+
+    '<div>'+escapeHtml(d.description||'—')+'</div>'+
+    '<div class="report-section-title">Operational map</div>'+
+    mapHtml+
+    '<div class="report-section-title">Assigned UAS</div>'+
+    '<div class="report-grid">'+reportField('Model',d.uas.manufacturer+' '+d.uas.model)+reportField('Type',d.uas.type)+reportField('MTOM',d.uas.mtom)+reportField('Payload',d.uas.payload)+'</div>'+
+    '<div class="report-section-title">Hazards and risk matrix</div>'+
+    '<table class="table"><thead><tr><th>Hazard</th><th>Category</th><th>Initial risk</th><th>Mitigations</th><th>Residual risk</th></tr></thead><tbody>'+
+      d.hazards.map(h=>{
+        const ri=riskLevel(h.riskInitial), rr=riskLevel(h.riskResidual);
+        return '<tr><td>'+escapeHtml(h.name)+'</td><td>'+escapeHtml(h.category)+'</td><td><span class="badge '+ri.cls+'">'+h.riskInitial+' '+ri.label+'</span></td>'+
+          '<td>'+(h.mitigations||[]).map(m=>escapeHtml(m.desc)).join('; ')+'</td><td><span class="badge '+rr.cls+'">'+h.riskResidual+' '+rr.label+'</span></td></tr>';
+      }).join('')+
+    '</tbody></table>'+
+    '<div class="report-section-title">Pre-flight checklist</div>'+
+    '<div>'+PRECHECK_ITEMS.filter(it=>d.checklist[it.id]).length+' of '+PRECHECK_ITEMS.length+' items completed. '+
+      (PRECHECK_ITEMS.filter(it=>it.crit && !d.checklist[it.id]).length? '<b style="color:var(--risk-crit)">Critical items pending: '+PRECHECK_ITEMS.filter(it=>it.crit && !d.checklist[it.id]).map(i=>i.text).join('; ')+'</b>':'All critical items completed.')+'</div>'+
+    '<div class="report-section-title">Operational decision</div>'+
+    '<div style="font-size:16px;font-weight:800;">'+final+'</div>'+
+    '<div style="margin-top:6px;">'+escapeHtml(d.decision.justification||'—')+'</div>'+
+    '<div class="sig-row"><div class="sig-box">'+escapeHtml(d.decision.signedBy||'—')+'<br><span class="subtle">'+escapeHtml(d.decision.signedRole||'')+'</span></div><div class="sig-box">Date and time<br><span class="subtle">'+(d.decision.signedAt? new Date(d.decision.signedAt).toLocaleString('en-GB'):'—')+'</span></div></div>'+
+    '<div class="disclaimer">This tool does not replace an official authorisation, a formal SORA assessment, a regulatory review, or an approval from the competent aviation authority. It is a support tool for risk management, SMS, operational analysis, traceability and decision-making. The operator is responsible for verifying applicable regulations, permits, UAS geographical zones, coordination, NOTAMs, weather, operational limitations and other requirements before flight.</div>'+
+  '</div>';
+}
+function reportField(label,val){ return '<div><b>'+label+'</b>'+escapeHtml(val||'—')+'</div>'; }
+
+/* ---------------- form field helpers ---------------- */
+function field(label,type,value,path){
+  return '<div class="field"><label>'+label+'</label><input type="'+type+'" value="'+escapeHtml(value)+'" onchange="App.setDraft(\''+path+'\',this.value)"></div>';
+}
+function selectField(label,value,path,options){
+  return '<div class="field"><label>'+label+'</label><select onchange="App.setDraft(\''+path+'\',this.value,true)"><option value="">— Select —</option>'+
+    options.map(o=>'<option'+(value===o?' selected':'')+'>'+o+'</option>').join('')+'</select></div>';
+}
+
+/* ---------------- HAZARD LIBRARY VIEW ---------------- */
+function renderLibrary(){
+  const tabs=Object.keys(HAZARD_LIBRARY);
+  if(!tabs.includes(App.state.libTab)) App.state.libTab=tabs[0];
+  return shell('Hazard library','Professional UAS reference',
+    '<h1 class="pagetitle">UAS/BVLOS hazard library</h1><div class="subtle" style="margin-bottom:16px;">Reference catalogue by category, directly usable in the "Hazards" step of any mission.</div>'+
+    '<div class="lib-tabs">'+tabs.map(t=>'<button class="lib-tab'+(App.state.libTab===t?' active':'')+'" onclick="App.state.libTab=\''+t+'\';App.render();">'+t+'</button>').join('')+'</div>'+
+    '<div class="card"><div class="lib-grid">'+HAZARD_LIBRARY[App.state.libTab].map(h=>'<div class="lib-item">'+escapeHtml(h)+'</div>').join('')+'</div></div>'+
+    '<div class="card" style="margin-top:16px;"><div class="section-label">Mitigation library</div>'+
+      Object.keys(MITIGATION_LIBRARY).map(c=>'<div style="margin-bottom:12px;"><div style="font-weight:700;font-size:12.5px;margin-bottom:6px;">'+c+'</div><div class="pill-row">'+MITIGATION_LIBRARY[c].map(m=>'<span class="pill" style="cursor:default;">'+m+'</span>').join('')+'</div></div>').join('')+
+    '</div>'
+  );
+}
+
+/* ---------------- FLEET VIEW ---------------- */
+function renderFleet(){
+  return shell('UAS fleet','Aircraft management',
+    '<div class="row-between" style="margin-bottom:16px;"><div><h1 class="pagetitle">UAS fleet</h1><div class="subtle">In this MVP, UAS are registered and associated directly from the "UAS & crew" step of each mission.</div></div></div>'+
+    '<div class="card"><div class="section-label">UAS used in logged missions</div>'+
+      (App.state.missions.length? '<table class="table"><thead><tr><th>Model</th><th>Type</th><th>MTOM</th><th>Associated mission</th></tr></thead><tbody>'+
+        App.state.missions.map(m=>'<tr><td>'+escapeHtml((m.uas.manufacturer||'')+' '+(m.uas.model||''))+'</td><td>'+escapeHtml(m.uas.type)+'</td><td>'+escapeHtml(m.uas.mtom)+'</td><td>'+escapeHtml(m.name)+'</td></tr>').join('')+
+        '</tbody></table>' : '<div class="empty">'+icon('uas')+'<div>No UAS registered yet.</div></div>')+
+    '</div>'
+  );
+}
+
+/* ---------------- SMS VIEW ---------------- */
+function renderSms(){
+  const ms=App.state.missions;
+  const allHaz=ms.flatMap(m=>m.hazards||[]);
+  const byCat={};
+  allHaz.forEach(h=>{ byCat[h.category]=(byCat[h.category]||0)+1; });
+  const topCats=Object.entries(byCat).sort((a,b)=>b[1]-a[1]).slice(0,6);
+  const maxCat=topCats.length? topCats[0][1]:1;
+  return shell('SMS indicators','Safety Management System',
+    '<h1 class="pagetitle">SMS indicators</h1><div class="subtle" style="margin-bottom:16px;">Basic indicators derived from logged missions (indicative SPIs).</div>'+
+    '<div class="kpi-grid">'+
+      '<div class="kpi"><div class="num">'+allHaz.length+'</div><div class="lbl">Hazards reported</div></div>'+
+      '<div class="kpi warn"><div class="num">'+allHaz.filter(h=>riskLevel(h.riskInitial).key==='high').length+'</div><div class="lbl">High initial risks</div></div>'+
+      '<div class="kpi danger"><div class="num">'+allHaz.filter(h=>riskLevel(h.riskInitial).key==='intolerable').length+'</div><div class="lbl">Intolerable initial risks</div></div>'+
+      '<div class="kpi accent"><div class="num">'+ms.filter(m=>m.status==='HOLD').length+'</div><div class="lbl">HOLD decisions</div></div>'+
+      '<div class="kpi danger"><div class="num">'+ms.filter(m=>m.status==='NO-GO').length+'</div><div class="lbl">NO-GO decisions</div></div>'+
+      '<div class="kpi good"><div class="num">'+(allHaz.length? Math.round(allHaz.filter(h=>(h.mitigations||[]).length>0).length/allHaz.length*100):0)+'%</div><div class="lbl">Hazards with mitigation</div></div>'+
+    '</div>'+
+    '<div class="card" style="margin-top:16px;"><div class="section-label">Most frequent hazards by category</div>'+
+      (topCats.length? topCats.map(([c,v])=>'<div style="margin-bottom:8px;"><div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:3px;"><span>'+escapeHtml(c)+'</span><span class="subtle">'+v+'</span></div><div style="height:8px;background:#EDEFF2;border-radius:4px;overflow:hidden;"><div style="height:100%;width:'+(v/maxCat*100)+'%;background:var(--blue-accent);"></div></div></div>').join('')
+      : '<div class="empty">'+icon('sms')+'<div>Not enough data yet.</div></div>')+
+    '</div>'
+  );
+}
+
+/* ---------------- SETTINGS ---------------- */
+function renderSettings(){
+  const u=App.state.user||{name:'',role:'Safety Manager'};
+  return shell('Settings','Organization & risk matrix',
+    '<h1 class="pagetitle">Settings</h1><div class="subtle" style="margin-bottom:16px;">Organization parameters and risk matrix (reference view in this MVP).</div>'+
+
+    '<div class="card"><div class="section-label">User profile</div>'+
+      '<div class="grid2">'+
+        '<div class="field"><label>Name</label><input id="profile_name_input" value="'+escapeHtml(u.name)+'"></div>'+
+        '<div class="field"><label>Role</label><select id="profile_role_input">'+
+          ['Super Admin','Organization Admin','Safety Manager','Operations Manager','Remote Pilot','Observer / Support Crew','Auditor','Client']
+          .map(r=>'<option'+(r===u.role?' selected':'')+'>'+r+'</option>').join('')+
+        '</select></div>'+
+      '</div>'+
+      '<button class="btn btn-primary" onclick="App.updateUserProfile(document.getElementById(\'profile_name_input\').value, document.getElementById(\'profile_role_input\').value)">'+icon('user')+' Save profile</button>'+
+    '</div>'+
+
+    '<div class="card" style="margin-top:16px;"><div class="row-between"><div class="section-label" style="margin:0;">Map data source</div><span class="key-status on">'+icon('map')+' Active, no setup needed</span></div>'+
+      '<div class="subtle">The operational map uses <b>OpenStreetMap</b> (street layer) and <b>Esri World Imagery</b> (satellite layer) for real, worldwide map data, plus <b>Nominatim</b> for address search. These services are free and do not require an account, an API key, or billing &mdash; they work out of the box everywhere this app is opened. Heavy production use should review each provider&rsquo;s usage policy.</div>'+
+    '</div>'+
+
+    '<div class="card" style="margin-top:16px;"><div class="section-label">5×5 risk matrix (default)</div>'+
+      '<table class="table"><thead><tr><th>Severity \\ Probability</th>'+PROBABILITY.map(p=>'<th>'+p.v+'</th>').join('')+'</tr></thead><tbody>'+
+      SEVERITY.slice().reverse().map(s=>'<tr><td><b>'+s.v+'</b> '+s.label.split('· ')[1]+'</td>'+
+        PROBABILITY.map(p=>{ const r=s.v*p.v; const lvl=riskLevel(r); return '<td><span class="badge '+lvl.cls+'">'+r+'</span></td>'; }).join('')+'</tr>').join('')+
+      '</tbody></table>'+
+      '<div class="pill-row" style="margin-top:14px;"><span class="badge low">1–4 Low</span><span class="badge med">5–9 Medium</span><span class="badge high">10–14 High</span><span class="badge crit">15–25 Intolerable</span></div>'+
+    '</div>'+
+    '<div class="card" style="margin-top:16px;"><div class="section-label">Organization</div>'+
+      '<div class="grid2">'+orgField('Organization name',App.state.org.name,'name')+orgField('Operator number',App.state.org.operatorNumber,'operatorNumber')+'</div>'+
+      '<div class="subtle">Multi-organization management, advanced roles and custom matrix templates are planned for the full version (see the architecture document).</div>'+
+    '</div>'
+  );
+}
+function orgField(label,value,key){
+  return '<div class="field"><label>'+label+'</label><input value="'+escapeHtml(value)+'" onchange="App.setOrgField(\''+key+'\',this.value)"></div>';
+}
+
+/* ---------------- ROOT ---------------- */
+function renderRoot(){
+  if(!App.state.user) return renderLogin();
+  switch(App.state.view){
+    case 'dashboard': return renderDashboard();
+    case 'missions': return renderMissions();
+    case 'wizard': return renderWizard();
+    case 'library': return renderLibrary();
+    case 'fleet': return renderFleet();
+    case 'sms': return renderSms();
+    case 'settings': return renderSettings();
+    default: return renderDashboard();
+  }
+}
+
+App.init();
+
+if('serviceWorker' in navigator && (location.protocol==='https:' || location.hostname==='localhost')){
+  window.addEventListener('load', function(){
+    navigator.serviceWorker.register('./sw.js').catch(function(){});
+  });
+}
+</script>
+</body>
+</html>
