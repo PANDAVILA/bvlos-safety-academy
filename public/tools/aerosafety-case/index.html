@@ -222,11 +222,16 @@ svg.mapsvg{display:block;width:100%;height:auto;background:#142B40;cursor:crossh
 .login-mark .mark{width:42px;height:42px;border-radius:9px;object-fit:cover;display:block;}
 .login-title{font-size:17px;font-weight:800;}
 .login-sub{font-size:11px;color:var(--text-mute);text-transform:uppercase;letter-spacing:.1em;}
-.terms-box{display:flex;gap:9px;align-items:flex-start;margin-top:14px;padding:10px 12px;border:1px solid var(--border);border-radius:6px;font-size:11.5px;line-height:1.5;color:var(--text-mute);cursor:pointer;}
-.terms-box input{margin-top:2px;flex:none;}
-.terms-box a,.terms-note a{color:var(--blue-accent);font-weight:600;}
-.terms-box.terms-err{border-color:#C0392B;background:#FDF1EF;}
-.terms-note{margin-top:14px;font-size:11.5px;line-height:1.5;color:var(--text-mute);}
+.terms-row{display:flex;align-items:center;gap:8px;margin-top:14px;padding:8px 10px;border:1px solid var(--border);border-radius:6px;font-size:12.5px;color:var(--text);}
+.terms-row input[type=checkbox]{width:17px;height:17px;padding:0;margin:0;flex:none;cursor:pointer;}
+.terms-row label{cursor:pointer;}
+.terms-row.terms-err{border-color:#C0392B;background:#FDF1EF;}
+.terms-link{background:none;border:0;padding:0;font:inherit;font-weight:700;color:var(--blue-accent);text-decoration:underline;cursor:pointer;}
+.terms-panel{display:none;margin-top:8px;padding:10px 12px;background:#F6F8FB;border:1px solid var(--border);border-radius:6px;font-size:11.5px;line-height:1.55;color:var(--text-mute);}
+.terms-panel.open{display:block;}
+.terms-panel ul{margin:6px 0 0;padding-left:18px;}
+.terms-panel a{color:var(--blue-accent);font-weight:600;}
+.terms-note{margin-top:14px;font-size:12px;color:var(--text-mute);}
 .legal-links{display:flex;flex-wrap:wrap;justify-content:center;gap:2px 10px;padding:0 12px 10px;font-size:10px;}
 .legal-links a{color:#A9C0DC;text-decoration:none;}
 .legal-links a:hover{color:#fff;text-decoration:underline;}
@@ -1072,6 +1077,19 @@ function shell(title,crumbs,contentHtml){
 }
 
 /* ---------------- LOGIN ---------------- */
+function termsHtml(){
+  const link='<button type="button" class="terms-link" onclick="document.getElementById(\'li_terms_panel\').classList.toggle(\'open\')">Terms &amp; Conditions</button>';
+  const panel='<div class="terms-panel" id="li_terms_panel">The Terms &amp; Conditions include these documents (each opens in a new tab):<ul>'+
+    '<li><a href="/legal/app-terms" target="_blank" rel="noopener">App &amp; SAFETI Terms of Use</a></li>'+
+    '<li><a href="/legal/ai-use" target="_blank" rel="noopener">AI Use Policy</a></li>'+
+    '<li><a href="/legal/terms" target="_blank" rel="noopener">Terms of Service</a></li>'+
+    '<li><a href="/legal/privacy" target="_blank" rel="noopener">Privacy Policy</a></li></ul>'+
+    '<div style="margin-top:6px;">This app and its AI are decision-support only, can make mistakes, and do not replace FAA or other authority approval.</div></div>';
+  if(App.state.termsOk) return '<div class="terms-note">By using this app you accept the '+link+'.</div>'+panel;
+  return '<div id="li_terms_box" class="terms-row"><input type="checkbox" id="li_terms" onchange="this.parentNode.classList.remove(\'terms-err\');var m=document.getElementById(\'li_terms_msg\');if(m)m.style.display=\'none\'"><label for="li_terms">I accept the</label>'+link+'</div>'+
+    '<div id="li_terms_msg" style="display:none;color:#C0392B;font-size:11.5px;margin:6px 0 0;">Please accept the Terms &amp; Conditions to continue.</div>'+panel;
+}
+
 function renderLogin(){
   const last=App.state.savedUser||{};
   const name=last.name||'Alex Carter';
@@ -1083,10 +1101,8 @@ function renderLogin(){
       ['Super Admin','Organization Admin','Safety Manager','Operations Manager','Remote Pilot','Observer / Support Crew','Auditor','Client']
       .map(r=>'<option'+(r===role?' selected':'')+'>'+r+'</option>').join('')+
     '</select></div>'+
-    '<button class="btn btn-primary" style="width:100%;justify-content:center;padding:11px;" onclick="App.login(document.getElementById(\'li_name\').value, document.getElementById(\'li_role\').value)">Enter the platform</button>'+
-    (App.state.termsOk
-      ? '<div class="terms-note">By using this app you agree to the <a href="/legal/app-terms" target="_blank" rel="noopener">App &amp; SAFETI Terms</a>, <a href="/legal/ai-use" target="_blank" rel="noopener">AI Use Policy</a>, <a href="/legal/terms" target="_blank" rel="noopener">Terms of Service</a> and <a href="/legal/privacy" target="_blank" rel="noopener">Privacy Policy</a>.</div>'
-      : '<label id="li_terms_box" class="terms-box"><input type="checkbox" id="li_terms" onchange="this.parentNode.classList.remove(\'terms-err\');document.getElementById(\'li_terms_msg\').style.display=\'none\'"><span>I have read and agree to the <a href="/legal/app-terms" target="_blank" rel="noopener">App &amp; SAFETI Terms</a>, <a href="/legal/ai-use" target="_blank" rel="noopener">AI Use Policy</a>, <a href="/legal/terms" target="_blank" rel="noopener">Terms of Service</a> and <a href="/legal/privacy" target="_blank" rel="noopener">Privacy Policy</a>. I understand this app and its AI are decision-support only, can make mistakes, and do not replace FAA or other authority approval.</span></label><div id="li_terms_msg" style="display:none;color:#C0392B;font-size:11.5px;margin:6px 0 0;">Please accept the terms to continue.</div>')+
+    termsHtml()+
+    '<button class="btn btn-primary" style="width:100%;justify-content:center;padding:11px;margin-top:12px;" onclick="App.login(document.getElementById(\'li_name\').value, document.getElementById(\'li_role\').value)">Enter the platform</button>'+
     '<div class="disclaimer-mini">This tool does not replace an official authorisation, a regulatory review, or an approval from the competent aviation authority. It is a support tool for risk management, SMS, operational analysis, traceability and decision-making. The operator is responsible for verifying applicable regulations, permits, UAS geographical zones, NOTAMs, weather and other requirements before flight.</div>'+
   '<div style="text-align:center;margin-top:14px;"><a href="/" style="font-size:12.5px;font-weight:700;color:var(--blue-accent);">&larr; Back to the BVLOS Safety Academy website</a></div>'+
   '</div></div>';
