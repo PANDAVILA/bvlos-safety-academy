@@ -42,6 +42,13 @@ svg{width:1em;height:1em;}
 .sidebar-logo .sub{font-size:9.5px;letter-spacing:.14em;color:#7E97B8;margin-top:2px;text-transform:uppercase;}
 .nav{padding:14px 10px;flex:1;}
 .navgroup-label{font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:#56708F;padding:14px 12px 6px;}
+.site-back{background:var(--blue-accent)!important;color:#fff!important;font-weight:700!important;text-decoration:none;margin-bottom:6px!important;}
+.site-back:hover{filter:brightness(1.1);}
+.site-link{text-decoration:none;margin-bottom:10px!important;}
+.site-link:hover{background:var(--navy-800);color:#fff;}
+.site-btn{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:700;color:var(--navy-800);border:1px solid var(--border);background:#fff;border-radius:8px;padding:7px 11px;text-decoration:none;white-space:nowrap;}
+.site-btn:hover{background:var(--blue-soft);border-color:var(--blue-accent);}
+@media (max-width:520px){.site-btn span{display:none;}.site-btn{padding:7px 9px;}}
 .navitem{display:flex;align-items:center;gap:10px;width:100%;text-align:left;padding:9px 12px;border-radius:6px;color:#A9C0DC;background:none;border:none;font-size:13px;font-weight:500;cursor:pointer;margin-bottom:2px;}
 .navitem svg{width:16px;height:16px;flex-shrink:0;stroke-width:1.6;}
 .navitem.active{background:var(--navy-700);color:#fff;}
@@ -993,6 +1000,9 @@ function sidebarHtml(){
   return '<div class="sidebar'+(App.state.sidebarOpen?' open':'')+'">'+
     '<div class="sidebar-logo"><img class="mark" src="./icons/icon-96.png" alt="AeroSafety Case"><div><div class="word">AEROSAFETY<br>CASE</div><div class="sub">SMS · BVLOS · ICAO</div></div></div>'+
     '<div class="nav">'+
+      '<a class="navitem site-back no-print" href="/" onclick="try{var d=App.state.draft;if(d&&(d.name||(d.hazards&&d.hazards.length)))App.saveDraft();}catch(e){}" title="Back to the BVLOS Safety Academy website">'+'<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>'+' Back to website</a>'+
+      '<a class="navitem site-link no-print" href="/courses" onclick="try{var d=App.state.draft;if(d&&(d.name||(d.hazards&&d.hazards.length)))App.saveDraft();}catch(e){}">'+icon('library')+' Courses</a>'+
+      '<div class="navgroup-label">AeroSafety Case</div>'+
       navItem('dashboard','dashboard','Dashboard')+
       navItem('missions','missions','Missions')+
       navItem('library','library','Hazard library')+
@@ -1015,6 +1025,7 @@ function topbarHtml(title,crumbs){
       '<div><div class="crumbs">'+crumbs+'</div><div class="title">'+title+'</div></div>'+
     '</div>'+
     '<div class="topbar-right">'+
+      '<a class="site-btn no-print" href="/" onclick="try{var d=App.state.draft;if(d&&(d.name||(d.hazards&&d.hazards.length)))App.saveDraft();}catch(e){}" title="Back to the BVLOS Safety Academy website">'+'<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>'+'<span>Website</span></a>'+
       '<div class="clock" id="utcclock">'+App.clockHtml()+'</div>'+
       '<div class="userchip" style="cursor:pointer" onclick="App.go(\'settings\')" title="Edit profile"><div class="avatar">'+initials+'</div><div><div class="uname">'+escapeHtml(u.name)+'</div><div class="urole">'+escapeHtml(u.role)+'</div></div></div>'+
       '<button class="btn-ghost" title="Log out" onclick="App.logout()">'+icon('logout')+'</button>'+
@@ -1041,6 +1052,7 @@ function renderLogin(){
     '</select></div>'+
     '<button class="btn btn-primary" style="width:100%;justify-content:center;padding:11px;" onclick="App.login(document.getElementById(\'li_name\').value, document.getElementById(\'li_role\').value)">Enter the platform</button>'+
     '<div class="disclaimer-mini">This tool does not replace an official authorisation, a regulatory review, or an approval from the competent aviation authority. It is a support tool for risk management, SMS, operational analysis, traceability and decision-making. The operator is responsible for verifying applicable regulations, permits, UAS geographical zones, NOTAMs, weather and other requirements before flight.</div>'+
+  '<div style="text-align:center;margin-top:14px;"><a href="/" style="font-size:12.5px;font-weight:700;color:var(--blue-accent);">&larr; Back to the BVLOS Safety Academy website</a></div>'+
   '</div></div>';
 }
 
