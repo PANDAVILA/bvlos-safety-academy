@@ -142,6 +142,37 @@ export async function callClaude(opts: { system: string; user: string; maxTokens
   return { text, inputTokens: data?.usage?.input_tokens || 0, outputTokens: data?.usage?.output_tokens || 0 };
 }
 
+// Streaming call for long documents. Returns the open response (SSE) and a function to abort it.
+export async function openClaudeStream(opts: { system: any[]; user: string; maxTokens: number }) {
+  const key = process.env.ANTHROPIC_API_KEY;
+  if (!key) throw new Error("not_configured");
+  const base = (process.env.ANTHROPIC_API_URL || "https://api.anthropic.com").replace(/\/$/, "");
+  const ctrl = new AbortController();
+  const timer = setTimeout(() => ctrl.abort(), 420_000);
+  let res: Response;
+  try {
+    res = await fetch(`${base}/v1/messages`, {
+      method: "POST",
+      signal: ctrl.signal,
+      headers: { "content-type": "application/json", "x-api-key": key, "anthropic-version": "2023-06-01" },
+      body: JSON.stringify({
+        model: process.env.AI_MODEL || "claude-sonnet-5-5",
+        max_tokens: opts.maxTokens, stream: true,
+        system: opts.system, messages: [{ role: "user", content: opts.user }],
+      }),
+    });
+  } catch (e) { clearTimeout(timer); throw e; }
+  if (!res.ok || !res.body) {
+    clearTimeout(timer);
+    const raw = await res.text().catch(() => "");
+    let data: any = null; try { data = JSON.parse(raw); } catch {}
+    const err: any = new Error("upstream");
+    err.status = res.status; err.detail = data?.error?.message || raw.slice(0, 200);
+    throw err;
+  }
+  return { body: res.body, abort: () => { clearTimeout(timer); ctrl.abort(); }, done: () => clearTimeout(timer) };
+}
+
 // Chat with tools (SAFETI). Returns the raw content blocks so the caller can validate them.
 export async function callClaudeChat(opts: { system: any[]; messages: any[]; tools: any[]; maxTokens: number }) {
   const data = await anthropicPost({
