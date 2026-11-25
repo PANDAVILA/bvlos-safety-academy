@@ -297,31 +297,54 @@ function icon(name){
 }
 
 /* ---------------- REFERENCE DATA ---------------- */
+/* Risk model: FAA AC 120-92D Table 3-1 (sample matrix) with ICAO risk-index codes.
+   Internal values keep the old 1-5 range so saved missions still load: severity 5 = A (Catastrophic) ... 1 = E (Negligible);
+   likelihood 5 = Frequent ... 1 = Extremely improbable. A risk is stored as severity*10+likelihood. */
 const SEVERITY = [
-  {v:1,label:'1 · Negligible',desc:'No damage, no injuries, no relevant operational impact.'},
-  {v:2,label:'2 · Minor',desc:'Light damage, minor injuries, minor interruption.'},
-  {v:3,label:'3 · Moderate',desc:'Significant material damage, moderate injuries, partial mission loss.'},
-  {v:4,label:'4 · Major',desc:'Serious injuries, loss of the UAS, significant risk to third parties.'},
-  {v:5,label:'5 · Catastrophic',desc:'Potential fatality, collision with a manned aircraft.'}
+  {v:5,letter:'A',label:'A · Catastrophic',desc:'Death or life-threatening injury to any person; mid-air collision with a crewed aircraft; destruction of the aircraft with multiple serious injuries.'},
+  {v:4,letter:'B',label:'B · Hazardous',desc:'Serious injury; near mid-air collision that needs evasive action by a crewed aircraft; major third-party property damage; large reduction in safety margins.'},
+  {v:3,letter:'C',label:'C · Major',desc:'Minor injury; significant reduction in safety margins; third-party property damage; event reportable to the FAA; emergency procedures used.'},
+  {v:2,letter:'D',label:'D · Minor',desc:'Nuisance; normal contingency procedures; minor damage to company equipment; mission abort; no third party affected.'},
+  {v:1,letter:'E',label:'E · Negligible',desc:'Few consequences; no effect on safety or on the mission.'}
 ];
 const PROBABILITY = [
-  {v:1,label:'1 · Rare',desc:'Very unlikely, not expected under normal conditions.'},
-  {v:2,label:'2 · Unlikely',desc:'Could occur, but is not expected.'},
-  {v:3,label:'3 · Possible',desc:'May occur during the operation.'},
-  {v:4,label:'4 · Likely',desc:'Reasonably expected to occur.'},
-  {v:5,label:'5 · Frequent',desc:'Likely to occur repeatedly.'}
+  {v:5,label:'5 · Frequent',desc:'More than once per 1,000 flight hours. Expected to occur often.',guide:'More than once per 1,000 flight hours'},
+  {v:4,label:'4 · Occasional',desc:'Expected to occur sometimes; has occurred in our operation.',guide:'Once per 1,000 to 10,000 flight hours'},
+  {v:3,label:'3 · Remote',desc:'Unlikely but possible; has occurred in the industry.',guide:'Once per 10,000 to 100,000 flight hours'},
+  {v:2,label:'2 · Improbable',desc:'Very unlikely; not known to have occurred.',guide:'Once per 100,000 to 1,000,000 flight hours'},
+  {v:1,label:'1 · Extremely improbable',desc:'Almost inconceivable.',guide:'Less than once per 1,000,000 flight hours'}
 ];
+const SEV_LETTER={5:'A',4:'B',3:'C',2:'D',1:'E'};
+/* rows = likelihood 5..1, columns = severity A..E (H = High, M = Medium, L = Low) */
+const RISK_GRID={5:'HHHMM',4:'HHMMM',3:'HMMML',2:'MMMLL',1:'LLLLL'};
+const RISK_ACCEPT=[
+  {key:'high',label:'High',who:'Accountable Executive',action:'Not acceptable as it stands. Do not operate, or stop, until controls bring the risk down.'},
+  {key:'medium',label:'Medium',who:'Director of Operations',action:'Acceptable only with controls in place and monitored; owner, indicator and review date required.'},
+  {key:'low',label:'Low',who:'Safety Manager',action:'Acceptable. Record and monitor through normal assurance.'}
+];
+function encodeRisk(s,p){ return (s>=1&&s<=5&&p>=1&&p<=5)? s*10+p : null; }
+function riskCode(r){
+  if(r==null||r<11) return '–';
+  return (r%10)+SEV_LETTER[Math.floor(r/10)];
+}
 function riskLevel(r){
-  if(r==null) return {key:'na',label:'Not assessed',cls:'neutral'};
-  if(r<=4) return {key:'low',label:'Low',cls:'low'};
-  if(r<=9) return {key:'medium',label:'Medium',cls:'med'};
-  if(r<=14) return {key:'high',label:'High',cls:'high'};
-  return {key:'intolerable',label:'Intolerable',cls:'crit'};
+  if(r==null||r<11||Math.floor(r/10)>5||r%10<1||r%10>5) return {key:'na',label:'Not assessed',cls:'neutral'};
+  const s=Math.floor(r/10), p=r%10;
+  const c=RISK_GRID[p][5-s];
+  if(c==='H') return {key:'high',label:'High',cls:'crit'};
+  if(c==='M') return {key:'medium',label:'Medium',cls:'med'};
+  return {key:'low',label:'Low',cls:'low'};
+}
+function normalizeMissionRisks(m){
+  (m.hazards||[]).forEach(h=>{
+    const ri=encodeRisk(h.severityInitial,h.probabilityInitial); if(ri!=null) h.riskInitial=ri;
+    const rr=encodeRisk(h.severityResidual,h.probabilityResidual); if(rr!=null) h.riskResidual=rr;
+  });
 }
 
 const OPERATION_TYPES = ['VLOS','EVLOS','BVLOS','Urban','Rural','Industrial','Linear inspection','Powerline inspection',
   'Infrastructure inspection','Photogrammetry','LiDAR','Thermography','Surveillance','Security','Emergency','Agriculture','Training','Other'];
-const OPERATION_CATEGORIES = ['Open','Specific','Certified','STS','PDRA','SORA','Own operational authorisation','Operational declaration','Not determined'];
+const OPERATION_CATEGORIES = ['Part 107','Part 107 waiver (BVLOS)','Part 107 + airspace authorization','Part 135 (air carrier)','Public aircraft operation (COA)','Section 44807 exemption','Open','Specific','Certified','STS','PDRA','SORA','Own operational authorisation','Operational declaration','Not determined'];
 const ENVIRONMENTS = [
   {v:'rural',label:'Rural'},{v:'urban',label:'Urban'},{v:'industrial',label:'Industrial'},{v:'critical',label:'Critical infrastructure'}
 ];
@@ -388,7 +411,7 @@ const LMap = { map:null, reportMap:null, takeoffMarker:null, landingMarker:null,
 
 function riskColor(h){
   const lvl=riskLevel(h.riskResidual!=null?h.riskResidual:h.riskInitial);
-  return lvl.key==='low'?'#28804A':lvl.key==='medium'?'#A8790A':lvl.key==='high'?'#C9651A':lvl.key==='intolerable'?'#B3261E':'#888';
+  return lvl.key==='low'?'#28804A':lvl.key==='medium'?'#A8790A':lvl.key==='high'?'#B3261E':'#888';
 }
 function setMapToolMode(mode){
   LMap.mode = (LMap.mode===mode)? null : mode;
@@ -507,7 +530,7 @@ function initLocationMap(){
       App.showToast('Point '+n+' added to operational area'+(n<3?' — add '+(3-n)+' more to form an area.':'.'));
     } else if(mode==='hazard'){
       const hz={id:'H-'+Date.now()+Math.random().toString(36).slice(2,6), name:'Hazard detected on map', category:'Operational',
-        lat:latlng.lat, lng:latlng.lng, severityInitial:3, probabilityInitial:3, riskInitial:9, mitigations:[], severityResidual:3, probabilityResidual:3, riskResidual:9};
+        lat:latlng.lat, lng:latlng.lng, severityInitial:3, probabilityInitial:3, riskInitial:33, mitigations:[], severityResidual:3, probabilityResidual:3, riskResidual:33};
       App.state.draft.hazards.push(hz);
       placeLHazardMarker(hz);
       setMapToolMode(null);
@@ -611,6 +634,7 @@ const App = {
     try{ const r=await Store.get('srm_org'); if(r) org=JSON.parse(r); }catch(e){}
     try{ const r=await Store.get('srm_user'); if(r) savedUser=JSON.parse(r); }catch(e){}
     this.state.missions=missions||[];
+    this.state.missions.forEach(normalizeMissionRisks);
     this.state.fleet=fleet||[];
     if(org) this.state.org=org;
     if(savedUser) this.state.savedUser=savedUser;
@@ -712,15 +736,15 @@ const App = {
   demoMission(){
     function hz(name,cat,si,pi,sr,pr,lat,lng,mits){
       return {id:'H-'+name.replace(/\s/g,'')+Math.random().toString(36).slice(2,6), name, category:cat, lat, lng,
-        severityInitial:si, probabilityInitial:pi, riskInitial:si*pi,
-        severityResidual:sr, probabilityResidual:pr, riskResidual:sr*pr,
+        severityInitial:si, probabilityInitial:pi, riskInitial:encodeRisk(si,pi),
+        severityResidual:sr, probabilityResidual:pr, riskResidual:encodeRisk(sr,pr),
         mitigations: mits.map(t=>({id:'MIT-'+Math.random().toString(36).slice(2,8), desc:t, type:'Operational', responsible:'Pilot in command', status:'Implemented', due:''}))
       };
     }
     return {
       id:'DEMO-001', code:'OP-DEMO-001', name:'BVLOS power line inspection', client:'Regional Electric Utility',
       date:new Date().toISOString().slice(0,10), startTime:'09:00', endTime:'12:00',
-      operationType:'BVLOS', category:'SORA', scenario:'Linear inspection in a rural area',
+      operationType:'BVLOS', category:'Specific', scenario:'Linear inspection in a rural area',
       description:'Power line inspection operation in a rural area with a nearby secondary road, farm tracks, a power line, possible non-participating persons, gusting wind and variable C2 coverage.',
       criticality:'High', responsible:'Operations Manager', safetyManager:'Demo Safety Manager', pilot:'Demo Remote Pilot', observers:'Observer 1, Observer 2',
       location:{name:'HV line segment, sector 4, rural area (Castilla y Leon, Spain)', country:'Spain', city:'—', env:'rural',
@@ -749,20 +773,20 @@ const App = {
   /* -------- hazards / mitigations -------- */
   addHazardManual(){
     this.state.draft.hazards.push({id:'H-'+Date.now()+Math.random().toString(36).slice(2,6), name:'New hazard', category:'Operational',
-      x:null,y:null, severityInitial:3, probabilityInitial:3, riskInitial:9, mitigations:[], severityResidual:3, probabilityResidual:3, riskResidual:9});
+      x:null,y:null, severityInitial:3, probabilityInitial:3, riskInitial:33, mitigations:[], severityResidual:3, probabilityResidual:3, riskResidual:33});
     this.render();
   },
   addHazardFromLib(name,cat){
     this.state.draft.hazards.push({id:'H-'+Date.now()+Math.random().toString(36).slice(2,6), name, category:cat,
-      x:null,y:null, severityInitial:3, probabilityInitial:3, riskInitial:9, mitigations:[], severityResidual:3, probabilityResidual:3, riskResidual:9});
+      x:null,y:null, severityInitial:3, probabilityInitial:3, riskInitial:33, mitigations:[], severityResidual:3, probabilityResidual:3, riskResidual:33});
     this.render();
   },
   removeHazard(id){ this.state.draft.hazards=this.state.draft.hazards.filter(h=>h.id!==id); this.render(); },
   updateHazardNum(id,field,value){
     const h=this.state.draft.hazards.find(x=>x.id===id); if(!h) return;
     h[field]=parseInt(value,10);
-    h.riskInitial=h.severityInitial*h.probabilityInitial;
-    h.riskResidual=h.severityResidual*h.probabilityResidual;
+    h.riskInitial=encodeRisk(h.severityInitial,h.probabilityInitial);
+    h.riskResidual=encodeRisk(h.severityResidual,h.probabilityResidual);
     this.render();
   },
   updateHazardText(id,field,value){
@@ -841,10 +865,10 @@ function evaluateMission(m){
 
   const hazards=m.hazards||[];
   const residualKeys=hazards.map(h=>riskLevel(h.riskResidual!=null?h.riskResidual:h.riskInitial).key);
-  const hasIntolerable=residualKeys.includes('intolerable');
+  const hasHigh=residualKeys.includes('high');
   const highOpen=hazards.filter(h=>{
     const lvl=riskLevel(h.riskResidual!=null?h.riskResidual:h.riskInitial).key;
-    if(lvl!=='high') return false;
+    if(lvl!=='medium') return false;
     const closed=h.mitigations && h.mitigations.length>0 && h.mitigations.every(mm=>mm.status==='Implemented'||mm.status==='Verified');
     return !closed;
   });
@@ -853,7 +877,7 @@ function evaluateMission(m){
   if(m.flags && m.flags.uasNotApt) reasons.push({level:'nogo',text:'UAS flagged as not airworthy for this operation.'});
   if(m.flags && m.flags.pilotNotCompetent) reasons.push({level:'nogo',text:'Pilot without valid competency for this scenario.'});
   if(m.flags && m.flags.uncontrolledThirdParties) reasons.push({level:'nogo',text:'Uncontrolled non-participating persons present in the area.'});
-  if(hasIntolerable) reasons.push({level:'nogo',text:'At least one residual risk is classified as intolerable.'});
+  if(hasHigh) reasons.push({level:'nogo',text:'At least one residual risk is rated High: not acceptable as it stands (Accountable Executive).'});
 
   const criticalPending=PRECHECK_ITEMS.filter(it=>it.crit && !(m.checklist && m.checklist[it.id])).length;
   if(criticalPending>0) reasons.push({level:'hold',text:criticalPending+' critical checklist item(s) not completed.'});
@@ -862,7 +886,7 @@ function evaluateMission(m){
   const expiredDocs=(m.documents||[]).filter(d=>d.expiry && new Date(d.expiry)<today).length;
   if(expiredDocs>0) reasons.push({level:'hold',text:expiredDocs+' document(s) expired.'});
 
-  if(highOpen.length>0) reasons.push({level:'hold',text:highOpen.length+' high risk(s) without a closed (implemented/verified) mitigation.'});
+  if(highOpen.length>0) reasons.push({level:'hold',text:highOpen.length+' medium risk(s) without controls implemented or verified (Medium is acceptable only with controls in place).'});
 
   const nogo=reasons.filter(r=>r.level==='nogo');
   const hold=reasons.filter(r=>r.level==='hold');
@@ -876,7 +900,7 @@ function evaluateMission(m){
     });
     decision = needsMitigation ? 'GO WITH MITIGATIONS' : 'GO';
   }
-  if(reasons.length===0) reasons.push({level:'ok',text:'No blocking issues detected. All residual risks are low or accepted medium.'});
+  if(reasons.length===0) reasons.push({level:'ok',text:'No blocking issues detected. All residual risks are Low, or Medium with controls in place.'});
   return {decision, reasons};
 }
 
@@ -904,7 +928,7 @@ function sidebarHtml(){
       navItem('sms','sms','SMS indicators')+
       navItem('settings','settings','Settings')+
     '</div>'+
-    '<div class="sidebar-foot">This tool does not replace an official authorisation or a formal SORA assessment. Risk management and SMS support only.</div>'+
+    '<div class="sidebar-foot">This tool does not replace an official authorisation or a regulatory review. Risk management and SMS support only.</div>'+
   '</div>';
 }
 
@@ -942,7 +966,7 @@ function renderLogin(){
       .map(r=>'<option'+(r===role?' selected':'')+'>'+r+'</option>').join('')+
     '</select></div>'+
     '<button class="btn btn-primary" style="width:100%;justify-content:center;padding:11px;" onclick="App.login(document.getElementById(\'li_name\').value, document.getElementById(\'li_role\').value)">Enter the platform</button>'+
-    '<div class="disclaimer-mini">This tool does not replace an official authorisation, a formal SORA assessment, a regulatory review, or an approval from the competent aviation authority. It is a support tool for risk management, SMS, operational analysis, traceability and decision-making. The operator is responsible for verifying applicable regulations, permits, UAS geographical zones, NOTAMs, weather and other requirements before flight.</div>'+
+    '<div class="disclaimer-mini">This tool does not replace an official authorisation, a regulatory review, or an approval from the competent aviation authority. It is a support tool for risk management, SMS, operational analysis, traceability and decision-making. The operator is responsible for verifying applicable regulations, permits, UAS geographical zones, NOTAMs, weather and other requirements before flight.</div>'+
   '</div></div>';
 }
 
@@ -952,7 +976,7 @@ function renderDashboard(){
   const byStatus={};
   ms.forEach(m=>{ byStatus[m.status]=(byStatus[m.status]||0)+1; });
   const allHazards=ms.flatMap(m=>m.hazards||[]);
-  const riskCounts={low:0,medium:0,high:0,intolerable:0};
+  const riskCounts={low:0,medium:0,high:0};
   allHazards.forEach(h=>{ const lvl=riskLevel(h.riskResidual!=null?h.riskResidual:h.riskInitial).key; if(riskCounts[lvl]!=null) riskCounts[lvl]++; });
   const expiredDocs=ms.flatMap(m=>m.documents||[]).filter(d=>d.expiry && new Date(d.expiry)<new Date()).length;
 
@@ -962,8 +986,7 @@ function renderDashboard(){
   const donutSegs=[
     {k:'low',color:'var(--risk-low)',v:riskCounts.low},
     {k:'medium',color:'var(--risk-med)',v:riskCounts.medium},
-    {k:'high',color:'var(--risk-high)',v:riskCounts.high},
-    {k:'intolerable',color:'var(--risk-crit)',v:riskCounts.intolerable}
+    {k:'high',color:'var(--risk-crit)',v:riskCounts.high}
   ];
   let acc=0;
   const circumference=2*Math.PI*54;
@@ -984,7 +1007,7 @@ function renderDashboard(){
       '<div class="kpi warn"><div class="num">'+(byStatus['GO WITH MITIGATIONS']||0)+'</div><div class="lbl">GO with mitigations</div></div>'+
       '<div class="kpi accent"><div class="num">'+(byStatus['HOLD']||0)+'</div><div class="lbl">On HOLD</div></div>'+
       '<div class="kpi danger"><div class="num">'+(byStatus['NO-GO']||0)+'</div><div class="lbl">NO-GO</div></div>'+
-      '<div class="kpi danger"><div class="num">'+(riskCounts.high+riskCounts.intolerable)+'</div><div class="lbl">High / intolerable risks</div></div>'+
+      '<div class="kpi danger"><div class="num">'+riskCounts.high+'</div><div class="lbl">High residual risks</div></div>'+
       '<div class="kpi warn"><div class="num">'+expiredDocs+'</div><div class="lbl">Expired documents</div></div>'+
       '<div class="kpi"><div class="num">'+allHazards.length+'</div><div class="lbl">Hazards logged</div></div>'+
     '</div>'+
@@ -997,8 +1020,7 @@ function renderDashboard(){
           '<div style="font-size:12.5px;display:flex;flex-direction:column;gap:6px;">'+
             '<div><span class="badge low">Low</span> '+riskCounts.low+'</div>'+
             '<div><span class="badge med">Medium</span> '+riskCounts.medium+'</div>'+
-            '<div><span class="badge high">High</span> '+riskCounts.high+'</div>'+
-            '<div><span class="badge crit">Intolerable</span> '+riskCounts.intolerable+'</div>'+
+            '<div><span class="badge crit">High</span> '+riskCounts.high+'</div>'+
           '</div></div>'
           : '<div class="empty">'+icon('alert')+'<div>No hazards logged yet.</div></div>')+
       '</div>'+
@@ -1026,8 +1048,9 @@ function renderDashboard(){
 }
 function missionMaxRisk(m){
   const hs=m.hazards||[]; if(!hs.length) return {cls:'neutral',label:'No data'};
-  let max=0; hs.forEach(h=>{ const r=h.riskResidual!=null?h.riskResidual:h.riskInitial; if(r>max) max=r; });
-  return riskLevel(max);
+  const rank={na:0,low:1,medium:2,high:3}; let best=null;
+  hs.forEach(h=>{ const l=riskLevel(h.riskResidual!=null?h.riskResidual:h.riskInitial); if(!best||rank[l.key]>rank[best.key]) best=l; });
+  return best||{cls:'neutral',label:'No data'};
 }
 
 /* ---------------- MISSIONS LIST ---------------- */
@@ -1156,7 +1179,7 @@ function stepLocation(d){
         '<button class="maptool danger" onclick="clearAreaPath()">Clear area</button>'+
         '<button class="maptool danger" onclick="clearPoints()">Clear points</button>'+
       '</div>'+
-      '<div class="maplegend"><span><i style="background:#28804A"></i>Low risk</span><span><i style="background:#A8790A"></i>Medium</span><span><i style="background:#C9651A"></i>High</span><span><i style="background:#B3261E"></i>Intolerable</span><span><i style="background:#1E88C9"></i>Take-off / landing</span></div>'+
+      '<div class="maplegend"><span><i style="background:#28804A"></i>Low risk</span><span><i style="background:#A8790A"></i>Medium</span><span><i style="background:#B3261E"></i>High</span><span><i style="background:#1E88C9"></i>Take-off / landing</span></div>'+
       '<div id="leaflet-map" style="height:430px;"></div>'+
       '<div class="gmap-status"><span id="map-coords">'+(loc.lat!=null? 'Center: '+loc.lat.toFixed(5)+', '+loc.lng.toFixed(5):'Search an address above, or click the map directly to set take-off, landing, the operational area or a hazard.')+'</span></div>'+
     '</div>'+
@@ -1222,7 +1245,7 @@ function hazardCard(h,withMitigations){
     '<div class="mini-grid">'+
       sevSelect('Initial severity',h.severityInitial,h.id,'severityInitial')+
       probSelect('Initial probability',h.probabilityInitial,h.id,'probabilityInitial')+
-      '<div><div class="field"><label>Initial risk</label><span class="badge '+ri.cls+'" style="font-size:13px;padding:7px 12px;">'+h.riskInitial+' · '+ri.label+'</span></div></div>'+
+      '<div><div class="field"><label>Initial risk</label><span class="badge '+ri.cls+'" style="font-size:13px;padding:7px 12px;">'+riskCode(h.riskInitial)+' · '+ri.label+'</span></div></div>'+
       '<div></div>'+
     '</div>'+
   '</div>';
@@ -1248,14 +1271,14 @@ function stepMitigations(d){
     const libCat=Object.keys(MITIGATION_LIBRARY);
     const libPills=libCat.map(c=>MITIGATION_LIBRARY[c].slice(0,5).map(t=>'<button class="pill" onclick="App.addMitigation(\''+h.id+'\',\''+t.replace(/'/g,"\\'")+'\')">+ '+t+'</button>').join('')).join('');
     return '<div class="hz-card">'+
-      '<div class="hz-head"><div><div class="hz-name">'+escapeHtml(h.name)+'</div><div class="hz-cat">'+escapeHtml(h.category)+' · Initial risk: <span class="badge '+ri.cls+'">'+h.riskInitial+'</span></div></div></div>'+
+      '<div class="hz-head"><div><div class="hz-name">'+escapeHtml(h.name)+'</div><div class="hz-cat">'+escapeHtml(h.category)+' · Initial risk: <span class="badge '+ri.cls+'">'+riskCode(h.riskInitial)+'</span></div></div></div>'+
       '<div class="mit-row">'+(mits||'<div class="subtle">No mitigations yet.</div>')+
         '<div class="pill-row">'+libPills+'<button class="pill" style="font-weight:700;" onclick="App.addMitigation(\''+h.id+'\',\'New mitigation\')">'+icon('plus')+' Manual mitigation</button></div>'+
       '</div>'+
       '<div class="mini-grid" style="margin-top:14px;">'+
         sevSelect('Residual severity',h.severityResidual,h.id,'severityResidual')+
         probSelect('Residual probability',h.probabilityResidual,h.id,'probabilityResidual')+
-        '<div><div class="field"><label>Residual risk</label><span class="badge '+rr.cls+'" style="font-size:13px;padding:7px 12px;">'+h.riskResidual+' · '+rr.label+'</span></div></div>'+
+        '<div><div class="field"><label>Residual risk</label><span class="badge '+rr.cls+'" style="font-size:13px;padding:7px 12px;">'+riskCode(h.riskResidual)+' · '+rr.label+'</span></div></div>'+
         '<div></div>'+
       '</div>'+
     '</div>';
@@ -1355,8 +1378,8 @@ function stepReport(d){
     '<table class="table"><thead><tr><th>Hazard</th><th>Category</th><th>Initial risk</th><th>Mitigations</th><th>Residual risk</th></tr></thead><tbody>'+
       d.hazards.map(h=>{
         const ri=riskLevel(h.riskInitial), rr=riskLevel(h.riskResidual);
-        return '<tr><td>'+escapeHtml(h.name)+'</td><td>'+escapeHtml(h.category)+'</td><td><span class="badge '+ri.cls+'">'+h.riskInitial+' '+ri.label+'</span></td>'+
-          '<td>'+(h.mitigations||[]).map(m=>escapeHtml(m.desc)).join('; ')+'</td><td><span class="badge '+rr.cls+'">'+h.riskResidual+' '+rr.label+'</span></td></tr>';
+        return '<tr><td>'+escapeHtml(h.name)+'</td><td>'+escapeHtml(h.category)+'</td><td><span class="badge '+ri.cls+'">'+riskCode(h.riskInitial)+' '+ri.label+'</span></td>'+
+          '<td>'+(h.mitigations||[]).map(m=>escapeHtml(m.desc)).join('; ')+'</td><td><span class="badge '+rr.cls+'">'+riskCode(h.riskResidual)+' '+rr.label+'</span></td></tr>';
       }).join('')+
     '</tbody></table>'+
     '<div class="report-section-title">Pre-flight checklist</div>'+
@@ -1366,7 +1389,7 @@ function stepReport(d){
     '<div style="font-size:16px;font-weight:800;">'+final+'</div>'+
     '<div style="margin-top:6px;">'+escapeHtml(d.decision.justification||'—')+'</div>'+
     '<div class="sig-row"><div class="sig-box">'+escapeHtml(d.decision.signedBy||'—')+'<br><span class="subtle">'+escapeHtml(d.decision.signedRole||'')+'</span></div><div class="sig-box">Date and time<br><span class="subtle">'+(d.decision.signedAt? new Date(d.decision.signedAt).toLocaleString('en-GB'):'—')+'</span></div></div>'+
-    '<div class="disclaimer">This tool does not replace an official authorisation, a formal SORA assessment, a regulatory review, or an approval from the competent aviation authority. It is a support tool for risk management, SMS, operational analysis, traceability and decision-making. The operator is responsible for verifying applicable regulations, permits, UAS geographical zones, coordination, NOTAMs, weather, operational limitations and other requirements before flight.</div>'+
+    '<div class="disclaimer">This tool does not replace an official authorisation, a regulatory review, or an approval from the competent aviation authority. It is a support tool for risk management, SMS, operational analysis, traceability and decision-making. The operator is responsible for verifying applicable regulations, permits, UAS geographical zones, coordination, NOTAMs, weather, operational limitations and other requirements before flight.</div>'+
   '</div>';
 }
 function reportField(label,val){ return '<div><b>'+label+'</b>'+escapeHtml(val||'—')+'</div>'; }
@@ -1419,7 +1442,7 @@ function renderSms(){
     '<div class="kpi-grid">'+
       '<div class="kpi"><div class="num">'+allHaz.length+'</div><div class="lbl">Hazards reported</div></div>'+
       '<div class="kpi warn"><div class="num">'+allHaz.filter(h=>riskLevel(h.riskInitial).key==='high').length+'</div><div class="lbl">High initial risks</div></div>'+
-      '<div class="kpi danger"><div class="num">'+allHaz.filter(h=>riskLevel(h.riskInitial).key==='intolerable').length+'</div><div class="lbl">Intolerable initial risks</div></div>'+
+      '<div class="kpi danger"><div class="num">'+allHaz.filter(h=>riskLevel(h.riskResidual!=null?h.riskResidual:h.riskInitial).key==='high').length+'</div><div class="lbl">High residual risks</div></div>'+
       '<div class="kpi accent"><div class="num">'+ms.filter(m=>m.status==='HOLD').length+'</div><div class="lbl">HOLD decisions</div></div>'+
       '<div class="kpi danger"><div class="num">'+ms.filter(m=>m.status==='NO-GO').length+'</div><div class="lbl">NO-GO decisions</div></div>'+
       '<div class="kpi good"><div class="num">'+(allHaz.length? Math.round(allHaz.filter(h=>(h.mitigations||[]).length>0).length/allHaz.length*100):0)+'%</div><div class="lbl">Hazards with mitigation</div></div>'+
@@ -1452,12 +1475,28 @@ function renderSettings(){
       '<div class="subtle">The operational map uses <b>OpenStreetMap</b> (street layer) and <b>Esri World Imagery</b> (satellite layer) for real, worldwide map data, plus <b>Nominatim</b> for address search. These services are free and do not require an account, an API key, or billing &mdash; they work out of the box everywhere this app is opened. Heavy production use should review each provider&rsquo;s usage policy.</div>'+
     '</div>'+
 
-    '<div class="card" style="margin-top:16px;"><div class="section-label">5×5 risk matrix (default)</div>'+
-      '<table class="table"><thead><tr><th>Severity \\ Probability</th>'+PROBABILITY.map(p=>'<th>'+p.v+'</th>').join('')+'</tr></thead><tbody>'+
-      SEVERITY.slice().reverse().map(s=>'<tr><td><b>'+s.v+'</b> '+s.label.split('· ')[1]+'</td>'+
-        PROBABILITY.map(p=>{ const r=s.v*p.v; const lvl=riskLevel(r); return '<td><span class="badge '+lvl.cls+'">'+r+'</span></td>'; }).join('')+'</tr>').join('')+
+    '<div class="card" style="margin-top:16px;"><div class="section-label">Risk matrix · FAA AC 120-92D Table 3-1 with ICAO risk codes</div>'+
+      '<div class="subtle" style="margin-bottom:10px;">Sample matrix from FAA Advisory Circular 120-92D with ICAO-style risk-index codes (likelihood 1&ndash;5 and severity A&ndash;E). Adjust the scales and acceptance levels to your own SMS.</div>'+
+      '<table class="table"><thead><tr><th>Likelihood \\ Severity</th>'+SEVERITY.map(s=>'<th>'+s.label+'</th>').join('')+'</tr></thead><tbody>'+
+      PROBABILITY.map(p=>'<tr><td><b>'+p.v+'</b> '+p.label.split('· ')[1]+'</td>'+
+        SEVERITY.map(s=>{ const r=encodeRisk(s.v,p.v); const lvl=riskLevel(r); return '<td><span class="badge '+lvl.cls+'">'+riskCode(r)+'</span></td>'; }).join('')+'</tr>').join('')+
       '</tbody></table>'+
-      '<div class="pill-row" style="margin-top:14px;"><span class="badge low">1–4 Low</span><span class="badge med">5–9 Medium</span><span class="badge high">10–14 High</span><span class="badge crit">15–25 Intolerable</span></div>'+
+      '<div class="pill-row" style="margin-top:14px;"><span class="badge crit">High</span><span class="badge med">Medium</span><span class="badge low">Low</span></div>'+
+    '</div>'+
+    '<div class="card" style="margin-top:16px;"><div class="section-label">Acceptance rules (example)</div>'+
+      '<table class="table"><thead><tr><th>Rating</th><th>Who may accept</th><th>Action</th></tr></thead><tbody>'+
+      RISK_ACCEPT.map(a=>{ const c=a.key==='high'?'crit':a.key==='medium'?'med':'low'; return '<tr><td><span class="badge '+c+'">'+a.label+'</span></td><td>'+a.who+'</td><td>'+a.action+'</td></tr>'; }).join('')+
+      '</tbody></table>'+
+    '</div>'+
+    '<div class="card" style="margin-top:16px;"><div class="section-label">Severity scale (example)</div>'+
+      '<table class="table"><thead><tr><th>Code</th><th>Severity</th><th>Meaning for the operation</th></tr></thead><tbody>'+
+      SEVERITY.map(s=>'<tr><td><b>'+s.letter+'</b></td><td>'+s.label.split('· ')[1]+'</td><td>'+s.desc+'</td></tr>').join('')+
+      '</tbody></table>'+
+    '</div>'+
+    '<div class="card" style="margin-top:16px;"><div class="section-label">Likelihood scale (example)</div>'+
+      '<table class="table"><thead><tr><th>Value</th><th>Likelihood</th><th>Quantitative guide</th><th>Qualitative guide</th></tr></thead><tbody>'+
+      PROBABILITY.map(p=>'<tr><td><b>'+p.v+'</b></td><td>'+p.label.split('· ')[1]+'</td><td>'+p.guide+'</td><td>'+p.desc+'</td></tr>').join('')+
+      '</tbody></table>'+
     '</div>'+
     '<div class="card" style="margin-top:16px;"><div class="section-label">Organization</div>'+
       '<div class="grid2">'+orgField('Organization name',App.state.org.name,'name')+orgField('Operator number',App.state.org.operatorNumber,'operatorNumber')+'</div>'+

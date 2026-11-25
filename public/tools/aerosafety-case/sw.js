@@ -4,7 +4,7 @@
    intentionally left to the network (cache-first would risk stale map data
    and the providers are external/cross-origin). */
 
-const CACHE_NAME = 'aerosafety-case-shell-v1';
+const CACHE_NAME = 'aerosafety-case-shell-v2';
 const SHELL_ASSETS = [
   './',
   './index.html',
@@ -37,14 +37,13 @@ self.addEventListener('fetch', (event) => {
   // Leaflet CDN, address search) go straight to the network as usual.
   if (url.origin !== self.location.origin) return;
 
+  // Network first, so a new version of the app is picked up as soon as it is published;
+  // the cached copy is only used when the network is unavailable (offline).
   event.respondWith(
-    caches.match(event.request).then((cached) => {
-      if (cached) return cached;
-      return fetch(event.request).then((response) => {
-        const copy = response.clone();
-        caches.open(CACHE_NAME).then((cache) => cache.put(event.request, copy)).catch(() => {});
-        return response;
-      }).catch(() => cached);
-    })
+    fetch(event.request).then((response) => {
+      const copy = response.clone();
+      caches.open(CACHE_NAME).then((cache) => cache.put(event.request, copy)).catch(() => {});
+      return response;
+    }).catch(() => caches.match(event.request))
   );
 });
