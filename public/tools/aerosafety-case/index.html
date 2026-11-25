@@ -211,7 +211,12 @@ svg.mapsvg{display:block;width:100%;height:auto;background:#142B40;cursor:crossh
 .report-page img.report-map{width:100%;border-radius:6px;display:block;}
 
 /* login */
-.login-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at 30% 20%, #11254a 0%, #0B2347 55%, #060f1f 100%);}
+.login-wrap{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;background:radial-gradient(circle at 30% 20%, #11254a 0%, #0B2347 55%, #060f1f 100%);}
+.login-bsa{display:block;text-align:center;text-decoration:none;margin-bottom:22px;}
+.login-bsa img{display:block;width:230px;max-width:70vw;height:auto;margin:0 auto 2px;}
+.login-bsa span{display:block;font-size:12px;letter-spacing:.1em;color:#A9C0DC;text-transform:uppercase;}
+.login-bsa b{color:#fff;font-weight:700;}
+.login-bsa:hover span{color:#fff;}
 .login-card{width:380px;background:#fff;border-radius:12px;padding:34px 32px;box-shadow:0 20px 60px rgba(0,0,0,.35);}
 .login-mark{display:flex;align-items:center;gap:10px;margin-bottom:18px;}
 .login-mark .mark{width:42px;height:42px;border-radius:9px;object-fit:cover;display:block;}
@@ -1049,7 +1054,7 @@ function renderLogin(){
   const last=App.state.savedUser||{};
   const name=last.name||'Alex Carter';
   const role=last.role||'Safety Manager';
-  return '<div class="login-wrap"><div class="login-card">'+
+  return '<div class="login-wrap"><a class="login-bsa" href="/" title="BVLOS Safety Academy"><img src="/brand/logo-white.png" alt="BVLOS Safety Academy"><span>APP by <b>BVLOS SAFETY ACADEMY</b></span></a><div class="login-card">'+
     '<div class="login-mark"><img class="mark" src="./icons/icon-96.png" alt="AeroSafety Case"><div><div class="login-title">AeroSafety Case</div><div class="login-sub">SMS · ICAO · BVLOS</div></div></div>'+
     '<div class="field"><label>Name</label><input id="li_name" placeholder="e.g. Alex Carter" value="'+escapeHtml(name)+'"></div>'+
     '<div class="field"><label>Role</label><select id="li_role">'+
