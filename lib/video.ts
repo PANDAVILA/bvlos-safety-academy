@@ -31,13 +31,13 @@ export function parseVideoUrl(raw: string | null | undefined): VideoSource | nul
 
   // YouTube
   if (host === "youtu.be" && parts[0] && YT_ID.test(parts[0])) {
-    return { kind: "iframe", src: `https://www.youtube.com/embed/${parts[0]}?rel=0` };
+    return { kind: "iframe", src: `https://www.youtube-nocookie.com/embed/${parts[0]}?rel=0` };
   }
   if (host === "youtube.com" || host === "youtube-nocookie.com" || host === "music.youtube.com") {
     const v = url.searchParams.get("v");
-    if (v && YT_ID.test(v)) return { kind: "iframe", src: `https://www.youtube.com/embed/${v}?rel=0` };
+    if (v && YT_ID.test(v)) return { kind: "iframe", src: `https://www.youtube-nocookie.com/embed/${v}?rel=0` };
     if (["embed", "shorts", "live", "v"].includes(parts[0]) && parts[1] && YT_ID.test(parts[1])) {
-      return { kind: "iframe", src: `https://www.youtube.com/embed/${parts[1]}?rel=0` };
+      return { kind: "iframe", src: `https://www.youtube-nocookie.com/embed/${parts[1]}?rel=0` };
     }
   }
 
@@ -47,7 +47,7 @@ export function parseVideoUrl(raw: string | null | undefined): VideoSource | nul
     if (idIndex !== -1) {
       const id = parts[idIndex];
       const hash = url.searchParams.get("h") || (/^[0-9a-f]{8,}$/i.test(parts[idIndex + 1] || "") ? parts[idIndex + 1] : "");
-      return { kind: "iframe", src: `https://player.vimeo.com/video/${id}${hash ? `?h=${hash}` : ""}` };
+      return { kind: "iframe", src: `https://player.vimeo.com/video/${id}?dnt=1${hash ? `&h=${hash}` : ""}` };
     }
   }
 

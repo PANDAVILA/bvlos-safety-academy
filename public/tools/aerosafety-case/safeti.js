@@ -523,7 +523,7 @@ function bodyHtml(){
       '<h3>Hi, I\'m SAFETI</h3>'+
       '<p>Your UAS safety <b>'+BADGE+'</b> assistant. I <b>build missions</b> from your data and coordinates, review them, and <b>write documents</b>: SMS manuals, risk analyses, risk matrices and the documents an operator may have to show the FAA. I propose, you decide.</p></div>'+
       '<div class="sf-chips">'+suggestChips().map(function(c,k){ return '<button class="sf-chip" onclick="Safeti.chip('+k+')">'+esc(c.t)+'</button>'; }).join('')+'</div>'+
-      '<div class="sf-note">SAFETI uses an AI service (Anthropic). What you type, and the data of the mission open in the app, are sent to it to answer. Do not include personal data you do not need. SAFETI is a draft helper: a qualified person must check everything, and it never ticks checklists, sets safety flags, validates documents or signs a decision. Missions stay in this browser. <a href="/legal/privacy" target="_blank" rel="noopener">Privacy</a></div>';
+      '<div class="sf-note">SAFETI uses an AI service (Anthropic). What you type, and the data of the mission open in the app, are sent to it to answer. Do not include personal data you do not need. SAFETI is a draft helper: a qualified person must check everything, and it never ticks checklists, sets safety flags, validates documents or signs a decision. Missions stay in this browser. <a href="/legal/ai-use" target="_blank" rel="noopener">AI Use Policy</a> · <a href="/legal/app-terms" target="_blank" rel="noopener">Terms</a> · <a href="/legal/privacy" target="_blank" rel="noopener">Privacy</a></div>';
   } else {
     S.messages.forEach(function(m){ h+=bubbleHtml(m); });
   }

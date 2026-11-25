@@ -62,8 +62,10 @@ export default function Footer() {
               <Link href="/legal/privacy" className="hover:text-gold-400">Privacy Policy</Link>
               <Link href="/legal/refunds" className="hover:text-gold-400">Refund Policy</Link>
               <Link href="/legal/consulting-scope" className="hover:text-gold-400">Consulting Scope</Link>
+              <Link href="/legal/app-terms" className="hover:text-gold-400">App &amp; AI Terms</Link>
+              <Link href="/legal/ai-use" className="hover:text-gold-400">AI Use Policy</Link>
+              <Link href="/legal/security" className="hover:text-gold-400">Security</Link>
             </nav>
-            <p className="coord">39.4699° N · 0.3763° W — HQ OPS</p>
           </div>
         </div>
       </div>

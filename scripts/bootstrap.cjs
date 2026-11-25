@@ -169,6 +169,11 @@ ensureColumn("modules", "video_url", "TEXT");
 ensureColumn("lessons", "image", "TEXT");
 ensureColumn("lessons", "attachment_url", "TEXT");
 ensureColumn("lessons", "attachment_name", "TEXT");
+ensureColumn("users", "terms_accepted_at", "TEXT");
+ensureColumn("users", "terms_version", "TEXT");
+ensureColumn("orders", "terms_accepted_at", "TEXT");
+ensureColumn("orders", "terms_version", "TEXT");
+ensureColumn("consulting_leads", "consent_at", "TEXT");
 
 if (courseCount === 0) {
   console.log("[bootstrap] Empty database: loading sample content…");

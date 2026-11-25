@@ -5,6 +5,8 @@ import { courses, products, orders } from "@/lib/db/schema";
 import { eq } from "drizzle-orm";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
+import { rateLimit, clientIp } from "@/lib/rate-limit";
+import { TERMS_VERSION } from "@/lib/legal";
 
 export async function POST(req: Request) {
   try {
@@ -14,7 +16,13 @@ export async function POST(req: Request) {
         { status: 501 }
       );
     }
-    const { itemType, itemId } = await req.json();
+    if (!rateLimit(`checkout:${clientIp(req)}`, 20, 10 * 60 * 1000)) {
+      return NextResponse.json({ error: "Too many attempts. Please wait a few minutes." }, { status: 429 });
+    }
+    const { itemType, itemId, acceptTerms } = await req.json();
+    if (acceptTerms !== true) {
+      return NextResponse.json({ error: "Please accept the Terms of Service and Refund Policy to continue." }, { status: 400 });
+    }
     const session = await getServerSession(authOptions);
 
     let item: { title: string; priceCents: number; currency: string } | undefined;
@@ -57,6 +65,8 @@ export async function POST(req: Request) {
         providerRef: order.id,
         status: "pending",
         email: session?.user?.email ?? null,
+        termsAcceptedAt: new Date().toISOString(),
+        termsVersion: TERMS_VERSION,
       })
       .run();
 

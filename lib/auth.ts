@@ -4,6 +4,7 @@ import { db } from "@/lib/db";
 import { users } from "@/lib/db/schema";
 import { eq } from "drizzle-orm";
 import bcrypt from "bcryptjs";
+import { rateLimit, rateLimitReset, clientIp } from "@/lib/rate-limit";
 
 export const authOptions: NextAuthOptions = {
   session: { strategy: "jwt" },
@@ -17,8 +18,12 @@ export const authOptions: NextAuthOptions = {
         email: { label: "Email", type: "email" },
         password: { label: "Password", type: "password" },
       },
-      async authorize(credentials) {
+      async authorize(credentials, req) {
         if (!credentials?.email || !credentials?.password) return null;
+        // Brute-force protection: per email+IP and per IP.
+        const ip = clientIp({ headers: (req as any)?.headers ?? {} });
+        const emailKey = `login:${ip}:${credentials.email.toLowerCase()}`;
+        if (!rateLimit(emailKey, 8, 15 * 60 * 1000) || !rateLimit(`login-ip:${ip}`, 40, 15 * 60 * 1000)) return null;
         const user = db
           .select()
           .from(users)
@@ -27,6 +32,7 @@ export const authOptions: NextAuthOptions = {
         if (!user) return null;
         const valid = await bcrypt.compare(credentials.password, user.passwordHash);
         if (!valid) return null;
+        rateLimitReset(emailKey);
 
         const adminEmails = (process.env.ADMIN_EMAILS || "")
           .split(",")

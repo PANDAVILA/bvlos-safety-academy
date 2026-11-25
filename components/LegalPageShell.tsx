@@ -6,6 +6,9 @@ const legalNav = [
   { href: "/legal/privacy", label: "Privacy Policy" },
   { href: "/legal/refunds", label: "Refund Policy" },
   { href: "/legal/consulting-scope", label: "Consulting Scope of Services" },
+  { href: "/legal/app-terms", label: "AeroSafety Case & SAFETI Terms" },
+  { href: "/legal/ai-use", label: "AI Use Policy" },
+  { href: "/legal/security", label: "Security & Disclosure" },
 ];
 
 export default function LegalPageShell({

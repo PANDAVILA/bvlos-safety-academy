@@ -1,31 +1,23 @@
 export const dynamic = "force-static";
 
 import LegalPageShell from "@/components/LegalPageShell";
+import { LEGAL_UPDATED, CONTACT_EMAIL } from "@/lib/legal";
 
 export default function RefundsPage() {
   return (
-    <LegalPageShell title="Refund Policy" updated="July 2026">
+    <LegalPageShell title="Refund Policy" updated={LEGAL_UPDATED}>
       <h2>1. Courses</h2>
       <p>
         You may request a full refund for a paid course within <strong>14 days</strong> of purchase, provided you
         have completed less than 20% of the course content. To request a refund, contact{" "}
-        <strong>info@bvlossafetyacademy.com</strong> with your order reference.
+        <strong>{CONTACT_EMAIL}</strong> with your order reference.
       </p>
 
       <h2>2. Digital Products (eBooks, Templates, Checklists)</h2>
       <p>
         Because digital products are delivered instantly and can be copied, all sales are final once the file has
-        been downloaded or accessed, except where required otherwise by applicable law.
+        been downloaded or accessed, except where required otherwise by applicable law. You are shown and must accept this policy at checkout. If a file is defective or not what was described, contact us within 14 days and we will fix it or refund you.
       </p>
-      <div className="callout">
-        <p style={{ margin: 0 }}>
-          <strong>For customers in the European Union:</strong> under EU consumer law you normally have a 14-day
-          right of withdrawal for online purchases. For digital content delivered immediately, this right does
-          not apply once you expressly consent to immediate delivery and acknowledge you lose the right of
-          withdrawal — which you do at checkout. If you have not yet downloaded or accessed the product, contact
-          us within 14 days for a refund.
-        </p>
-      </div>
 
       <h2>3. Consulting Services</h2>
       <p>
@@ -49,7 +41,7 @@ export default function RefundsPage() {
 
       <h2>6. Contact</h2>
       <p>
-        For any refund request, email <strong>info@bvlossafetyacademy.com</strong> with your name, order reference, and
+        For any refund request, email <strong>{CONTACT_EMAIL}</strong> with your name, order reference, and
         reason for the request.
       </p>
     </LegalPageShell>

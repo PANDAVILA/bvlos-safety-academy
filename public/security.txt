@@ -1,0 +1,5 @@
+Contact: mailto:info@bvlossafetyacademy.com
+Expires: 2027-11-25T00:00:00.000Z
+Preferred-Languages: en, es
+Canonical: https://bvlossafetyacademy.com/.well-known/security.txt
+Policy: https://bvlossafetyacademy.com/legal/security

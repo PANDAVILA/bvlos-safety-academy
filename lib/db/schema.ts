@@ -10,6 +10,8 @@ export const users = sqliteTable("users", {
   role: text("role").notNull().default("student"), // student | admin | instructor
   company: text("company"),
   country: text("country"),
+  termsAcceptedAt: text("terms_accepted_at"),
+  termsVersion: text("terms_version"),
   createdAt: text("created_at").default(sql`CURRENT_TIMESTAMP`),
 });
 
@@ -112,6 +114,8 @@ export const orders = sqliteTable("orders", {
   providerRef: text("provider_ref"), // session id / order id
   status: text("status").notNull().default("pending"), // pending | paid | failed
   email: text("email"),
+  termsAcceptedAt: text("terms_accepted_at"),
+  termsVersion: text("terms_version"),
   createdAt: text("created_at").default(sql`CURRENT_TIMESTAMP`),
 });
 
@@ -124,6 +128,7 @@ export const consultingLeads = sqliteTable("consulting_leads", {
   serviceInterest: text("service_interest").notNull(),
   message: text("message"),
   status: text("status").notNull().default("new"),
+  consentAt: text("consent_at"),
   createdAt: text("created_at").default(sql`CURRENT_TIMESTAMP`),
 });
 

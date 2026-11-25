@@ -1,10 +1,11 @@
 export const dynamic = "force-static";
 
 import LegalPageShell from "@/components/LegalPageShell";
+import { LEGAL_UPDATED, CONTACT_EMAIL } from "@/lib/legal";
 
 export default function PrivacyPage() {
   return (
-    <LegalPageShell title="Privacy Policy" updated="July 2026">
+    <LegalPageShell title="Privacy Policy" updated={LEGAL_UPDATED}>
       <p>
         This Privacy Policy explains how <strong>Manuel Ignacio Pérez Pan (d/b/a BVLOS Safety Academy)</strong>, operating as BVLOS Safety
         Academy ("we," "us," "our"), collects, uses, and protects your personal information when you use our
@@ -14,7 +15,7 @@ export default function PrivacyPage() {
       <h2>1. Information We Collect</h2>
       <h3>Information you provide directly</h3>
       <ul>
-        <li>Name, email address, and password when you create an account;</li>
+        <li>Name, email address, and password when you create an account, and the date you accepted our Terms;</li>
         <li>Company/operator name and country, if provided;</li>
         <li>Information submitted through contact or consulting-inquiry forms (name, email, company, message);</li>
         <li>Content of communications you send us.</li>
@@ -52,51 +53,72 @@ export default function PrivacyPage() {
       <p>We do not sell your personal information to third parties.</p>
 
       <h2>4. Data Retention</h2>
-      <p>
-        We retain account and course data for as long as your account is active, and for a reasonable period
-        afterward to comply with legal, accounting, or reporting obligations. You may request deletion of your
-        account at any time, subject to Section 6.
-      </p>
-
-      <h2>5. International Users</h2>
-      <p>
-        If you access the Services from outside the United States, your information will be transferred to and
-        processed in the United States and any other country where our service providers operate. Where required
-        by applicable law (such as the EU General Data Protection Regulation), we rely on appropriate safeguards
-        for such transfers.
-      </p>
-
-      <h2>6. Your Rights</h2>
-      <p>Depending on your location, you may have the right to:</p>
       <ul>
-        <li>Access the personal information we hold about you;</li>
-        <li>Request correction of inaccurate information;</li>
-        <li>Request deletion of your account and associated data;</li>
-        <li>Object to or restrict certain processing;</li>
-        <li>Withdraw consent for marketing communications at any time.</li>
+        <li><strong>Account and course data:</strong> kept while your account is active. After a verified deletion request we delete or anonymize it within 30 days, except where the law requires us to keep it.</li>
+        <li><strong>Order and payment records:</strong> kept as required for tax and accounting (generally up to 7 years), together with the record of the terms you accepted.</li>
+        <li><strong>Contact and consulting inquiries:</strong> kept for up to 24 months after our last contact, or until you ask us to delete them.</li>
+        <li><strong>Server logs:</strong> kept for a limited period by our hosting provider for security and troubleshooting.</li>
+        <li><strong>AI usage records:</strong> account ID, action type, time and token counts, kept while your account is active.</li>
+      </ul>
+
+      <h2>5. Where Your Information Is Processed</h2>
+      <p>
+        The Services are directed to users in the United States. Our hosting and service providers may store
+        and process information in the United States and in other countries where they operate, and it may be
+        accessed from outside the United States by the operator and those providers. We require our providers to
+        protect it under their own security and privacy commitments.
+      </p>
+
+      <h2>6. Your Privacy Rights</h2>
+      <p>
+        Depending on where you live (for example California, Colorado, Connecticut, Virginia, Texas and other
+        states with privacy laws), you may have the right to:
+      </p>
+      <ul>
+        <li>Know and access the personal information we hold about you, and get a copy;</li>
+        <li>Correct inaccurate information;</li>
+        <li>Delete your account and associated data;</li>
+        <li>Opt out of the sale or sharing of personal information and of targeted advertising or profiling. <strong>We do not sell or share your personal information for advertising, and we do not use it for targeted advertising or profiling;</strong></li>
+        <li>Limit use of sensitive information. We do not collect sensitive personal information as defined by those laws;</li>
+        <li>Withdraw consent for marketing messages at any time, and not be treated unfairly for using these rights.</li>
       </ul>
       <p>
-        To exercise any of these rights, contact us at <strong>info@bvlossafetyacademy.com</strong>.
+        To make a request, email <strong>{CONTACT_EMAIL}</strong> from the address linked to your account. We may
+        need to verify your identity, and we will respond within 45 days (we will tell you if we need more
+        time). If we deny a request, you may appeal by replying to our message, and you may also contact your
+        state attorney general. You may use an authorized agent, with written proof.
+      </p>
+      <p>
+        <strong>Categories collected in the last 12 months:</strong> identifiers (name, email, IP address);
+        commercial information (orders and course enrollments); internet activity (logs, course progress); and
+        content you send us (messages, AI prompts). We collect them from you and from your use of the Services,
+        and disclose them only to the providers listed in Section 3 for business purposes.
       </p>
 
-      <h2>7. Cookies</h2>
+      <h2>7. Cookies, Local Storage and Tracking</h2>
       <p>
-        We use essential cookies required for login sessions and platform functionality. If we add analytics or
-        marketing cookies in the future, we will request consent where required by law and update this policy
-        accordingly.
+        We use only essential cookies for login sessions and security. We do not use advertising or
+        cross-site tracking cookies, and we do not respond to "Do Not Track" signals because we do not track you
+        across other sites. Course videos are embedded in privacy-enhanced modes (YouTube no-cookie, Vimeo
+        do-not-track), but the video provider may still receive technical data such as your IP address when you
+        press play. PayPal buttons load scripts from PayPal. AeroSafety Case stores your missions and AI chats in
+        your browser's local storage on your device. If we add analytics or marketing tools, we will update this
+        policy first and give any required choices.
       </p>
 
       <h2>8. Children's Privacy</h2>
       <p>
-        Our Services are intended for professional and adult use and are not directed at children under 16. We do
-        not knowingly collect personal information from children.
+        Our Services are for professional and adult use (18+) and are not directed at children. We do not
+        knowingly collect personal information from anyone under 13 (or under 18 for accounts). If you believe a
+        child gave us information, contact us and we will delete it.
       </p>
 
       <h2>9. Security</h2>
       <p>
         We use reasonable technical and organizational measures to protect your information, including password
-        hashing and encrypted connections. No method of transmission or storage is 100% secure, and we cannot
-        guarantee absolute security.
+        hashing, encrypted connections, access controls and rate limits (see our{" "}
+        <a href="/legal/security" className="text-gold-600 underline">Security page</a>). No method of transmission or
+        storage is 100% secure. If a breach affects your information, we will notify you as required by law.
       </p>
 
       <h2>10. Changes to This Policy</h2>
@@ -107,7 +129,7 @@ export default function PrivacyPage() {
 
       <h2>11. Contact</h2>
       <p>
-        Questions about this Privacy Policy can be sent to <strong>info@bvlossafetyacademy.com</strong>.
+        Questions about this Privacy Policy can be sent to <strong>{CONTACT_EMAIL}</strong>.
       </p>
     </LegalPageShell>
   );
