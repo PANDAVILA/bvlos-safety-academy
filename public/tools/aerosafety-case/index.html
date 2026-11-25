@@ -923,6 +923,7 @@ const App = {
     if(onReportStep && document.getElementById('leaflet-report-map')){
       try{ initReportMap(); }catch(e){}
     }
+    if(window.Safeti){ try{ Safeti.sync(); }catch(e){} }
   }
 };
 window.App=App;
@@ -996,7 +997,7 @@ function sidebarHtml(){
       navItem('missions','missions','Missions')+
       navItem('library','library','Hazard library')+
       navItem('fleet','uas','UAS fleet')+
-      navItem('ai','ai','AI assistant')+
+      navItem('ai','ai','AI tools')+
       '<div class="navgroup-label">SMS</div>'+
       navItem('sms','sms','SMS indicators')+
       navItem('settings','settings','Settings')+
@@ -1698,8 +1699,9 @@ function renderAI(){
       '<div class="ai-warn">AI-generated suggestions. Check that each hazard and rating fits your operation.</div></div>';
   }
 
-  return shell('AI assistant','Beta',
-    '<h1 class="pagetitle">AI assistant</h1><div class="subtle" style="margin-bottom:16px;">Review a mission, get hazard and control suggestions, or draft report sections, using the FAA / ICAO risk matrix of this tool.</div>'+
+  return shell('AI tools','Beta',
+    '<h1 class="pagetitle">AI tools</h1><div class="subtle" style="margin-bottom:16px;">Review a mission, get hazard and control suggestions, or draft report sections, using the FAA / ICAO risk matrix of this tool.</div>'+
+    '<div class="ai-banner no-print"><span><b>Want to build a mission by talking?</b> SAFETI, the assistant on the right side of the app, can fill in a mission from your data and coordinates, and answers questions about the app.</span><span><button class="btn btn-primary" onclick="window.Safeti&&Safeti.toggle(true)">Open SAFETI</button></span></div>'+
     banner+controls+result);
 }
 
@@ -1727,5 +1729,6 @@ if('serviceWorker' in navigator && (location.protocol==='https:' || location.hos
   });
 }
 </script>
+<script src="safeti.js"></script>
 </body>
 </html>

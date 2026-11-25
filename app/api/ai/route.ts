@@ -1,23 +1,14 @@
 import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
-import { sqlite } from "@/lib/db";
+import { FREE_USES, DAILY_CAP, usedBy, usedToday, reserveUse, aiErrorResponse } from "@/lib/ai-usage";
 import {
   AI_ACTIONS, AiAction, buildUserMessage, callClaude, parseHazards, sanitizeMission, systemPrompt, REPORT_SECTIONS,
 } from "@/lib/ai";
 
 export const dynamic = "force-dynamic";
 
-const FREE_USES = Number(process.env.AI_FREE_USES ?? 3); // free sample per registered user
-const DAILY_CAP = Number(process.env.AI_DAILY_CAP ?? 150); // safety limit for the whole site, per day
 const MAX_BODY = 80_000;
-
-function usedBy(userId: string): number {
-  return (sqlite.prepare("SELECT COUNT(*) AS n FROM ai_usage WHERE user_id = ?").get(userId) as any).n;
-}
-function usedToday(): number {
-  return (sqlite.prepare("SELECT COUNT(*) AS n FROM ai_usage WHERE date(created_at) = date('now')").get() as any).n;
-}
 
 // Status for the app: is the visitor signed in, and how many free uses are left.
 export async function GET() {
@@ -62,9 +53,8 @@ export async function POST(req: Request) {
   if (usedToday() >= DAILY_CAP) return NextResponse.json({ error: "capacity" }, { status: 429 });
 
   // Reserve the use first (so parallel requests cannot bypass the limit); release it if the call fails.
-  const id = crypto.randomUUID();
-  sqlite.prepare("INSERT INTO ai_usage (id, user_id, action) VALUES (?, ?, ?)").run(id, u.id, action);
-  const release = () => sqlite.prepare("DELETE FROM ai_usage WHERE id = ?").run(id);
+  const reservation = reserveUse(u.id, action);
+  const release = reservation.release;
 
   try {
     const out = await callClaude({
@@ -72,7 +62,7 @@ export async function POST(req: Request) {
       user: buildUserMessage(action, mission, instruction, lang, section),
       maxTokens: action === "report" ? 2500 : action === "review" ? 2000 : 2200,
     });
-    sqlite.prepare("UPDATE ai_usage SET input_tokens = ?, output_tokens = ? WHERE id = ?").run(out.inputTokens, out.outputTokens, id);
+    reservation.tokens(out.inputTokens, out.outputTokens);
     const usedNow = used + 1;
     const remaining = admin ? null : Math.max(0, FREE_USES - usedNow);
 
@@ -85,13 +75,7 @@ export async function POST(req: Request) {
     return NextResponse.json({ ok: true, action, text: out.text, remaining });
   } catch (e: any) {
     release();
-    const status = e?.status as number | undefined;
-    // The detail of the upstream error is shown to admins only.
-    const detail = admin ? e?.detail || e?.message : undefined;
-    if (e?.name === "AbortError") return NextResponse.json({ error: "timeout" }, { status: 504 });
-    if (status === 401 || status === 403) return NextResponse.json({ error: "upstream_auth", detail }, { status: 502 });
-    if (status === 429 || status === 529) return NextResponse.json({ error: "busy", detail }, { status: 503 });
-    if (status === 400 && /credit|balance/i.test(String(e?.detail))) return NextResponse.json({ error: "no_credit", detail }, { status: 502 });
-    return NextResponse.json({ error: "upstream", detail }, { status: 502 });
+    const r = aiErrorResponse(e, admin);
+    return NextResponse.json(r.body, { status: r.status });
   }
 }
