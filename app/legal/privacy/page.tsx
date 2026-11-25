@@ -46,6 +46,7 @@ export default function PrivacyPage() {
       <ul>
         <li><strong>Payment processors</strong> (Stripe, PayPal) to process your transactions;</li>
         <li><strong>Hosting and infrastructure providers</strong> that store and run the platform on our behalf;</li>
+        <li><strong>AI service provider</strong> (Anthropic): when you use the AI assistant in AeroSafety Case, the mission details you choose to analyse (without the names of people) are sent to Anthropic&rsquo;s API to generate the answer. We do not send your email or password;</li>
         <li>Authorities, where required by law or to protect our legal rights.</li>
       </ul>
       <p>We do not sell your personal information to third parties.</p>

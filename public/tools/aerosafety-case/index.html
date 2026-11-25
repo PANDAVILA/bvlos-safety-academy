@@ -249,6 +249,25 @@ svg.mapsvg{display:block;width:100%;height:auto;background:#142B40;cursor:crossh
   .kpi-grid{grid-template-columns:1fr 1fr;}
   .login-card{width:92vw;padding:26px 22px;}
 }
+
+/* ---------- AI assistant ---------- */
+.ai-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:6px;}
+.ai-tab{padding:9px 14px;border-radius:7px;border:1px solid var(--border);background:#fff;font-size:12.5px;font-weight:700;color:var(--text);cursor:pointer;}
+.ai-tab:hover{border-color:var(--navy-700);}
+.ai-tab.active{background:var(--navy-900);border-color:var(--navy-900);color:#fff;}
+.ai-banner{border:1px solid var(--border);background:var(--blue-soft);border-radius:9px;padding:12px 16px;font-size:12.5px;margin-bottom:16px;display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;}
+.ai-result p{margin:0 0 10px;line-height:1.6;font-size:13.5px;}
+.ai-h{font-weight:800;font-size:14px;margin:18px 0 6px;color:var(--navy-900);}
+.ai-h:first-child{margin-top:0;}
+.ai-ul{margin:0 0 10px;padding-left:20px;font-size:13.5px;}
+.ai-ul li{margin-bottom:5px;line-height:1.55;}
+.ai-warn{font-size:11.5px;color:var(--text-mute);border-top:1px solid var(--border);margin-top:16px;padding-top:10px;line-height:1.5;}
+.ai-hz{border:1px solid var(--border);border-radius:8px;padding:14px 16px;margin-top:10px;background:#fff;}
+.ai-hz .top{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;flex-wrap:wrap;}
+.ai-pulse{display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--blue-accent);margin-right:8px;animation:aipulse 1s infinite ease-in-out;}
+@keyframes aipulse{0%,100%{opacity:.25}50%{opacity:1}}
+.ai-err{background:var(--risk-crit-bg);color:var(--risk-crit);border-radius:8px;padding:12px 16px;font-size:13px;margin-top:14px;}
+textarea.ai-text{width:100%;min-height:70px;padding:10px 12px;border:1px solid var(--border);border-radius:6px;font-family:inherit;font-size:13px;}
 </style>
 </head>
 <body>
@@ -269,6 +288,7 @@ svg.mapsvg{display:block;width:100%;height:auto;background:#142B40;cursor:crossh
 /* ---------------- ICONS ---------------- */
 function icon(name){
   const p = {
+    ai:'<path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/><path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8z"/>',
     dashboard:'<rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/>',
     missions:'<path d="M3 7.5 12 3l9 4.5v9L12 21l-9-4.5z"/><path d="M3 7.5 12 12l9-4.5"/><path d="M12 12v9"/>',
     map:'<path d="M9 20 3.6 18a1 1 0 0 1-.6-.9V5.6a1 1 0 0 1 1.4-.9L9 7m0 13 6-3m-6 3V7m6 10 5.4 2.1a1 1 0 0 0 1.6-.8V6.6a1 1 0 0 0-.6-.9L15 4m0 13V4m0 0L9 7"/>',
@@ -624,6 +644,7 @@ const App = {
     libTab:Object.keys(HAZARD_LIBRARY)[0],
     sidebarOpen:false,
     toast:null,
+    ai:{status:null, tool:'review', missionId:'', lang:'en', instruction:'', section:'risk', loading:false, error:null, result:null, added:{}},
     org:{name:'Aerial Risk Solutions', operatorNumber:'EU-UAS-00231'}
   },
 
@@ -668,7 +689,58 @@ const App = {
     this.showToast('Profile updated.');
   },
 
-  go(view){ this.state.view=view; this.state.sidebarOpen=false; this.render(); window.scrollTo(0,0); },
+  go(view){ this.state.view=view; this.state.sidebarOpen=false; this.render(); window.scrollTo(0,0); if(view==='ai') this.aiLoadStatus(); },
+
+  /* -------- AI assistant (server: /api/ai on the BVLOS Safety Academy site) -------- */
+  aiSet(k,v){ this.state.ai[k]=v; },
+  aiTool(t){ const a=this.state.ai; a.tool=t; a.result=null; a.error=null; a.added={}; this.render(); },
+  async aiLoadStatus(){
+    const a=this.state.ai;
+    try{
+      const r=await fetch('/api/ai',{credentials:'same-origin'});
+      a.status=await r.json();
+    }catch(e){ a.status={offline:true}; }
+    if(this.state.view==='ai') this.render();
+  },
+  async aiRun(){
+    const a=this.state.ai;
+    const m=this.state.missions.find(x=>x.id===a.missionId);
+    if(!m){ a.error='Choose a mission first.'; this.render(); return; }
+    a.loading=true; a.error=null; a.result=null; a.added={}; this.render();
+    try{
+      const res=await fetch('/api/ai',{method:'POST',credentials:'same-origin',headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({action:a.tool, mission:missionForAI(m), instruction:a.instruction, lang:a.lang, section:a.section})});
+      const data=await res.json().catch(()=>({}));
+      if(!res.ok){ a.error=aiErrorText(data); if(data.error==='auth') a.status={signedIn:false,configured:true}; }
+      else { a.result=data; }
+    }catch(e){
+      a.error='Could not reach the AI service. The assistant works only on the BVLOS Safety Academy website, with an internet connection.';
+    }
+    a.loading=false; this.render();
+    if(a.result) this.aiLoadStatus();
+  },
+  aiAddHazards(indexes){
+    const a=this.state.ai; const m=this.state.missions.find(x=>x.id===a.missionId);
+    if(!m||!a.result||!a.result.hazards) return;
+    const SEVNUM={A:5,B:4,C:3,D:2,E:1};
+    let n=0;
+    indexes.forEach(i=>{
+      if(a.added[i]) return;
+      const h=a.result.hazards[i]; if(!h) return;
+      const si=SEVNUM[h.severity], pi=h.likelihood, r=encodeRisk(si,pi);
+      (m.hazards=m.hazards||[]).push({id:'H-'+Date.now()+Math.random().toString(36).slice(2,6), name:h.name, category:h.category, x:null, y:null,
+        severityInitial:si, probabilityInitial:pi, riskInitial:r,
+        mitigations:(h.controls||[]).map(c=>({id:'MIT-'+Math.random().toString(36).slice(2,8), desc:c.desc, type:c.type, responsible:'', status:'Proposed', due:''})),
+        severityResidual:si, probabilityResidual:pi, riskResidual:r});
+      a.added[i]=true; n++;
+    });
+    if(n){ m.updatedAt=new Date().toISOString(); this.persist(); this.showToast(n+' hazard'+(n>1?'s':'')+' added to the mission. Review and rate the residual risk in the mission.'); }
+    else this.render();
+  },
+  aiCopy(){
+    const a=this.state.ai; if(!a.result||!a.result.text) return;
+    try{ navigator.clipboard.writeText(a.result.text).then(()=>this.showToast('Copied to the clipboard.')); }catch(e){ this.showToast('Select the text and copy it manually.'); }
+  },
 
   /* -------- mutate helpers (no rerender, preserves input focus) -------- */
   setPath(root, path, value){
@@ -924,6 +996,7 @@ function sidebarHtml(){
       navItem('missions','missions','Missions')+
       navItem('library','library','Hazard library')+
       navItem('fleet','uas','UAS fleet')+
+      navItem('ai','ai','AI assistant')+
       '<div class="navgroup-label">SMS</div>'+
       navItem('sms','sms','SMS indicators')+
       navItem('settings','settings','Settings')+
@@ -1508,6 +1581,128 @@ function orgField(label,value,key){
   return '<div class="field"><label>'+label+'</label><input value="'+escapeHtml(value)+'" onchange="App.setOrgField(\''+key+'\',this.value)"></div>';
 }
 
+
+/* ---------------- AI ASSISTANT ---------------- */
+function missionForAI(m){
+  const ev=evaluateMission(m);
+  const cl=m.checklist||{};
+  const hz=(m.hazards||[]).map(h=>{
+    const rIni=h.riskInitial, rRes=(h.riskResidual!=null?h.riskResidual:h.riskInitial);
+    return {name:h.name, category:h.category, initial:riskCode(rIni), initialLevel:riskLevel(rIni).label, residual:riskCode(rRes), residualLevel:riskLevel(rRes).label,
+      mitigations:(h.mitigations||[]).map(x=>({desc:x.desc, type:x.type, status:x.status}))};
+  });
+  return {
+    name:m.name, operationType:m.operationType, category:m.category, scenario:m.scenario, description:m.description, criticality:m.criticality,
+    location:{name:m.location&&m.location.name, country:m.location&&m.location.country, env:m.location&&m.location.env},
+    uas:m.uas?{type:m.uas.type, mtom:m.uas.mtom, payload:m.uas.payload, rth:!!m.uas.rth, geofence:!!m.uas.geofence, failsafe:!!m.uas.failsafe}:{},
+    hazards:hz,
+    checklist:{done:PRECHECK_ITEMS.filter(it=>cl[it.id]).length, total:PRECHECK_ITEMS.length, criticalPending:PRECHECK_ITEMS.filter(it=>it.crit&&!cl[it.id]).map(it=>it.text)},
+    documents:(m.documents||[]).map(d=>({type:d.type, expired:!!(d.expiry&&new Date(d.expiry)<new Date())})),
+    flags:m.flags||{},
+    engine:{decision:ev.decision, reasons:ev.reasons.map(r=>r.text)}
+  };
+}
+function aiErrorText(d){
+  const map={
+    auth:'Please sign in to use the AI assistant.',
+    quota:'You have used your free sample ('+(d.limit||'')+' uses). Contact us to get more access.',
+    capacity:'The AI assistant has reached its daily limit. Please try again tomorrow.',
+    not_configured:'The AI assistant is not configured yet.',
+    busy:'The AI service is busy. Please try again in a minute.',
+    timeout:'The AI took too long to answer. Please try again.',
+    format:'The AI answer could not be read. Please try again. This attempt was not counted.',
+    empty:'The AI returned no answer. Please try again. This attempt was not counted.',
+    upstream_auth:'The AI service key is not valid. The site administrator must check it.',
+    no_credit:'The AI service has no credit left. The site administrator must add credit.',
+    too_large:'The mission is too large to send.',
+    bad_request:'The request could not be processed.'
+  };
+  let t=map[d.error]||'The AI service had a problem. Please try again.';
+  if(d.detail) t+=' ['+d.detail+']';
+  return t;
+}
+function aiMarkdown(t){
+  const inline=s=>escapeHtml(s).replace(/\*\*(.+?)\*\*/g,'<b>$1</b>');
+  let html='', inList=false;
+  const close=()=>{ if(inList){ html+='</ul>'; inList=false; } };
+  String(t||'').split('\n').forEach(l=>{
+    const h=l.match(/^#{1,4}\s+(.*)$/);
+    if(h){ close(); html+='<div class="ai-h">'+inline(h[1])+'</div>'; return; }
+    const li=l.match(/^\s*(?:[-*•]|\d+[.)])\s+(.*)$/);
+    if(li){ if(!inList){ html+='<ul class="ai-ul">'; inList=true; } html+='<li>'+inline(li[1])+'</li>'; return; }
+    if(!l.trim()){ close(); return; }
+    close(); html+='<p>'+inline(l)+'</p>';
+  });
+  close(); return html;
+}
+const AI_TOOLS=[
+  {k:'review', label:'Review mission', desc:'Finds gaps and inconsistencies in the risk assessment and suggests actions.'},
+  {k:'hazards', label:'Suggest hazards & controls', desc:'Proposes hazards that may be missing, with severity, likelihood and controls you can add to the mission.'},
+  {k:'report', label:'Draft report section', desc:'Writes a section for your operations manual or safety case from the mission data.'}
+];
+const AI_SECTIONS={conops:'Operation description (ConOps summary)', risk:'Risk assessment summary', mitigations:'Mitigation and monitoring plan', contingency:'Contingency and emergency procedures', decision:'Justification for the GO / NO-GO decision'};
+
+function renderAI(){
+  const a=App.state.ai, st=a.status, ms=App.state.missions;
+  const signed=!!(st&&st.signedIn), ready=signed&&st.configured;
+  const cb=encodeURIComponent('/tools/aerosafety-case/index.html');
+  let banner;
+  if(!st) banner='<div class="ai-banner"><span><span class="ai-pulse"></span>Checking your account…</span></div>';
+  else if(st.offline) banner='<div class="ai-banner"><span>The AI assistant works only on the BVLOS Safety Academy website, with an internet connection.</span></div>';
+  else if(!signed) banner='<div class="ai-banner"><span><b>Sign in to use the AI assistant.</b> Registered users get a free sample.</span><span style="display:flex;gap:8px;"><a class="btn btn-primary" href="/login?callbackUrl='+cb+'">Sign in</a><a class="btn btn-secondary" href="/register">Create a free account</a></span></div>';
+  else if(!st.configured) banner='<div class="ai-banner"><span>The AI assistant is not configured yet.</span></div>';
+  else banner='<div class="ai-banner"><span>Signed in as <b>'+escapeHtml(st.name||'')+'</b> · '+(st.admin?'<b>Administrator: unlimited use</b>':'Free sample: <b>'+st.remaining+' of '+st.limit+'</b> uses left')+'</span></div>';
+
+  const tool=AI_TOOLS.find(t=>t.k===a.tool)||AI_TOOLS[0];
+  const dis=(!ready||a.loading)?' disabled':'';
+  const tabs='<div class="ai-tabs">'+AI_TOOLS.map(t=>'<button class="ai-tab'+(t.k===a.tool?' active':'')+'" onclick="App.aiTool(\''+t.k+'\')">'+t.label+'</button>').join('')+'</div>'+
+    '<div class="subtle" style="margin-bottom:16px;">'+tool.desc+'</div>';
+  if(!a.missionId && ms.length) a.missionId=ms[0].id;
+  const missionSel=ms.length
+    ? '<select onchange="App.aiSet(\'missionId\',this.value)">'+ms.map(m=>'<option value="'+escapeHtml(m.id)+'"'+(m.id===a.missionId?' selected':'')+'>'+escapeHtml((m.code||'')+' · '+(m.name||'(unnamed)'))+'</option>').join('')+'</select>'
+    : '<div class="subtle">No missions yet. <a href="#" onclick="App.loadDemo();App.go(\'ai\');return false;" style="color:var(--blue-accent);font-weight:700;">Load the demo mission</a> or create one first.</div>';
+  const sectionSel=a.tool==='report'
+    ? '<div class="field"><label>Section to draft</label><select onchange="App.aiSet(\'section\',this.value)">'+Object.keys(AI_SECTIONS).map(k=>'<option value="'+k+'"'+(a.section===k?' selected':'')+'>'+AI_SECTIONS[k]+'</option>').join('')+'</select></div>' : '';
+
+  const controls='<div class="card" style="margin-top:0;">'+tabs+
+    '<div class="grid2"><div class="field"><label>Mission</label>'+missionSel+'</div>'+
+    '<div class="field"><label>Answer language</label><select onchange="App.aiSet(\'lang\',this.value)"><option value="en"'+(a.lang==='en'?' selected':'')+'>English</option><option value="es"'+(a.lang==='es'?' selected':'')+'>Español</option></select></div></div>'+
+    sectionSel+
+    '<div class="field"><label>Extra instruction or question (optional)</label><textarea class="ai-text" maxlength="600" placeholder="For example: focus on third-party risk, or explain why the decision is HOLD." oninput="App.aiSet(\'instruction\',this.value)">'+escapeHtml(a.instruction)+'</textarea></div>'+
+    '<div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;"><button class="btn btn-primary"'+dis+(ms.length?'':' disabled')+' onclick="App.aiRun()">'+icon('ai')+' '+(a.loading?'Working…':'Run')+'</button>'+
+    (st&&signed&&!st.admin?'<span class="subtle">Each run uses 1 of your free uses.</span>':'')+
+    (a.loading?'<span class="subtle"><span class="ai-pulse"></span>This can take up to a minute.</span>':'')+'</div>'+
+    (a.error?'<div class="ai-err">'+escapeHtml(a.error)+'</div>':'')+
+    '<div class="ai-warn">Mission data (without the names of people) is sent to Anthropic&rsquo;s API to produce the answer. Do not type confidential personal data. Answers are AI-generated drafts: verify them against the current FAA and ICAO texts and have a qualified person review them. They are not an approval.</div>'+
+  '</div>';
+
+  let result='';
+  const r=a.result;
+  if(r&&r.text){
+    result='<div class="card" style="margin-top:16px;"><div class="row-between"><div class="section-label" style="margin:0;">'+(a.tool==='report'?'Draft':'Review')+'</div><button class="btn btn-secondary btn-sm" onclick="App.aiCopy()">Copy text</button></div>'+
+      '<div class="ai-result" style="margin-top:12px;">'+aiMarkdown(r.text)+'</div>'+
+      '<div class="ai-warn">AI-generated draft. Review before use.</div></div>';
+  } else if(r&&r.hazards){
+    const all=r.hazards.map((h,i)=>i);
+    const SEVNUM={A:5,B:4,C:3,D:2,E:1};
+    result='<div class="card" style="margin-top:16px;"><div class="row-between"><div class="section-label" style="margin:0;">Suggested hazards</div><button class="btn btn-secondary btn-sm" onclick="App.aiAddHazards(['+all.join(',')+'])">Add all to the mission</button></div>'+
+      '<div class="subtle" style="margin-top:6px;">Ratings are initial (before controls). Added hazards keep their controls as &ldquo;Proposed&rdquo;; review them in the mission.</div>'+
+      r.hazards.map((h,i)=>{
+        const code=riskCode(encodeRisk(SEVNUM[h.severity],h.likelihood)); const lvl=riskLevel(encodeRisk(SEVNUM[h.severity],h.likelihood));
+        return '<div class="ai-hz"><div class="top"><div><div style="font-weight:800;font-size:13.5px;">'+escapeHtml(h.name)+'</div><div class="subtle">'+escapeHtml(h.category)+' · <span class="badge '+lvl.cls+'">'+code+' · '+lvl.label+'</span></div></div>'+
+          '<button class="btn btn-secondary btn-sm"'+(a.added[i]?' disabled':'')+' onclick="App.aiAddHazards(['+i+'])">'+(a.added[i]?'Added':'Add to mission')+'</button></div>'+
+          (h.rationale?'<p style="margin:8px 0 6px;font-size:13px;line-height:1.5;">'+escapeHtml(h.rationale)+'</p>':'')+
+          (h.controls&&h.controls.length?'<ul class="ai-ul" style="margin:4px 0 0;">'+h.controls.map(c=>'<li>'+escapeHtml(c.desc)+' <span class="subtle">('+escapeHtml(c.type)+')</span></li>').join('')+'</ul>':'')+
+        '</div>';
+      }).join('')+
+      '<div class="ai-warn">AI-generated suggestions. Check that each hazard and rating fits your operation.</div></div>';
+  }
+
+  return shell('AI assistant','Beta',
+    '<h1 class="pagetitle">AI assistant</h1><div class="subtle" style="margin-bottom:16px;">Review a mission, get hazard and control suggestions, or draft report sections, using the FAA / ICAO risk matrix of this tool.</div>'+
+    banner+controls+result);
+}
+
 /* ---------------- ROOT ---------------- */
 function renderRoot(){
   if(!App.state.user) return renderLogin();
@@ -1519,6 +1714,7 @@ function renderRoot(){
     case 'fleet': return renderFleet();
     case 'sms': return renderSms();
     case 'settings': return renderSettings();
+    case 'ai': return renderAI();
     default: return renderDashboard();
   }
 }

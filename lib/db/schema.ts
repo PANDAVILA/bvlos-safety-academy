@@ -133,3 +133,13 @@ export const siteContent = sqliteTable("site_content", {
   value: text("value").notNull().default(""),
   updatedAt: text("updated_at").default(sql`CURRENT_TIMESTAMP`),
 });
+
+// ---------- AI USAGE (AeroSafety Case assistant) ----------
+export const aiUsage = sqliteTable("ai_usage", {
+  id: text("id").primaryKey().$defaultFn(() => crypto.randomUUID()),
+  userId: text("user_id").notNull().references(() => users.id),
+  action: text("action").notNull(), // review | hazards | report
+  inputTokens: integer("input_tokens").default(0),
+  outputTokens: integer("output_tokens").default(0),
+  createdAt: text("created_at").default(sql`CURRENT_TIMESTAMP`),
+});

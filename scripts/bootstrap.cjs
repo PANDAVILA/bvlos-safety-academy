@@ -139,6 +139,15 @@ CREATE TABLE IF NOT EXISTS site_content (
   value TEXT NOT NULL DEFAULT '',
   updated_at TEXT DEFAULT CURRENT_TIMESTAMP
 );
+
+CREATE TABLE IF NOT EXISTS ai_usage (
+  id TEXT PRIMARY KEY,
+  user_id TEXT NOT NULL,
+  action TEXT NOT NULL,
+  input_tokens INTEGER DEFAULT 0,
+  output_tokens INTEGER DEFAULT 0,
+  created_at TEXT DEFAULT CURRENT_TIMESTAMP
+);
 `);
 
 const courseCount = db.prepare("SELECT COUNT(*) AS n FROM courses").get().n;
