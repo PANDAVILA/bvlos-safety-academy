@@ -44,6 +44,9 @@ export async function POST(req: Request) {
 
     const checkoutSession = await stripe.checkout.sessions.create({
       mode: "payment",
+      // We are the seller (no Managed Payments / merchant of record). New Stripe accounts have it on by
+      // default, and then every product needs a tax code, so switch it off for these sessions.
+      managed_payments: { enabled: false },
       locale: "en",
       customer_email: session?.user?.email ?? undefined,
       client_reference_id: userId,
@@ -60,7 +63,7 @@ export async function POST(req: Request) {
       success_url: `${origin}/checkout/success?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${origin}/checkout/cancel`,
       metadata: { itemType, itemId, userId },
-    });
+    } as any);
 
     db.insert(orders)
       .values({
