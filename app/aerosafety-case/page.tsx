@@ -69,8 +69,8 @@ export default function AeroSafetyCasePage() {
           </div>
 
           {/* SAFETI orb with floating example messages */}
-          <div className="relative mx-auto w-full max-w-md">
-            <SafetiOrb size={340} />
+          <div className="relative mx-auto w-full max-w-md lg:-translate-y-8">
+            <SafetiOrb size={305} />
             <p className="safeti-bubble absolute left-0 top-2 hidden max-w-[13rem] bg-gold-500/95 px-4 py-3 text-sm text-navy-950 shadow-xl sm:block">
               Plan a BVLOS pipeline inspection, 12 km corridor.
             </p>

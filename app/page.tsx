@@ -16,7 +16,7 @@ import SafetiOrb from "@/components/SafetiOrb";
 function SafetiAnnouncement({ compact = false }: { compact?: boolean }) {
   return (
     <Link href="/aerosafety-case" className="group flex flex-col items-center text-center">
-      <SafetiOrb size={compact ? 150 : 240} />
+      <SafetiOrb size={compact ? 150 : 215} />
       <span className="eyebrow mt-4 inline-flex items-center gap-2 rounded-full border border-gold-500/50 bg-navy-950/60 px-3 py-1 text-gold-400">
         <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-gold-400" /> New · AI assistant
       </span>
@@ -118,7 +118,7 @@ export default async function Home() {
               </div>
             </div>
           ) : (
-            <div className="relative mx-auto w-full max-w-sm lg:ml-auto lg:mr-8">
+            <div className="relative mx-auto w-full max-w-sm lg:ml-auto lg:mr-8 lg:-translate-y-10">
               <SafetiAnnouncement />
             </div>
           )}
