@@ -49,6 +49,7 @@ export default function BuyButtons({
 
   async function handleStripe() {
     setError(null);
+    if (!session) return router.push("/login");
     setLoading("stripe");
     try {
       const res = await fetch("/api/checkout/stripe", {
@@ -57,6 +58,7 @@ export default function BuyButtons({
         body: JSON.stringify({ itemType, itemId, acceptTerms: accepted }),
       });
       const data = await res.json();
+      if (res.status === 401) return router.push("/login");
       if (data.url) window.location.href = data.url;
       else setError(data.error || "We could not start checkout. Please try again or email info@bvlossafetyacademy.com.");
     } catch {
@@ -78,6 +80,11 @@ export default function BuyButtons({
           course certificates are not an FAA or other regulatory authorization.
         </span>
       </label>
+      {!session && (
+        <p className={`text-xs ${dark ? "text-white/60" : "text-navy-900/60"}`}>
+          You need an account to buy. You will be asked to sign in or register first.
+        </p>
+      )}
       <button
         onClick={handleStripe}
         disabled={loading !== null || !accepted}
@@ -102,6 +109,7 @@ export default function BuyButtons({
                 body: JSON.stringify({ itemType, itemId, acceptTerms: accepted }),
               });
               const data = await res.json();
+              if (res.status === 401) { router.push("/login"); throw new Error("Please sign in first."); }
               if (!data.id) throw new Error(data.error || "PayPal could not create the order.");
               return data.id;
             }}

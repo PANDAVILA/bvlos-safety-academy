@@ -24,6 +24,8 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Please accept the Terms of Service and Refund Policy to continue." }, { status: 400 });
     }
     const session = await getServerSession(authOptions);
+    const userId = (session?.user as any)?.id as string | undefined;
+    if (!userId) return NextResponse.json({ error: "Please sign in or create an account before paying." }, { status: 401 });
 
     let item: { title: string; priceCents: number; currency: string } | undefined;
     if (itemType === "course") {
@@ -56,7 +58,7 @@ export async function POST(req: Request) {
 
     db.insert(orders)
       .values({
-        userId: (session?.user as any)?.id ?? null,
+        userId,
         itemType,
         itemId,
         amountCents: item.priceCents,

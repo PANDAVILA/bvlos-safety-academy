@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
-import { stripe, stripeConfigured } from "@/lib/stripe";
+import { stripe, stripeConfigured, siteUrl } from "@/lib/stripe";
+import { alreadyOwns } from "@/lib/fulfill";
 import { db } from "@/lib/db";
 import { courses, products, orders } from "@/lib/db/schema";
 import { eq } from "drizzle-orm";
@@ -25,6 +26,9 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Please accept the Terms of Service and Refund Policy to continue." }, { status: 400 });
     }
     const session = await getServerSession(authOptions);
+    const userId = (session?.user as any)?.id as string | undefined;
+    // Purchases must belong to an account, otherwise the buyer would pay and get no access.
+    if (!userId) return NextResponse.json({ error: "Please sign in or create an account before paying." }, { status: 401 });
 
     let item: { title: string; priceCents: number; currency: string; slug: string } | undefined;
     if (itemType === "course") {
@@ -33,14 +37,16 @@ export async function POST(req: Request) {
       item = db.select().from(products).where(eq(products.id, itemId)).get();
     }
     if (!item) return NextResponse.json({ error: "Item not found" }, { status: 404 });
+    if (!item.priceCents || item.priceCents <= 0) return NextResponse.json({ error: "This item is free." }, { status: 400 });
+    if (alreadyOwns(userId, itemType, itemId)) return NextResponse.json({ error: "You already have access to this item." }, { status: 409 });
 
-    const origin = req.headers.get("origin") || "http://localhost:3000";
+    const origin = siteUrl(req);
 
     const checkoutSession = await stripe.checkout.sessions.create({
       mode: "payment",
       locale: "en",
-      payment_method_types: ["card"],
       customer_email: session?.user?.email ?? undefined,
+      client_reference_id: userId,
       line_items: [
         {
           price_data: {
@@ -53,12 +59,12 @@ export async function POST(req: Request) {
       ],
       success_url: `${origin}/checkout/success?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${origin}/checkout/cancel`,
-      metadata: { itemType, itemId, userId: (session?.user as any)?.id ?? "" },
+      metadata: { itemType, itemId, userId },
     });
 
     db.insert(orders)
       .values({
-        userId: (session?.user as any)?.id ?? null,
+        userId,
         itemType,
         itemId,
         amountCents: item.priceCents,
