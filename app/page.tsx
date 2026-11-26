@@ -12,6 +12,32 @@ import { getHomepageContent, heroImageSizeClass } from "@/lib/site-content";
 import IntroVideo from "@/components/IntroVideo";
 import SafetiMark from "@/components/SafetiMark";
 
+function SafetiCard({ compact = false }: { compact?: boolean }) {
+  return (
+    <Link
+      href="/aerosafety-case"
+      className="group block border border-gold-500/40 bg-navy-950/75 p-6 text-white shadow-2xl backdrop-blur transition hover:border-gold-400"
+    >
+      <div className="flex items-center gap-4">
+        <SafetiMark size={compact ? 64 : 96} />
+        <div>
+          <p className="eyebrow text-gold-400">New · AI assistant</p>
+          <p className={`mt-1 font-display font-semibold leading-tight ${compact ? "text-xl" : "text-3xl"}`}>
+            Meet SAFETI
+          </p>
+        </div>
+      </div>
+      <p className={`mt-4 text-white/75 ${compact ? "text-sm" : ""}`}>
+        Our AI specialized in UAS operations. It helps you build your <strong className="text-white">missions</strong>{" "}
+        and draft your <strong className="text-white">safety documents</strong>.
+      </p>
+      <span className="mt-4 inline-flex items-center gap-2 font-medium text-gold-400 group-hover:text-gold-500">
+        Try SAFETI <ArrowRight size={16} className="transition group-hover:translate-x-1" />
+      </span>
+    </Link>
+  );
+}
+
 export default async function Home() {
   const featuredCourses = db.select().from(courses).where(eq(courses.published, true)).all().slice(0, 3);
   const latestArticles = db.select().from(articles).where(eq(articles.published, true)).orderBy(desc(articles.publishedAt)).all().slice(0, 3);
@@ -82,7 +108,7 @@ export default async function Home() {
             </div>
           </div>
 
-          {hero.hero_image && (
+          {hero.hero_image ? (
             <div className={`relative mx-auto w-full ${heroImageSizeClass[hero.hero_image_size] ?? ""}`}>
               <div className="absolute -inset-4 border border-gold-500/20" />
               <Image
@@ -93,6 +119,13 @@ export default async function Home() {
                 className="relative w-full object-cover"
                 priority
               />
+              <div className="absolute -bottom-6 left-4 z-10 max-w-[18rem]">
+                <SafetiCard compact />
+              </div>
+            </div>
+          ) : (
+            <div className="relative mx-auto w-full max-w-sm lg:ml-auto lg:mr-8">
+              <SafetiCard />
             </div>
           )}
         </div>
