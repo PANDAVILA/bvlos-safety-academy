@@ -4,7 +4,7 @@
    intentionally left to the network (cache-first would risk stale map data
    and the providers are external/cross-origin). */
 
-const CACHE_NAME = 'aerosafety-case-shell-v5';
+const CACHE_NAME = 'aerosafety-case-shell-v6';
 const SHELL_ASSETS = [
   './',
   './index.html',

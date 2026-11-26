@@ -218,7 +218,19 @@ svg.mapsvg{display:block;width:100%;height:auto;background:#142B40;cursor:crossh
 .login-bsa b{color:#fff;font-weight:700;}
 .login-bsa:hover span{color:#fff;}
 .login-card{width:380px;background:#fff;border-radius:12px;padding:34px 32px;box-shadow:0 20px 60px rgba(0,0,0,.35);}
-.login-mark{display:flex;align-items:center;gap:10px;margin-bottom:18px;}
+.login-mark{display:flex;align-items:center;gap:10px;margin-bottom:6px;}
+.login-mascot{width:78px;height:62px;margin-left:auto;flex:none;display:block;animation:lgFloat 4s ease-in-out infinite;filter:drop-shadow(0 6px 8px rgba(11,35,71,.25));}
+.login-mascot .lg-rotor{animation:lgRotor .18s ease-in-out infinite;transform-box:fill-box;transform-origin:center;}
+.login-mascot .lg-rotor.b{animation-delay:.09s;}
+.login-mascot .lg-eyes{animation:lgBlink 5s ease-in-out infinite;transform-box:fill-box;transform-origin:center;}
+.login-mascot .lg-beacon{animation:lgBeacon 1.2s ease-in-out infinite;}
+.login-ai{font-size:12px;line-height:1.45;color:var(--text-mute);margin:0 0 16px;padding:7px 10px;background:#F2F7FD;border-left:3px solid #FF9A2E;border-radius:4px;}
+.login-ai b{color:var(--text);}
+@keyframes lgFloat{0%,100%{transform:translateY(0) rotate(-2deg);}50%{transform:translateY(-5px) rotate(2deg);}}
+@keyframes lgRotor{0%,100%{transform:scaleX(1);}50%{transform:scaleX(.45);}}
+@keyframes lgBlink{0%,91%,100%{transform:scaleY(1);}94%{transform:scaleY(.08);}}
+@keyframes lgBeacon{0%,100%{opacity:1;}50%{opacity:.25;}}
+@media (prefers-reduced-motion:reduce){.login-mascot,.login-mascot *{animation:none!important;}}
 .login-mark .mark{width:42px;height:42px;border-radius:9px;object-fit:cover;display:block;}
 .login-title{font-size:17px;font-weight:800;}
 .login-sub{font-size:11px;color:var(--text-mute);text-transform:uppercase;letter-spacing:.1em;}
@@ -1095,7 +1107,8 @@ function renderLogin(){
   const name=last.name||'Alex Carter';
   const role=last.role||'Safety Manager';
   return '<div class="login-wrap"><a class="login-bsa" href="/" title="BVLOS Safety Academy"><img src="/brand/logo-white.png" alt="BVLOS Safety Academy"><span>APP by <b>BVLOS SAFETY ACADEMY</b></span></a><div class="login-card">'+
-    '<div class="login-mark"><img class="mark" src="./icons/icon-96.png" alt="AeroSafety Case"><div><div class="login-title">AeroSafety Case</div><div class="login-sub">SMS · ICAO · BVLOS</div></div></div>'+
+    '<div class="login-mark"><img class="mark" src="./icons/icon-96.png" alt="AeroSafety Case"><div><div class="login-title">AeroSafety Case</div><div class="login-sub">SMS · ICAO · BVLOS</div></div>'+'<svg class="login-mascot" viewBox="0 4 80 64" width="78" height="62" role="img" aria-label="SAFETI" xmlns="http://www.w3.org/2000/svg">'+'<line x1="40" y1="22" x2="40" y2="12" stroke="#142C56" stroke-width="2.6" stroke-linecap="round"/>'+'<circle class="lg-beacon" cx="40" cy="9.5" r="3.6" fill="#FF9A2E" stroke="#142C56" stroke-width="1.6"/>'+'<line x1="22" y1="32" x2="12" y2="24" stroke="#142C56" stroke-width="2.6" stroke-linecap="round"/><line x1="58" y1="32" x2="68" y2="24" stroke="#142C56" stroke-width="2.6" stroke-linecap="round"/>'+'<ellipse class="lg-rotor" cx="11" cy="22.5" rx="9" ry="2.3" fill="#1E88C9" stroke="#142C56" stroke-width="1.6"/><ellipse class="lg-rotor b" cx="69" cy="22.5" rx="9" ry="2.3" fill="#1E88C9" stroke="#142C56" stroke-width="1.6"/>'+'<circle cx="40" cy="44" r="22" fill="#F4F8FD" stroke="#142C56" stroke-width="2.6"/><path d="M22 40 q3 -16 18 -18" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" opacity=".9"/>'+'<rect x="25" y="35" width="30" height="21" rx="10.5" fill="#0B2347"/>'+'<g class="lg-eyes"><ellipse cx="34" cy="47" rx="4.2" ry="5.4" fill="#5FD0FF"/><ellipse cx="46" cy="47" rx="4.2" ry="5.4" fill="#5FD0FF"/><circle cx="35.4" cy="45" r="1.4" fill="#fff"/><circle cx="47.4" cy="45" r="1.4" fill="#fff"/></g>'+'<circle cx="23.5" cy="52" r="2.6" fill="#FF9A2E" opacity=".35"/><circle cx="56.5" cy="52" r="2.6" fill="#FF9A2E" opacity=".35"/></svg>'+'</div>'+
+    '<p class="login-ai"><b>SAFETI</b>, our AI assistant, builds your missions and drafts your safety documents inside this app.</p>'+
     '<div class="field"><label>Name</label><input id="li_name" placeholder="e.g. Alex Carter" value="'+escapeHtml(name)+'"></div>'+
     '<div class="field"><label>Role</label><select id="li_role">'+
       ['Super Admin','Organization Admin','Safety Manager','Operations Manager','Remote Pilot','Observer / Support Crew','Auditor','Client']
