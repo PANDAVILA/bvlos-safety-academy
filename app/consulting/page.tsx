@@ -43,7 +43,7 @@ export default function ConsultingPage() {
         </div>
       </section>
 
-      <section id="contact" className="chart-bg-light border-t border-navy-900/10">
+      <section id="contact" className="chart-bg-light scroll-mt-16 border-t border-navy-900/10">
         <div className="mx-auto max-w-5xl px-6 py-24">
           <div className="grid gap-10 lg:grid-cols-[1fr_1.2fr] lg:items-start">
             <div>

@@ -11,7 +11,7 @@ export const homepageDefaults = {
   hero_background_image: "",
   primary_cta_text: "Explore courses",
   primary_cta_href: "/courses",
-  secondary_cta_text: "Try AeroSafety Case",
+  secondary_cta_text: "SAFETI AI for your documents & app",
   secondary_cta_href: "/aerosafety-case",
 
   intro_video_url: "",
@@ -39,7 +39,17 @@ export type HomepageContent = typeof homepageDefaults;
 export async function getHomepageContent(): Promise<HomepageContent> {
   const rows = db.select().from(siteContent).all();
   const map = Object.fromEntries(rows.map((r) => [r.key, r.value]));
-  return { ...homepageDefaults, ...map } as HomepageContent;
+  const content = { ...homepageDefaults, ...map } as HomepageContent;
+
+  // Texto antiguo guardado en la base de datos: se sustituye por el nuevo.
+  if (/^\s*try\s+aerosafety\s+case\s*$/i.test(content.secondary_cta_text)) {
+    content.secondary_cta_text = homepageDefaults.secondary_cta_text;
+  }
+  // Cualquier botón que apunte a la consultoría va directo al formulario.
+  for (const key of ["primary_cta_href", "secondary_cta_href"] as const) {
+    if (/^\/consulting\/?$/.test(content[key].trim())) content[key] = "/consulting#contact";
+  }
+  return content;
 }
 
 export const heroImageSizeClass: Record<string, string> = {

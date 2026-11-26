@@ -10,6 +10,7 @@ import CourseCard from "@/components/CourseCard";
 import ArticleCard from "@/components/ArticleCard";
 import { getHomepageContent, heroImageSizeClass } from "@/lib/site-content";
 import IntroVideo from "@/components/IntroVideo";
+import SafetiMark from "@/components/SafetiMark";
 
 export default async function Home() {
   const featuredCourses = db.select().from(courses).where(eq(courses.published, true)).all().slice(0, 3);
@@ -55,6 +56,7 @@ export default async function Home() {
                 href={hero.secondary_cta_href}
                 className="flex items-center gap-2 border border-white/25 px-6 py-3 font-medium text-white transition hover:border-gold-400 hover:text-gold-400"
               >
+                {hero.secondary_cta_href.startsWith("/aerosafety-case") && <SafetiMark size={30} />}
                 {hero.secondary_cta_text}
               </Link>
               <IntroVideo
@@ -174,7 +176,7 @@ export default async function Home() {
               { icon: BookOpen, title: "LMS Academy", desc: "Tiered courses with assessments, certificates of completion, and progress tracking.", href: "/courses" },
               { icon: Newspaper, title: "News", desc: "Regulatory and industry updates for the BVLOS sector, curated by experts.", href: "/news" },
               { icon: FileText, title: "Reports", desc: "Technical analysis, case studies, and incident reports.", href: "/reports" },
-              { icon: Radar, title: "AeroSafety Case", desc: "Try our risk assessment and safety case tool.", href: "/aerosafety-case" },
+              { icon: Radar, title: "SMS AI APP", desc: "Risk assessments and safety cases with SAFETI, our specialized AI for your documents.", href: "/aerosafety-case" },
             ].map((f) => (
               <Link key={f.title} href={f.href} className="group flex flex-col gap-4 bg-white p-8 transition hover:bg-navy-900">
                 <f.icon size={22} className="text-gold-600 group-hover:text-gold-400" />
@@ -223,7 +225,7 @@ export default async function Home() {
                 manufacturers, and public administrations.
               </p>
               <Link
-                href="/consulting"
+                href="/consulting#contact"
                 className="mt-8 inline-flex items-center gap-2 bg-gold-500 px-6 py-3 font-medium text-navy-950 hover:bg-gold-400"
               >
                 Request a proposal <ArrowRight size={16} />
