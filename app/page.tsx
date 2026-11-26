@@ -92,14 +92,10 @@ export default async function Home() {
                 frequency={(["session", "always"].includes(hero.intro_video_frequency) ? hero.intro_video_frequency : "once") as "once" | "session" | "always"}
               />
             </div>
-            <div className="mt-14 grid grid-cols-3 gap-6 border-t border-white/10 pt-8 text-white/80 sm:max-w-md">
+            <div className="mt-14 grid grid-cols-2 gap-6 border-t border-white/10 pt-8 text-white/80 sm:max-w-xs">
               <div>
                 <p className="font-display text-2xl text-gold-400">40+</p>
                 <p className="eyebrow mt-1 text-white/40">Technical modules</p>
-              </div>
-              <div>
-                <p className="font-display text-2xl text-gold-400">18</p>
-                <p className="eyebrow mt-1 text-white/40">Countries</p>
               </div>
               <div>
                 <p className="font-display text-2xl text-gold-400">SMS</p>
