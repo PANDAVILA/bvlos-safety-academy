@@ -11,27 +11,25 @@ import ArticleCard from "@/components/ArticleCard";
 import { getHomepageContent, heroImageSizeClass } from "@/lib/site-content";
 import IntroVideo from "@/components/IntroVideo";
 import SafetiMark from "@/components/SafetiMark";
+import SafetiOrb from "@/components/SafetiOrb";
 
-function SafetiCard({ compact = false }: { compact?: boolean }) {
+function SafetiAnnouncement({ compact = false }: { compact?: boolean }) {
   return (
-    <Link
-      href="/aerosafety-case"
-      className="group block border border-gold-500/40 bg-navy-950/75 p-6 text-white shadow-2xl backdrop-blur transition hover:border-gold-400"
-    >
-      <div className="flex items-center gap-4">
-        <SafetiMark size={compact ? 64 : 96} />
-        <div>
-          <p className="eyebrow text-gold-400">New · AI assistant</p>
-          <p className={`mt-1 font-display font-semibold leading-tight ${compact ? "text-xl" : "text-3xl"}`}>
-            Meet SAFETI
-          </p>
-        </div>
-      </div>
-      <p className={`mt-4 text-white/75 ${compact ? "text-sm" : ""}`}>
-        Our AI specialized in UAS operations. It helps you build your <strong className="text-white">missions</strong>{" "}
-        and draft your <strong className="text-white">safety documents</strong>.
-      </p>
-      <span className="mt-4 inline-flex items-center gap-2 font-medium text-gold-400 group-hover:text-gold-500">
+    <Link href="/aerosafety-case" className="group flex flex-col items-center text-center">
+      <SafetiOrb size={compact ? 150 : 240} />
+      <span className="eyebrow mt-4 inline-flex items-center gap-2 rounded-full border border-gold-500/50 bg-navy-950/60 px-3 py-1 text-gold-400">
+        <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-gold-400" /> New · AI assistant
+      </span>
+      <span className={`mt-3 block font-display font-semibold leading-tight text-white ${compact ? "text-lg" : "text-3xl"}`}>
+        Meet SAFETI
+      </span>
+      {!compact && (
+        <span className="mt-2 block max-w-xs text-white/75">
+          Your AI for <strong className="text-white">documents</strong> and <strong className="text-white">missions</strong>,
+          specialized in UAS operations.
+        </span>
+      )}
+      <span className="mt-3 inline-flex items-center gap-2 font-medium text-gold-400 group-hover:text-gold-500">
         Try SAFETI <ArrowRight size={16} className="transition group-hover:translate-x-1" />
       </span>
     </Link>
@@ -46,8 +44,8 @@ export default async function Home() {
   return (
     <div>
       {/* HERO */}
-      <section className="chart-bg chart-bg-subtle relative overflow-hidden">
-        <div className="relative">
+      <section className="chart-bg chart-bg-subtle relative overflow-hidden lg:flex lg:min-h-[calc(100svh-5.5rem)] lg:items-center">
+        <div className="relative w-full">
           {hero.hero_background_image && (
             <div className="pointer-events-none absolute inset-0 z-0">
               <Image
@@ -63,14 +61,14 @@ export default async function Home() {
               />
             </div>
           )}
-        <div className="relative mx-auto grid max-w-7xl gap-10 px-6 py-24 lg:grid-cols-2 lg:items-center lg:py-32">
+        <div className="relative mx-auto grid max-w-7xl gap-8 px-6 py-12 lg:grid-cols-2 lg:items-center lg:py-10">
           <div>
             <p className="eyebrow text-gold-400">{hero.hero_eyebrow}</p>
-            <h1 className="mt-5 font-display text-4xl font-semibold leading-[1.08] text-white sm:text-5xl lg:text-6xl">
+            <h1 className="mt-4 font-display text-4xl font-semibold leading-[1.08] text-white sm:text-5xl lg:text-6xl">
               {hero.hero_title}
             </h1>
-            <p className="mt-6 max-w-lg text-lg text-white/70">{hero.hero_subtitle}</p>
-            <div className="mt-9 flex flex-wrap items-center gap-4">
+            <p className="mt-5 max-w-lg text-lg text-white/70">{hero.hero_subtitle}</p>
+            <div className="mt-7 flex flex-wrap items-center gap-4">
               <Link
                 href={hero.primary_cta_href}
                 className="group flex items-center gap-2 bg-gold-500 px-6 py-3 font-medium text-navy-950 transition hover:bg-gold-400"
@@ -92,7 +90,7 @@ export default async function Home() {
                 frequency={(["session", "always"].includes(hero.intro_video_frequency) ? hero.intro_video_frequency : "once") as "once" | "session" | "always"}
               />
             </div>
-            <div className="mt-14 grid grid-cols-2 gap-6 border-t border-white/10 pt-8 text-white/80 sm:max-w-xs">
+            <div className="mt-9 grid grid-cols-2 gap-6 border-t border-white/10 pt-6 text-white/80 sm:max-w-xs">
               <div>
                 <p className="font-display text-2xl text-gold-400">40+</p>
                 <p className="eyebrow mt-1 text-white/40">Technical modules</p>
@@ -115,13 +113,13 @@ export default async function Home() {
                 className="relative w-full object-cover"
                 priority
               />
-              <div className="absolute -bottom-6 left-4 z-10 max-w-[18rem]">
-                <SafetiCard compact />
+              <div className="absolute -bottom-10 left-2 z-10">
+                <SafetiAnnouncement compact />
               </div>
             </div>
           ) : (
             <div className="relative mx-auto w-full max-w-sm lg:ml-auto lg:mr-8">
-              <SafetiCard />
+              <SafetiAnnouncement />
             </div>
           )}
         </div>

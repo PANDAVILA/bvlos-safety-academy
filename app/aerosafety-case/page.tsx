@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { ArrowUpRight, Bot, ClipboardCheck, FilePenLine, Gauge, ListChecks, ShieldAlert } from "lucide-react";
 import DisclaimerNote from "@/components/DisclaimerNote";
 import SafetiMark from "@/components/SafetiMark";
+import SafetiOrb from "@/components/SafetiOrb";
 
 export const metadata: Metadata = {
   title: "SAFETI AI and SMS AI APP",
@@ -34,18 +35,18 @@ export default function AeroSafetyCasePage() {
   return (
     <div>
       {/* HERO: SAFETI is the protagonist */}
-      <section className="chart-bg relative overflow-hidden">
-        <div className="relative mx-auto grid max-w-7xl gap-12 px-6 py-24 lg:grid-cols-2 lg:items-center">
+      <section className="chart-bg relative overflow-hidden lg:flex lg:min-h-[calc(100svh-5.5rem)] lg:items-center">
+        <div className="relative mx-auto grid w-full max-w-7xl gap-10 px-6 py-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:py-10">
           <div>
             <p className="eyebrow text-gold-400">SMS AI APP · AeroSafety Case</p>
-            <h1 className="mt-4 font-display text-4xl font-semibold leading-[1.08] text-white sm:text-5xl lg:text-6xl">
+            <h1 className="mt-4 font-display text-4xl font-semibold leading-[1.08] text-white sm:text-5xl lg:text-5xl xl:text-6xl">
               Meet SAFETI, the AI for your safety documents and missions.
             </h1>
             <p className="mt-6 max-w-xl text-lg text-white/70">
               SAFETI is an AI assistant specialized in UAS operations. Tell it about your operation and it builds your
               mission, reviews your risks and drafts the safety documents you need, inside our SMS app.
             </p>
-            <div className="mt-9 flex flex-wrap gap-4">
+            <div className="mt-7 flex flex-wrap gap-4">
               <a
                 href={appUrl}
                 target="_blank"
@@ -67,35 +68,26 @@ export default function AeroSafetyCasePage() {
             </div>
           </div>
 
-          {/* Illustrative conversation */}
-          <div className="relative mx-auto w-full max-w-lg">
-            <div className="absolute -inset-4 border border-gold-500/20" />
-            <div className="relative border border-gold-500/40 bg-navy-950/80 p-6 shadow-2xl backdrop-blur">
-              <div className="flex items-center gap-4 border-b border-white/10 pb-4">
-                <SafetiMark size={84} />
-                <div>
-                  <p className="font-display text-2xl font-semibold text-white">SAFETI</p>
-                  <p className="eyebrow text-gold-400">AI assistant for UAS safety</p>
-                </div>
-              </div>
-              <div className="mt-5 space-y-3 text-sm">
-                <p className="ml-auto max-w-[85%] bg-gold-500/90 px-4 py-3 text-navy-950">
-                  Plan a BVLOS pipeline inspection, 12 km corridor. Then draft the hazard log.
-                </p>
-                <p className="max-w-[90%] border border-white/15 bg-white/5 px-4 py-3 text-white/85">
-                  Got it. I will set up the mission, add the coordinates and propose the first hazards. What aircraft and
-                  maximum altitude will you fly?
-                </p>
-                <div className="flex flex-wrap gap-2 pt-1">
-                  {["Mission created", "Hazards proposed", "Hazard Log draft"].map((t) => (
-                    <span key={t} className="coord border border-gold-500/40 px-2.5 py-1 text-[11px] text-gold-400">
-                      {t}
-                    </span>
-                  ))}
-                </div>
-              </div>
-              <p className="mt-5 text-[11px] text-white/40">Example conversation for illustration.</p>
+          {/* SAFETI orb with floating example messages */}
+          <div className="relative mx-auto w-full max-w-md">
+            <SafetiOrb size={340} />
+            <p className="safeti-bubble absolute left-0 top-2 hidden max-w-[13rem] bg-gold-500/95 px-4 py-3 text-sm text-navy-950 shadow-xl sm:block">
+              Plan a BVLOS pipeline inspection, 12 km corridor.
+            </p>
+            <p
+              className="safeti-bubble absolute bottom-6 right-0 hidden max-w-[15rem] border border-white/20 bg-navy-950/90 px-4 py-3 text-sm text-white/90 shadow-xl backdrop-blur sm:block"
+              style={{ animationDelay: "1.4s" }}
+            >
+              Got it. I will set up the mission and propose the first hazards.
+            </p>
+            <div className="mt-14 flex flex-wrap justify-center gap-2">
+              {["Mission created", "Hazards proposed", "Hazard Log draft"].map((t) => (
+                <span key={t} className="coord rounded-full border border-gold-500/40 px-3 py-1 text-[11px] text-gold-400">
+                  {t}
+                </span>
+              ))}
             </div>
+            <p className="mt-3 text-center text-[11px] text-white/40">Example conversation for illustration.</p>
           </div>
         </div>
       </section>
